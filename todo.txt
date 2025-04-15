@@ -28,12 +28,12 @@ TODO - PROJET POKÉMON ECLIPSE
 - [x] Créer gestion de sauvegarde de session (temporaire uniquement)
 
 === UI ET AFFICHAGE ===
-- [ ] Créer système de composants UI dans ui/
-  - [ ] Bouton stylisé (ui/button.py)
-  - [ ] Barre de vie (ui/health_bar.py)
-  - [ ] Texte animé (ui/animated_text.py)
-- [ ] Intégrer gif_pygame pour affichage sprites animés
-- [ ] Créer gestionnaire d’assets (core/assets.py)
+- [x] Créer système de composants UI dans ui/
+  - [x] Bouton stylisé (ui/button.py)
+  - [x] Barre de vie (ui/health_bar.py)
+  - [x] Texte animé (ui/animated_text.py)
+- [x] Intégrer gif_pygame pour affichage sprites animés
+- [x] Créer gestionnaire d’assets (core/assets.py)
 
 === SCÈNES ===
 - [ ] Créer système de changement de scène (core/scene_manager.py)
