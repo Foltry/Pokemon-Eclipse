@@ -1,0 +1,27 @@
+{
+    "001": {
+      "name": "Bulbizarre",
+      "types": ["Plante", "Poison"],
+      "base_hp": 45,
+      "base_attack": 49,
+      "base_defense": 49,
+      "moves": ["Tackle", "Growl"]
+    },
+    "004": {
+      "name": "Salamèche",
+      "types": ["Feu"],
+      "base_hp": 39,
+      "base_attack": 52,
+      "base_defense": 43,
+      "moves": ["Scratch", "Growl"]
+    },
+    "007": {
+      "name": "Carapuce",
+      "types": ["Eau"],
+      "base_hp": 44,
+      "base_attack": 48,
+      "base_defense": 65,
+      "moves": ["Tackle", "Tail Whip"]
+    }
+  }
+  

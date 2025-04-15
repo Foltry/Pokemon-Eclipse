@@ -1,0 +1,11 @@
+{
+    "Potion": {
+      "effect": "heal",
+      "value": 20
+    },
+    "Poké Ball": {
+      "effect": "catch",
+      "value": 1
+    }
+  }
+  

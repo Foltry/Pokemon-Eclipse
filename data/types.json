@@ -1,0 +1,18 @@
+{
+  "Feu": {
+    "weak": ["Eau", "Roche"],
+    "resist": ["Plante", "Feu"]
+  },
+  "Eau": {
+    "weak": ["Plante", "Électrik"],
+    "resist": ["Feu", "Eau"]
+  },
+  "Plante": {
+    "weak": ["Feu", "Vol"],
+    "resist": ["Eau", "Plante"]
+  },
+  "Poison": {
+    "weak": ["Sol", "Psy"],
+    "resist": ["Plante", "Combat"]
+  }
+}

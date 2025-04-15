@@ -1,0 +1,19 @@
+{
+    "Tackle": {
+      "power": 40,
+      "type": "Normal"
+    },
+    "Growl": {
+      "power": 0,
+      "type": "Normal"
+    },
+    "Scratch": {
+      "power": 40,
+      "type": "Normal"
+    },
+    "Tail Whip": {
+      "power": 0,
+      "type": "Normal"
+    }
+  }
+  

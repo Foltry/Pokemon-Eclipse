@@ -10,15 +10,15 @@ TODO - PROJET POKÉMON ECLIPSE
 - [x] Créer helpers/utilitaires (core/utils.py)
 
 === GESTION DES DONNÉES ===
-- [ ] Créer système de chargement JSON (core/data_loader.py)
-- [ ] Créer fichiers JSON mock pour :
-  - [ ] data/pokemon.json
-  - [ ] data/types.json
-  - [ ] data/moves.json
-  - [ ] data/items.json
-  - [ ] data/starters.json
-- [ ] Créer modèle de données Pokémon (core/models/pokemon.py)
-- [ ] Créer modèle de données Move, Item, etc. (core/models/*)
+- [x] Créer système de chargement JSON (core/data_loader.py)
+- [x] Créer fichiers JSON mock pour :
+  - [x] data/pokemon.json
+  - [x] data/types.json
+  - [x] data/moves.json
+  - [x] data/items.json
+  - [x] data/starters.json
+- [x] Créer modèle de données Pokémon (core/models/pokemon.py)
+- [x] Créer modèle de données Move, Item, etc. (core/models/*)
 
 === LOGIQUE DE RUN ===
 - [ ] Créer gestionnaire de run (core/run_manager.py)
