@@ -16,10 +16,8 @@ class RunManager:
         self.items.clear()
         self.active = True
 
-    def add_pokemon(self, pokemon_id: str):
-        if pokemon_id in self.pokemon_data:
-            pokemon = Pokemon(pokemon_id, self.pokemon_data[pokemon_id])
-            self.team.append(pokemon)
+    def add_pokemon_to_team(self, pokemon):
+        self.team.append(pokemon)
 
     def add_item(self, item_name: str, quantity: int = 1):
         if item_name in self.item_data:
@@ -29,8 +27,17 @@ class RunManager:
 
     def is_team_alive(self):
         return any(p.hp > 0 for p in self.team)
-
+    
+    def set_starters(self, starter_list):
+        self.starters = starter_list
+    
     def reset(self):
-        self.active = False
-        self.team.clear()
-        self.items.clear()
+        self.team = []
+        self.items = []
+        self.state = {}
+        self.starters = []
+
+    
+    
+
+run_manager = RunManager()
