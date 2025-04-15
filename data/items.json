@@ -1,11 +1,227 @@
 {
-    "Potion": {
-      "effect": "heal",
-      "value": 20
-    },
-    "Poké Ball": {
-      "effect": "catch",
-      "value": 1
-    }
+  "Master Ball": {
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": "Assurément la Ball la plus performante.\nElle permet de capturer à coup sûr un\nPokémon sauvage."
+  },
+  "Hyper Ball": {
+    "category": "standard-balls",
+    "cost": 800,
+    "effect": "Une Ball ultraperformante dont le taux\nde réussite est supérieur à celui de la\nSuper Ball."
+  },
+  "Super Ball": {
+    "category": "standard-balls",
+    "cost": 600,
+    "effect": "Une Ball très performante dont le taux\nde réussite est supérieur à celui de la\nPoké Ball."
+  },
+  "Poké Ball": {
+    "category": "standard-balls",
+    "cost": 200,
+    "effect": "Un objet pareil à une capsule, qui\ncapture les Pokémon sauvages. Il suffit\npour cela de le jeter comme une balle."
+  },
+  "Safari Ball": {
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": "Une Poké Ball spéciale dont l’usage\nest réservé au Parc Safari. Elle est\ndécorée d’un motif camouflage."
+  },
+  "Parc Ball": {
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": "Une Poké Ball spéciale utilisée au Parc des Amis."
+  },
+  "Compét’Ball": {
+    "category": "standard-balls",
+    "cost": 300,
+    "effect": "Une Poké Ball spéciale utilisée au\nConcours de Capture d’insecte."
+  },
+  "lastrange-ball": {
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": ""
+  },
+  "lapoke-ball": {
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": ""
+  },
+  "lagreat-ball": {
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": ""
+  },
+  "laultra-ball": {
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": ""
+  },
+  "laheavy-ball": {
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": ""
+  },
+  "laleaden-ball": {
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": ""
+  },
+  "lagigaton-ball": {
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": ""
+  },
+  "lafeather-ball": {
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": ""
+  },
+  "lawing-ball": {
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": ""
+  },
+  "lajet-ball": {
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": ""
+  },
+  "laorigin-ball": {
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": ""
+  },
+  "Antidote": {
+    "category": "status-cures",
+    "cost": 200,
+    "effect": "Un médicament sous forme de spray.\nGuérit un Pokémon empoisonné."
+  },
+  "Anti-Brûle": {
+    "category": "status-cures",
+    "cost": 200,
+    "effect": "Un médicament sous forme de spray.\nSoigne les brûlures d’un Pokémon."
+  },
+  "Antigel": {
+    "category": "status-cures",
+    "cost": 200,
+    "effect": "Un médicament sous forme de spray.\nRéchauffe un Pokémon gelé."
+  },
+  "Réveil": {
+    "category": "status-cures",
+    "cost": 200,
+    "effect": "Un médicament sous forme de spray.\nRéveille un Pokémon endormi."
+  },
+  "Anti-Para": {
+    "category": "status-cures",
+    "cost": 200,
+    "effect": "Un médicament sous forme de spray.\nSoigne un Pokémon de la paralysie."
+  },
+  "Total Soin": {
+    "category": "status-cures",
+    "cost": 400,
+    "effect": "Un médicament sous forme de spray.\nSoigne tous les problèmes de statut\nd’un Pokémon."
+  },
+  "Poudre Soin": {
+    "category": "status-cures",
+    "cost": 300,
+    "effect": "Une poudre médicinale très amère.\nSoigne tous les problèmes de statut\nd’un Pokémon."
+  },
+  "Lava Cookie": {
+    "category": "status-cures",
+    "cost": 350,
+    "effect": "La spécialité de la ville de Vermilava.\nSoigne tous les problèmes de statut\nd’un Pokémon."
+  },
+  "Vieux Gâteau": {
+    "category": "status-cures",
+    "cost": 350,
+    "effect": "Spécialité du Vieux Château. Il\nsoigne tous les problèmes de\nstatut d’un Pokémon."
+  },
+  "Glace Volute": {
+    "category": "status-cures",
+    "cost": 350,
+    "effect": "Spécialité de Volucité. Elle\nsoigne tous les problèmes\nde statut d’un Pokémon."
+  },
+  "Galette Illumis": {
+    "category": "status-cures",
+    "cost": 350,
+    "effect": "La spécialité d’Illumis.\nElle soigne tous les problèmes de statut\nd’un Pokémon."
+  },
+  "Sablé Yantreizh": {
+    "category": "status-cures",
+    "cost": 350,
+    "effect": "La spécialité de Yantreizh.\nElle soigne tous les problèmes de statut\nd’un Pokémon."
+  },
+  "Malasada Maxi": {
+    "category": "status-cures",
+    "cost": 350,
+    "effect": "Une spécialité d’Alola. Elle soigne toutes\nles altérations de statut d’un Pokémon."
+  },
+  "Crok’Argenta": {
+    "category": "status-cures",
+    "cost": 250,
+    "effect": "Une spécialité d’Argenta.\nSoigne toutes les altérations de statut d’un Pokémon."
+  },
+  "Potion": {
+    "category": "healing",
+    "cost": 200,
+    "effect": "Un spray qui soigne les blessures.\nRestaure 20 PV à un Pokémon."
+  },
+  "Guérison": {
+    "category": "healing",
+    "cost": 3000,
+    "effect": "Un médicament qui restaure tous les\nPV d’un Pokémon et soigne tous ses\nproblèmes de statut."
+  },
+  "Potion Max": {
+    "category": "healing",
+    "cost": 2500,
+    "effect": "Un spray qui soigne les blessures.\nRestaure tous les PV d’un Pokémon."
+  },
+  "Hyper Potion": {
+    "category": "healing",
+    "cost": 1500,
+    "effect": "Un spray qui soigne les blessures.\nRestaure 200 PV à un Pokémon."
+  },
+  "Super Potion": {
+    "category": "healing",
+    "cost": 700,
+    "effect": "Un spray qui soigne les blessures.\nRestaure 50 PV à un Pokémon."
+  },
+  "Eau Fraîche": {
+    "category": "healing",
+    "cost": 200,
+    "effect": "Une eau riche en minéraux.\nRestaure 50 PV à un Pokémon."
+  },
+  "Soda Cool": {
+    "category": "healing",
+    "cost": 300,
+    "effect": "Une boisson pétillante.\nRestaure 60 PV à un Pokémon."
+  },
+  "Limonade": {
+    "category": "healing",
+    "cost": 400,
+    "effect": "Une boisson très sucrée.\nRestaure 80 PV à un Pokémon."
+  },
+  "Lait Meumeu": {
+    "category": "healing",
+    "cost": 600,
+    "effect": "Un lait très nourrissant.\nRestaure 100 PV à un Pokémon."
+  },
+  "Poudrénergie": {
+    "category": "healing",
+    "cost": 500,
+    "effect": "Une poudre médicinale très amère.\nRestaure 50 PV à un Pokémon."
+  },
+  "Racinénergie": {
+    "category": "healing",
+    "cost": 1200,
+    "effect": "Une racine très amère.\nRestaure 200 PV à un Pokémon."
+  },
+  "Jus de Baie": {
+    "category": "healing",
+    "cost": 200,
+    "effect": "Une boisson 100% pur jus de Baies.\nRestaure 20 PV à un Pokémon."
+  },
+  "Chococœur": {
+    "category": "healing",
+    "cost": 3000,
+    "effect": "Un chocolat extrêmement\nsucré. Restaure 20 PV\nà un Pokémon."
   }
-  
+}
