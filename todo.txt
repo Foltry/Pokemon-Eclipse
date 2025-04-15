@@ -35,6 +35,21 @@ TODO - PROJET POKÉMON ECLIPSE
 - [x] Intégrer gif_pygame pour affichage sprites animés
 - [x] Créer gestionnaire d’assets (core/assets.py)
 
+=== IMPORT DE CONTENU OFFICIEL ===
+- [ ] Ajouter un outil d'import JSON pour générer :
+  - [ ] Tous les Pokémon (nom, types, stats, attaques de base)
+  - [ ] Tous les types avec faiblesses/résistances
+  - [ ] Toutes les attaques (nom, puissance, type)
+  - [ ] Tous les objets de base (Potions, Balls…)
+- [ ] Télécharger et organiser :
+  - [ ] Sprites animés .gif des Pokémon (front)
+  - [ ] Icônes ou images des objets
+- [ ] Générer data/starters.json automatiquement depuis les starters officiels
+- [ ] Générer une version réduite pour tests (ex: 30 Pokémon max)
+- [ ] Vérifier correspondance entre ID Pokémon et nom de sprite
+- [ ] Ajouter script de validation des données JSON
+
+
 === SCÈNES ===
 - [ ] Créer système de changement de scène (core/scene_manager.py)
 - [ ] Implémenter scènes de base :
