@@ -21,11 +21,11 @@ TODO - PROJET POKÉMON ECLIPSE
 - [x] Créer modèle de données Move, Item, etc. (core/models/*)
 
 === LOGIQUE DE RUN ===
-- [ ] Créer gestionnaire de run (core/run_manager.py)
-  - [ ] Équipe du joueur
-  - [ ] Objets possédés
-  - [ ] État de la run
-- [ ] Créer gestion de sauvegarde de session (temporaire uniquement)
+- [x] Créer gestionnaire de run (core/run_manager.py)
+  - [x] Équipe du joueur
+  - [x] Objets possédés
+  - [x] État de la run
+- [x] Créer gestion de sauvegarde de session (temporaire uniquement)
 
 === UI ET AFFICHAGE ===
 - [ ] Créer système de composants UI dans ui/

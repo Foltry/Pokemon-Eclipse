@@ -29,4 +29,17 @@ def main():
     quit_game()
 
 if __name__ == "__main__":
-    main()
+    from core.run_manager import RunManager
+
+    run = RunManager()
+    run.start_new_run()
+    run.add_pokemon("001")
+    run.add_item("Potion", 2)
+
+    print("Run active ?", run.active)
+    print("Équipe :", run.team)
+    print("Objets :", run.items)
+
+    # reset pour test
+    run.reset()
+    print("Run reset :", run.active, run.team, run.items)
