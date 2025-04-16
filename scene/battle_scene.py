@@ -1,39 +1,34 @@
 import pygame
 import json
 from ui.battle_ui import (
-    BattleButton,
-    BattleDialogBox,
     load_battle_ui,
     load_combat_sprites,
     draw_combat_scene
 )
+from core.scene_manager import Scene
 
-class BattleScene:
+class BattleScene(Scene):
     def __init__(self):
+        # Chargement de l’UI de combat
         self.bg, self.dialog_box, self.buttons = load_battle_ui()
         self.selected_index = 0
 
-        # IDs utilisés avec zéros non significatifs (ex : "025", "016")
-        self.ally_id = "025"
-        self.enemy_id = "016"
+        # Pokémon en combat
+        self.ally_id = "025"   # Pikachu
+        self.enemy_id = "016"  # Roucool
 
         # Chargement des données Pokémon
         with open("data/pokemon.json", encoding="utf-8") as f:
-            self.pokemon_data = json.load(f)
+            data = json.load(f)
+            self.ally_name = data[self.ally_id]["name"]
+            self.enemy_name = data[self.enemy_id]["name"]
+            self.ally_hp = self.ally_max_hp = data[self.ally_id]["base_hp"]
+            self.enemy_hp = self.enemy_max_hp = data[self.enemy_id]["base_hp"]
 
-        # Noms dynamiques récupérés depuis le fichier
-        self.ally_name = self.pokemon_data[self.ally_id]["name"]
-        self.enemy_name = self.pokemon_data[self.enemy_id]["name"]
-
-        # Chargement des assets visuels de combat
-        self.bases, self.sprites = load_combat_sprites(
-            ally_id=self.ally_id,
-            enemy_id=self.enemy_id
-        )
+        self.bases, self.sprites = load_combat_sprites(self.ally_id, self.enemy_id)
 
     def on_enter(self): pass
     def on_exit(self): pass
-
     def update(self, dt): pass
 
     def handle_event(self, event):
@@ -46,12 +41,29 @@ class BattleScene:
                 self.selected_index -= 2
             elif event.key == pygame.K_RIGHT and self.selected_index in [0, 1]:
                 self.selected_index += 2
+            elif event.key == pygame.K_RETURN:
+                print(f"[ACTION] Bouton {self.selected_index} sélectionné")
 
     def draw(self, screen):
-        draw_combat_scene(screen, self.bg, self.bases, self.sprites, self.ally_name, self.enemy_name)
+        draw_combat_scene(
+            screen,
+            self.bg,
+            self.bases,
+            self.sprites,
+            ally_name=self.ally_name,
+            enemy_name=self.enemy_name,
+            ally_hp=self.ally_hp,
+            ally_max_hp=self.ally_max_hp,
+            enemy_hp=self.enemy_hp,
+            enemy_max_hp=self.enemy_max_hp,
+        )
+
         self.dialog_box.draw(screen, f"Que doit faire {self.ally_name} ?")
 
+        # Tous les boutons sauf sélectionné
         for i, button in enumerate(self.buttons):
             if i != self.selected_index:
                 button.draw(screen, selected=False)
+
+        # Bouton sélectionné au premier plan
         self.buttons[self.selected_index].draw(screen, selected=True)

@@ -127,7 +127,8 @@ def draw_combat_scene(
     enemy_max_hp=100
 ):
     load_status_images()
-    font = pygame.font.Font(os.path.join(FONTS, "power clear.ttf"), 25)
+    font_pkm = pygame.font.Font(os.path.join(FONTS, "power clear.ttf"), 27)
+    font_pv = pygame.font.Font(os.path.join(FONTS, "power clear bold.ttf"), 27)
 
     screen.blit(background, (0, 0))
 
@@ -147,20 +148,23 @@ def draw_combat_scene(
     screen.blit(STATUS_ENEMY, (0, 35))
 
     # Noms des Pokémon
-    text_ally = font.render(ally_name, True, (0, 0, 0))
-    text_enemy = font.render(enemy_name, True, (0, 0, 0))
+    text_ally = font_pkm.render(ally_name, True, (0, 0, 0))
+    text_enemy = font_pkm.render(enemy_name, True, (0, 0, 0))
     screen.blit(text_ally, (305, 205))
     screen.blit(text_enemy, (10, 45))
 
     # Barres de vie
-    ally_bar = HealthBar((402, 233), (98, 7), ally_max_hp)
+    ally_bar = HealthBar((402, 232), (98, 9), ally_max_hp)
     ally_bar.update(ally_hp)
     ally_bar.draw(screen)
 
-    enemy_bar = HealthBar((116, 74), (98, 7), enemy_max_hp)
+    enemy_bar = HealthBar((116, 73), (98, 9), enemy_max_hp)
     enemy_bar.update(enemy_hp)
     enemy_bar.draw(screen)
 
-    # PV texte du joueur (sous la barre de vie)
-    hp_text = font.render(f"{ally_hp}/{ally_max_hp}", True, (0, 0, 0))
-    screen.blit(hp_text, (428, 245))  # Pile sous la barre, bien centré à droite
+    # PV texte du joueur (gris)
+# PV texte du joueur (sous la barre de vie)
+    hp_text = font_pv.render(f"{ally_hp}/{ally_max_hp}", True, (51, 51, 51))
+    hp_text = pygame.transform.scale(hp_text, (hp_text.get_width(), int(hp_text.get_height() * 0.65)))
+    screen.blit(hp_text, (410, 246))
+

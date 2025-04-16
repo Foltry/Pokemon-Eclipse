@@ -14,6 +14,10 @@ class Scene:
     def draw(self, surface):
         pass
 
+    def handle_event(self, event):
+        pass
+
+
 class SceneManager:
     def __init__(self):
         self.scene = None
@@ -32,3 +36,7 @@ class SceneManager:
     def draw(self, surface):
         if self.scene:
             self.scene.draw(surface)
+
+    def handle_event(self, event):
+        if self.scene:
+            self.scene.handle_event(event)
