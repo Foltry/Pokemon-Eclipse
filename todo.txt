@@ -46,14 +46,7 @@ TODO - PROJET POKÉMON ECLIPSE
   - [x] Valider tous les fichiers JSON générés
 
 
-=== SCÈNES ===
-- [x] Créer système de changement de scène (core/scene_manager.py)
-- [] Implémenter scènes de base :
-  - [] scene/menu_scene.py → Choix de nouvelle run
-  - [x] scene/starter_scene.py → Choix parmi 3 starters aléatoires
-  - [x] scene/battle_scene.py → Combat tour par tour
-  - [ ] scene/bonus_scene.py → Choix de récompense (soin, objet, Pokémon)
-  - [ ] scene/gameover_scene.py → Fin de run (KO équipe)
+ a
 
 === COMBAT ===
 - [ ] Implémenter moteur de combat simplifié (battle/engine.py)

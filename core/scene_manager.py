@@ -23,7 +23,7 @@ class SceneManager:
             self.scene.exit()
         self.scene = new_scene
         self.scene.manager = self
-        self.scene.enter()
+        self.scene.on_enter()
 
     def update(self, dt):
         if self.scene:

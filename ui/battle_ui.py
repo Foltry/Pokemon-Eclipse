@@ -1,6 +1,7 @@
 import os
 import pygame
 import gif_pygame
+from ui.health_bar import HealthBar
 
 # === PATHS & CONST ===
 ASSETS = os.path.join("assets", "ui", "battle")
@@ -36,13 +37,12 @@ class BattleDialogBox:
         self.font = pygame.font.Font(font_path, 25)
 
         self.text_color = (0, 0, 0)
-        self.margin_x = 22  # Ce qui donne x=19 pour le texte
-        self.margin_y = 25  # Ce qui donne y=335 (288 + 47)
+        self.margin_x = 22
+        self.margin_y = 25
         self.line_spacing = 2
-        self.max_width = 216  # Largeur utile max pour le texte
+        self.max_width = 216
 
     def wrap_text(self, text):
-        """Retour à la ligne automatique dans la zone max_width."""
         words = text.split(" ")
         lines = []
         current_line = ""
@@ -60,7 +60,6 @@ class BattleDialogBox:
 
     def draw(self, surface, text):
         surface.blit(self.image, self.rect.topleft)
-
         lines = self.wrap_text(text)
         y = self.rect.top + self.margin_y
 
@@ -80,7 +79,18 @@ def load_battle_ui():
     ]
     return bg, dialog, buttons
 
-# === SPRITE HANDLING ===
+# === SPRITES & STATUS UI ===
+
+STATUS_PLAYER = None
+STATUS_ENEMY = None
+_status_loaded = False
+
+def load_status_images():
+    global STATUS_PLAYER, STATUS_ENEMY, _status_loaded
+    if not _status_loaded:
+        STATUS_PLAYER = pygame.image.load(os.path.join(ASSETS, "status_player.png")).convert_alpha()
+        STATUS_ENEMY = pygame.image.load(os.path.join(ASSETS, "status_enemy.png")).convert_alpha()
+        _status_loaded = True
 
 def resize_gif(gif_obj, size):
     resized_frames = [
@@ -93,30 +103,64 @@ def load_combat_sprites(ally_id, enemy_id):
     base_ally = pygame.image.load(os.path.join(ASSETS, "base_ally.png")).convert_alpha()
     base_enemy = pygame.image.load(os.path.join(ASSETS, "base_enemy.png")).convert_alpha()
 
-    path_back = os.path.join("assets", "sprites", "pokemon", "back", f"{ally_id:03}.gif")
-    path_front = os.path.join("assets", "sprites", "pokemon", "front", f"{enemy_id:03}.gif")
+    path_back = os.path.join("assets", "sprites", "pokemon", "back", f"{ally_id}.gif")
+    path_front = os.path.join("assets", "sprites", "pokemon", "front", f"{enemy_id}.gif")
 
     ally_sprite = gif_pygame.load(path_back)
     enemy_sprite = gif_pygame.load(path_front)
-
-    if ally_sprite is None:
-        raise FileNotFoundError(f"❌ Sprite dos introuvable ou invalide : {path_back}")
-    if enemy_sprite is None:
-        raise FileNotFoundError(f"❌ Sprite face introuvable ou invalide : {path_front}")
 
     ally_sprite = resize_gif(ally_sprite, ALLY_SPRITE_SIZE)
     enemy_sprite = resize_gif(enemy_sprite, ENEMY_SPRITE_SIZE)
 
     return (base_ally, base_enemy), (ally_sprite, enemy_sprite)
 
-def draw_combat_scene(screen, background, bases, sprites):
+def draw_combat_scene(
+    screen,
+    background,
+    bases,
+    sprites,
+    ally_name="",
+    enemy_name="",
+    ally_hp=100,
+    ally_max_hp=100,
+    enemy_hp=100,
+    enemy_max_hp=100
+):
+    load_status_images()
+    font = pygame.font.Font(os.path.join(FONTS, "power clear.ttf"), 25)
+
     screen.blit(background, (0, 0))
 
     base_ally, base_enemy = bases
     ally_sprite, enemy_sprite = sprites
 
-    screen.blit(base_ally, (-128, 240))      # Sol du joueur
-    screen.blit(base_enemy, (255, 115))      # Sol de l’ennemi
+    # Sol
+    screen.blit(base_ally, (-128, 240))
+    screen.blit(base_enemy, (255, 115))
 
-    screen.blit(ally_sprite.blit_ready(), (40, 160))    # Dos joueur
-    screen.blit(enemy_sprite.blit_ready(), (340, 90))   # Face ennemi
+    # Sprites
+    screen.blit(ally_sprite.blit_ready(), (40, 160))
+    screen.blit(enemy_sprite.blit_ready(), (340, 90))
+
+    # Status boxes
+    screen.blit(STATUS_PLAYER, (268, 193))
+    screen.blit(STATUS_ENEMY, (0, 35))
+
+    # Noms des Pokémon
+    text_ally = font.render(ally_name, True, (0, 0, 0))
+    text_enemy = font.render(enemy_name, True, (0, 0, 0))
+    screen.blit(text_ally, (305, 205))
+    screen.blit(text_enemy, (10, 45))
+
+    # Barres de vie
+    ally_bar = HealthBar((402, 233), (98, 7), ally_max_hp)
+    ally_bar.update(ally_hp)
+    ally_bar.draw(screen)
+
+    enemy_bar = HealthBar((116, 74), (98, 7), enemy_max_hp)
+    enemy_bar.update(enemy_hp)
+    enemy_bar.draw(screen)
+
+    # PV texte du joueur (sous la barre de vie)
+    hp_text = font.render(f"{ally_hp}/{ally_max_hp}", True, (0, 0, 0))
+    screen.blit(hp_text, (428, 245))  # Pile sous la barre, bien centré à droite

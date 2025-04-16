@@ -1,4 +1,5 @@
 import pygame
+import json
 from ui.battle_ui import (
     BattleButton,
     BattleDialogBox,
@@ -12,10 +13,23 @@ class BattleScene:
         self.bg, self.dialog_box, self.buttons = load_battle_ui()
         self.selected_index = 0
 
+        # IDs utilisés avec zéros non significatifs (ex : "025", "016")
+        self.ally_id = "025"
+        self.enemy_id = "016"
+
+        # Chargement des données Pokémon
+        with open("data/pokemon.json", encoding="utf-8") as f:
+            self.pokemon_data = json.load(f)
+
+        # Noms dynamiques récupérés depuis le fichier
+        self.ally_name = self.pokemon_data[self.ally_id]["name"]
+        self.enemy_name = self.pokemon_data[self.enemy_id]["name"]
+
         # Chargement des assets visuels de combat
         self.bases, self.sprites = load_combat_sprites(
-            ally_id=25, enemy_id=16
-        )  # Pikachu vs Pidgey pour test
+            ally_id=self.ally_id,
+            enemy_id=self.enemy_id
+        )
 
     def on_enter(self): pass
     def on_exit(self): pass
@@ -34,8 +48,8 @@ class BattleScene:
                 self.selected_index += 2
 
     def draw(self, screen):
-        draw_combat_scene(screen, self.bg, self.bases, self.sprites)
-        self.dialog_box.draw(screen, "Que doit faire Pikachu ?")
+        draw_combat_scene(screen, self.bg, self.bases, self.sprites, self.ally_name, self.enemy_name)
+        self.dialog_box.draw(screen, f"Que doit faire {self.ally_name} ?")
 
         for i, button in enumerate(self.buttons):
             if i != self.selected_index:
