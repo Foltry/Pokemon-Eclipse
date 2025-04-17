@@ -6,6 +6,8 @@ from ui.battle_ui import (
     draw_combat_scene
 )
 from core.scene_manager import Scene
+import core.run_manager
+
 
 class BattleScene(Scene):
     def __init__(self):
@@ -13,16 +15,17 @@ class BattleScene(Scene):
         self.bg, self.dialog_box, self.buttons = load_battle_ui()
         self.selected_index = 0
 
-        # Pokémon en combat
-        self.ally_id = "025"   # Pikachu
-        self.enemy_id = "016"  # Roucool
+        # Récupère le Pokémon choisi via run_manager
+        starter = run_manager.get_team()[0]  # Le premier Pokémon de l’équipe
+        self.ally_id = starter["id"]
+        self.ally_name = starter["name"]
+        self.ally_hp = self.ally_max_hp = starter["base_hp"]
 
-        # Chargement des données Pokémon
+        # Pokémon ennemi temporaire (ex: Roucool)
+        self.enemy_id = "016"
         with open("data/pokemon.json", encoding="utf-8") as f:
             data = json.load(f)
-            self.ally_name = data[self.ally_id]["name"]
             self.enemy_name = data[self.enemy_id]["name"]
-            self.ally_hp = self.ally_max_hp = data[self.ally_id]["base_hp"]
             self.enemy_hp = self.enemy_max_hp = data[self.enemy_id]["base_hp"]
 
         self.bases, self.sprites = load_combat_sprites(self.ally_id, self.enemy_id)
@@ -60,10 +63,7 @@ class BattleScene(Scene):
 
         self.dialog_box.draw(screen, f"Que doit faire {self.ally_name} ?")
 
-        # Tous les boutons sauf sélectionné
         for i, button in enumerate(self.buttons):
             if i != self.selected_index:
                 button.draw(screen, selected=False)
-
-        # Bouton sélectionné au premier plan
         self.buttons[self.selected_index].draw(screen, selected=True)

@@ -11,6 +11,8 @@ class RunManager:
         self.pokemon_data = load_json("data/pokemon.json")
         self.item_data = load_json("data/items.json")
 
+        self.starters = []
+
     def start_new_run(self):
         self.team.clear()
         self.items.clear()
@@ -30,14 +32,15 @@ class RunManager:
     
     def set_starters(self, starter_list):
         self.starters = starter_list
-    
+
+    def get_team(self):
+        return self.team
+
     def reset(self):
         self.team = []
         self.items = []
         self.state = {}
         self.starters = []
 
-    
-    
 
 run_manager = RunManager()
