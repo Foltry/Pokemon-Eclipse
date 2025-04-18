@@ -3,87 +3,103 @@ TODO - PROJET POKÉMON ECLIPSE
 ===================================
 
 === BASE DU PROJET ===
-- [x] Créer structure de dossiers : core/, data/, ui/, scene/, battle/, assets/
-- [x] Créer point d’entrée : main.py
-- [x] Initialiser boucle principale Pygame CE
-- [x] Charger config globale (core/config.py)
-- [x] Créer helpers/utilitaires (core/utils.py)
+
+- [x] Créer la structure de dossiers : `core/`, `data/`, `ui/`, `scene/`, `battle/`, `assets/`
+- [x] Créer le point d’entrée : `main.py`
+- [x] Initialiser la boucle principale Pygame CE
+- [x] Charger la config globale (`core/config.py`)
+- [x] Créer les helpers/utilitaires (`core/utils.py`)
 
 === GESTION DES DONNÉES ===
-- [x] Créer système de chargement JSON (core/data_loader.py)
+
+- [x] Créer système de chargement JSON (`core/data_loader.py`)
 - [x] Créer fichiers JSON mock pour :
-  - [x] data/pokemon.json
-  - [x] data/types.json
-  - [x] data/moves.json
-  - [x] data/items.json
-  - [x] data/starters.json
-- [x] Créer modèle de données Pokémon (core/models/pokemon.py)
-- [x] Créer modèle de données Move, Item, etc. (core/models/*)
+  - [x] `data/pokemon.json`
+  - [x] `data/types.json`
+  - [x] `data/moves.json`
+  - [x] `data/items.json`
+  - [x] `data/starters.json`
+- [x] Créer modèles de données :
+  - [x] Pokémon (`core/models/pokemon.py`)
+  - [x] Move, Item, etc. (`core/models/*`)
 
 === LOGIQUE DE RUN ===
-- [x] Créer gestionnaire de run (core/run_manager.py)
+
+- [x] Créer gestionnaire de run (`core/run_manager.py`)
   - [x] Équipe du joueur
   - [x] Objets possédés
-  - [x] État de la run
-- [x] Créer gestion de sauvegarde de session (temporaire uniquement)
+  - [x] État courant de la run
+- [x] Créer gestion de sauvegarde temporaire
 
-=== UI ET AFFICHAGE ===
-- [x] Créer système de composants UI dans ui/
-  - [x] Bouton stylisé (ui/button.py)
-  - [x] Barre de vie (ui/health_bar.py)
-  - [x] Texte animé (ui/animated_text.py)
-- [x] Intégrer gif_pygame pour affichage sprites animés
-- [x] Créer gestionnaire d’assets (core/assets.py)
+=== UI & AFFICHAGE ===
 
-=== IMPORT DE CONTENU OFFICIEL ===
-- [x] Ajouter un outil d'import JSON complet depuis PokéAPI (tools/generate_data.py)
-  - [x] Générer pokemon.json avec tous les Pokémon Gen 1 à 5 (ID, nom, types, stats, moves de base)
-  - [x] Générer types.json avec toutes les faiblesses/résistances des types
-  - [x] Générer moves.json avec tous les moves connus (nom, type, catégorie, puissance, précision, PP)
-  - [x] Générer items.json à partir de catégories PokéAPI : standard-balls, healing, status-cures, berries
-  - [x] Générer starters.json automatiquement depuis les starters Gen 1 à 5
-  - [x] Vérifier présence des sprites animés .gif dans assets/sprites/ (basé sur ID)
-  - [x] Valider tous les fichiers JSON générés
+- [x] Créer composants UI dans `ui/` :
+  - [x] Boutons stylisés (`ui/button.py`)
+  - [x] Barre de vie (`ui/health_bar.py`)
+  - [x] Barre d'XP (`ui/xp_bar.py`)
+  - [x] Texte animé
+- [x] Intégrer `gif_pygame` pour les sprites animés
+- [x] Créer gestionnaire d’assets si besoin (`core/assets.py`)
 
- === SCÈNES ===
-- [x] Créer système de changement de scène (core/scene_manager.py)
-- [] Implémenter scènes de base :
-  - [x] scene/menu_scene.py → Choix de nouvelle run
-  - [x] scene/starter_scene.py → Choix parmi 3 starters aléatoires
-  - [x] scene/battle_scene.py → Combat tour par tour
-  - [ ] scene/bonus_scene.py → Choix de récompense (soin, objet, Pokémon)
-  - [ ] scene/gameover_scene.py → Fin de run (KO équipe)
+=== IMPORT DE CONTENU OFFICIEL (tools/) ===
+
+- [x] Script principal : `tools/generate_data.py`
+- [x] Générer les fichiers suivants :
+  - [x] `pokemon.json` (Pokémon Gen 1 à 5 avec nom FR, types, stats, moves)
+  - [x] `types.json` (faiblesses/résistances)
+  - [x] `moves.json` (nom FR, type, catégorie, puissance, précision, PP)
+  - [x] `items.json` (depuis catégories : balls, soins, baies, etc.)
+  - [x] `starters.json` (liste des starters de la Gen 1 à 5)
+- [x] Vérifier présence des sprites `.gif` (`assets/sprites/pokemon/back|front/`)
+- [x] Log et gestion de progression (`tqdm`, logs)
+- [x] Ajout script multi-threadé : `generate_all.py`
+
+=== SCÈNES ===
+
+- [x] Système de changement de scène (`core/scene_manager.py`)
+- [x] Scènes implémentées :
+  - [x] Menu principal (`scene/menu_scene.py`)
+  - [x] Choix des starters (`scene/starter_scene.py`) avec animation wiggle
+  - [x] Combat (`scene/battle_scene.py`)
+- [ ] À faire :
+  - [ ] Scène bonus entre combats (`scene/bonus_scene.py`)
+  - [ ] Scène game over (`scene/gameover_scene.py`)
 
 === COMBAT ===
-- [ ] Implémenter moteur de combat simplifié (battle/engine.py)
-  - [ ] Tour par tour : attaque joueur puis IA
-  - [ ] Calculs de dégâts simples (type, puissance, stats)
-  - [ ] Gestion des PV, statut KO
-- [ ] Implémenter logique IA basique (battle/ai.py)
-- [ ] Implémenter gestion des capacités (battle/move_handler.py)
-- [ ] Implémenter gestion des effets d’objets (battle/item_handler.py)
-- [ ] Implémenter logique de capture plus tard
 
-=== MOCKS ET ASSETS ===
+- [ ] Implémenter moteur de combat (`battle/engine.py`)
+  - [ ] Tour par tour : joueur puis IA
+  - [ ] Calculs de dégâts (type, stats, puissance)
+  - [ ] KO et gestion PV
+- [ ] IA basique (`battle/ai.py`)
+- [ ] Gestion des capacités (`battle/move_handler.py`)
+- [ ] Gestion des objets (`battle/item_handler.py`)
+- [ ] Capture (plus tard)
+
+=== MOCKS & ASSETS ===
+
 - [ ] Créer assets temporaires :
-  - [ ] assets/sprites/placeholder.gif (sprites Pokémon)
-  - [ ] assets/ui/button.png (UI)
-  - [ ] assets/fonts/default.ttf
-  - [ ] assets/sfx/click.wav
-- [ ] Créer générique de test avec 3 Pokémon de base (mock)
-- [ ] Ajouter musiques et sons de test (assets/music/)
+  - [ ] `assets/sprites/placeholder.gif`
+  - [ ] `assets/ui/button.png`
+  - [ ] `assets/fonts/default.ttf`
+  - [ ] `assets/sfx/click.wav`
+- [ ] Générique de test avec 3 Pokémon mock
+- [ ] Ajouter musiques et sons test (`assets/music/`)
 
 === SYSTÈME D’ÉVÉNEMENTS ===
-- [ ] Implémenter gestion centralisée des événements Pygame (core/event_manager.py)
 
-=== TESTS ET DÉBOGAGE ===
-- [ ] Ajouter logs de debug dans utils
-- [ ] Créer mode debug pour scènes (affichage des états)
-- [ ] Implémenter réinitialisation de run rapide
+- [ ] Gestion centralisée des événements (`core/event_manager.py`)
+
+=== TESTS & DÉBOGAGE ===
+
+- [ ] Ajouter logs de debug (`core/utils.py`)
+- [ ] Mode debug visuel pour chaque scène
+- [ ] Réinitialisation rapide d’une run
 
 === EXTENSIBILITÉ FUTURE ===
-- [ ] Ajouter sauvegarde persistante (hors session)
-- [ ] Ajouter boutique d’objets
-- [ ] Ajouter gestion multi-langues (i18n)
-- [ ] Ajouter mod support (données custom)
+
+- [ ] Sauvegarde persistante (hors session)
+- [ ] Boutique d’objets
+- [ ] Support multi-langues (i18n)
+- [ ] Support des mods (données custom)
 

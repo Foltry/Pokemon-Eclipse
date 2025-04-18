@@ -1,0 +1,970 @@
+{
+  "1": {
+    "id": 1,
+    "name": "Master Ball",
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": null,
+    "sprite": "1.png"
+  },
+  "2": {
+    "id": 2,
+    "name": "Hyper Ball",
+    "category": "standard-balls",
+    "cost": 800,
+    "effect": null,
+    "sprite": "2.png"
+  },
+  "3": {
+    "id": 3,
+    "name": "Super Ball",
+    "category": "standard-balls",
+    "cost": 600,
+    "effect": null,
+    "sprite": "3.png"
+  },
+  "4": {
+    "id": 4,
+    "name": "Poké Ball",
+    "category": "standard-balls",
+    "cost": 200,
+    "effect": null,
+    "sprite": "4.png"
+  },
+  "5": {
+    "id": 5,
+    "name": "Safari Ball",
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": null,
+    "sprite": "5.png"
+  },
+  "456": {
+    "id": 456,
+    "name": "Parc Ball",
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": null,
+    "sprite": "456.png"
+  },
+  "457": {
+    "id": 457,
+    "name": "Compét’Ball",
+    "category": "standard-balls",
+    "cost": 300,
+    "effect": null,
+    "sprite": "457.png"
+  },
+  "2219": {
+    "id": 2219,
+    "name": "lastrange-ball",
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": null,
+    "sprite": "2219.png"
+  },
+  "2220": {
+    "id": 2220,
+    "name": "lapoke-ball",
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": null,
+    "sprite": "2220.png"
+  },
+  "2221": {
+    "id": 2221,
+    "name": "lagreat-ball",
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": null,
+    "sprite": "2221.png"
+  },
+  "2222": {
+    "id": 2222,
+    "name": "laultra-ball",
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": null,
+    "sprite": "2222.png"
+  },
+  "2223": {
+    "id": 2223,
+    "name": "laheavy-ball",
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": null,
+    "sprite": "2223.png"
+  },
+  "2224": {
+    "id": 2224,
+    "name": "laleaden-ball",
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": null,
+    "sprite": "2224.png"
+  },
+  "2225": {
+    "id": 2225,
+    "name": "lagigaton-ball",
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": null,
+    "sprite": "2225.png"
+  },
+  "2226": {
+    "id": 2226,
+    "name": "lafeather-ball",
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": null,
+    "sprite": "2226.png"
+  },
+  "2227": {
+    "id": 2227,
+    "name": "lawing-ball",
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": null,
+    "sprite": "2227.png"
+  },
+  "2228": {
+    "id": 2228,
+    "name": "lajet-ball",
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": null,
+    "sprite": "2228.png"
+  },
+  "2229": {
+    "id": 2229,
+    "name": "laorigin-ball",
+    "category": "standard-balls",
+    "cost": 0,
+    "effect": null,
+    "sprite": "2229.png"
+  },
+  "17": {
+    "id": 17,
+    "name": "Potion",
+    "category": "healing",
+    "cost": 200,
+    "effect": null,
+    "sprite": "17.png"
+  },
+  "23": {
+    "id": 23,
+    "name": "Guérison",
+    "category": "healing",
+    "cost": 3000,
+    "effect": null,
+    "sprite": "23.png"
+  },
+  "24": {
+    "id": 24,
+    "name": "Potion Max",
+    "category": "healing",
+    "cost": 2500,
+    "effect": null,
+    "sprite": "24.png"
+  },
+  "25": {
+    "id": 25,
+    "name": "Hyper Potion",
+    "category": "healing",
+    "cost": 1500,
+    "effect": null,
+    "sprite": "25.png"
+  },
+  "26": {
+    "id": 26,
+    "name": "Super Potion",
+    "category": "healing",
+    "cost": 700,
+    "effect": null,
+    "sprite": "26.png"
+  },
+  "30": {
+    "id": 30,
+    "name": "Eau Fraîche",
+    "category": "healing",
+    "cost": 200,
+    "effect": null,
+    "sprite": "30.png"
+  },
+  "31": {
+    "id": 31,
+    "name": "Soda Cool",
+    "category": "healing",
+    "cost": 300,
+    "effect": null,
+    "sprite": "31.png"
+  },
+  "32": {
+    "id": 32,
+    "name": "Limonade",
+    "category": "healing",
+    "cost": 400,
+    "effect": null,
+    "sprite": "32.png"
+  },
+  "33": {
+    "id": 33,
+    "name": "Lait Meumeu",
+    "category": "healing",
+    "cost": 600,
+    "effect": null,
+    "sprite": "33.png"
+  },
+  "34": {
+    "id": 34,
+    "name": "Poudrénergie",
+    "category": "healing",
+    "cost": 500,
+    "effect": null,
+    "sprite": "34.png"
+  },
+  "35": {
+    "id": 35,
+    "name": "Racinénergie",
+    "category": "healing",
+    "cost": 1200,
+    "effect": null,
+    "sprite": "35.png"
+  },
+  "43": {
+    "id": 43,
+    "name": "Jus de Baie",
+    "category": "healing",
+    "cost": 200,
+    "effect": null,
+    "sprite": "43.png"
+  },
+  "567": {
+    "id": 567,
+    "name": "Chococœur",
+    "category": "healing",
+    "cost": 3000,
+    "effect": null,
+    "sprite": "567.png"
+  },
+  "18": {
+    "id": 18,
+    "name": "Antidote",
+    "category": "status-cures",
+    "cost": 200,
+    "effect": null,
+    "sprite": "18.png"
+  },
+  "19": {
+    "id": 19,
+    "name": "Anti-Brûle",
+    "category": "status-cures",
+    "cost": 200,
+    "effect": null,
+    "sprite": "19.png"
+  },
+  "20": {
+    "id": 20,
+    "name": "Antigel",
+    "category": "status-cures",
+    "cost": 200,
+    "effect": null,
+    "sprite": "20.png"
+  },
+  "21": {
+    "id": 21,
+    "name": "Réveil",
+    "category": "status-cures",
+    "cost": 200,
+    "effect": null,
+    "sprite": "21.png"
+  },
+  "22": {
+    "id": 22,
+    "name": "Anti-Para",
+    "category": "status-cures",
+    "cost": 200,
+    "effect": null,
+    "sprite": "22.png"
+  },
+  "27": {
+    "id": 27,
+    "name": "Total Soin",
+    "category": "status-cures",
+    "cost": 400,
+    "effect": null,
+    "sprite": "27.png"
+  },
+  "36": {
+    "id": 36,
+    "name": "Poudre Soin",
+    "category": "status-cures",
+    "cost": 300,
+    "effect": null,
+    "sprite": "36.png"
+  },
+  "42": {
+    "id": 42,
+    "name": "Lava Cookie",
+    "category": "status-cures",
+    "cost": 350,
+    "effect": null,
+    "sprite": "42.png"
+  },
+  "54": {
+    "id": 54,
+    "name": "Vieux Gâteau",
+    "category": "status-cures",
+    "cost": 350,
+    "effect": null,
+    "sprite": "54.png"
+  },
+  "632": {
+    "id": 632,
+    "name": "Glace Volute",
+    "category": "status-cures",
+    "cost": 350,
+    "effect": null,
+    "sprite": "632.png"
+  },
+  "728": {
+    "id": 728,
+    "name": "Galette Illumis",
+    "category": "status-cures",
+    "cost": 350,
+    "effect": null,
+    "sprite": "728.png"
+  },
+  "765": {
+    "id": 765,
+    "name": "Sablé Yantreizh",
+    "category": "status-cures",
+    "cost": 350,
+    "effect": null,
+    "sprite": "765.png"
+  },
+  "888": {
+    "id": 888,
+    "name": "Malasada Maxi",
+    "category": "status-cures",
+    "cost": 350,
+    "effect": null,
+    "sprite": "888.png"
+  },
+  "1039": {
+    "id": 1039,
+    "name": "Crok’Argenta",
+    "category": "status-cures",
+    "cost": 250,
+    "effect": null,
+    "sprite": null
+  },
+  "45": {
+    "id": 45,
+    "name": "PV Plus",
+    "category": "vitamins",
+    "cost": 10000,
+    "effect": null,
+    "sprite": "45.png"
+  },
+  "46": {
+    "id": 46,
+    "name": "Protéine",
+    "category": "vitamins",
+    "cost": 10000,
+    "effect": null,
+    "sprite": "46.png"
+  },
+  "47": {
+    "id": 47,
+    "name": "Fer",
+    "category": "vitamins",
+    "cost": 10000,
+    "effect": null,
+    "sprite": "47.png"
+  },
+  "48": {
+    "id": 48,
+    "name": "Carbone",
+    "category": "vitamins",
+    "cost": 10000,
+    "effect": null,
+    "sprite": "48.png"
+  },
+  "49": {
+    "id": 49,
+    "name": "Calcium",
+    "category": "vitamins",
+    "cost": 10000,
+    "effect": null,
+    "sprite": "49.png"
+  },
+  "50": {
+    "id": 50,
+    "name": "Super Bonbon",
+    "category": "vitamins",
+    "cost": 10000,
+    "effect": null,
+    "sprite": "50.png"
+  },
+  "51": {
+    "id": 51,
+    "name": "PP Plus",
+    "category": "vitamins",
+    "cost": 10000,
+    "effect": null,
+    "sprite": "51.png"
+  },
+  "52": {
+    "id": 52,
+    "name": "Zinc",
+    "category": "vitamins",
+    "cost": 10000,
+    "effect": null,
+    "sprite": "52.png"
+  },
+  "53": {
+    "id": 53,
+    "name": "PP Max",
+    "category": "vitamins",
+    "cost": 10000,
+    "effect": null,
+    "sprite": "53.png"
+  },
+  "606": {
+    "id": 606,
+    "name": "Plume Santé",
+    "category": "vitamins",
+    "cost": 300,
+    "effect": null,
+    "sprite": "606.png"
+  },
+  "607": {
+    "id": 607,
+    "name": "Plume Force",
+    "category": "vitamins",
+    "cost": 300,
+    "effect": null,
+    "sprite": "607.png"
+  },
+  "608": {
+    "id": 608,
+    "name": "Plume Armure",
+    "category": "vitamins",
+    "cost": 300,
+    "effect": null,
+    "sprite": "608.png"
+  },
+  "609": {
+    "id": 609,
+    "name": "Plume Esprit",
+    "category": "vitamins",
+    "cost": 300,
+    "effect": null,
+    "sprite": "609.png"
+  },
+  "610": {
+    "id": 610,
+    "name": "Plume Mental",
+    "category": "vitamins",
+    "cost": 300,
+    "effect": null,
+    "sprite": "610.png"
+  },
+  "611": {
+    "id": 611,
+    "name": "Plume Sprint",
+    "category": "vitamins",
+    "cost": 300,
+    "effect": null,
+    "sprite": "611.png"
+  },
+  "685": {
+    "id": 685,
+    "name": "Pilule Talent",
+    "category": "vitamins",
+    "cost": 10000,
+    "effect": null,
+    "sprite": "685.png"
+  },
+  "1040": {
+    "id": 1040,
+    "name": "Bonbon Santé S",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1041": {
+    "id": 1041,
+    "name": "Bonbon Force S",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1042": {
+    "id": 1042,
+    "name": "Bonbon Armure S",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1043": {
+    "id": 1043,
+    "name": "Bonbon Esprit S",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1044": {
+    "id": 1044,
+    "name": "Bonbon Mental S",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1045": {
+    "id": 1045,
+    "name": "Bonbon Sprint S",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1046": {
+    "id": 1046,
+    "name": "Bonbon Santé M",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1047": {
+    "id": 1047,
+    "name": "Bonbon Force M",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1048": {
+    "id": 1048,
+    "name": "Bonbon Armure M",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1049": {
+    "id": 1049,
+    "name": "Bonbon Esprit M",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1050": {
+    "id": 1050,
+    "name": "Bonbon Mental M",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1051": {
+    "id": 1051,
+    "name": "Bonbon Sprint M",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1052": {
+    "id": 1052,
+    "name": "Bonbon Santé L",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1053": {
+    "id": 1053,
+    "name": "Bonbon Force L",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1054": {
+    "id": 1054,
+    "name": "Bonbon Armure L",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1055": {
+    "id": 1055,
+    "name": "Bonbon Esprit L",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1056": {
+    "id": 1056,
+    "name": "Bonbon Mental L",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1057": {
+    "id": 1057,
+    "name": "Bonbon Sprint L",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1182": {
+    "id": 1182,
+    "name": "Bonbon Exp. XS",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "1183": {
+    "id": 1183,
+    "name": "Bonbon Exp. S",
+    "category": "vitamins",
+    "cost": 240,
+    "effect": null,
+    "sprite": null
+  },
+  "1184": {
+    "id": 1184,
+    "name": "Bonbon Exp. M",
+    "category": "vitamins",
+    "cost": 1000,
+    "effect": null,
+    "sprite": null
+  },
+  "1185": {
+    "id": 1185,
+    "name": "Bonbon Exp. L",
+    "category": "vitamins",
+    "cost": 3000,
+    "effect": null,
+    "sprite": null
+  },
+  "1186": {
+    "id": 1186,
+    "name": "Bonbon Exp. XL",
+    "category": "vitamins",
+    "cost": 10000,
+    "effect": null,
+    "sprite": null
+  },
+  "1187": {
+    "id": 1187,
+    "name": "Bonbon Dynamax",
+    "category": "vitamins",
+    "cost": 0,
+    "effect": null,
+    "sprite": null
+  },
+  "1657": {
+    "id": 1657,
+    "name": "Patch Talent",
+    "category": "vitamins",
+    "cost": 20,
+    "effect": null,
+    "sprite": null
+  },
+  "2112": {
+    "id": 2112,
+    "name": "health-mochi",
+    "category": "vitamins",
+    "cost": 125,
+    "effect": null,
+    "sprite": null
+  },
+  "2113": {
+    "id": 2113,
+    "name": "muscle-mochi",
+    "category": "vitamins",
+    "cost": 125,
+    "effect": null,
+    "sprite": null
+  },
+  "2114": {
+    "id": 2114,
+    "name": "resist-mochi",
+    "category": "vitamins",
+    "cost": 125,
+    "effect": null,
+    "sprite": null
+  },
+  "2115": {
+    "id": 2115,
+    "name": "genius-mochi",
+    "category": "vitamins",
+    "cost": 125,
+    "effect": null,
+    "sprite": null
+  },
+  "2116": {
+    "id": 2116,
+    "name": "clever-mochi",
+    "category": "vitamins",
+    "cost": 125,
+    "effect": null,
+    "sprite": null
+  },
+  "2117": {
+    "id": 2117,
+    "name": "swift-mochi",
+    "category": "vitamins",
+    "cost": 125,
+    "effect": null,
+    "sprite": null
+  },
+  "2118": {
+    "id": 2118,
+    "name": "fresh-start-mochi",
+    "category": "vitamins",
+    "cost": 75,
+    "effect": null,
+    "sprite": null
+  },
+  "38": {
+    "id": 38,
+    "name": "Huile",
+    "category": "pp-recovery",
+    "cost": 1200,
+    "effect": null,
+    "sprite": "38.png"
+  },
+  "39": {
+    "id": 39,
+    "name": "Huile Max",
+    "category": "pp-recovery",
+    "cost": 2000,
+    "effect": null,
+    "sprite": "39.png"
+  },
+  "40": {
+    "id": 40,
+    "name": "Élixir",
+    "category": "pp-recovery",
+    "cost": 3000,
+    "effect": null,
+    "sprite": "40.png"
+  },
+  "41": {
+    "id": 41,
+    "name": "Élixir Max",
+    "category": "pp-recovery",
+    "cost": 4500,
+    "effect": null,
+    "sprite": "41.png"
+  },
+  "28": {
+    "id": 28,
+    "name": "Rappel",
+    "category": "revival",
+    "cost": 2000,
+    "effect": null,
+    "sprite": "28.png"
+  },
+  "29": {
+    "id": 29,
+    "name": "Rappel Max",
+    "category": "revival",
+    "cost": 4000,
+    "effect": null,
+    "sprite": "29.png"
+  },
+  "37": {
+    "id": 37,
+    "name": "Herbe Rappel",
+    "category": "revival",
+    "cost": 2800,
+    "effect": null,
+    "sprite": "37.png"
+  },
+  "44": {
+    "id": 44,
+    "name": "Cendre Sacrée",
+    "category": "revival",
+    "cost": 50000,
+    "effect": null,
+    "sprite": "44.png"
+  },
+  "1630": {
+    "id": 1630,
+    "name": "Maxi Miel",
+    "category": "revival",
+    "cost": 4000,
+    "effect": null,
+    "sprite": null
+  },
+  "55": {
+    "id": 55,
+    "name": "Garde-Stats",
+    "category": "stat-boosts",
+    "cost": 1500,
+    "effect": null,
+    "sprite": "55.png"
+  },
+  "56": {
+    "id": 56,
+    "name": "Muscle +",
+    "category": "stat-boosts",
+    "cost": 1000,
+    "effect": null,
+    "sprite": "56.png"
+  },
+  "57": {
+    "id": 57,
+    "name": "Attaque +",
+    "category": "stat-boosts",
+    "cost": 1000,
+    "effect": null,
+    "sprite": "57.png"
+  },
+  "58": {
+    "id": 58,
+    "name": "Défense +",
+    "category": "stat-boosts",
+    "cost": 2000,
+    "effect": null,
+    "sprite": "58.png"
+  },
+  "59": {
+    "id": 59,
+    "name": "Vitesse +",
+    "category": "stat-boosts",
+    "cost": 1000,
+    "effect": null,
+    "sprite": "59.png"
+  },
+  "60": {
+    "id": 60,
+    "name": "Précision +",
+    "category": "stat-boosts",
+    "cost": 1000,
+    "effect": null,
+    "sprite": "60.png"
+  },
+  "61": {
+    "id": 61,
+    "name": "Atq. Spé. +",
+    "category": "stat-boosts",
+    "cost": 1000,
+    "effect": null,
+    "sprite": "61.png"
+  },
+  "62": {
+    "id": 62,
+    "name": "Déf. Spé. +",
+    "category": "stat-boosts",
+    "cost": 2000,
+    "effect": null,
+    "sprite": "62.png"
+  },
+  "1631": {
+    "id": 1631,
+    "name": "Maxi Champi",
+    "category": "stat-boosts",
+    "cost": 6000,
+    "effect": null,
+    "sprite": null
+  },
+  "126": {
+    "id": 126,
+    "name": "Baie Ceriz",
+    "category": "medicine",
+    "cost": 80,
+    "effect": null,
+    "sprite": "126.png"
+  },
+  "127": {
+    "id": 127,
+    "name": "Baie Maron",
+    "category": "medicine",
+    "cost": 80,
+    "effect": null,
+    "sprite": "127.png"
+  },
+  "128": {
+    "id": 128,
+    "name": "Baie Pêcha",
+    "category": "medicine",
+    "cost": 80,
+    "effect": null,
+    "sprite": "128.png"
+  },
+  "129": {
+    "id": 129,
+    "name": "Baie Fraive",
+    "category": "medicine",
+    "cost": 80,
+    "effect": null,
+    "sprite": "129.png"
+  },
+  "130": {
+    "id": 130,
+    "name": "Baie Willia",
+    "category": "medicine",
+    "cost": 80,
+    "effect": null,
+    "sprite": "130.png"
+  },
+  "131": {
+    "id": 131,
+    "name": "Baie Mepo",
+    "category": "medicine",
+    "cost": 80,
+    "effect": null,
+    "sprite": "131.png"
+  },
+  "132": {
+    "id": 132,
+    "name": "Baie Oran",
+    "category": "medicine",
+    "cost": 80,
+    "effect": null,
+    "sprite": "132.png"
+  },
+  "133": {
+    "id": 133,
+    "name": "Baie Kika",
+    "category": "medicine",
+    "cost": 80,
+    "effect": null,
+    "sprite": "133.png"
+  },
+  "134": {
+    "id": 134,
+    "name": "Baie Prine",
+    "category": "medicine",
+    "cost": 80,
+    "effect": null,
+    "sprite": "134.png"
+  },
+  "135": {
+    "id": 135,
+    "name": "Baie Sitrus",
+    "category": "medicine",
+    "cost": 80,
+    "effect": null,
+    "sprite": "135.png"
+  }
+}

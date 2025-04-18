@@ -1,45 +1,57 @@
-import os, json, random, argparse
+import os
+import json
+import requests
 
-POKE_PATH = "data/pokemon.json"
-STARTER_PATH = "data/starters.json"
+POKEAPI_BASE = "https://pokeapi.co/api/v2"
+DATA_DIR = "data"
+GEN_LIMIT = 5
 
-def load(path):
-    if not os.path.exists(path): return {}
-    with open(path, encoding="utf-8") as f: return json.load(f)
+# Liste des noms des starters de chaque génération (premiers stades uniquement)
+STARTER_NAMES = [
+    # Gen 1
+    "bulbasaur", "charmander", "squirtle",
+    # Gen 2
+    "chikorita", "cyndaquil", "totodile",
+    # Gen 3
+    "treecko", "torchic", "mudkip",
+    # Gen 4
+    "turtwig", "chimchar", "piplup",
+    # Gen 5
+    "snivy", "tepig", "oshawott"
+]
 
-def save(path, data):
+def ensure_dir(path):
+    os.makedirs(path, exist_ok=True)
+
+def save_json(path, data):
     with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+        json.dump(data, f, indent=2, ensure_ascii=False)
 
-def by_type(data):
-    types = {"fire": [], "water": [], "grass": []}
-    for pid, poke in data.items():
-        for t in poke.get("types", []):
-            if t in types:
-                types[t].append(pid)
-                break
-    if not all(types.values()): return []
-    return random.sample(types["fire"], 1) + random.sample(types["water"], 1) + random.sample(types["grass"], 1)
+def get_pokemon_id(name):
+    try:
+        url = f"{POKEAPI_BASE}/pokemon/{name.lower()}"
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        return str(response.json()["id"])
+    except Exception as e:
+        print(f"❌ Erreur starter {name} : {e}")
+        return None
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--by-type", action="store_true")
-    parser.add_argument("--shuffle", action="store_true")
-    parser.add_argument("--verbose", action="store_true")
-    args = parser.parse_args()
+    ensure_dir(DATA_DIR)
+    ids = []
 
-    pokemon = load(POKE_PATH)
-    ids = list(pokemon.keys())
+    for name in STARTER_NAMES:
+        poke_id = get_pokemon_id(name)
+        if poke_id:
+            ids.append(poke_id)
+
     if len(ids) < 3:
-        print("❌ Moins de 3 Pokémon.")
-        return
-
-    starters = by_type(pokemon) if args.by_type else random.sample(ids, 3)
-    if args.shuffle: random.shuffle(starters)
-    if args.verbose: print("⭐ Starters :", starters)
-
-    save(STARTER_PATH, starters)
-    print("✅ starters.json mis à jour.")
+        print("❌ Moins de 3 starters trouvés, échec.")
+    else:
+        path = os.path.join(DATA_DIR, "starters.json")
+        save_json(path, ids)
+        print(f"✅ Fichier starters.json généré avec {len(ids)} starters.")
 
 if __name__ == "__main__":
     main()

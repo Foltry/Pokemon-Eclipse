@@ -1,60 +1,109 @@
-import os, json, requests, signal, sys
+import os
+import json
+import requests
+from tqdm import tqdm
 
-POKE_PATH = "data/pokemon.json"
-SPRITE_DIR = "assets/sprites/pokemon/front"
+POKEAPI_BASE = "https://pokeapi.co/api/v2"
+POKEMON_COUNT = 649  # GEN 1 à 5
 
-def sig_handler(sig, frame): sys.exit(0)
-if hasattr(signal, "SIGTSTP"):
-    signal.signal(signal.SIGTSTP, sig_handler)
+DATA_DIR = "data"
+SPRITE_DIR = os.path.join("assets", "sprites", "pokemon", "front")
 
-def load_json(path):
-    if not os.path.exists(path): return {}
-    with open(path, encoding="utf-8") as f: return json.load(f)
+# === UTILS ===
+
+def ensure_dir(path):
+    os.makedirs(path, exist_ok=True)
 
 def save_json(path, data):
     with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+        json.dump(data, f, indent=2, ensure_ascii=False)
 
-def download_sprite(pid, url):
-    path = os.path.join(SPRITE_DIR, f"{pid}.gif")
-    if os.path.exists(path): return
-    r = requests.get(url)
-    if r.status_code == 200:
-        with open(path, "wb") as f: f.write(r.content)
+# === SPRITES ===
 
-def main():
-    os.makedirs(SPRITE_DIR, exist_ok=True)
-    existing = load_json(POKE_PATH)
-    updated = {}
+def download_sprite(pokemon_id, url):
+    if not url:
+        return
+    filename = os.path.join(SPRITE_DIR, f"{str(pokemon_id).zfill(3)}.png")
+    if os.path.exists(filename):
+        return
+    try:
+        img = requests.get(url, timeout=10).content
+        with open(filename, "wb") as f:
+            f.write(img)
+    except Exception as e:
+        print(f"❌ Sprite {pokemon_id}: {e}")
 
-    for pid in range(1, 152):
-        pid_str = str(pid).zfill(3)
-        if pid_str in existing: continue
+# === FETCH POKEMON ===
 
-        url = f"https://pokeapi.co/api/v2/pokemon/{pid}/"
-        r = requests.get(url)
-        if r.status_code != 200: continue
+def fetch_pokemon_data(pokemon_id):
+    try:
+        poke_data = requests.get(f"{POKEAPI_BASE}/pokemon/{pokemon_id}", timeout=10).json()
+        species_data = requests.get(f"{POKEAPI_BASE}/pokemon-species/{pokemon_id}", timeout=10).json()
 
-        data = r.json()
-        name = next((n["name"] for n in data["names"] if n["language"]["name"] == "fr"), data["name"])
-        sprite = data["sprites"]["versions"]["generation-v"]["black-white"]["animated"]["front_default"]
+        # Types, stats
+        types = [t["type"]["name"] for t in poke_data["types"]]
+        stats = {s["stat"]["name"]: s["base_stat"] for s in poke_data["stats"]}
+        abilities = [a["ability"]["name"] for a in poke_data["abilities"]]
+        held_items = [item["item"]["name"] for item in poke_data["held_items"]]
 
-        print(f"⬇️ Sprite Pokémon : {pid_str} - {name}")
-        download_sprite(pid_str, sprite)
+        # Moves
+        moves = [{
+            "name": m["move"]["name"],
+            "level": d["level_learned_at"]
+        } for m in poke_data["moves"] for d in m["version_group_details"]
+            if d["move_learn_method"]["name"] == "level-up" and d["level_learned_at"] > 0]
 
-        print(f"✅ Pokémon ajouté : {name}")
-        updated[pid_str] = {
-            "name": name,
-            "types": [t["type"]["name"] for t in data["types"]],
-            "base_hp": data["stats"][0]["base_stat"],
-            "base_attack": data["stats"][1]["base_stat"],
-            "base_defense": data["stats"][2]["base_stat"],
-            "moves": [m["move"]["name"] for m in data["moves"][:4]]
+        moves = sorted(moves, key=lambda x: x["level"])
+
+        # Description FR
+        desc = next((entry["flavor_text"].replace("\n", " ").replace("\f", " ")
+                     for entry in species_data["flavor_text_entries"]
+                     if entry["language"]["name"] == "fr"), "")
+
+        # Sprite (PNG)
+        sprite_url = poke_data["sprites"]["front_default"]
+        download_sprite(pokemon_id, sprite_url)
+
+        return {
+            "id": pokemon_id,
+            "name": poke_data["name"],
+            "types": types,
+            "stats": stats,
+            "base_experience": poke_data["base_experience"],
+            "height": poke_data["height"],
+            "weight": poke_data["weight"],
+            "abilities": abilities,
+            "held_items": held_items,
+            "moves": moves,
+            "description": desc,
+            "capture_rate": species_data["capture_rate"],
+            "is_baby": species_data["is_baby"],
+            "is_legendary": species_data["is_legendary"],
+            "is_mythical": species_data["is_mythical"],
+            "habitat": species_data["habitat"]["name"] if species_data["habitat"] else None,
+            "generation": species_data["generation"]["name"]
         }
 
-    existing.update(updated)
-    save_json(POKE_PATH, existing)
-    print(f"✅ {len(updated)} nouveaux Pokémon ajoutés.")
+    except Exception as e:
+        print(f"❌ Erreur Pokémon {pokemon_id} : {e}")
+        return None
+
+# === MAIN ===
+
+def main():
+    ensure_dir(DATA_DIR)
+    ensure_dir(SPRITE_DIR)
+
+    all_pokemon = {}
+
+    print("🔄 Téléchargement des Pokémon (GEN 1 à 5)...")
+    for pid in tqdm(range(1, POKEMON_COUNT + 1)):
+        data = fetch_pokemon_data(pid)
+        if data:
+            all_pokemon[str(pid).zfill(3)] = data
+
+    save_json(os.path.join(DATA_DIR, "pokemon.json"), all_pokemon)
+    print("✅ Fichier pokemon.json généré.")
 
 if __name__ == "__main__":
     main()
