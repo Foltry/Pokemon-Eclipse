@@ -1,59 +1,60 @@
-import os, json, requests
-from tqdm import tqdm
+import os, json, requests, signal, sys
 
-BASE = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-DATA = os.path.join(BASE, "data")
-SPRITES = os.path.join(BASE, "assets", "sprites", "pokemon")
-os.makedirs(DATA, exist_ok=True)
+POKE_PATH = "data/pokemon.json"
+SPRITE_DIR = "assets/sprites/pokemon/front"
 
-SPRITE_TYPES = [
-    "front_default", "back_default", "front_shiny", "back_shiny",
-    "front_female", "back_female", "front_shiny_female", "back_shiny_female"
-]
+def sig_handler(sig, frame): sys.exit(0)
+if hasattr(signal, "SIGTSTP"):
+    signal.signal(signal.SIGTSTP, sig_handler)
 
-def download_sprite(url, path):
-    if url and not os.path.exists(path):
-        try:
-            r = requests.get(url)
-            if r.status_code == 200:
-                with open(path, 'wb') as f:
-                    f.write(r.content)
-        except:
-            pass
+def load_json(path):
+    if not os.path.exists(path): return {}
+    with open(path, encoding="utf-8") as f: return json.load(f)
 
-def generate_pokemon_data():
-    pokemons = {}
-    for t in SPRITE_TYPES:
-        os.makedirs(os.path.join(SPRITES, t.replace("default", "front")), exist_ok=True)
+def save_json(path, data):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
 
-    for i in tqdm(range(1, 650), desc="📥 Pokémon"):
-        res = requests.get(f"https://pokeapi.co/api/v2/pokemon/{i}")
-        if res.status_code != 200:
-            continue
-        d = res.json()
+def download_sprite(pid, url):
+    path = os.path.join(SPRITE_DIR, f"{pid}.gif")
+    if os.path.exists(path): return
+    r = requests.get(url)
+    if r.status_code == 200:
+        with open(path, "wb") as f: f.write(r.content)
 
-        # Nom en français (fallback : nom par défaut)
-        name = d["name"]
-        species_data = requests.get(d["species"]["url"]).json()
-        name_fr = next((n["name"] for n in species_data["names"] if n["language"]["name"] == "fr"), name)
+def main():
+    os.makedirs(SPRITE_DIR, exist_ok=True)
+    existing = load_json(POKE_PATH)
+    updated = {}
 
-        poke_id = str(i).zfill(3)
-        pokemons[poke_id] = {
-            "name": name_fr,
-            "types": [t["type"]["name"].capitalize() for t in d["types"]],
-            "base_hp": next(s["base_stat"] for s in d["stats"] if s["stat"]["name"] == "hp"),
-            "base_attack": next(s["base_stat"] for s in d["stats"] if s["stat"]["name"] == "attack"),
-            "base_defense": next(s["base_stat"] for s in d["stats"] if s["stat"]["name"] == "defense"),
-            "moves": [m["move"]["name"] for m in d["moves"][:4]]
+    for pid in range(1, 152):
+        pid_str = str(pid).zfill(3)
+        if pid_str in existing: continue
+
+        url = f"https://pokeapi.co/api/v2/pokemon/{pid}/"
+        r = requests.get(url)
+        if r.status_code != 200: continue
+
+        data = r.json()
+        name = next((n["name"] for n in data["names"] if n["language"]["name"] == "fr"), data["name"])
+        sprite = data["sprites"]["versions"]["generation-v"]["black-white"]["animated"]["front_default"]
+
+        print(f"⬇️ Sprite Pokémon : {pid_str} - {name}")
+        download_sprite(pid_str, sprite)
+
+        print(f"✅ Pokémon ajouté : {name}")
+        updated[pid_str] = {
+            "name": name,
+            "types": [t["type"]["name"] for t in data["types"]],
+            "base_hp": data["stats"][0]["base_stat"],
+            "base_attack": data["stats"][1]["base_stat"],
+            "base_defense": data["stats"][2]["base_stat"],
+            "moves": [m["move"]["name"] for m in data["moves"][:4]]
         }
 
-        sprites = d["sprites"]["versions"]["generation-v"]["black-white"]["animated"]
-        for t in SPRITE_TYPES:
-            sprite_url = sprites.get(t)
-            if sprite_url:
-                folder = t.replace("default", "front")
-                save_path = os.path.join(SPRITES, folder, f"{poke_id}.gif")
-                download_sprite(sprite_url, save_path)
+    existing.update(updated)
+    save_json(POKE_PATH, existing)
+    print(f"✅ {len(updated)} nouveaux Pokémon ajoutés.")
 
-    with open(os.path.join(DATA, "pokemon.json"), "w", encoding="utf-8") as f:
-        json.dump(pokemons, f, indent=2)
+if __name__ == "__main__":
+    main()

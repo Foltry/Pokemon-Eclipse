@@ -2,6 +2,7 @@ import os
 import pygame
 import gif_pygame
 from ui.health_bar import HealthBar
+from ui.xp_bar import XPBar
 
 # === PATHS & CONST ===
 ASSETS = os.path.join("assets", "ui", "battle")
@@ -124,7 +125,12 @@ def draw_combat_scene(
     ally_hp=100,
     ally_max_hp=100,
     enemy_hp=100,
-    enemy_max_hp=100
+    enemy_max_hp=100,
+    ally_level=5,
+    enemy_level=5,
+    enemy_gender="?",
+    ally_xp=0,
+    ally_max_xp=100
 ):
     load_status_images()
     font_pkm = pygame.font.Font(os.path.join(FONTS, "power clear.ttf"), 27)
@@ -147,13 +153,32 @@ def draw_combat_scene(
     screen.blit(STATUS_PLAYER, (268, 193))
     screen.blit(STATUS_ENEMY, (0, 35))
 
-    # Noms des Pokémon
-    text_ally = font_pkm.render(ally_name, True, (0, 0, 0))
-    text_enemy = font_pkm.render(enemy_name, True, (0, 0, 0))
-    screen.blit(text_ally, (305, 205))
-    screen.blit(text_enemy, (10, 45))
+    # === Infos ENNEMI ===
+    enemy_name_text = font_pkm.render(enemy_name, True, (0, 0, 0))
 
-    # Barres de vie
+    # Couleur selon le sexe
+    if enemy_gender == "♂":
+        gender_color = (66, 150, 255)
+    elif enemy_gender == "♀":
+        gender_color = (255, 105, 180)
+    else:
+        gender_color = (120, 120, 120)
+
+    enemy_gender_text = font_pv.render(enemy_gender, True, gender_color)
+    enemy_level_text = font_pv.render(f"Nv.{enemy_level}", True, (51, 51, 51))
+
+    screen.blit(enemy_name_text, (10, 45))
+    screen.blit(enemy_gender_text, (55 + enemy_name_text.get_width() + 10, 45))
+    screen.blit(enemy_level_text, (85 + enemy_name_text.get_width(), 45))
+
+    # === Infos ALLIÉ ===
+    ally_name_text = font_pkm.render(ally_name, True, (0, 0, 0))
+    ally_level_text = font_pv.render(f"Nv.{ally_level}", True, (51, 51, 51))
+
+    screen.blit(ally_name_text, (305, 205))
+    screen.blit(ally_level_text, (450, 205))
+
+    # === Barres de vie ===
     ally_bar = HealthBar((402, 232), (98, 9), ally_max_hp)
     ally_bar.update(ally_hp)
     ally_bar.draw(screen)
@@ -162,9 +187,14 @@ def draw_combat_scene(
     enemy_bar.update(enemy_hp)
     enemy_bar.draw(screen)
 
-    # PV texte du joueur (gris)
-# PV texte du joueur (sous la barre de vie)
+    # PV texte du joueur
     hp_text = font_pv.render(f"{ally_hp}/{ally_max_hp}", True, (51, 51, 51))
     hp_text = pygame.transform.scale(hp_text, (hp_text.get_width(), int(hp_text.get_height() * 0.65)))
     screen.blit(hp_text, (410, 246))
+
+    # === XP bar sous la barre de vie (240x5 px)
+    xp_bar = XPBar((308, 267), ally_max_xp)
+    xp_bar.update(ally_xp)
+    xp_bar.draw(screen)
+
 

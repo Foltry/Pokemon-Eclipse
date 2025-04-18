@@ -1,74 +1,58 @@
-import os, json, requests
-from tqdm import tqdm
+import os, json, requests, signal, sys
 
-BASE = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-DATA = os.path.join(BASE, "data")
-SPRITES = os.path.join(BASE, "assets", "sprites", "items")
-os.makedirs(DATA, exist_ok=True)
-os.makedirs(SPRITES, exist_ok=True)
+ITEMS_PATH = "data/items.json"
+SPRITES_DIR = "assets/sprites/items"
+should_exit = False
 
-def get_french_name(data):
-    return next((n["name"] for n in data["names"] if n["language"]["name"] == "fr"), data["name"])
+def handle_sig(sig, frame): sys.exit(0)
+if hasattr(signal, "SIGTSTP"):
+    signal.signal(signal.SIGTSTP, handle_sig)
 
-def get_french_effect(data):
-    # Priorité : effect_entries (plus technique), sinon flavor_text_entries (description longue)
-    effect = next((e["short_effect"] for e in data.get("effect_entries", []) if e["language"]["name"] == "fr"), None)
-    if not effect:
-        effect = next((e["text"] for e in data.get("flavor_text_entries", []) if e["language"]["name"] == "fr"), "")
-    return effect.strip()
+def load_json(path):
+    if not os.path.exists(path): return {}
+    with open(path, encoding="utf-8") as f: return json.load(f)
 
-def generate_items_data():
-    categories = ["standard-balls", "status-cures", "healing", "medecine"]
-    items = {}
+def save_json(path, data):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
 
-    for cat in tqdm(categories, desc="📥 Items"):
-        res = requests.get(f"https://pokeapi.co/api/v2/item-category/{cat}")
-        if res.status_code != 200:
-            print(f"⚠️ Erreur catégorie {cat}")
-            continue
+def download_sprite(name, url):
+    path = os.path.join(SPRITES_DIR, name + ".png")
+    if os.path.exists(path): return
+    r = requests.get(url)
+    if r.status_code == 200:
+        with open(path, "wb") as f: f.write(r.content)
 
-        try:
-            cat_data = res.json()
-        except:
-            continue
+def main():
+    os.makedirs(SPRITES_DIR, exist_ok=True)
+    existing = load_json(ITEMS_PATH)
+    all_items = {}
 
-        for item_entry in cat_data.get("items", []):
-            r = requests.get(item_entry["url"])
-            if r.status_code != 200:
-                continue
+    url = "https://pokeapi.co/api/v2/item?limit=2000"
+    r = requests.get(url)
+    if r.status_code != 200: return
 
-            try:
-                data = r.json()
-            except:
-                continue
+    for entry in r.json()["results"]:
+        data = requests.get(entry["url"]).json()
+        item_id = str(data["id"])
+        if item_id in existing: continue
 
-            # Récupération FR
-            name = get_french_name(data)
-            effect = get_french_effect(data)
+        name = next((n["name"] for n in data["names"] if n["language"]["name"] == "fr"), data["name"])
+        sprite_url = data["sprites"]["default"]
+        if not os.path.exists(os.path.join(SPRITES_DIR, item_id + ".png")):
+            print(f"⬇️ Téléchargement sprite objet : {name}")
+        download_sprite(item_id, sprite_url)
 
-            items[name] = {
-                "category": cat,
-                "cost": data["cost"],
-                "effect": effect
-            }
+        print(f"✅ Objet ajouté : {name}")
+        all_items[item_id] = {
+            "name": name,
+            "category": data["category"]["name"],
+            "cost": data["cost"]
+        }
 
-            # Sprite
-            sprite_url = data["sprites"]["default"]
-            if sprite_url:
-                filename = f"{name}.png"
-                path = os.path.join(SPRITES, filename)
-                if not os.path.exists(path):
-                    try:
-                        img = requests.get(sprite_url)
-                        if img.status_code == 200:
-                            with open(path, "wb") as f:
-                                f.write(img.content)
-                    except:
-                        continue
+    existing.update(all_items)
+    save_json(ITEMS_PATH, existing)
+    print(f"✅ {len(all_items)} nouveaux objets ajoutés.")
 
-    # Écriture finale
-    with open(os.path.join(DATA, "items.json"), "w", encoding="utf-8") as f:
-        json.dump(items, f, indent=2, ensure_ascii=False)
-
-    print("✅ items.json généré avec noms et effets en français.")
-
+if __name__ == "__main__":
+    main()

@@ -2,7 +2,6 @@ import pygame
 from core.scene_manager import Scene
 from scene.starter_scene import StarterScene
 
-# === CONFIG ===
 FONT_PATH = "assets/fonts/power clear.ttf"
 TITLE_COLOR = (255, 255, 0)
 OPTION_COLOR = (255, 255, 255)
@@ -32,6 +31,7 @@ class MenuScene(Scene):
                 self.cooldown = 150
             elif event.key == pygame.K_RETURN:
                 if self.selected == 0:
+                    print("➡️ Changement vers StarterScene")
                     self.manager.change_scene(StarterScene())
                 elif self.selected == 1:
                     pygame.quit()
@@ -40,12 +40,10 @@ class MenuScene(Scene):
     def draw(self, screen):
         screen.fill((0, 0, 0))
 
-        # Titre du jeu
         title_surf = self.font_title.render("Pokémon Eclipse", True, TITLE_COLOR)
         title_rect = title_surf.get_rect(center=(240, 80))
         screen.blit(title_surf, title_rect)
 
-        # Options
         for i, option in enumerate(self.options):
             color = SELECTED_COLOR if i == self.selected else OPTION_COLOR
             option_surf = self.font_option.render(option, True, color)

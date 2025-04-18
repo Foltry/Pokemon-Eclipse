@@ -12,9 +12,9 @@ def main():
 
     clock = pygame.time.Clock()
     scene_manager = SceneManager()
-    scene_manager.change_scene(MenuScene())  # Démarrage sur le menu principal
+    scene_manager.change_scene(MenuScene())  # Lance le menu principal
 
-    running = True
+    running = True  
     while running:
         dt = clock.tick(60)
 
@@ -22,7 +22,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             else:
-                scene_manager.scene.handle_event(event)
+                scene_manager.handle_event(event)
 
         scene_manager.update(dt)
         scene_manager.draw(screen)

@@ -1,234 +1,82 @@
 {
-  "Normal": {
-    "weak": [
-      "Fighting"
-    ],
-    "resist": [],
-    "immune": [
-      "Ghost"
-    ]
+  "normal": {
+    "id": "1",
+    "name": "Normal"
   },
-  "Feu": {
-    "weak": [
-      "Ground",
-      "Rock",
-      "Water"
-    ],
-    "resist": [
-      "Bug",
-      "Steel",
-      "Fire",
-      "Grass",
-      "Ice"
-    ],
-    "immune": []
+  "fighting": {
+    "id": "2",
+    "name": "Combat"
   },
-  "Eau": {
-    "weak": [
-      "Grass",
-      "Electric"
-    ],
-    "resist": [
-      "Steel",
-      "Fire",
-      "Water",
-      "Ice"
-    ],
-    "immune": []
+  "flying": {
+    "id": "3",
+    "name": "Vol"
   },
-  "\u00c9lectrik": {
-    "weak": [
-      "Ground"
-    ],
-    "resist": [
-      "Flying",
-      "Steel",
-      "Electric"
-    ],
-    "immune": []
+  "poison": {
+    "id": "4",
+    "name": "Poison"
   },
-  "Plante": {
-    "weak": [
-      "Flying",
-      "Poison",
-      "Bug",
-      "Fire",
-      "Ice"
-    ],
-    "resist": [
-      "Ground",
-      "Water",
-      "Grass",
-      "Electric"
-    ],
-    "immune": []
+  "ground": {
+    "id": "5",
+    "name": "Sol"
   },
-  "Glace": {
-    "weak": [
-      "Fighting",
-      "Rock",
-      "Steel",
-      "Fire"
-    ],
-    "resist": [
-      "Ice"
-    ],
-    "immune": []
+  "rock": {
+    "id": "6",
+    "name": "Roche"
   },
-  "Combat": {
-    "weak": [
-      "Flying",
-      "Psychic"
-    ],
-    "resist": [
-      "Rock",
-      "Bug",
-      "Dark"
-    ],
-    "immune": []
+  "bug": {
+    "id": "7",
+    "name": "Insecte"
   },
-  "Poison": {
-    "weak": [
-      "Ground",
-      "Psychic"
-    ],
-    "resist": [
-      "Fighting",
-      "Poison",
-      "Bug",
-      "Grass"
-    ],
-    "immune": []
+  "ghost": {
+    "id": "8",
+    "name": "Spectre"
   },
-  "Sol": {
-    "weak": [
-      "Water",
-      "Grass",
-      "Ice"
-    ],
-    "resist": [
-      "Poison",
-      "Rock"
-    ],
-    "immune": [
-      "Electric"
-    ]
+  "steel": {
+    "id": "9",
+    "name": "Acier"
   },
-  "Vol": {
-    "weak": [
-      "Rock",
-      "Electric",
-      "Ice"
-    ],
-    "resist": [
-      "Fighting",
-      "Bug",
-      "Grass"
-    ],
-    "immune": [
-      "Ground"
-    ]
+  "fire": {
+    "id": "10",
+    "name": "Feu"
   },
-  "Psy": {
-    "weak": [
-      "Bug",
-      "Ghost",
-      "Dark"
-    ],
-    "resist": [
-      "Fighting",
-      "Psychic"
-    ],
-    "immune": []
+  "water": {
+    "id": "11",
+    "name": "Eau"
   },
-  "Insecte": {
-    "weak": [
-      "Flying",
-      "Rock",
-      "Fire"
-    ],
-    "resist": [
-      "Fighting",
-      "Ground",
-      "Grass"
-    ],
-    "immune": []
+  "grass": {
+    "id": "12",
+    "name": "Plante"
   },
-  "Roche": {
-    "weak": [
-      "Fighting",
-      "Ground",
-      "Steel",
-      "Water",
-      "Grass"
-    ],
-    "resist": [
-      "Normal",
-      "Flying",
-      "Poison",
-      "Fire"
-    ],
-    "immune": []
+  "electric": {
+    "id": "13",
+    "name": "Électrik"
   },
-  "Spectre": {
-    "weak": [
-      "Ghost",
-      "Dark"
-    ],
-    "resist": [
-      "Poison",
-      "Bug"
-    ],
-    "immune": [
-      "Normal",
-      "Fighting"
-    ]
+  "psychic": {
+    "id": "14",
+    "name": "Psy"
   },
-  "Dragon": {
-    "weak": [
-      "Ice",
-      "Dragon"
-    ],
-    "resist": [
-      "Fire",
-      "Water",
-      "Grass",
-      "Electric"
-    ],
-    "immune": []
+  "ice": {
+    "id": "15",
+    "name": "Glace"
   },
-  "T\u00e9n\u00e8bres": {
-    "weak": [
-      "Fighting",
-      "Bug"
-    ],
-    "resist": [
-      "Ghost",
-      "Dark"
-    ],
-    "immune": [
-      "Psychic"
-    ]
+  "dragon": {
+    "id": "16",
+    "name": "Dragon"
   },
-  "Acier": {
-    "weak": [
-      "Fighting",
-      "Ground",
-      "Fire"
-    ],
-    "resist": [
-      "Normal",
-      "Flying",
-      "Rock",
-      "Bug",
-      "Steel",
-      "Grass",
-      "Psychic",
-      "Ice",
-      "Dragon"
-    ],
-    "immune": [
-      "Poison"
-    ]
+  "dark": {
+    "id": "17",
+    "name": "Ténèbres"
+  },
+  "fairy": {
+    "id": "18",
+    "name": "Fée"
+  },
+  "stellar": {
+    "id": "19",
+    "name": "Stellaire"
+  },
+  "unknown": {
+    "id": "10001",
+    "name": "???"
   }
 }

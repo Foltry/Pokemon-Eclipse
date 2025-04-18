@@ -2,10 +2,10 @@ class Scene:
     def __init__(self):
         self.manager = None
 
-    def enter(self):
+    def on_enter(self):
         pass
 
-    def exit(self):
+    def on_exit(self):
         pass
 
     def update(self, dt):
@@ -24,7 +24,7 @@ class SceneManager:
 
     def change_scene(self, new_scene):
         if self.scene:
-            self.scene.exit()
+            self.scene.on_exit()  # ✅ Corrigé ici
         self.scene = new_scene
         self.scene.manager = self
         self.scene.on_enter()
