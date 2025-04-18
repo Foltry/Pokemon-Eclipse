@@ -1,57 +1,46 @@
+import sys
 import os
-import json
-import requests
+import traceback
 
-POKEAPI_BASE = "https://pokeapi.co/api/v2"
-DATA_DIR = "data"
-GEN_LIMIT = 5
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+LOG_PATH = os.path.join("tools", "logs")
+os.makedirs(LOG_PATH, exist_ok=True)
+ERROR_LOG_FILE = os.path.join(LOG_PATH, "generation_errors.log")
 
-# Liste des noms des starters de chaque génération (premiers stades uniquement)
-STARTER_NAMES = [
-    # Gen 1
-    "bulbasaur", "charmander", "squirtle",
-    # Gen 2
-    "chikorita", "cyndaquil", "totodile",
-    # Gen 3
-    "treecko", "torchic", "mudkip",
-    # Gen 4
-    "turtwig", "chimchar", "piplup",
-    # Gen 5
-    "snivy", "tepig", "oshawott"
-]
-
-def ensure_dir(path):
-    os.makedirs(path, exist_ok=True)
-
-def save_json(path, data):
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
-
-def get_pokemon_id(name):
-    try:
-        url = f"{POKEAPI_BASE}/pokemon/{name.lower()}"
-        response = requests.get(url, timeout=10)
-        response.raise_for_status()
-        return str(response.json()["id"])
-    except Exception as e:
-        print(f"❌ Erreur starter {name} : {e}")
-        return None
-
-def main():
-    ensure_dir(DATA_DIR)
-    ids = []
-
-    for name in STARTER_NAMES:
-        poke_id = get_pokemon_id(name)
-        if poke_id:
-            ids.append(poke_id)
-
-    if len(ids) < 3:
-        print("❌ Moins de 3 starters trouvés, échec.")
-    else:
-        path = os.path.join(DATA_DIR, "starters.json")
-        save_json(path, ids)
-        print(f"✅ Fichier starters.json généré avec {len(ids)} starters.")
+def log_error(script_name, error_text):
+    with open(ERROR_LOG_FILE, "a", encoding="utf-8") as log_file:
+        log_file.write(f"--- Erreur dans {script_name} ---\n")
+        log_file.write(error_text + "\n\n")
 
 if __name__ == "__main__":
-    main()
+    try:
+        import sys
+        import os
+        sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+        import json
+        from core.data_loader import load_json, save_json
+        
+        STARTER_IDS = [
+            # Gen 1
+            "001", "004", "007",
+            # Gen 2
+            "152", "155", "158",
+            # Gen 3
+            "252", "255", "258",
+            # Gen 4
+            "387", "390", "393",
+            # Gen 5
+            "495", "498", "501"
+        ]
+        
+        def main():
+            data = {"starters": STARTER_IDS}
+            save_json("data/starters.json", data)
+            print(f"✅ Fichier starters.json généré avec {len(STARTER_IDS)} starters.")
+        
+        if __name__ == "__main__":
+            main()
+    except Exception as e:
+        error_details = traceback.format_exc()
+        print(f"❌ Erreur dans generate_starters.py: {e}")
+        log_error("generate_starters.py", error_details)
