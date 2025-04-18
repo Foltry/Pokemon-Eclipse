@@ -1,0 +1,6 @@
+Fichier	Statut	Améliorations prioritaires
+pokemon.json	✅ Complet	Ajouter attaques, évolutions, stats SP.
+moves.json	✅ Complet	Ajouter target, ailment, effect_chance.
+items.json	🔶 Limité	Ajouter sprites, catégories, + objets.
+types.json	✅ Complet	Ajouter métadonnées (génération, couleur).
+starters.json	✅ Minimal	Structure OK, option d’enrichir noms.
