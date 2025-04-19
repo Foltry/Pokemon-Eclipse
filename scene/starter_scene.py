@@ -30,18 +30,15 @@ class StarterScene(Scene):
 
     def pick_starters(self):
         with open("data/starters.json", encoding="utf-8") as f:
-            starter_ids = json.load(f)
-        with open("data/pokemon.json", encoding="utf-8") as f:
-            all_data = json.load(f)
+            starter_list = json.load(f)  # starter_list = liste de Pokémon (dict)
 
         types = {"grass": [], "fire": [], "water": []}
-        for pid in starter_ids:
-            poke = all_data[pid]
-            poke["id"] = pid
-            for t in poke["types"]:
+
+        for starter in starter_list:
+            for t in starter["types"]:
                 t_lower = t.lower()
                 if t_lower in types:
-                    types[t_lower].append(poke)
+                    types[t_lower].append(starter)
                     break
 
         if not all(types.values()):
@@ -93,6 +90,6 @@ class StarterScene(Scene):
 
             screen.blit(surf, rect.topleft)
 
-            name_text = FONT.render(poke["name"], True, (0, 0, 0))
+            name_text = FONT.render(poke.get("name_fr", "???"), True, (0, 0, 0))
             name_rect = name_text.get_rect(center=(x, rect.top - 16))
             screen.blit(name_text, name_rect)

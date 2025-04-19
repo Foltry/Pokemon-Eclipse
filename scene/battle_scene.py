@@ -23,8 +23,8 @@ class BattleScene(Scene):
         # Pokémon du joueur
         starter = run_manager.get_team()[0]
         self.ally_id = starter["id"]
-        self.ally_name = starter["name"]
-        self.ally_hp = self.ally_max_hp = starter["base_hp"]
+        self.ally_name = starter.get("name_fr", starter.get("name_en", "???"))
+        self.ally_hp = self.ally_max_hp = starter["base_stats"]["hp"]
         self.ally_level = 5
         self.ally_xp = 30          # XP actuelle
         self.ally_max_xp = 100     # XP max avant passage de niveau
@@ -33,8 +33,14 @@ class BattleScene(Scene):
         self.enemy_id = "016"
         with open("data/pokemon.json", encoding="utf-8") as f:
             data = json.load(f)
-            self.enemy_name = data[self.enemy_id]["name"]
-            self.enemy_hp = self.enemy_max_hp = data[self.enemy_id]["base_hp"]
+            enemy = next((p for p in data if str(p["id"]).zfill(3) == self.enemy_id), None)
+            if not enemy:
+                raise ValueError(f"❌ Ennemi avec ID {self.enemy_id} introuvable.")
+            
+            self.enemy_name = enemy.get("name_fr", enemy.get("name", "Inconnu"))
+            self.enemy_hp = self.enemy_max_hp = enemy.get("base_stats", {}).get("hp", 50)
+
+
 
         self.enemy_level = 5
         self.enemy_gender = random.choice(["♂", "♀"])

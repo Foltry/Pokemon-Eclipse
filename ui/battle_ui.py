@@ -1,18 +1,20 @@
 import os
 import pygame
 import gif_pygame
+import json
 from ui.health_bar import HealthBar
 from ui.xp_bar import XPBar
 
 # === PATHS & CONST ===
 ASSETS = os.path.join("assets", "ui", "battle")
 FONTS = os.path.join("assets", "fonts")
+SPRITE_DIR = os.path.join("assets", "sprites", "pokemon")
 CMD_IMG = pygame.image.load(os.path.join(ASSETS, "cursor_command.png"))
 
 BUTTON_WIDTH = 130
 BUTTON_HEIGHT = 46
-ALLY_SPRITE_SIZE = (160, 160)
-ENEMY_SPRITE_SIZE = (96, 96)
+ALLY_SPRITE_SIZE = (116, 116)
+ENEMY_SPRITE_SIZE = (96, 96)  # même taille pour garder une cohérence visuelle
 
 # === UI ELEMENTS ===
 
@@ -104,11 +106,21 @@ def load_combat_sprites(ally_id, enemy_id):
     base_ally = pygame.image.load(os.path.join(ASSETS, "base_ally.png")).convert_alpha()
     base_enemy = pygame.image.load(os.path.join(ASSETS, "base_enemy.png")).convert_alpha()
 
-    path_back = os.path.join("assets", "sprites", "pokemon", "back", f"{ally_id}.gif")
-    path_front = os.path.join("assets", "sprites", "pokemon", "front", f"{enemy_id}.gif")
+    with open("data/pokemon.json", encoding="utf-8") as f:
+        pokemon_data = json.load(f)
 
-    ally_sprite = gif_pygame.load(path_back)
-    enemy_sprite = gif_pygame.load(path_front)
+    ally = next((p for p in pokemon_data if str(p["id"]).zfill(3) == str(ally_id).zfill(3)), None)
+    enemy = next((p for p in pokemon_data if str(p["id"]).zfill(3) == str(enemy_id).zfill(3)), None)
+
+    if not ally or not enemy:
+        raise ValueError(f"Impossible de charger les sprites : ally={ally_id}, enemy={enemy_id}")
+
+
+    ally_path = os.path.join(SPRITE_DIR, ally["sprites"]["back"])
+    enemy_path = os.path.join(SPRITE_DIR, enemy["sprites"]["front"])
+
+    ally_sprite = gif_pygame.load(ally_path)
+    enemy_sprite = gif_pygame.load(enemy_path)
 
     ally_sprite = resize_gif(ally_sprite, ALLY_SPRITE_SIZE)
     enemy_sprite = resize_gif(enemy_sprite, ENEMY_SPRITE_SIZE)
@@ -146,7 +158,7 @@ def draw_combat_scene(
     screen.blit(base_enemy, (255, 115))
 
     # Sprites
-    screen.blit(ally_sprite.blit_ready(), (40, 160))
+    screen.blit(ally_sprite.blit_ready(), (80, 200))
     screen.blit(enemy_sprite.blit_ready(), (340, 90))
 
     # Status boxes
@@ -156,7 +168,6 @@ def draw_combat_scene(
     # === Infos ENNEMI ===
     enemy_name_text = font_pkm.render(enemy_name, True, (0, 0, 0))
 
-    # Couleur selon le sexe
     if enemy_gender == "♂":
         gender_color = (66, 150, 255)
     elif enemy_gender == "♀":
@@ -196,5 +207,3 @@ def draw_combat_scene(
     xp_bar = XPBar((308, 267), ally_max_xp)
     xp_bar.update(ally_xp)
     xp_bar.draw(screen)
-
-
