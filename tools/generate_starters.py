@@ -1,46 +1,78 @@
-import sys
+# tools/generate_starters.py
+
 import os
-import traceback
+import json
+import requests
+from logger import log_error
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-LOG_PATH = os.path.join("tools", "logs")
-os.makedirs(LOG_PATH, exist_ok=True)
-ERROR_LOG_FILE = os.path.join(LOG_PATH, "generation_errors.log")
+OUTPUT_PATH = os.path.join("data", "starters.json")
+POKEAPI_BASE = "https://pokeapi.co/api/v2"
 
-def log_error(script_name, error_text):
-    with open(ERROR_LOG_FILE, "a", encoding="utf-8") as log_file:
-        log_file.write(f"--- Erreur dans {script_name} ---\n")
-        log_file.write(error_text + "\n\n")
+# IDs Pokédex national des 15 starters (1 à 5G)
+STARTER_IDS = [
+    1, 4, 7,        # Gen 1 : Bulbasaur, Charmander, Squirtle
+    152, 155, 158,  # Gen 2 : Chikorita, Cyndaquil, Totodile
+    252, 255, 258,  # Gen 3 : Treecko, Torchic, Mudkip
+    387, 390, 393,  # Gen 4 : Turtwig, Chimchar, Piplup
+    495, 498, 501   # Gen 5 : Snivy, Tepig, Oshawott
+]
+
+
+def fetch_json(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        return response.json()
+    except Exception as e:
+        log_error("generate_starters.py", f"Erreur lors du fetch {url} : {e}")
+        return None
+
+
+def extract_starter_data(pokemon_id):
+    pokemon_data = fetch_json(f"{POKEAPI_BASE}/pokemon/{pokemon_id}")
+    species_data = fetch_json(f"{POKEAPI_BASE}/pokemon-species/{pokemon_id}")
+
+    if not pokemon_data or not species_data:
+        return None
+
+    try:
+        name_en = pokemon_data["name"]
+        name_fr = next((n["name"] for n in species_data["names"] if n["language"]["name"] == "fr"), name_en)
+
+        types = [t["type"]["name"] for t in sorted(pokemon_data["types"], key=lambda x: x["slot"])]
+
+        stats = {s["stat"]["name"]: s["base_stat"] for s in pokemon_data["stats"]}
+
+        return {
+            "id": pokemon_id,
+            "name_en": name_en,
+            "name_fr": name_fr,
+            "types": types,
+            "base_stats": stats
+        }
+
+    except Exception as e:
+        log_error("generate_starters.py", f"Erreur parsing starter #{pokemon_id} : {e}")
+        return None
+
+
+def main():
+    starters = []
+
+    for pid in STARTER_IDS:
+        print(f"-> Récupération starter #{pid}")
+        data = extract_starter_data(pid)
+        if data:
+            starters.append(data)
+        else:
+            log_error("generate_starters.py", f"Erreur récupération starter #{pid}")
+
+    os.makedirs("data", exist_ok=True)
+    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
+        json.dump(starters, f, ensure_ascii=False, indent=2)
+
+    print(f"OK {len(starters)} starters sauvegardés dans {OUTPUT_PATH}")
+
 
 if __name__ == "__main__":
-    try:
-        import sys
-        import os
-        sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-        import json
-        from core.data_loader import load_json, save_json
-        
-        STARTER_IDS = [
-            # Gen 1
-            "001", "004", "007",
-            # Gen 2
-            "152", "155", "158",
-            # Gen 3
-            "252", "255", "258",
-            # Gen 4
-            "387", "390", "393",
-            # Gen 5
-            "495", "498", "501"
-        ]
-        
-        def main():
-            data = {"starters": STARTER_IDS}
-            save_json("data/starters.json", data)
-            print(f"✅ Fichier starters.json généré avec {len(STARTER_IDS)} starters.")
-        
-        if __name__ == "__main__":
-            main()
-    except Exception as e:
-        error_details = traceback.format_exc()
-        print(f"❌ Erreur dans generate_starters.py: {e}")
-        log_error("generate_starters.py", error_details)
+    main()

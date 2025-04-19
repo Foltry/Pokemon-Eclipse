@@ -1,260 +1,354 @@
-{
-  "1": {
+[
+  {
+    "id": 1,
     "name": "Master Ball",
     "category": "standard-balls",
     "cost": 0,
-    "effect": "Assurément la Ball la plus performante. Elle permet de capturer à coup sûr un Pokémon sauvage."
+    "effect": "Assurément la Ball la plus performante. Elle permet de capturer à coup sûr un Pokémon sauvage.",
+    "sprite": "master-ball.png"
   },
-  "2": {
+  {
+    "id": 2,
     "name": "Hyper Ball",
     "category": "standard-balls",
     "cost": 800,
-    "effect": "Une Ball ultraperformante dont le taux de réussite est supérieur à celui de la Super Ball."
+    "effect": "Une Ball ultraperformante dont le taux de réussite est supérieur à celui de la Super Ball.",
+    "sprite": "ultra-ball.png"
   },
-  "3": {
+  {
+    "id": 3,
     "name": "Super Ball",
     "category": "standard-balls",
     "cost": 600,
-    "effect": "Une Ball très performante dont le taux de réussite est supérieur à celui de la Poké Ball."
+    "effect": "Une Ball très performante dont le taux de réussite est supérieur à celui de la Poké Ball.",
+    "sprite": "great-ball.png"
   },
-  "4": {
+  {
+    "id": 4,
     "name": "Poké Ball",
     "category": "standard-balls",
     "cost": 200,
-    "effect": "Un objet pareil à une capsule, qui capture les Pokémon sauvages. Il suffit pour cela de le jeter comme une balle."
+    "effect": "Un objet pareil à une capsule, qui capture les Pokémon sauvages. Il suffit pour cela de le jeter comme une balle.",
+    "sprite": "poke-ball.png"
   },
-  "5": {
+  {
+    "id": 5,
     "name": "Safari Ball",
     "category": "standard-balls",
     "cost": 0,
-    "effect": "Une Poké Ball spéciale dont l’usage est réservé au Parc Safari. Elle est décorée d’un motif camouflage."
+    "effect": "Une Poké Ball spéciale dont l’usage est réservé au Parc Safari. Elle est décorée d’un motif camouflage.",
+    "sprite": "safari-ball.png"
   },
-  "17": {
+  {
+    "id": 17,
     "name": "Potion",
     "category": "healing",
     "cost": 200,
-    "effect": "Un spray qui soigne les blessures. Restaure 20 PV à un Pokémon."
+    "effect": "Un spray qui soigne les blessures. Restaure 20 PV à un Pokémon.",
+    "sprite": "potion.png"
   },
-  "18": {
+  {
+    "id": 18,
     "name": "Antidote",
     "category": "status-cures",
     "cost": 200,
-    "effect": "Un médicament sous forme de spray. Guérit un Pokémon empoisonné."
+    "effect": "Un médicament sous forme de spray. Guérit un Pokémon empoisonné.",
+    "sprite": "antidote.png"
   },
-  "19": {
+  {
+    "id": 19,
     "name": "Anti-Brûle",
     "category": "status-cures",
     "cost": 200,
-    "effect": "Un médicament sous forme de spray. Soigne les brûlures d’un Pokémon."
+    "effect": "Un médicament sous forme de spray. Soigne les brûlures d’un Pokémon.",
+    "sprite": "burn-heal.png"
   },
-  "20": {
+  {
+    "id": 20,
     "name": "Antigel",
     "category": "status-cures",
     "cost": 200,
-    "effect": "Un médicament sous forme de spray. Réchauffe un Pokémon gelé."
+    "effect": "Un médicament sous forme de spray. Réchauffe un Pokémon gelé.",
+    "sprite": "ice-heal.png"
   },
-  "21": {
+  {
+    "id": 21,
     "name": "Réveil",
     "category": "status-cures",
     "cost": 200,
-    "effect": "Un médicament sous forme de spray. Réveille un Pokémon endormi."
+    "effect": "Un médicament sous forme de spray. Réveille un Pokémon endormi.",
+    "sprite": "awakening.png"
   },
-  "22": {
+  {
+    "id": 22,
     "name": "Anti-Para",
     "category": "status-cures",
     "cost": 200,
-    "effect": "Un médicament sous forme de spray. Soigne un Pokémon de la paralysie."
+    "effect": "Un médicament sous forme de spray. Soigne un Pokémon de la paralysie.",
+    "sprite": "paralyze-heal.png"
   },
-  "23": {
+  {
+    "id": 23,
     "name": "Guérison",
     "category": "healing",
     "cost": 3000,
-    "effect": "Un médicament qui restaure tous les PV d’un Pokémon et soigne tous ses problèmes de statut."
+    "effect": "Un médicament qui restaure tous les PV d’un Pokémon et soigne tous ses problèmes de statut.",
+    "sprite": "full-restore.png"
   },
-  "24": {
+  {
+    "id": 24,
     "name": "Potion Max",
     "category": "healing",
     "cost": 2500,
-    "effect": "Un spray qui soigne les blessures. Restaure tous les PV d’un Pokémon."
+    "effect": "Un spray qui soigne les blessures. Restaure tous les PV d’un Pokémon.",
+    "sprite": "max-potion.png"
   },
-  "25": {
+  {
+    "id": 25,
     "name": "Hyper Potion",
     "category": "healing",
     "cost": 1500,
-    "effect": "Un spray qui soigne les blessures. Restaure 200 PV à un Pokémon."
+    "effect": "Un spray qui soigne les blessures. Restaure 200 PV à un Pokémon.",
+    "sprite": "hyper-potion.png"
   },
-  "26": {
+  {
+    "id": 26,
     "name": "Super Potion",
     "category": "healing",
     "cost": 700,
-    "effect": "Un spray qui soigne les blessures. Restaure 50 PV à un Pokémon."
+    "effect": "Un spray qui soigne les blessures. Restaure 50 PV à un Pokémon.",
+    "sprite": "super-potion.png"
   },
-  "27": {
+  {
+    "id": 27,
     "name": "Total Soin",
     "category": "status-cures",
     "cost": 400,
-    "effect": "Un médicament sous forme de spray. Soigne tous les problèmes de statut d’un Pokémon."
+    "effect": "Un médicament sous forme de spray. Soigne tous les problèmes de statut d’un Pokémon.",
+    "sprite": "full-heal.png"
   },
-  "30": {
+  {
+    "id": 30,
     "name": "Eau Fraîche",
     "category": "healing",
     "cost": 200,
-    "effect": "Une eau riche en minéraux. Restaure 50 PV à un Pokémon."
+    "effect": "Une eau riche en minéraux. Restaure 50 PV à un Pokémon.",
+    "sprite": "fresh-water.png"
   },
-  "31": {
+  {
+    "id": 31,
     "name": "Soda Cool",
     "category": "healing",
     "cost": 300,
-    "effect": "Une boisson pétillante. Restaure 60 PV à un Pokémon."
+    "effect": "Une boisson pétillante. Restaure 60 PV à un Pokémon.",
+    "sprite": "soda-pop.png"
   },
-  "32": {
+  {
+    "id": 32,
     "name": "Limonade",
     "category": "healing",
     "cost": 400,
-    "effect": "Une boisson très sucrée. Restaure 80 PV à un Pokémon."
+    "effect": "Une boisson très sucrée. Restaure 80 PV à un Pokémon.",
+    "sprite": "lemonade.png"
   },
-  "33": {
+  {
+    "id": 33,
     "name": "Lait Meumeu",
     "category": "healing",
     "cost": 600,
-    "effect": "Un lait très nourrissant. Restaure 100 PV à un Pokémon."
+    "effect": "Un lait très nourrissant. Restaure 100 PV à un Pokémon.",
+    "sprite": "moomoo-milk.png"
   },
-  "34": {
+  {
+    "id": 34,
     "name": "Poudrénergie",
     "category": "healing",
     "cost": 500,
-    "effect": "Une poudre médicinale très amère. Restaure 50 PV à un Pokémon."
+    "effect": "Une poudre médicinale très amère. Restaure 50 PV à un Pokémon.",
+    "sprite": "energy-powder.png"
   },
-  "35": {
+  {
+    "id": 35,
     "name": "Racinénergie",
     "category": "healing",
     "cost": 1200,
-    "effect": "Une racine très amère. Restaure 200 PV à un Pokémon."
+    "effect": "Une racine très amère. Restaure 200 PV à un Pokémon.",
+    "sprite": "energy-root.png"
   },
-  "36": {
+  {
+    "id": 36,
     "name": "Poudre Soin",
     "category": "status-cures",
     "cost": 300,
-    "effect": "Une poudre médicinale très amère. Soigne tous les problèmes de statut d’un Pokémon."
+    "effect": "Une poudre médicinale très amère. Soigne tous les problèmes de statut d’un Pokémon.",
+    "sprite": "heal-powder.png"
   },
-  "42": {
+  {
+    "id": 42,
     "name": "Lava Cookie",
     "category": "status-cures",
     "cost": 350,
-    "effect": "La spécialité de la ville de Vermilava. Soigne tous les problèmes de statut d’un Pokémon."
+    "effect": "La spécialité de la ville de Vermilava. Soigne tous les problèmes de statut d’un Pokémon.",
+    "sprite": "lava-cookie.png"
   },
-  "43": {
+  {
+    "id": 43,
     "name": "Jus de Baie",
     "category": "healing",
     "cost": 200,
-    "effect": "Une boisson 100% pur jus de Baies. Restaure 20 PV à un Pokémon."
+    "effect": "Une boisson 100% pur jus de Baies. Restaure 20 PV à un Pokémon.",
+    "sprite": "berry-juice.png"
   },
-  "54": {
+  {
+    "id": 54,
     "name": "Vieux Gâteau",
     "category": "status-cures",
     "cost": 350,
-    "effect": "Spécialité du Vieux Château. Il soigne tous les problèmes de statut d’un Pokémon."
+    "effect": "Spécialité du Vieux Château. Il soigne tous les problèmes de statut d’un Pokémon.",
+    "sprite": "old-gateau.png"
   },
-  "126": {
+  {
+    "id": 126,
     "name": "Baie Ceriz",
     "category": "medicine",
     "cost": 80,
-    "effect": "Baie qui soigne la paralysie lorsqu’elle est tenue par un Pokémon."
+    "effect": "Baie qui soigne la paralysie lorsqu’elle est tenue par un Pokémon.",
+    "sprite": "cheri-berry.png"
   },
-  "127": {
+  {
+    "id": 127,
     "name": "Baie Maron",
     "category": "medicine",
     "cost": 80,
-    "effect": "Baie qui soigne le sommeil lorsqu’elle est tenue par un Pokémon."
+    "effect": "Baie qui soigne le sommeil lorsqu’elle est tenue par un Pokémon.",
+    "sprite": "chesto-berry.png"
   },
-  "128": {
+  {
+    "id": 128,
     "name": "Baie Pêcha",
     "category": "medicine",
     "cost": 80,
-    "effect": "Baie qui soigne l’empoisonnement lorsqu’elle est tenue par un Pokémon."
+    "effect": "Baie qui soigne l’empoisonnement lorsqu’elle est tenue par un Pokémon.",
+    "sprite": "pecha-berry.png"
   },
-  "129": {
+  {
+    "id": 129,
     "name": "Baie Fraive",
     "category": "medicine",
     "cost": 80,
-    "effect": "Baie qui soigne les brûlures lorsqu’elle est tenue par un Pokémon."
+    "effect": "Baie qui soigne les brûlures lorsqu’elle est tenue par un Pokémon.",
+    "sprite": "rawst-berry.png"
   },
-  "130": {
+  {
+    "id": 130,
     "name": "Baie Willia",
     "category": "medicine",
     "cost": 80,
-    "effect": "Baie qui soigne le gel lorsqu’elle est tenue par un Pokémon."
+    "effect": "Baie qui soigne le gel lorsqu’elle est tenue par un Pokémon.",
+    "sprite": "aspear-berry.png"
   },
-  "131": {
+  {
+    "id": 131,
     "name": "Baie Mepo",
     "category": "medicine",
     "cost": 80,
-    "effect": "Baie qui restaure 10 PP lorsqu’elle est tenue par un Pokémon."
+    "effect": "Baie qui restaure 10 PP lorsqu’elle est tenue par un Pokémon.",
+    "sprite": "leppa-berry.png"
   },
-  "132": {
+  {
+    "id": 132,
     "name": "Baie Oran",
     "category": "medicine",
     "cost": 80,
-    "effect": "Baie qui restaure 10 PV lorsqu’elle est tenue par un Pokémon."
+    "effect": "Baie qui restaure 10 PV lorsqu’elle est tenue par un Pokémon.",
+    "sprite": "oran-berry.png"
   },
-  "133": {
+  {
+    "id": 133,
     "name": "Baie Kika",
     "category": "medicine",
     "cost": 80,
-    "effect": "Baie qui soigne la confusion lorsqu’elle est tenue par un Pokémon."
+    "effect": "Baie qui soigne la confusion lorsqu’elle est tenue par un Pokémon.",
+    "sprite": "persim-berry.png"
   },
-  "134": {
+  {
+    "id": 134,
     "name": "Baie Prine",
     "category": "medicine",
     "cost": 80,
-    "effect": "Baie qui soigne tous les problèmes de statut lorsqu’elle est tenue par un Pokémon."
+    "effect": "Baie qui soigne tous les problèmes de statut lorsqu’elle est tenue par un Pokémon.",
+    "sprite": "lum-berry.png"
   },
-  "135": {
+  {
+    "id": 135,
     "name": "Baie Sitrus",
     "category": "medicine",
     "cost": 80,
-    "effect": "Baie qui restaure quelques PV lorsqu’elle est tenue par un Pokémon."
+    "effect": "Baie qui restaure quelques PV lorsqu’elle est tenue par un Pokémon.",
+    "sprite": "sitrus-berry.png"
   },
-  "456": {
+  {
+    "id": 456,
     "name": "Parc Ball",
     "category": "standard-balls",
     "cost": 0,
-    "effect": "Une Poké Ball spéciale utilisée au Parc des Amis."
+    "effect": "Une Poké Ball spéciale utilisée au Parc des Amis.",
+    "sprite": "park-ball.png"
   },
-  "457": {
+  {
+    "id": 457,
     "name": "Compét’Ball",
     "category": "standard-balls",
     "cost": 300,
-    "effect": "Une Poké Ball spéciale utilisée au Concours de Capture d’insecte."
+    "effect": "Une Poké Ball spéciale utilisée au Concours de Capture d’insecte.",
+    "sprite": "sport-ball.png"
   },
-  "567": {
+  {
+    "id": 567,
     "name": "Chococœur",
     "category": "healing",
     "cost": 3000,
-    "effect": "Un chocolat extrêmement sucré. Restaure 20 PV à un Pokémon."
+    "effect": "Un chocolat extrêmement sucré. Restaure 20 PV à un Pokémon.",
+    "sprite": "sweet-heart.png"
   },
-  "632": {
+  {
+    "id": 632,
     "name": "Glace Volute",
     "category": "status-cures",
     "cost": 350,
-    "effect": "Spécialité de Volucité. Elle soigne tous les problèmes de statut d’un Pokémon."
+    "effect": "Spécialité de Volucité. Elle soigne tous les problèmes de statut d’un Pokémon.",
+    "sprite": "casteliacone.png"
   },
-  "728": {
+  {
+    "id": 728,
     "name": "Galette Illumis",
     "category": "status-cures",
     "cost": 350,
-    "effect": "La spécialité d’Illumis. Elle soigne tous les problèmes de statut d’un Pokémon."
+    "effect": "La spécialité d’Illumis. Elle soigne tous les problèmes de statut d’un Pokémon.",
+    "sprite": "lumiose-galette.png"
   },
-  "765": {
+  {
+    "id": 765,
     "name": "Sablé Yantreizh",
     "category": "status-cures",
     "cost": 350,
-    "effect": "La spécialité de Yantreizh. Elle soigne tous les problèmes de statut d’un Pokémon."
+    "effect": "La spécialité de Yantreizh. Elle soigne tous les problèmes de statut d’un Pokémon.",
+    "sprite": "shalour-sable.png"
   },
-  "888": {
+  {
+    "id": 888,
     "name": "Malasada Maxi",
     "category": "status-cures",
     "cost": 350,
-    "effect": "Une spécialité d’Alola. Elle soigne toutes les altérations de statut d’un Pokémon."
+    "effect": "Une spécialité d’Alola. Elle soigne toutes les altérations de statut d’un Pokémon.",
+    "sprite": "big-malasada.png"
+  },
+  {
+    "id": 1039,
+    "name": "Crok’Argenta",
+    "category": "status-cures",
+    "cost": 250,
+    "effect": "Une spécialité d’Argenta. Soigne toutes les altérations de statut d’un Pokémon.",
+    "sprite": null
   }
-}
+]

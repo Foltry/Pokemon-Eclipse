@@ -1,78 +1,109 @@
-import sys
 import os
-import traceback
+import json
+import requests
+from logger import log_error
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-LOG_PATH = os.path.join("tools", "logs")
-os.makedirs(LOG_PATH, exist_ok=True)
-ERROR_LOG_FILE = os.path.join(LOG_PATH, "generation_errors.log")
+POKEAPI_BASE = "https://pokeapi.co/api/v2"
+OUTPUT_PATH = os.path.join("data", "types.json")
 
-def log_error(script_name, error_text):
-    with open(ERROR_LOG_FILE, "a", encoding="utf-8") as log_file:
-        log_file.write(f"--- Erreur dans {script_name} ---\n")
-        log_file.write(error_text + "\n\n")
+# Types valides jusqu’à Gen 5
+VALID_TYPE_NAMES = {
+    "normal", "fire", "water", "electric", "grass", "ice",
+    "fighting", "poison", "ground", "flying", "psychic", "bug",
+    "rock", "ghost", "dragon", "dark", "steel"
+}
+
+# Traduction des classes de dégâts (move_damage_class)
+COLOR_TRANSLATIONS = {
+    "physical": "physique",
+    "special": "spécial",
+    "status": "statut"
+}
+
+
+def fetch_json(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        return response.json()
+    except Exception as e:
+        log_error("generate_types.py", f"Erreur lors du fetch {url} : {e}")
+        return None
+
+
+def get_all_type_urls():
+    url = f"{POKEAPI_BASE}/type?limit=100"
+    data = fetch_json(url)
+    return [t["url"] for t in data["results"]] if data else []
+
+
+def get_localized_name(obj, language="fr"):
+    for name_entry in obj.get("names", []):
+        if name_entry["language"]["name"] == language:
+            return name_entry["name"]
+    return obj.get("name", "inconnu")
+
+
+def filter_and_translate_relations(relations):
+    return [get_localized_name(t) for t in relations if t["name"] in VALID_TYPE_NAMES]
+
+
+def extract_type_data(url):
+    type_data = fetch_json(url)
+    if not type_data:
+        return None
+
+    try:
+        name_en = type_data["name"]
+        if name_en not in VALID_TYPE_NAMES:
+            return None
+
+        name_fr = get_localized_name(type_data)
+        generation_data = fetch_json(type_data["generation"]["url"])
+        generation_fr = get_localized_name(generation_data)
+
+        relations = type_data["damage_relations"]
+        damage_relations = {
+            "double_damage_from": filter_and_translate_relations(relations["double_damage_from"]),
+            "double_damage_to": filter_and_translate_relations(relations["double_damage_to"]),
+            "half_damage_from": filter_and_translate_relations(relations["half_damage_from"]),
+            "half_damage_to": filter_and_translate_relations(relations["half_damage_to"]),
+            "no_damage_from": filter_and_translate_relations(relations["no_damage_from"]),
+            "no_damage_to": filter_and_translate_relations(relations["no_damage_to"]),
+        }
+
+        raw_color = type_data.get("move_damage_class", {}).get("name")
+        color_fr = COLOR_TRANSLATIONS.get(raw_color, "inconnu")
+
+        return {
+            "id": type_data["id"],
+            "name": name_fr,
+            "generation": generation_fr,
+            "color": color_fr,
+            "damage_relations": damage_relations
+        }
+
+    except Exception as e:
+        log_error("generate_types.py", f"Erreur parsing type {url} : {e}")
+        return None
+
+
+def main():
+    type_urls = get_all_type_urls()
+    all_types = []
+
+    for i, url in enumerate(type_urls, start=1):
+        print(f"-> Récupération type {i}/{len(type_urls)}")
+        type_data = extract_type_data(url)
+        if type_data:
+            all_types.append(type_data)
+
+    os.makedirs("data", exist_ok=True)
+    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
+        json.dump(all_types, f, ensure_ascii=False, indent=2)
+
+    print(f"OK {len(all_types)} types sauvegardés dans {OUTPUT_PATH}")
+
 
 if __name__ == "__main__":
-    try:
-        import sys
-        import os
-        sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-        import os
-        import json
-        import requests
-        from tqdm import tqdm
-        from core.data_loader import load_json, save_json, ensure_dir
-        
-        DATA_PATH = "data/types.json"
-        
-        def fetch_type(type_id):
-            url = f"https://pokeapi.co/api/v2/type/{type_id}/"
-            try:
-                res = requests.get(url)
-                if res.status_code != 200:
-                    return None
-                return res.json()
-            except Exception:
-                return None
-        
-        def extract_data(raw):
-            name = next((n['name'] for n in raw['names'] if n['language']['name'] == 'fr'), raw['name'])
-            relations = raw["damage_relations"]
-            return {
-                "name": name,
-                "double_damage_from": [t['name'] for t in relations['double_damage_from']],
-                "double_damage_to": [t['name'] for t in relations['double_damage_to']],
-                "half_damage_from": [t['name'] for t in relations['half_damage_from']],
-                "half_damage_to": [t['name'] for t in relations['half_damage_to']],
-                "no_damage_from": [t['name'] for t in relations['no_damage_from']],
-                "no_damage_to": [t['name'] for t in relations['no_damage_to']],
-            }
-        
-        def main():
-            ensure_dir("data/")
-            try:
-                data = load_json(DATA_PATH) if os.path.exists(DATA_PATH) else {}
-        
-                for i in tqdm(range(1, 19), desc="🧪 Récupération des types"):
-                    if str(i) in data:
-                        continue
-                    raw = fetch_type(i)
-                    if not raw:
-                        continue
-        
-                    info = extract_data(raw)
-                    data[str(i)] = info
-                    print(f"✅ Type ajouté : {info['name']} ({i})")
-        
-                save_json(DATA_PATH, data)
-                print("✅ Données types sauvegardées.")
-            except KeyboardInterrupt:
-                print("⏹ Interruption demandée, sauvegarde partielle...")
-                save_json(DATA_PATH, data)
-        
-        if __name__ == "__main__":
-            main()
-    except Exception as e:
-        error_details = traceback.format_exc()
-        print(f"❌ Erreur dans generate_types.py: {e}")
-        log_error("generate_types.py", error_details)
+    main()

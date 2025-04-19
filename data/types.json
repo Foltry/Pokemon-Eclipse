@@ -1,489 +1,535 @@
-{
-  "1": {
+[
+  {
+    "id": 1,
     "name": "Normal",
-    "double_damage_from": [
-      "fighting"
-    ],
-    "double_damage_to": [],
-    "half_damage_from": [],
-    "half_damage_to": [
-      "rock",
-      "steel"
-    ],
-    "no_damage_from": [
-      "ghost"
-    ],
-    "no_damage_to": [
-      "ghost"
-    ]
+    "generation": "Génération I",
+    "color": "physique",
+    "damage_relations": {
+      "double_damage_from": [
+        "fighting"
+      ],
+      "double_damage_to": [],
+      "half_damage_from": [],
+      "half_damage_to": [
+        "rock",
+        "steel"
+      ],
+      "no_damage_from": [
+        "ghost"
+      ],
+      "no_damage_to": [
+        "ghost"
+      ]
+    }
   },
-  "2": {
+  {
+    "id": 2,
     "name": "Combat",
-    "double_damage_from": [
-      "flying",
-      "psychic",
-      "fairy"
-    ],
-    "double_damage_to": [
-      "normal",
-      "rock",
-      "steel",
-      "ice",
-      "dark"
-    ],
-    "half_damage_from": [
-      "rock",
-      "bug",
-      "dark"
-    ],
-    "half_damage_to": [
-      "flying",
-      "poison",
-      "bug",
-      "psychic",
-      "fairy"
-    ],
-    "no_damage_from": [],
-    "no_damage_to": [
-      "ghost"
-    ]
+    "generation": "Génération I",
+    "color": "physique",
+    "damage_relations": {
+      "double_damage_from": [
+        "flying",
+        "psychic"
+      ],
+      "double_damage_to": [
+        "normal",
+        "rock",
+        "steel",
+        "ice",
+        "dark"
+      ],
+      "half_damage_from": [
+        "rock",
+        "bug",
+        "dark"
+      ],
+      "half_damage_to": [
+        "flying",
+        "poison",
+        "bug",
+        "psychic"
+      ],
+      "no_damage_from": [],
+      "no_damage_to": [
+        "ghost"
+      ]
+    }
   },
-  "3": {
+  {
+    "id": 3,
     "name": "Vol",
-    "double_damage_from": [
-      "rock",
-      "electric",
-      "ice"
-    ],
-    "double_damage_to": [
-      "fighting",
-      "bug",
-      "grass"
-    ],
-    "half_damage_from": [
-      "fighting",
-      "bug",
-      "grass"
-    ],
-    "half_damage_to": [
-      "rock",
-      "steel",
-      "electric"
-    ],
-    "no_damage_from": [
-      "ground"
-    ],
-    "no_damage_to": []
+    "generation": "Génération I",
+    "color": "physique",
+    "damage_relations": {
+      "double_damage_from": [
+        "rock",
+        "electric",
+        "ice"
+      ],
+      "double_damage_to": [
+        "fighting",
+        "bug",
+        "grass"
+      ],
+      "half_damage_from": [
+        "fighting",
+        "bug",
+        "grass"
+      ],
+      "half_damage_to": [
+        "rock",
+        "steel",
+        "electric"
+      ],
+      "no_damage_from": [
+        "ground"
+      ],
+      "no_damage_to": []
+    }
   },
-  "4": {
+  {
+    "id": 4,
     "name": "Poison",
-    "double_damage_from": [
-      "ground",
-      "psychic"
-    ],
-    "double_damage_to": [
-      "grass",
-      "fairy"
-    ],
-    "half_damage_from": [
-      "fighting",
-      "poison",
-      "bug",
-      "grass",
-      "fairy"
-    ],
-    "half_damage_to": [
-      "poison",
-      "ground",
-      "rock",
-      "ghost"
-    ],
-    "no_damage_from": [],
-    "no_damage_to": [
-      "steel"
-    ]
+    "generation": "Génération I",
+    "color": "physique",
+    "damage_relations": {
+      "double_damage_from": [
+        "ground",
+        "psychic"
+      ],
+      "double_damage_to": [
+        "grass"
+      ],
+      "half_damage_from": [
+        "fighting",
+        "poison",
+        "bug",
+        "grass"
+      ],
+      "half_damage_to": [
+        "poison",
+        "ground",
+        "rock",
+        "ghost"
+      ],
+      "no_damage_from": [],
+      "no_damage_to": [
+        "steel"
+      ]
+    }
   },
-  "5": {
+  {
+    "id": 5,
     "name": "Sol",
-    "double_damage_from": [
-      "water",
-      "grass",
-      "ice"
-    ],
-    "double_damage_to": [
-      "poison",
-      "rock",
-      "steel",
-      "fire",
-      "electric"
-    ],
-    "half_damage_from": [
-      "poison",
-      "rock"
-    ],
-    "half_damage_to": [
-      "bug",
-      "grass"
-    ],
-    "no_damage_from": [
-      "electric"
-    ],
-    "no_damage_to": [
-      "flying"
-    ]
+    "generation": "Génération I",
+    "color": "physique",
+    "damage_relations": {
+      "double_damage_from": [
+        "water",
+        "grass",
+        "ice"
+      ],
+      "double_damage_to": [
+        "poison",
+        "rock",
+        "steel",
+        "fire",
+        "electric"
+      ],
+      "half_damage_from": [
+        "poison",
+        "rock"
+      ],
+      "half_damage_to": [
+        "bug",
+        "grass"
+      ],
+      "no_damage_from": [
+        "electric"
+      ],
+      "no_damage_to": [
+        "flying"
+      ]
+    }
   },
-  "6": {
+  {
+    "id": 6,
     "name": "Roche",
-    "double_damage_from": [
-      "fighting",
-      "ground",
-      "steel",
-      "water",
-      "grass"
-    ],
-    "double_damage_to": [
-      "flying",
-      "bug",
-      "fire",
-      "ice"
-    ],
-    "half_damage_from": [
-      "normal",
-      "flying",
-      "poison",
-      "fire"
-    ],
-    "half_damage_to": [
-      "fighting",
-      "ground",
-      "steel"
-    ],
-    "no_damage_from": [],
-    "no_damage_to": []
+    "generation": "Génération I",
+    "color": "physique",
+    "damage_relations": {
+      "double_damage_from": [
+        "fighting",
+        "ground",
+        "steel",
+        "water",
+        "grass"
+      ],
+      "double_damage_to": [
+        "flying",
+        "bug",
+        "fire",
+        "ice"
+      ],
+      "half_damage_from": [
+        "normal",
+        "flying",
+        "poison",
+        "fire"
+      ],
+      "half_damage_to": [
+        "fighting",
+        "ground",
+        "steel"
+      ],
+      "no_damage_from": [],
+      "no_damage_to": []
+    }
   },
-  "7": {
+  {
+    "id": 7,
     "name": "Insecte",
-    "double_damage_from": [
-      "flying",
-      "rock",
-      "fire"
-    ],
-    "double_damage_to": [
-      "grass",
-      "psychic",
-      "dark"
-    ],
-    "half_damage_from": [
-      "fighting",
-      "ground",
-      "grass"
-    ],
-    "half_damage_to": [
-      "fighting",
-      "flying",
-      "poison",
-      "ghost",
-      "steel",
-      "fire",
-      "fairy"
-    ],
-    "no_damage_from": [],
-    "no_damage_to": []
+    "generation": "Génération I",
+    "color": "physique",
+    "damage_relations": {
+      "double_damage_from": [
+        "flying",
+        "rock",
+        "fire"
+      ],
+      "double_damage_to": [
+        "grass",
+        "psychic",
+        "dark"
+      ],
+      "half_damage_from": [
+        "fighting",
+        "ground",
+        "grass"
+      ],
+      "half_damage_to": [
+        "fighting",
+        "flying",
+        "poison",
+        "ghost",
+        "steel",
+        "fire"
+      ],
+      "no_damage_from": [],
+      "no_damage_to": []
+    }
   },
-  "8": {
+  {
+    "id": 8,
     "name": "Spectre",
-    "double_damage_from": [
-      "ghost",
-      "dark"
-    ],
-    "double_damage_to": [
-      "ghost",
-      "psychic"
-    ],
-    "half_damage_from": [
-      "poison",
-      "bug"
-    ],
-    "half_damage_to": [
-      "dark"
-    ],
-    "no_damage_from": [
-      "normal",
-      "fighting"
-    ],
-    "no_damage_to": [
-      "normal"
-    ]
+    "generation": "Génération I",
+    "color": "physique",
+    "damage_relations": {
+      "double_damage_from": [
+        "ghost",
+        "dark"
+      ],
+      "double_damage_to": [
+        "ghost",
+        "psychic"
+      ],
+      "half_damage_from": [
+        "poison",
+        "bug"
+      ],
+      "half_damage_to": [
+        "dark"
+      ],
+      "no_damage_from": [
+        "normal",
+        "fighting"
+      ],
+      "no_damage_to": [
+        "normal"
+      ]
+    }
   },
-  "9": {
+  {
+    "id": 9,
     "name": "Acier",
-    "double_damage_from": [
-      "fighting",
-      "ground",
-      "fire"
-    ],
-    "double_damage_to": [
-      "rock",
-      "ice",
-      "fairy"
-    ],
-    "half_damage_from": [
-      "normal",
-      "flying",
-      "rock",
-      "bug",
-      "steel",
-      "grass",
-      "psychic",
-      "ice",
-      "dragon",
-      "fairy"
-    ],
-    "half_damage_to": [
-      "steel",
-      "fire",
-      "water",
-      "electric"
-    ],
-    "no_damage_from": [
-      "poison"
-    ],
-    "no_damage_to": []
+    "generation": "Génération II",
+    "color": "physique",
+    "damage_relations": {
+      "double_damage_from": [
+        "fighting",
+        "ground",
+        "fire"
+      ],
+      "double_damage_to": [
+        "rock",
+        "ice"
+      ],
+      "half_damage_from": [
+        "normal",
+        "flying",
+        "rock",
+        "bug",
+        "steel",
+        "grass",
+        "psychic",
+        "ice",
+        "dragon"
+      ],
+      "half_damage_to": [
+        "steel",
+        "fire",
+        "water",
+        "electric"
+      ],
+      "no_damage_from": [
+        "poison"
+      ],
+      "no_damage_to": []
+    }
   },
-  "10": {
+  {
+    "id": 10,
     "name": "Feu",
-    "double_damage_from": [
-      "ground",
-      "rock",
-      "water"
-    ],
-    "double_damage_to": [
-      "bug",
-      "steel",
-      "grass",
-      "ice"
-    ],
-    "half_damage_from": [
-      "bug",
-      "steel",
-      "fire",
-      "grass",
-      "ice",
-      "fairy"
-    ],
-    "half_damage_to": [
-      "rock",
-      "fire",
-      "water",
-      "dragon"
-    ],
-    "no_damage_from": [],
-    "no_damage_to": []
+    "generation": "Génération I",
+    "color": "spécial",
+    "damage_relations": {
+      "double_damage_from": [
+        "ground",
+        "rock",
+        "water"
+      ],
+      "double_damage_to": [
+        "bug",
+        "steel",
+        "grass",
+        "ice"
+      ],
+      "half_damage_from": [
+        "bug",
+        "steel",
+        "fire",
+        "grass",
+        "ice"
+      ],
+      "half_damage_to": [
+        "rock",
+        "fire",
+        "water",
+        "dragon"
+      ],
+      "no_damage_from": [],
+      "no_damage_to": []
+    }
   },
-  "11": {
+  {
+    "id": 11,
     "name": "Eau",
-    "double_damage_from": [
-      "grass",
-      "electric"
-    ],
-    "double_damage_to": [
-      "ground",
-      "rock",
-      "fire"
-    ],
-    "half_damage_from": [
-      "steel",
-      "fire",
-      "water",
-      "ice"
-    ],
-    "half_damage_to": [
-      "water",
-      "grass",
-      "dragon"
-    ],
-    "no_damage_from": [],
-    "no_damage_to": []
+    "generation": "Génération I",
+    "color": "spécial",
+    "damage_relations": {
+      "double_damage_from": [
+        "grass",
+        "electric"
+      ],
+      "double_damage_to": [
+        "ground",
+        "rock",
+        "fire"
+      ],
+      "half_damage_from": [
+        "steel",
+        "fire",
+        "water",
+        "ice"
+      ],
+      "half_damage_to": [
+        "water",
+        "grass",
+        "dragon"
+      ],
+      "no_damage_from": [],
+      "no_damage_to": []
+    }
   },
-  "12": {
+  {
+    "id": 12,
     "name": "Plante",
-    "double_damage_from": [
-      "flying",
-      "poison",
-      "bug",
-      "fire",
-      "ice"
-    ],
-    "double_damage_to": [
-      "ground",
-      "rock",
-      "water"
-    ],
-    "half_damage_from": [
-      "ground",
-      "water",
-      "grass",
-      "electric"
-    ],
-    "half_damage_to": [
-      "flying",
-      "poison",
-      "bug",
-      "steel",
-      "fire",
-      "grass",
-      "dragon"
-    ],
-    "no_damage_from": [],
-    "no_damage_to": []
+    "generation": "Génération I",
+    "color": "spécial",
+    "damage_relations": {
+      "double_damage_from": [
+        "flying",
+        "poison",
+        "bug",
+        "fire",
+        "ice"
+      ],
+      "double_damage_to": [
+        "ground",
+        "rock",
+        "water"
+      ],
+      "half_damage_from": [
+        "ground",
+        "water",
+        "grass",
+        "electric"
+      ],
+      "half_damage_to": [
+        "flying",
+        "poison",
+        "bug",
+        "steel",
+        "fire",
+        "grass",
+        "dragon"
+      ],
+      "no_damage_from": [],
+      "no_damage_to": []
+    }
   },
-  "13": {
+  {
+    "id": 13,
     "name": "Électrik",
-    "double_damage_from": [
-      "ground"
-    ],
-    "double_damage_to": [
-      "flying",
-      "water"
-    ],
-    "half_damage_from": [
-      "flying",
-      "steel",
-      "electric"
-    ],
-    "half_damage_to": [
-      "grass",
-      "electric",
-      "dragon"
-    ],
-    "no_damage_from": [],
-    "no_damage_to": [
-      "ground"
-    ]
+    "generation": "Génération I",
+    "color": "spécial",
+    "damage_relations": {
+      "double_damage_from": [
+        "ground"
+      ],
+      "double_damage_to": [
+        "flying",
+        "water"
+      ],
+      "half_damage_from": [
+        "flying",
+        "steel",
+        "electric"
+      ],
+      "half_damage_to": [
+        "grass",
+        "electric",
+        "dragon"
+      ],
+      "no_damage_from": [],
+      "no_damage_to": [
+        "ground"
+      ]
+    }
   },
-  "14": {
+  {
+    "id": 14,
     "name": "Psy",
-    "double_damage_from": [
-      "bug",
-      "ghost",
-      "dark"
-    ],
-    "double_damage_to": [
-      "fighting",
-      "poison"
-    ],
-    "half_damage_from": [
-      "fighting",
-      "psychic"
-    ],
-    "half_damage_to": [
-      "steel",
-      "psychic"
-    ],
-    "no_damage_from": [],
-    "no_damage_to": [
-      "dark"
-    ]
+    "generation": "Génération I",
+    "color": "spécial",
+    "damage_relations": {
+      "double_damage_from": [
+        "bug",
+        "ghost",
+        "dark"
+      ],
+      "double_damage_to": [
+        "fighting",
+        "poison"
+      ],
+      "half_damage_from": [
+        "fighting",
+        "psychic"
+      ],
+      "half_damage_to": [
+        "steel",
+        "psychic"
+      ],
+      "no_damage_from": [],
+      "no_damage_to": [
+        "dark"
+      ]
+    }
   },
-  "15": {
+  {
+    "id": 15,
     "name": "Glace",
-    "double_damage_from": [
-      "fighting",
-      "rock",
-      "steel",
-      "fire"
-    ],
-    "double_damage_to": [
-      "flying",
-      "ground",
-      "grass",
-      "dragon"
-    ],
-    "half_damage_from": [
-      "ice"
-    ],
-    "half_damage_to": [
-      "steel",
-      "fire",
-      "water",
-      "ice"
-    ],
-    "no_damage_from": [],
-    "no_damage_to": []
+    "generation": "Génération I",
+    "color": "spécial",
+    "damage_relations": {
+      "double_damage_from": [
+        "fighting",
+        "rock",
+        "steel",
+        "fire"
+      ],
+      "double_damage_to": [
+        "flying",
+        "ground",
+        "grass",
+        "dragon"
+      ],
+      "half_damage_from": [
+        "ice"
+      ],
+      "half_damage_to": [
+        "steel",
+        "fire",
+        "water",
+        "ice"
+      ],
+      "no_damage_from": [],
+      "no_damage_to": []
+    }
   },
-  "16": {
+  {
+    "id": 16,
     "name": "Dragon",
-    "double_damage_from": [
-      "ice",
-      "dragon",
-      "fairy"
-    ],
-    "double_damage_to": [
-      "dragon"
-    ],
-    "half_damage_from": [
-      "fire",
-      "water",
-      "grass",
-      "electric"
-    ],
-    "half_damage_to": [
-      "steel"
-    ],
-    "no_damage_from": [],
-    "no_damage_to": [
-      "fairy"
-    ]
+    "generation": "Génération I",
+    "color": "spécial",
+    "damage_relations": {
+      "double_damage_from": [
+        "ice",
+        "dragon"
+      ],
+      "double_damage_to": [
+        "dragon"
+      ],
+      "half_damage_from": [
+        "fire",
+        "water",
+        "grass",
+        "electric"
+      ],
+      "half_damage_to": [
+        "steel"
+      ],
+      "no_damage_from": [],
+      "no_damage_to": []
+    }
   },
-  "17": {
+  {
+    "id": 17,
     "name": "Ténèbres",
-    "double_damage_from": [
-      "fighting",
-      "bug",
-      "fairy"
-    ],
-    "double_damage_to": [
-      "ghost",
-      "psychic"
-    ],
-    "half_damage_from": [
-      "ghost",
-      "dark"
-    ],
-    "half_damage_to": [
-      "fighting",
-      "dark",
-      "fairy"
-    ],
-    "no_damage_from": [
-      "psychic"
-    ],
-    "no_damage_to": []
-  },
-  "18": {
-    "name": "Fée",
-    "double_damage_from": [
-      "poison",
-      "steel"
-    ],
-    "double_damage_to": [
-      "fighting",
-      "dragon",
-      "dark"
-    ],
-    "half_damage_from": [
-      "fighting",
-      "bug",
-      "dark"
-    ],
-    "half_damage_to": [
-      "poison",
-      "steel",
-      "fire"
-    ],
-    "no_damage_from": [
-      "dragon"
-    ],
-    "no_damage_to": []
+    "generation": "Génération II",
+    "color": "spécial",
+    "damage_relations": {
+      "double_damage_from": [
+        "fighting",
+        "bug"
+      ],
+      "double_damage_to": [
+        "ghost",
+        "psychic"
+      ],
+      "half_damage_from": [
+        "ghost",
+        "dark"
+      ],
+      "half_damage_to": [
+        "fighting",
+        "dark"
+      ],
+      "no_damage_from": [
+        "psychic"
+      ],
+      "no_damage_to": []
+    }
   }
-}
+]

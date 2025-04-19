@@ -1,19 +1,243 @@
-{
-  "starters": [
-    "001",
-    "004",
-    "007",
-    "152",
-    "155",
-    "158",
-    "252",
-    "255",
-    "258",
-    "387",
-    "390",
-    "393",
-    "495",
-    "498",
-    "501"
-  ]
-}
+[
+  {
+    "id": 1,
+    "name_en": "bulbasaur",
+    "name_fr": "Bulbizarre",
+    "types": [
+      "grass",
+      "poison"
+    ],
+    "base_stats": {
+      "hp": 45,
+      "attack": 49,
+      "defense": 49,
+      "special-attack": 65,
+      "special-defense": 65,
+      "speed": 45
+    }
+  },
+  {
+    "id": 4,
+    "name_en": "charmander",
+    "name_fr": "Salamèche",
+    "types": [
+      "fire"
+    ],
+    "base_stats": {
+      "hp": 39,
+      "attack": 52,
+      "defense": 43,
+      "special-attack": 60,
+      "special-defense": 50,
+      "speed": 65
+    }
+  },
+  {
+    "id": 7,
+    "name_en": "squirtle",
+    "name_fr": "Carapuce",
+    "types": [
+      "water"
+    ],
+    "base_stats": {
+      "hp": 44,
+      "attack": 48,
+      "defense": 65,
+      "special-attack": 50,
+      "special-defense": 64,
+      "speed": 43
+    }
+  },
+  {
+    "id": 152,
+    "name_en": "chikorita",
+    "name_fr": "Germignon",
+    "types": [
+      "grass"
+    ],
+    "base_stats": {
+      "hp": 45,
+      "attack": 49,
+      "defense": 65,
+      "special-attack": 49,
+      "special-defense": 65,
+      "speed": 45
+    }
+  },
+  {
+    "id": 155,
+    "name_en": "cyndaquil",
+    "name_fr": "Héricendre",
+    "types": [
+      "fire"
+    ],
+    "base_stats": {
+      "hp": 39,
+      "attack": 52,
+      "defense": 43,
+      "special-attack": 60,
+      "special-defense": 50,
+      "speed": 65
+    }
+  },
+  {
+    "id": 158,
+    "name_en": "totodile",
+    "name_fr": "Kaiminus",
+    "types": [
+      "water"
+    ],
+    "base_stats": {
+      "hp": 50,
+      "attack": 65,
+      "defense": 64,
+      "special-attack": 44,
+      "special-defense": 48,
+      "speed": 43
+    }
+  },
+  {
+    "id": 252,
+    "name_en": "treecko",
+    "name_fr": "Arcko",
+    "types": [
+      "grass"
+    ],
+    "base_stats": {
+      "hp": 40,
+      "attack": 45,
+      "defense": 35,
+      "special-attack": 65,
+      "special-defense": 55,
+      "speed": 70
+    }
+  },
+  {
+    "id": 255,
+    "name_en": "torchic",
+    "name_fr": "Poussifeu",
+    "types": [
+      "fire"
+    ],
+    "base_stats": {
+      "hp": 45,
+      "attack": 60,
+      "defense": 40,
+      "special-attack": 70,
+      "special-defense": 50,
+      "speed": 45
+    }
+  },
+  {
+    "id": 258,
+    "name_en": "mudkip",
+    "name_fr": "Gobou",
+    "types": [
+      "water"
+    ],
+    "base_stats": {
+      "hp": 50,
+      "attack": 70,
+      "defense": 50,
+      "special-attack": 50,
+      "special-defense": 50,
+      "speed": 40
+    }
+  },
+  {
+    "id": 387,
+    "name_en": "turtwig",
+    "name_fr": "Tortipouss",
+    "types": [
+      "grass"
+    ],
+    "base_stats": {
+      "hp": 55,
+      "attack": 68,
+      "defense": 64,
+      "special-attack": 45,
+      "special-defense": 55,
+      "speed": 31
+    }
+  },
+  {
+    "id": 390,
+    "name_en": "chimchar",
+    "name_fr": "Ouisticram",
+    "types": [
+      "fire"
+    ],
+    "base_stats": {
+      "hp": 44,
+      "attack": 58,
+      "defense": 44,
+      "special-attack": 58,
+      "special-defense": 44,
+      "speed": 61
+    }
+  },
+  {
+    "id": 393,
+    "name_en": "piplup",
+    "name_fr": "Tiplouf",
+    "types": [
+      "water"
+    ],
+    "base_stats": {
+      "hp": 53,
+      "attack": 51,
+      "defense": 53,
+      "special-attack": 61,
+      "special-defense": 56,
+      "speed": 40
+    }
+  },
+  {
+    "id": 495,
+    "name_en": "snivy",
+    "name_fr": "Vipélierre",
+    "types": [
+      "grass"
+    ],
+    "base_stats": {
+      "hp": 45,
+      "attack": 45,
+      "defense": 55,
+      "special-attack": 45,
+      "special-defense": 55,
+      "speed": 63
+    }
+  },
+  {
+    "id": 498,
+    "name_en": "tepig",
+    "name_fr": "Gruikui",
+    "types": [
+      "fire"
+    ],
+    "base_stats": {
+      "hp": 65,
+      "attack": 63,
+      "defense": 45,
+      "special-attack": 45,
+      "special-defense": 45,
+      "speed": 45
+    }
+  },
+  {
+    "id": 501,
+    "name_en": "oshawott",
+    "name_fr": "Moustillon",
+    "types": [
+      "water"
+    ],
+    "base_stats": {
+      "hp": 55,
+      "attack": 55,
+      "defense": 45,
+      "special-attack": 63,
+      "special-defense": 45,
+      "speed": 45
+    }
+  }
+]
