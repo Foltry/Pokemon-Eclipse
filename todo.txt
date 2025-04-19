@@ -62,7 +62,7 @@ TODO - PROJET POKÉMON ECLIPSE
   - [x] Choix des starters (`scene/starter_scene.py`) avec animation wiggle
   - [x] Combat (`scene/battle_scene.py`)
 - [ ] À faire :
-  - [ ] Scène bonus entre combats (`scene/bonus_scene.py`)
+  - [x] Scène bonus entre combats (`scene/bonus_scene.py`)
   - [ ] Scène game over (`scene/gameover_scene.py`)
 
 === COMBAT ===
