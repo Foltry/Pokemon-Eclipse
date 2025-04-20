@@ -8,7 +8,7 @@ from ui.battle_ui import (
 )
 from core.scene_manager import Scene
 from core.run_manager import run_manager
-from scene.bonus_scene import BonusScene
+
 
 class BattleScene(Scene):
     def __init__(self):
@@ -17,15 +17,22 @@ class BattleScene(Scene):
         self.button_grid = [[0, 1], [2, 3]]
         self.grid_pos = [0, 0]
         self.selected_index = self.button_grid[0][0]
+        self.victory_handled = False
+        self.show_bonus = False
+        self.bonus_options = []
+        self.bonus_selected = 0
 
         # Pokémon du joueur
         starter = run_manager.get_team()[0]
         self.ally_id = starter["id"]
-        self.ally_name = starter.get("name_fr", starter.get("name", ""))
+        self.ally_name = starter["name"]
         self.ally_level = starter.get("level", 5)
-        self.ally_hp = self.ally_max_hp = starter["base_stats"]["hp"]
+        stats = starter.get("stats") or starter.get("base_stats")
+        if not stats or "hp" not in stats:
+            raise ValueError(f"❌ Données de stats invalides pour {starter}")
+        self.ally_hp = self.ally_max_hp = stats["hp"]
         self.ally_xp = starter.get("xp", 0)
-        self.ally_max_xp = 100  # temporaire
+        self.ally_max_xp = 100
 
         # Pokémon ennemi
         self.enemy_id = 16
@@ -34,25 +41,36 @@ class BattleScene(Scene):
 
         with open("data/pokemon.json", encoding="utf-8") as f:
             data = json.load(f)
-            self.enemy_data = next(
-                (p for p in data if int(p["id"]) == int(self.enemy_id)), None
-            )
+            self.enemy_data = next((p for p in data if p["id"] == int(self.enemy_id)), None)
 
         if not self.enemy_data:
             raise ValueError(f"❌ Données manquantes pour le Pokémon #{self.enemy_id}")
 
-        self.enemy_name = self.enemy_data.get("name_fr", self.enemy_data.get("name", "???"))
+        self.enemy_name = self.enemy_data["name"]
         self.enemy_hp = self.enemy_max_hp = self.enemy_data["stats"]["hp"]
         self.enemy_base_exp = self.enemy_data.get("base_experience", 50)
 
         self.bases, self.sprites = load_combat_sprites(self.ally_id, self.enemy_id)
-        self.victory_handled = False
 
     def on_enter(self): pass
     def on_exit(self): pass
     def update(self, dt): pass
 
     def handle_event(self, event):
+        if self.show_bonus:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    self.bonus_selected = (self.bonus_selected - 1) % len(self.bonus_options)
+                elif event.key == pygame.K_DOWN:
+                    self.bonus_selected = (self.bonus_selected + 1) % len(self.bonus_options)
+                elif event.key == pygame.K_RETURN:
+                    selected_item = self.bonus_options[self.bonus_selected]
+                    run_manager.add_item(selected_item)
+                    print(f"🎁 Objet reçu : {selected_item}")
+                    self.show_bonus = False
+                    self.manager.change_scene(BattleScene())
+            return
+
         if event.type == pygame.KEYDOWN:
             col, row = self.grid_pos
             if event.key == pygame.K_UP and row > 0:
@@ -72,22 +90,38 @@ class BattleScene(Scene):
                         self.handle_victory()
                 elif self.selected_index == 3:
                     print("Fuite !")
-                    self.manager.change_scene(BonusScene())
+                    self.manager.change_scene(BattleScene())
 
             self.grid_pos = [col, row]
             self.selected_index = self.button_grid[col][row]
 
     def handle_victory(self):
         self.victory_handled = True
-        exp = self.enemy_base_exp
+        enemy_exp = self.enemy_base_exp
         level = self.enemy_level
-        xp_gain = int((exp * level) / 7)
+        xp_gain = int((enemy_exp * level) / 7)
 
         for poke in run_manager.get_team():
             poke["xp"] = poke.get("xp", 0) + xp_gain
-            print(f"{poke.get('name_fr', poke.get('name'))} a gagné {xp_gain} XP ! (total: {poke['xp']})")
+            print(f"{poke['name']} a gagné {xp_gain} XP ! (total: {poke['xp']})")
 
-        self.manager.change_scene(BonusScene())
+        # Charger les objets
+        with open("data/items.json", encoding="utf-8") as f:
+            items = json.load(f)
+
+        valid_items = [
+            item["name"]
+            for item in items
+            if item["name"].lower() != "master ball"
+        ]
+
+        if len(valid_items) < 2:
+            print("Pas assez d’objets valides.")
+            return
+
+        self.bonus_options = random.sample(valid_items, 2)
+        self.bonus_selected = 0
+        self.show_bonus = True
 
     def draw(self, screen):
         draw_combat_scene(
@@ -108,9 +142,19 @@ class BattleScene(Scene):
             ally_max_xp=self.ally_max_xp
         )
 
-        self.dialog_box.draw(screen, f"Que doit faire {self.ally_name} ?")
+        if self.show_bonus:
+            # Affichage du texte de choix de bonus avec plus d’espace entre les lignes
+            lines = ["Choisissez un objet :"]
+            for i, item in enumerate(self.bonus_options):
+                prefix = "➤ " if i == self.bonus_selected else "  "
+                lines.append(f"{prefix}{item}")
+            self.dialog_box.draw(screen, "\n".join(lines), margin_y=8)
 
-        for i, button in enumerate(self.buttons):
-            if i != self.selected_index:
-                button.draw(screen, selected=False)
-        self.buttons[self.selected_index].draw(screen, selected=True)
+        else:
+            self.dialog_box.draw(screen, f"Que doit faire {self.ally_name} ?")
+
+        if not self.show_bonus:
+            for i, button in enumerate(self.buttons):
+                button.draw(screen, selected=(i == self.selected_index))
+
+

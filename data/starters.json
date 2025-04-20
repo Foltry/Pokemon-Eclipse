@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name_en": "bulbasaur",
-    "name_fr": "Bulbizarre",
+    "name": "Bulbizarre",
     "types": [
       "grass",
       "poison"
@@ -19,7 +19,7 @@
   {
     "id": 4,
     "name_en": "charmander",
-    "name_fr": "Salamèche",
+    "name": "Salamèche",
     "types": [
       "fire"
     ],
@@ -35,7 +35,7 @@
   {
     "id": 7,
     "name_en": "squirtle",
-    "name_fr": "Carapuce",
+    "name": "Carapuce",
     "types": [
       "water"
     ],
@@ -51,7 +51,7 @@
   {
     "id": 152,
     "name_en": "chikorita",
-    "name_fr": "Germignon",
+    "name": "Germignon",
     "types": [
       "grass"
     ],
@@ -67,7 +67,7 @@
   {
     "id": 155,
     "name_en": "cyndaquil",
-    "name_fr": "Héricendre",
+    "name": "Héricendre",
     "types": [
       "fire"
     ],
@@ -83,7 +83,7 @@
   {
     "id": 158,
     "name_en": "totodile",
-    "name_fr": "Kaiminus",
+    "name": "Kaiminus",
     "types": [
       "water"
     ],
@@ -99,7 +99,7 @@
   {
     "id": 252,
     "name_en": "treecko",
-    "name_fr": "Arcko",
+    "name": "Arcko",
     "types": [
       "grass"
     ],
@@ -115,7 +115,7 @@
   {
     "id": 255,
     "name_en": "torchic",
-    "name_fr": "Poussifeu",
+    "name": "Poussifeu",
     "types": [
       "fire"
     ],
@@ -131,7 +131,7 @@
   {
     "id": 258,
     "name_en": "mudkip",
-    "name_fr": "Gobou",
+    "name": "Gobou",
     "types": [
       "water"
     ],
@@ -147,7 +147,7 @@
   {
     "id": 387,
     "name_en": "turtwig",
-    "name_fr": "Tortipouss",
+    "name": "Tortipouss",
     "types": [
       "grass"
     ],
@@ -163,7 +163,7 @@
   {
     "id": 390,
     "name_en": "chimchar",
-    "name_fr": "Ouisticram",
+    "name": "Ouisticram",
     "types": [
       "fire"
     ],
@@ -179,7 +179,7 @@
   {
     "id": 393,
     "name_en": "piplup",
-    "name_fr": "Tiplouf",
+    "name": "Tiplouf",
     "types": [
       "water"
     ],
@@ -195,7 +195,7 @@
   {
     "id": 495,
     "name_en": "snivy",
-    "name_fr": "Vipélierre",
+    "name": "Vipélierre",
     "types": [
       "grass"
     ],
@@ -211,7 +211,7 @@
   {
     "id": 498,
     "name_en": "tepig",
-    "name_fr": "Gruikui",
+    "name": "Gruikui",
     "types": [
       "fire"
     ],
@@ -227,7 +227,7 @@
   {
     "id": 501,
     "name_en": "oshawott",
-    "name_fr": "Moustillon",
+    "name": "Moustillon",
     "types": [
       "water"
     ],

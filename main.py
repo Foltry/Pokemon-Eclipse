@@ -3,7 +3,7 @@ import sys
 
 from core.scene_manager import SceneManager
 from core.config import SCREEN_HEIGHT, SCREEN_WIDTH
-from scene.menu_scene import MenuScene
+from scene.menu_scene import MenuScene  # ← On revient au menu principal
 
 def main():
     pygame.init()
@@ -12,7 +12,7 @@ def main():
 
     clock = pygame.time.Clock()
     scene_manager = SceneManager()
-    scene_manager.change_scene(MenuScene())  # Lance le menu principal
+    scene_manager.change_scene(MenuScene())  # ← Lance le menu principal
 
     running = True  
     while running:

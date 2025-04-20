@@ -2,10 +2,10 @@ import os
 import pygame
 import gif_pygame
 import json
+from PIL import Image
 from ui.health_bar import HealthBar
 from ui.xp_bar import XPBar
 
-# === PATHS & CONST ===
 ASSETS = os.path.join("assets", "ui", "battle")
 FONTS = os.path.join("assets", "fonts")
 SPRITE_DIR = os.path.join("assets", "sprites", "pokemon")
@@ -13,10 +13,22 @@ CMD_IMG = pygame.image.load(os.path.join(ASSETS, "cursor_command.png"))
 
 BUTTON_WIDTH = 130
 BUTTON_HEIGHT = 46
-ALLY_SPRITE_SIZE = (116, 116)
-ENEMY_SPRITE_SIZE = (96, 96)  # même taille pour garder une cohérence visuelle
 
-# === UI ELEMENTS ===
+def get_gif_max_size(gif_path):
+    try:
+        from PIL import Image
+        with Image.open(gif_path) as img:
+            max_width = 0
+            max_height = 0
+            for frame in range(img.n_frames):
+                img.seek(frame)
+                w, h = img.size
+                max_width = max(max_width, w)
+                max_height = max(max_height, h)
+            # Appliquer un facteur de zoom
+            return int(max_width * 2), int(max_height * 2)
+    except:
+        return 96 * 2, 96 * 2  # Valeur par défaut doublée
 
 def get_command_button(index):
     normal = CMD_IMG.subsurface(pygame.Rect(0, index * BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT))
@@ -49,7 +61,6 @@ class BattleDialogBox:
         words = text.split(" ")
         lines = []
         current_line = ""
-
         for word in words:
             test_line = current_line + word + " "
             if self.font.size(test_line)[0] <= self.max_width:
@@ -61,15 +72,15 @@ class BattleDialogBox:
             lines.append(current_line.strip())
         return lines
 
-    def draw(self, surface, text):
+    def draw(self, surface, text, offset_x=0, offset_y=0):
         surface.blit(self.image, self.rect.topleft)
         lines = self.wrap_text(text)
-        y = self.rect.top + self.margin_y
-
+        y = self.rect.top + self.margin_y + offset_y
         for line in lines:
             txt_surface = self.font.render(line, True, self.text_color)
-            surface.blit(txt_surface, (self.rect.left + self.margin_x, y))
+            surface.blit(txt_surface, (self.rect.left + self.margin_x + offset_x, y))
             y += txt_surface.get_height() + self.line_spacing
+
 
 def load_battle_ui():
     bg = pygame.image.load(os.path.join(ASSETS, "battle_bg.png")).convert()
@@ -81,8 +92,6 @@ def load_battle_ui():
         BattleButton(3, (376, 336))
     ]
     return bg, dialog, buttons
-
-# === SPRITES & STATUS UI ===
 
 STATUS_PLAYER = None
 STATUS_ENEMY = None
@@ -115,15 +124,17 @@ def load_combat_sprites(ally_id, enemy_id):
     if not ally or not enemy:
         raise ValueError(f"Impossible de charger les sprites : ally={ally_id}, enemy={enemy_id}")
 
-
     ally_path = os.path.join(SPRITE_DIR, ally["sprites"]["back"])
     enemy_path = os.path.join(SPRITE_DIR, enemy["sprites"]["front"])
+
+    ally_size = get_gif_max_size(ally_path)
+    enemy_size = get_gif_max_size(enemy_path)
 
     ally_sprite = gif_pygame.load(ally_path)
     enemy_sprite = gif_pygame.load(enemy_path)
 
-    ally_sprite = resize_gif(ally_sprite, ALLY_SPRITE_SIZE)
-    enemy_sprite = resize_gif(enemy_sprite, ENEMY_SPRITE_SIZE)
+    ally_sprite = resize_gif(ally_sprite, ally_size)
+    enemy_sprite = resize_gif(enemy_sprite, enemy_size)
 
     return (base_ally, base_enemy), (ally_sprite, enemy_sprite)
 
@@ -153,28 +164,18 @@ def draw_combat_scene(
     base_ally, base_enemy = bases
     ally_sprite, enemy_sprite = sprites
 
-    # Sol
     screen.blit(base_ally, (-128, 240))
     screen.blit(base_enemy, (255, 115))
 
-    # Sprites
     screen.blit(ally_sprite.blit_ready(), (80, 200))
     screen.blit(enemy_sprite.blit_ready(), (340, 90))
 
-    # Status boxes
     screen.blit(STATUS_PLAYER, (268, 193))
     screen.blit(STATUS_ENEMY, (0, 35))
 
-    # === Infos ENNEMI ===
     enemy_name_text = font_pkm.render(enemy_name, True, (0, 0, 0))
 
-    if enemy_gender == "♂":
-        gender_color = (66, 150, 255)
-    elif enemy_gender == "♀":
-        gender_color = (255, 105, 180)
-    else:
-        gender_color = (120, 120, 120)
-
+    gender_color = (66, 150, 255) if enemy_gender == "♂" else (255, 105, 180) if enemy_gender == "♀" else (120, 120, 120)
     enemy_gender_text = font_pv.render(enemy_gender, True, gender_color)
     enemy_level_text = font_pv.render(f"Nv.{enemy_level}", True, (51, 51, 51))
 
@@ -182,14 +183,12 @@ def draw_combat_scene(
     screen.blit(enemy_gender_text, (55 + enemy_name_text.get_width() + 10, 45))
     screen.blit(enemy_level_text, (85 + enemy_name_text.get_width(), 45))
 
-    # === Infos ALLIÉ ===
     ally_name_text = font_pkm.render(ally_name, True, (0, 0, 0))
     ally_level_text = font_pv.render(f"Nv.{ally_level}", True, (51, 51, 51))
 
     screen.blit(ally_name_text, (305, 205))
     screen.blit(ally_level_text, (450, 205))
 
-    # === Barres de vie ===
     ally_bar = HealthBar((402, 232), (98, 9), ally_max_hp)
     ally_bar.update(ally_hp)
     ally_bar.draw(screen)
@@ -198,12 +197,10 @@ def draw_combat_scene(
     enemy_bar.update(enemy_hp)
     enemy_bar.draw(screen)
 
-    # PV texte du joueur
     hp_text = font_pv.render(f"{ally_hp}/{ally_max_hp}", True, (51, 51, 51))
     hp_text = pygame.transform.scale(hp_text, (hp_text.get_width(), int(hp_text.get_height() * 0.65)))
     screen.blit(hp_text, (410, 246))
 
-    # === XP bar sous la barre de vie (240x5 px)
     xp_bar = XPBar((308, 267), ally_max_xp)
     xp_bar.update(ally_xp)
     xp_bar.draw(screen)

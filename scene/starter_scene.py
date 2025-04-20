@@ -90,6 +90,6 @@ class StarterScene(Scene):
 
             screen.blit(surf, rect.topleft)
 
-            name_text = FONT.render(poke.get("name_fr", "???"), True, (0, 0, 0))
+            name_text = FONT.render(poke.get("name", "???"), True, (0, 0, 0))
             name_rect = name_text.get_rect(center=(x, rect.top - 16))
             screen.blit(name_text, name_rect)
