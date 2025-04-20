@@ -3,7 +3,7 @@ import sys
 
 from core.scene_manager import SceneManager
 from core.config import SCREEN_HEIGHT, SCREEN_WIDTH
-from scene.menu_scene import MenuScene  # ← On revient au menu principal
+from scene.gameover_scene import GameOverScene  # ← Import direct pour test
 
 def main():
     pygame.init()
@@ -12,7 +12,9 @@ def main():
 
     clock = pygame.time.Clock()
     scene_manager = SceneManager()
-    scene_manager.change_scene(MenuScene())  # ← Lance le menu principal
+
+    # ⬇️ Affiche directement la scène Game Over pour test
+    scene_manager.change_scene(GameOverScene())
 
     running = True  
     while running:
