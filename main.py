@@ -23,7 +23,7 @@ def main():
                 running = False
             else:
                 scene_manager.handle_event(event)
-
+ 
         scene_manager.update(dt)
         scene_manager.draw(screen)
         pygame.display.flip()

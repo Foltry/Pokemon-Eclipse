@@ -72,15 +72,16 @@ class BattleDialogBox:
             lines.append(current_line.strip())
         return lines
 
-    def draw(self, surface, text, offset_x=0, offset_y=0):
-        surface.blit(self.image, self.rect.topleft)
+    def draw(self, surface, text, offset_x=0, offset_y=0, draw_box=True):
+        if draw_box:
+            surface.blit(self.image, self.rect.topleft)
+
         lines = self.wrap_text(text)
         y = self.rect.top + self.margin_y + offset_y
         for line in lines:
             txt_surface = self.font.render(line, True, self.text_color)
             surface.blit(txt_surface, (self.rect.left + self.margin_x + offset_x, y))
             y += txt_surface.get_height() + self.line_spacing
-
 
 def load_battle_ui():
     bg = pygame.image.load(os.path.join(ASSETS, "battle_bg.png")).convert()

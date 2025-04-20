@@ -76,15 +76,6 @@ TODO - PROJET POKÉMON ECLIPSE
 - [ ] Gestion des objets (`battle/item_handler.py`)
 - [ ] Capture (plus tard)
 
-=== MOCKS & ASSETS ===
-
-- [ ] Créer assets temporaires :
-  - [ ] `assets/sprites/placeholder.gif`
-  - [ ] `assets/ui/button.png`
-  - [ ] `assets/fonts/default.ttf`
-  - [ ] `assets/sfx/click.wav`
-- [ ] Générique de test avec 3 Pokémon mock
-- [ ] Ajouter musiques et sons test (`assets/music/`)
 
 === SYSTÈME D’ÉVÉNEMENTS ===
 

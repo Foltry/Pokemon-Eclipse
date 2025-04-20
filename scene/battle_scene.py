@@ -1,5 +1,5 @@
 import pygame
-import json
+import json, os
 import random
 from ui.battle_ui import (
     load_battle_ui,
@@ -8,12 +8,12 @@ from ui.battle_ui import (
 )
 from core.scene_manager import Scene
 from core.run_manager import run_manager
-
+from ui.bonus_ui import BonusUI
 
 class BattleScene(Scene):
     def __init__(self):
         self.bg, self.dialog_box, self.buttons = load_battle_ui()
-
+        self.bonus_ui = BonusUI(pos=(300, 300), spacing=34)
         self.button_grid = [[0, 1], [2, 3]]
         self.grid_pos = [0, 0]
         self.selected_index = self.button_grid[0][0]
@@ -22,7 +22,7 @@ class BattleScene(Scene):
         self.bonus_options = []
         self.bonus_selected = 0
 
-        # Pokémon du joueur
+        
         starter = run_manager.get_team()[0]
         self.ally_id = starter["id"]
         self.ally_name = starter["name"]
@@ -34,7 +34,6 @@ class BattleScene(Scene):
         self.ally_xp = starter.get("xp", 0)
         self.ally_max_xp = 100
 
-        # Pokémon ennemi
         self.enemy_id = 16
         self.enemy_level = 5
         self.enemy_gender = random.choice(["♂", "♀"])
@@ -60,15 +59,16 @@ class BattleScene(Scene):
         if self.show_bonus:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
-                    self.bonus_selected = (self.bonus_selected - 1) % len(self.bonus_options)
+                    self.bonus_ui.move_selection(-1)
                 elif event.key == pygame.K_DOWN:
-                    self.bonus_selected = (self.bonus_selected + 1) % len(self.bonus_options)
+                    self.bonus_ui.move_selection(1)
                 elif event.key == pygame.K_RETURN:
-                    selected_item = self.bonus_options[self.bonus_selected]
-                    run_manager.add_item(selected_item)
-                    print(f"🎁 Objet reçu : {selected_item}")
-                    self.show_bonus = False
-                    self.manager.change_scene(BattleScene())
+                    selected_item = self.bonus_ui.get_selected_item()
+                    if selected_item:
+                        run_manager.add_item(selected_item)
+                        print(f"🎁 Objet reçu : {selected_item}")
+                        self.show_bonus = False
+                        self.manager.change_scene(BattleScene())
             return
 
         if event.type == pygame.KEYDOWN:
@@ -105,14 +105,13 @@ class BattleScene(Scene):
             poke["xp"] = poke.get("xp", 0) + xp_gain
             print(f"{poke['name']} a gagné {xp_gain} XP ! (total: {poke['xp']})")
 
-        # Charger les objets
         with open("data/items.json", encoding="utf-8") as f:
             items = json.load(f)
 
         valid_items = [
             item["name"]
             for item in items
-            if item["name"].lower() != "master ball"
+            if item["name"].lower() != "master ball" and "sprite" in item
         ]
 
         if len(valid_items) < 2:
@@ -120,7 +119,7 @@ class BattleScene(Scene):
             return
 
         self.bonus_options = random.sample(valid_items, 2)
-        self.bonus_selected = 0
+        self.bonus_ui.set_items(self.bonus_options)
         self.show_bonus = True
 
     def draw(self, screen):
@@ -143,18 +142,11 @@ class BattleScene(Scene):
         )
 
         if self.show_bonus:
-            # Affichage du texte de choix de bonus avec plus d’espace entre les lignes
-            lines = ["Choisissez un objet :"]
-            for i, item in enumerate(self.bonus_options):
-                prefix = "➤ " if i == self.bonus_selected else "  "
-                lines.append(f"{prefix}{item}")
-            self.dialog_box.draw(screen, "\n".join(lines), margin_y=8)
+            self.dialog_box.draw(screen, "Choisissez un objet :")
 
+            self.bonus_ui.draw(screen)
         else:
             self.dialog_box.draw(screen, f"Que doit faire {self.ally_name} ?")
-
-        if not self.show_bonus:
             for i, button in enumerate(self.buttons):
                 button.draw(screen, selected=(i == self.selected_index))
-
 
