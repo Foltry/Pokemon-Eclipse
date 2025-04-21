@@ -61,20 +61,19 @@ TODO - PROJET POKÉMON ECLIPSE
   - [x] Menu principal (`scene/menu_scene.py`)
   - [x] Choix des starters (`scene/starter_scene.py`) avec animation wiggle
   - [x] Combat (`scene/battle_scene.py`)
-- [ ] À faire :
   - [x] Scène bonus entre combats (`scene/bonus_scene.py`)
-  - [ ] Scène game over (`scene/gameover_scene.py`)
+  - [x] Scène game over (`scene/gameover_scene.py`)
 
 === COMBAT ===
 
-- [ ] Implémenter moteur de combat (`battle/engine.py`)
-  - [ ] Tour par tour : joueur puis IA
-  - [ ] Calculs de dégâts (type, stats, puissance)
-  - [ ] KO et gestion PV
-- [ ] IA basique (`battle/ai.py`)
-- [ ] Gestion des capacités (`battle/move_handler.py`)
-- [ ] Gestion des objets (`battle/item_handler.py`)
-- [ ] Capture (plus tard)
+- [x] Implémenter moteur de combat (`battle/engine.py`)
+  - [x] Tour par tour : joueur puis IA
+  - [x] Calculs de dégâts (type, stats, puissance)
+  - [x] KO et gestion PV
+- [x] IA basique (`battle/ai.py`)
+- [x] Gestion des capacités (`battle/move_handler.py`)
+- [x] Gestion des objets (`battle/item_handler.py`)
+- [] Capture (plus tard)
 
 
 === SYSTÈME D’ÉVÉNEMENTS ===
