@@ -169,7 +169,8 @@ def draw_combat_scene(
     screen.blit(base_enemy, (255, 115))
 
     screen.blit(ally_sprite.blit_ready(), (80, 200))
-    screen.blit(enemy_sprite.blit_ready(), (340, 90))
+    if enemy_sprite:
+        screen.blit(enemy_sprite.blit_ready(), (340, 90))
 
     screen.blit(STATUS_PLAYER, (268, 193))
     screen.blit(STATUS_ENEMY, (0, 35))

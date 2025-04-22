@@ -15,5 +15,5 @@ class AnimatedText:
         visible_text = self.full_text[:nb_chars]
         if nb_chars == len(self.full_text):
             self.done = True
-        text_surface = self.font.render(visible_text, True, (255, 255, 255))
+        text_surface = self.font.render(visible_text, True, (0, 0, 0))
         surface.blit(text_surface, self.pos)

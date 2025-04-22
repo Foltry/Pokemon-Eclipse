@@ -29,7 +29,7 @@ def get_status_modifier(status):
 def attempt_capture(pokemon, ball_name, status=None):
     """
     Tente de capturer un Pokémon avec la formule officielle.
-    Renvoie (captured: bool, messages: list)
+    Renvoie un dict : {"success": bool, "shakes": int, "messages": list[str]}
     """
     max_hp = pokemon["stats"]["hp"]
     current_hp = pokemon["hp"]
@@ -40,13 +40,21 @@ def attempt_capture(pokemon, ball_name, status=None):
 
     # Master Ball = capture garantie
     if ball_mod >= 255:
-        return True, [f"{pokemon['name']} est capturé avec une {ball_name} ! (master ball)"]
+        return {
+            "success": True,
+            "shakes": 3,
+            "messages": [f"{pokemon['name']} est capturé avec une {ball_name} ! (master ball)"]
+        }
 
     # Formule de base
     a = ((3 * max_hp - 2 * current_hp) * catch_rate * ball_mod * status_mod) / (3 * max_hp)
 
     if a >= 255:
-        return True, [f"{pokemon['name']} est capturé avec une {ball_name} !"]
+        return {
+            "success": True,
+            "shakes": 3,
+            "messages": [f"{pokemon['name']} est capturé avec une {ball_name} !"]
+        }
 
     # Calcul du seuil b
     try:
@@ -62,7 +70,16 @@ def attempt_capture(pokemon, ball_name, status=None):
             break
 
     if shakes == 4:
-        return True, [f"{pokemon['name']} est capturé avec une {ball_name} !"]
+        return {
+            "success": True,
+            "shakes": 3,
+            "messages": [f"{pokemon['name']} est capturé !"]
+        }
     else:
-        return False, [f"{pokemon['name']} se libère après {shakes} secousses..."]
+        return {
+            "success": False,
+            "shakes": shakes,
+            "messages": [f"{pokemon['name']} s'est échappé !"]
+        }
+
  
