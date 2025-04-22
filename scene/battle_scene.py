@@ -9,6 +9,9 @@ from ui.battle_ui import (
 from core.scene_manager import Scene
 from core.run_manager import run_manager
 from ui.bonus_ui import BonusUI
+from battle.item_handler import use_item_on_pokemon
+from battle.engine import calculate_damage
+from ui.animated_text import AnimatedText
 
 class BattleScene(Scene):
     def __init__(self):
@@ -21,8 +24,9 @@ class BattleScene(Scene):
         self.show_bonus = False
         self.bonus_options = []
         self.bonus_selected = 0
+        self.message_queue = []
+        self.font = pygame.font.Font("assets/fonts/power green.ttf", 18)
 
-        
         starter = run_manager.get_team()[0]
         self.ally_id = starter["id"]
         self.ally_name = starter["name"]
@@ -51,11 +55,28 @@ class BattleScene(Scene):
 
         self.bases, self.sprites = load_combat_sprites(self.ally_id, self.enemy_id)
 
+    def get_ally_stats(self):
+        return run_manager.get_team()[0].get("stats") or run_manager.get_team()[0].get("base_stats")
+
+    def queue_message(self, text):
+        animated = AnimatedText(text, self.font, (40, 300), speed=50)
+        self.message_queue.append(animated)
+
     def on_enter(self): pass
     def on_exit(self): pass
     def update(self, dt): pass
 
     def handle_event(self, event):
+        if self.message_queue:
+            current = self.message_queue[0]
+            if isinstance(current, AnimatedText):
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and current.done:
+                    self.message_queue.pop(0)
+            elif callable(current):
+                current()
+                self.message_queue.pop(0)
+            return
+
         if self.show_bonus:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
@@ -83,12 +104,67 @@ class BattleScene(Scene):
                 col += 1
             elif event.key == pygame.K_RETURN:
                 self.selected_index = self.button_grid[col][row]
-                if self.selected_index == 0:
-                    damage = random.randint(8, 12)
-                    self.enemy_hp = max(0, self.enemy_hp - damage)
-                    if self.enemy_hp == 0 and not self.victory_handled:
-                        self.handle_victory()
-                elif self.selected_index == 3:
+
+                if self.selected_index == 0:  # FIGHT
+                    move = {
+                        "name": "Charge",
+                        "power": 40,
+                        "type": "normal",
+                        "damage_class": "physical"
+                    }
+
+                    attacker = {
+                        "name": self.ally_name,
+                        "level": self.ally_level,
+                        "stats": self.get_ally_stats(),
+                        "types": run_manager.get_team()[0]["types"]
+                    }
+
+                    defender = {
+                        "name": self.enemy_name,
+                        "level": self.enemy_level,
+                        "stats": self.enemy_data["stats"],
+                        "types": self.enemy_data["types"]
+                    }
+
+                    damage, is_crit, multiplier = calculate_damage(attacker, defender, move)
+
+                    self.queue_message(f"{attacker['name']} utilise {move['name']} !")
+                    if is_crit:
+                        self.queue_message("Coup critique !")
+                    if multiplier > 1:
+                        self.queue_message("C’est super efficace !")
+                    elif 0 < multiplier < 1:
+                        self.queue_message("Ce n’est pas très efficace...")
+
+                    self.queue_message(f"{defender['name']} perd {damage} PV !")
+
+                    def apply_damage():
+                        self.enemy_hp = max(0, self.enemy_hp - damage)
+                        if self.enemy_hp == 0 and not self.victory_handled:
+                            self.handle_victory()
+
+                    self.message_queue.append(apply_damage)
+
+                elif self.selected_index == 2:  # BAG
+                    self.enemy_data["hp"] = self.enemy_hp
+                    self.enemy_data["stats"]["max_hp"] = self.enemy_max_hp
+
+                    result = use_item_on_pokemon("Super Ball", self.enemy_data)
+                    for msg in result["messages"]:
+                        self.queue_message(msg)
+
+                    if result["success"]:
+                        if hasattr(run_manager, "add_pokemon"):
+                            run_manager.add_pokemon_to_team(self.enemy_data)
+                        else:
+                            run_manager.add_pokemon_to_team(self.enemy_data)
+                        self.queue_message(f"{self.enemy_name} a rejoint votre équipe !")
+                        self.message_queue.append(lambda: self.manager.change_scene(BattleScene()))
+                    else:
+                        self.queue_message("Le combat continue...")
+
+                elif self.selected_index == 3:  # RUN
                     print("Fuite !")
                     self.manager.change_scene(BattleScene())
 
@@ -141,12 +217,14 @@ class BattleScene(Scene):
             ally_max_xp=self.ally_max_xp
         )
 
-        if self.show_bonus:
+        if self.message_queue:
+            self.dialog_box.draw(screen, "")
+            if hasattr(self.message_queue[0], "draw"):
+                self.message_queue[0].draw(screen)
+        elif self.show_bonus:
             self.dialog_box.draw(screen, "Choisissez un objet :")
-
             self.bonus_ui.draw(screen)
         else:
             self.dialog_box.draw(screen, f"Que doit faire {self.ally_name} ?")
             for i, button in enumerate(self.buttons):
                 button.draw(screen, selected=(i == self.selected_index))
-

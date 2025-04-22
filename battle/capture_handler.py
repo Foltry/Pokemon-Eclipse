@@ -65,3 +65,4 @@ def attempt_capture(pokemon, ball_name, status=None):
         return True, [f"{pokemon['name']} est capturé avec une {ball_name} !"]
     else:
         return False, [f"{pokemon['name']} se libère après {shakes} secousses..."]
+ 

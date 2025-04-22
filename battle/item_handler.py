@@ -1,5 +1,6 @@
 import os
 import json
+from battle.capture_handler import attempt_capture
 
 # Charge les données d'objets
 with open(os.path.join("data", "items.json"), encoding="utf-8") as f:
@@ -28,6 +29,13 @@ def use_item_on_pokemon(item_name, target):
 
     if not can_use_item_in_battle(item_name):
         result["messages"].append(f"Impossible d’utiliser {item_name} pendant un combat.")
+        return result
+
+    # Tentative de capture si c’est une Poké Ball
+    if item.get("category") == "standard-balls":
+        success, messages = attempt_capture(target, item_name, target.get("status"))
+        result["success"] = success
+        result["messages"].extend(messages)
         return result
 
     # Soin de PV

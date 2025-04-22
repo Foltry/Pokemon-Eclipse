@@ -23,33 +23,29 @@ def get_type_multiplier(move_type, defender_types):
     return multiplier
 
 def calculate_damage(attacker, defender, move):
-    # Récupère les données nécessaires
     atk_level = attacker["level"]
     power = move["power"]
     if power is None or power == 0:
-        return 0
+        return 0, False, 1.0
 
     is_special = move["damage_class"] == "special"
-    atk_stat = attacker["stats"]["sp_atk" if is_special else "atk"]
-    def_stat = defender["stats"]["sp_def" if is_special else "def"]
+
+    # Compatibilité avec noms de stats issus de l’API ou du JSON
+    atk_key = "special-attack" if is_special else "attack"
+    def_key = "special-defense" if is_special else "defense"
+
+    atk_stat = attacker["stats"][atk_key]
+    def_stat = defender["stats"][def_key]
 
     base_damage = (((2 * atk_level / 5 + 2) * power * atk_stat / def_stat) / 50) + 2
 
-    # Bonus de type (STAB)
     move_type = move["type"]
     stab = 1.5 if move_type in attacker["types"] else 1.0
 
-    # Multiplicateur de type
-    target_types = defender["types"]
-    type_multiplier = get_type_multiplier(move_type, target_types)
-
-    # Critique
-    is_crit = random.random() < 0.0625  # 6.25 %
+    type_multiplier = get_type_multiplier(move_type, defender["types"])
+    is_crit = random.random() < 0.0625
     crit_multiplier = 1.5 if is_crit else 1.0
-
-    # Random (entre 85% et 100%)
     rand = random.uniform(0.85, 1.0)
 
-    # Total
     damage = int(base_damage * stab * type_multiplier * crit_multiplier * rand)
     return max(1, damage), is_crit, type_multiplier

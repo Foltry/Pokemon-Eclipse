@@ -70,11 +70,28 @@ TODO - PROJET POKÉMON ECLIPSE
   - [x] Tour par tour : joueur puis IA
   - [x] Calculs de dégâts (type, stats, puissance)
   - [x] KO et gestion PV
-- [x] IA basique (`battle/ai.py`)
-- [x] Gestion des capacités (`battle/move_handler.py`)
-- [x] Gestion des objets (`battle/item_handler.py`)
-- [] Capture (plus tard)
 
+- [x] IA basique (`battle/ai.py`)
+
+- [x] Gestion des capacités (`battle/move_handler.py`)
+  - [x] Dégâts directs
+  - [x] Effets secondaires (statuts, boosts, drain, recul)
+  - [x] Attaques sans puissance (buff, debuff, statut pur)
+
+- [x] Gestion des objets (`battle/item_handler.py`)
+  - [x] Objets de soin (PV, statut)
+  - [x] Objets de combat (augmentation de stats)
+  - [x] Vérification des conditions d’utilisation
+
+- [ ] Capture (`battle/capture_handler.py`)
+
+- [ ] Intégration graphique du moteur de combat
+  - [ ] Affichage dynamique des messages (attaques, dégâts, effets)
+  - [ ] Affichage des animations de coups (plus tard)
+  - [ ] Choix et usage de capacités avec effets visibles
+  - [ ] Affichage des objets utilisés et feedback à l’écran
+  - [ ] Affichage des PV, statuts, KO mis à jour en temps réel
+  - [ ] Ajout transitions fin de combat (victoire, défaite, capture)
 
 === SYSTÈME D’ÉVÉNEMENTS ===
 
@@ -92,4 +109,3 @@ TODO - PROJET POKÉMON ECLIPSE
 - [ ] Boutique d’objets
 - [ ] Support multi-langues (i18n)
 - [ ] Support des mods (données custom)
-
