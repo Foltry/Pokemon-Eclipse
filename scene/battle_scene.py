@@ -57,7 +57,7 @@ class BattleScene(Scene):
         self.enemy_base_exp = self.enemy_data.get("base_experience", 50)
 
         self.bases, self.sprites = load_combat_sprites(self.ally_id, self.enemy_id)
-        self.capture_effect = CaptureEffect(sprite=self.sprites[1], pos=(340, 90))
+        self.capture_effect = CaptureEffect(sprite=self.sprites[1], pos=(360, 130))
 
     def get_ally_stats(self):
         return run_manager.get_team()[0].get("stats") or run_manager.get_team()[0].get("base_stats")

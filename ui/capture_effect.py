@@ -1,5 +1,4 @@
 import pygame
-import math
 
 class CaptureEffect:
     def __init__(self, sprite, pos):
@@ -18,7 +17,6 @@ class CaptureEffect:
         self.current_frame_index = 0  # nécessaire pour draw()
 
     def trigger_in(self):
-        print("[ACTION] trigger_in()")
         self.phase = "in"
         self.elapsed = 0
         self.active = True
@@ -27,9 +25,7 @@ class CaptureEffect:
 
     def trigger_out(self):
         if self.phase == "out" and self.active:
-            print("[WARNING] trigger_out() ignoré (déjà lancé)")
             return
-        print("[ACTION] trigger_out()")
         self.phase = "out"
         self.elapsed = 0
         self.active = True
