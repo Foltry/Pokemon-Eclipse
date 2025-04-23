@@ -58,6 +58,7 @@ class BattleScene(Scene):
 
         self.bases, self.sprites = load_combat_sprites(self.ally_id, self.enemy_id)
         self.capture_effect = CaptureEffect(sprite=self.sprites[1], pos=(360, 130))
+        self.bonus_message = None
 
     def get_ally_stats(self):
         return run_manager.get_team()[0].get("stats") or run_manager.get_team()[0].get("base_stats")
@@ -146,22 +147,54 @@ class BattleScene(Scene):
             elif event.key == pygame.K_RETURN:
                 self.selected_index = self.button_grid[col][row]
 
-                if self.selected_index == 0:
-                    move = {"name": "Charge", "power": 40, "type": "normal", "damage_class": "physical"}
-                    attacker = {"name": self.ally_name, "level": self.ally_level, "stats": self.get_ally_stats(), "types": run_manager.get_team()[0]["types"]}
-                    defender = {"name": self.enemy_name, "level": self.enemy_level, "stats": self.enemy_data["stats"], "types": self.enemy_data["types"]}
+                if self.selected_index == 0:  # FIGHT
+                    move = {
+                        "name": "Charge",
+                        "power": 40,
+                        "type": "normal",
+                        "damage_class": "physical"
+                    }
+
+                    attacker = {
+                        "name": self.ally_name,
+                        "level": self.ally_level,
+                        "stats": self.get_ally_stats(),
+                        "types": run_manager.get_team()[0]["types"]
+                    }
+
+                    defender = {
+                        "name": self.enemy_name,
+                        "level": self.enemy_level,
+                        "stats": self.enemy_data["stats"],
+                        "types": self.enemy_data["types"]
+                    }
+
                     damage, is_crit, multiplier = calculate_damage(attacker, defender, move)
+
+                    # Phase 1 : annonce de l'attaque
                     self.queue_message(f"{attacker['name']} utilise {move['name']} !")
-                    if is_crit: self.queue_message("Coup critique !")
-                    if multiplier > 1: self.queue_message("C’est super efficace !")
-                    elif 0 < multiplier < 1: self.queue_message("Ce n’est pas très efficace...")
+
+                    # Phase 2 : critique
+                    if is_crit:
+                        self.queue_message("Coup critique !")
+
+                    # Phase 3 : efficacité
+                    if multiplier > 1:
+                        self.queue_message("C’est super efficace !")
+                    elif 0 < multiplier < 1:
+                        self.queue_message("Ce n’est pas très efficace...")
+
+                    # Phase 4 : dégâts
                     self.queue_message(f"{defender['name']} perd {damage} PV !")
 
+                    # Phase 5 : appliquer les dégâts
                     def apply_damage():
                         self.enemy_hp = max(0, self.enemy_hp - damage)
                         if self.enemy_hp == 0 and not self.victory_handled:
                             self.handle_victory()
+
                     self.message_queue.append(apply_damage)
+
 
                 elif self.selected_index == 2:
                     self.enemy_data["hp"] = self.enemy_hp
@@ -210,6 +243,17 @@ class BattleScene(Scene):
         self.bonus_options = random.sample(valid_items, 2)
         self.bonus_ui.set_items(self.bonus_options)
         self.show_bonus = True
+        y = 300 + (85 - self.font.get_height()) // 2
+        self.bonus_message = AnimatedText("Choisissez un objet :", self.font, (40, y), speed=50)
+    
+    def render_bonus_message(self, screen):
+        if not self.bonus_message:
+            return
+        elapsed = (pygame.time.get_ticks() - self.bonus_message.start_time) / 1000
+        nb_chars = min(int(elapsed * self.bonus_message.speed), len(self.bonus_message.full_text))
+        visible = self.bonus_message.full_text[:nb_chars]
+        self.dialog_box.draw(screen, visible)
+
 
     def draw(self, screen):
         sprites = list(self.sprites)
@@ -244,7 +288,7 @@ class BattleScene(Scene):
         if self.message_queue:
             self.render_current_message(screen)
         elif self.show_bonus:
-            self.dialog_box.draw(screen, "Choisissez un objet :")
+            self.render_bonus_message(screen)
             self.bonus_ui.draw(screen)
         else:
             self.dialog_box.draw(screen, f"Que doit faire {self.ally_name} ?")
