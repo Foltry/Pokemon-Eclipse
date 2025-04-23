@@ -206,3 +206,59 @@ def draw_combat_scene(
     xp_bar = XPBar((308, 267), ally_max_xp)
     xp_bar.update(ally_xp)
     xp_bar.draw(screen)
+
+class AttackUI:
+    def __init__(self, pos=(20, 288), spacing=5):
+        self.pos = pos
+        self.spacing = spacing
+        self.moves = []
+        self.selected_index = 0
+        self.font = pygame.font.Font(os.path.join(FONTS, "power clear.ttf"), 22)
+        self.box = pygame.image.load("assets/ui/battle/dialogue_box_bonus.png").convert_alpha()
+        self.box_rect = self.box.get_rect(topleft=(260, 294))
+
+
+    def set_moves(self, moves):
+        print("[DEBUG] set_moves reçu :", moves)
+        self.moves = moves[:4] if moves else []
+        self.selected_index = 0
+
+
+    def move_selection(self, delta):
+        if not self.moves:
+            return
+        self.selected_index = (self.selected_index + delta) % len(self.moves)
+
+    def draw(self, surface):
+        surface.blit(self.box, self.box_rect.topleft)
+
+        if not self.moves:
+            return
+
+        font = pygame.font.Font("assets/fonts/power clear.ttf", 18)
+        spacing_x = 220
+        spacing_y = 32
+        start_x = 32
+        start_y = 298
+
+        for i, move in enumerate(self.moves[:4]):
+            col = i % 2
+            row = i // 2
+            x = start_x + col * spacing_x
+            y = start_y + row * spacing_y
+
+            name = move["name"]
+            type_ = move["type"].capitalize()
+            pp = move.get("pp", 0)
+            max_pp = move.get("max_pp", pp)
+
+            text = f"{name} ({type_}) - PP: {pp}/{max_pp}"
+            color = (255, 0, 0) if i == self.selected_index else (0, 0, 0)
+            txt_surface = font.render(text, True, color)
+            surface.blit(txt_surface, (x, y))
+
+
+    def get_selected_move(self):
+        if 0 <= self.selected_index < len(self.moves):
+            return self.moves[self.selected_index]
+        return None

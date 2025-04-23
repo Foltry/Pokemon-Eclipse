@@ -12,6 +12,8 @@ from ui.ballthrow import BallThrow
 from ui.capture_effect import CaptureEffect
 from battle.item_handler import use_item_on_pokemon
 from battle.engine import calculate_damage
+from ui.attack_effects import AttackEffect
+from ui.battle_ui import AttackUI
 
 class BattleScene(Scene):
     def __init__(self):
@@ -36,6 +38,14 @@ class BattleScene(Scene):
         self.hide_enemy_sprite = False
 
         starter = run_manager.get_team()[0]
+        # TEMP : Ajout attaques de test si manquantes
+        if "moves" not in starter or not starter["moves"]:
+            starter["moves"] = [
+                {"name": "Charge", "power": 40, "type": "normal", "damage_class": "physical", "pp": 35, "max_pp": 35},
+                {"name": "Griffe", "power": 40, "type": "normal", "damage_class": "physical", "pp": 35, "max_pp": 35},
+                {"name": "Flammèche", "power": 40, "type": "feu", "damage_class": "special", "pp": 25, "max_pp": 25}
+            ]
+
         self.ally_id = starter["id"]
         self.ally_name = starter["name"]
         self.ally_level = starter.get("level", 5)
@@ -59,6 +69,9 @@ class BattleScene(Scene):
         self.bases, self.sprites = load_combat_sprites(self.ally_id, self.enemy_id)
         self.capture_effect = CaptureEffect(sprite=self.sprites[1], pos=(360, 130))
         self.bonus_message = None
+        self.attack_effect = None
+        self.attack_ui = AttackUI(pos=(20, 200))  # position personnalisable
+        self.attack_menu_active = False
 
     def get_ally_stats(self):
         return run_manager.get_team()[0].get("stats") or run_manager.get_team()[0].get("base_stats")
@@ -84,8 +97,14 @@ class BattleScene(Scene):
     def update(self, dt):
         if self.throw_animation:
             self.throw_animation.update(dt)
+            
         if self.capture_effect:
             self.capture_effect.update(dt)
+            
+        if self.attack_effect:
+            self.attack_effect.update(dt)
+            if not self.attack_effect.active:
+                self.attack_effect = None
 
         if self.throw_animation:
             if not self.capture_started and self.throw_animation.has_landed():
@@ -125,6 +144,22 @@ class BattleScene(Scene):
                 self.message_queue.pop(0)
             return
 
+        if self.attack_menu_active:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    self.attack_ui.move_selection(-1)
+                elif event.key == pygame.K_DOWN:
+                    self.attack_ui.move_selection(1)
+                elif event.key == pygame.K_RETURN:
+                    selected = self.attack_ui.get_selected_move()
+                    if selected:
+                        self.queue_message(f"{self.ally_name} utilise {selected['name']} !")
+                        self.attack_menu_active = False
+                        # Tu peux lancer ici une animation ou effet plus tard
+                elif event.key == pygame.K_ESCAPE:
+                    self.attack_menu_active = False
+            return
+
         if self.show_bonus:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
@@ -140,86 +175,37 @@ class BattleScene(Scene):
 
         if event.type == pygame.KEYDOWN:
             col, row = self.grid_pos
-            if event.key == pygame.K_UP and row > 0: row -= 1
-            elif event.key == pygame.K_DOWN and row < 1: row += 1
-            elif event.key == pygame.K_LEFT and col > 0: col -= 1
-            elif event.key == pygame.K_RIGHT and col < 1: col += 1
+            if event.key == pygame.K_UP and row > 0:
+                row -= 1
+            elif event.key == pygame.K_DOWN and row < 1:
+                row += 1
+            elif event.key == pygame.K_LEFT and col > 0:
+                col -= 1
+            elif event.key == pygame.K_RIGHT and col < 1:
+                col += 1
             elif event.key == pygame.K_RETURN:
                 self.selected_index = self.button_grid[col][row]
 
                 if self.selected_index == 0:  # FIGHT
-                    move = {
-                        "name": "Charge",
-                        "power": 40,
-                        "type": "normal",
-                        "damage_class": "physical"
-                    }
+                    moves = run_manager.get_team()[0].get("moves") or []
+                    print("[DEBUG] Attaques du Pokémon :", moves)
+                    self.attack_ui.set_moves(moves)
+                    self.attack_menu_active = True
 
-                    attacker = {
-                        "name": self.ally_name,
-                        "level": self.ally_level,
-                        "stats": self.get_ally_stats(),
-                        "types": run_manager.get_team()[0]["types"]
-                    }
+                elif self.selected_index == 1:  # POKÉMON (non implémenté)
+                    self.queue_message("Ce menu n’est pas encore disponible.")
 
-                    defender = {
-                        "name": self.enemy_name,
-                        "level": self.enemy_level,
-                        "stats": self.enemy_data["stats"],
-                        "types": self.enemy_data["types"]
-                    }
+                elif self.selected_index == 2:  # BAG
+                    # code pour la capture ou utilisation objet
+                    pass
 
-                    damage, is_crit, multiplier = calculate_damage(attacker, defender, move)
-
-                    # Phase 1 : annonce de l'attaque
-                    self.queue_message(f"{attacker['name']} utilise {move['name']} !")
-
-                    # Phase 2 : critique
-                    if is_crit:
-                        self.queue_message("Coup critique !")
-
-                    # Phase 3 : efficacité
-                    if multiplier > 1:
-                        self.queue_message("C’est super efficace !")
-                    elif 0 < multiplier < 1:
-                        self.queue_message("Ce n’est pas très efficace...")
-
-                    # Phase 4 : dégâts
-                    self.queue_message(f"{defender['name']} perd {damage} PV !")
-
-                    # Phase 5 : appliquer les dégâts
-                    def apply_damage():
-                        self.enemy_hp = max(0, self.enemy_hp - damage)
-                        if self.enemy_hp == 0 and not self.victory_handled:
-                            self.handle_victory()
-
-                    self.message_queue.append(apply_damage)
-
-
-                elif self.selected_index == 2:
-                    self.enemy_data["hp"] = self.enemy_hp
-                    self.enemy_data["stats"]["max_hp"] = self.enemy_max_hp
-                    result = use_item_on_pokemon("Super Ball", self.enemy_data)
-
-                    self.throw_result = result
-                    self.throw_animation = BallThrow(
-                        ball_type="superball",
-                        start_pos=(462, 240),
-                        target_pos=(360, 130),
-                        result=result
-                    )
-
-                    # Reset états capture
-                    self.capture_started = False
-                    self.waiting_out = False
-                    self.message_shown = False
-                    self.hide_enemy_sprite = False
-
-                elif self.selected_index == 3:
+                elif self.selected_index == 3:  # RUN
                     self.manager.change_scene(BattleScene())
 
             self.grid_pos = [col, row]
             self.selected_index = self.button_grid[col][row]
+
+
 
     def resolve_capture_result(self):
         result = self.throw_result
@@ -284,13 +270,24 @@ class BattleScene(Scene):
             self.capture_effect.draw(screen)
         if self.throw_animation:
             self.throw_animation.draw(screen)
+        if self.attack_effect:
+            self.attack_effect.draw(screen)
 
-        if self.message_queue:
+        # ✅ Priorité : affichage du menu attaques
+        if self.attack_menu_active:
+            print("[DEBUG] Affichage du menu d’attaques")
+            self.attack_ui.draw(screen)
+        elif self.message_queue:
             self.render_current_message(screen)
         elif self.show_bonus:
             self.render_bonus_message(screen)
             self.bonus_ui.draw(screen)
         else:
-            self.dialog_box.draw(screen, f"Que doit faire {self.ally_name} ?")
-            for i, button in enumerate(self.buttons):
-                button.draw(screen, selected=(i == self.selected_index))
+            if self.attack_menu_active:
+                self.attack_ui.draw(screen)
+            else:
+                self.dialog_box.draw(screen, f"Que doit faire {self.ally_name} ?")
+                for i, button in enumerate(self.buttons):
+                    button.draw(screen, selected=(i == self.selected_index))
+
+
