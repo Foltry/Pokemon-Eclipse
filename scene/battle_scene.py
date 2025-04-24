@@ -95,17 +95,19 @@ class BattleScene(Scene):
     def on_exit(self): pass
 
     def update(self, dt):
+        # Animations spécifiques
         if self.throw_animation:
             self.throw_animation.update(dt)
-            
+
         if self.capture_effect:
             self.capture_effect.update(dt)
-            
+
         if self.attack_effect:
             self.attack_effect.update(dt)
             if not self.attack_effect.active:
                 self.attack_effect = None
 
+        # Gestion animation capture
         if self.throw_animation:
             if not self.capture_started and self.throw_animation.has_landed():
                 self.capture_effect.trigger_in()
@@ -113,7 +115,7 @@ class BattleScene(Scene):
                 self.hide_enemy_sprite = True
 
             if self.capture_started and self.capture_effect.current_phase() is None and not self.capture_effect.is_active() and not self.waiting_out:
-                pass  # capture_in terminé, aucun log
+                pass  # fin capture_in
 
             if self.capture_started and self.throw_animation.is_done() and not self.throw_result["success"] and not self.waiting_out:
                 self.capture_effect.trigger_out()
@@ -132,6 +134,11 @@ class BattleScene(Scene):
             if self.message_shown and not self.capture_effect.is_active():
                 self.throw_animation = None
 
+        # ✅ Met à jour les frames des sprites animés
+        if self.sprites:
+            for sprite in self.sprites:
+                if hasattr(sprite, "update"):
+                    sprite.update(dt)
 
     def handle_event(self, event):
         if self.message_queue:
@@ -147,15 +154,18 @@ class BattleScene(Scene):
         if self.attack_menu_active:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
-                    self.attack_ui.move_selection(-1)
+                    self.attack_ui.move_selection_up()
                 elif event.key == pygame.K_DOWN:
-                    self.attack_ui.move_selection(1)
+                    self.attack_ui.move_selection_down()
+                elif event.key == pygame.K_LEFT:
+                    self.attack_ui.move_selection_left()
+                elif event.key == pygame.K_RIGHT:
+                    self.attack_ui.move_selection_right()
                 elif event.key == pygame.K_RETURN:
                     selected = self.attack_ui.get_selected_move()
                     if selected:
                         self.queue_message(f"{self.ally_name} utilise {selected['name']} !")
                         self.attack_menu_active = False
-                        # Tu peux lancer ici une animation ou effet plus tard
                 elif event.key == pygame.K_ESCAPE:
                     self.attack_menu_active = False
             return
@@ -185,27 +195,20 @@ class BattleScene(Scene):
                 col += 1
             elif event.key == pygame.K_RETURN:
                 self.selected_index = self.button_grid[col][row]
-
                 if self.selected_index == 0:  # FIGHT
                     moves = run_manager.get_team()[0].get("moves") or []
-                    print("[DEBUG] Attaques du Pokémon :", moves)
                     self.attack_ui.set_moves(moves)
+                    self.queue_message("Choisissez une attaque :")  # ✅ Affiche texte animé
                     self.attack_menu_active = True
 
-                elif self.selected_index == 1:  # POKÉMON (non implémenté)
+                elif self.selected_index == 1:
                     self.queue_message("Ce menu n’est pas encore disponible.")
-
-                elif self.selected_index == 2:  # BAG
-                    # code pour la capture ou utilisation objet
+                elif self.selected_index == 2:
                     pass
-
-                elif self.selected_index == 3:  # RUN
+                elif self.selected_index == 3:
                     self.manager.change_scene(BattleScene())
-
             self.grid_pos = [col, row]
             self.selected_index = self.button_grid[col][row]
-
-
 
     def resolve_capture_result(self):
         result = self.throw_result
@@ -240,8 +243,11 @@ class BattleScene(Scene):
         visible = self.bonus_message.full_text[:nb_chars]
         self.dialog_box.draw(screen, visible)
 
-
     def draw(self, screen):
+        # 1. Background
+        screen.blit(self.bg, (0, 0))
+
+        # 2. Bases & Sprites : laissés à draw_combat_scene (avec infos PV, niveaux, etc.)
         sprites = list(self.sprites)
         if self.capture_effect and self.capture_effect.is_active():
             sprites[1] = None
@@ -266,28 +272,33 @@ class BattleScene(Scene):
             ally_max_xp=self.ally_max_xp
         )
 
+        # 3. Dialogue box vide (fond toujours présent)
+        self.dialog_box.draw(screen, "", draw_box=True)
+
+        # 4. Interface principale selon contexte
+        if self.message_queue:
+            self.render_current_message(screen)
+
+        elif self.show_bonus:
+            self.render_bonus_message(screen)
+            self.bonus_ui.draw(screen)
+
+        elif self.attack_menu_active:
+            if self.message_queue:
+                self.render_current_message(screen)
+            else:
+                self.dialog_box.draw(screen, "Choisissez une attaque :")
+            self.attack_ui.draw(screen)
+
+        else:
+            self.dialog_box.draw(screen, f"Que doit faire {self.ally_name} ?")
+            for i, button in enumerate(self.buttons):
+                button.draw(screen, selected=(i == self.selected_index))
+
+        # 5. Effets spéciaux par-dessus tout
         if self.capture_effect:
             self.capture_effect.draw(screen)
         if self.throw_animation:
             self.throw_animation.draw(screen)
         if self.attack_effect:
             self.attack_effect.draw(screen)
-
-        # ✅ Priorité : affichage du menu attaques
-        if self.attack_menu_active:
-            print("[DEBUG] Affichage du menu d’attaques")
-            self.attack_ui.draw(screen)
-        elif self.message_queue:
-            self.render_current_message(screen)
-        elif self.show_bonus:
-            self.render_bonus_message(screen)
-            self.bonus_ui.draw(screen)
-        else:
-            if self.attack_menu_active:
-                self.attack_ui.draw(screen)
-            else:
-                self.dialog_box.draw(screen, f"Que doit faire {self.ally_name} ?")
-                for i, button in enumerate(self.buttons):
-                    button.draw(screen, selected=(i == self.selected_index))
-
-
