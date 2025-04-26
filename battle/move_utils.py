@@ -1,18 +1,20 @@
+# battle/move_utils.py
+
 import random
 
 def check_accuracy(attacker, defender, move):
-    """Renvoie True si l'attaque touche, False sinon."""
+    """Vérifie si l'attaque touche, selon sa précision."""
     accuracy = move.get("accuracy")
     if accuracy is None:
-        return True  # attaques qui ne ratent jamais
+        return True  # Certaines attaques (ex : Danse-Lames) ne ratent jamais
     return random.randint(1, 100) <= accuracy
 
 def is_protected(defender):
-    """Vérifie si le défenseur est sous Abri ou similaire."""
+    """Renvoie True si la cible est sous un effet de protection (Abri, Détection, etc.)."""
     return defender.get("_protected", False)
 
-def should_fail(attacker, defender, move, last_move):
-    """Détermine si l'attaque échoue pour une autre raison (statut, effet, etc.)."""
+def should_fail(attacker, defender, move, last_move=None):
+    """Détermine si l'attaque échoue directement (recharge, attaque spéciale, etc.)."""
     if attacker.get("_recharging"):
         attacker["_recharging"] = False
         return True
@@ -22,26 +24,25 @@ def should_fail(attacker, defender, move, last_move):
         return True
     return False
 
-def get_fixed_damage(attacker, move):
-    """Retourne les dégâts fixes définis dans l’effet."""
-    value = move["fixed_damage"]
-    if value == "level":
-        return attacker["level"]
-    return int(value)
+def process_multi_hit(attacker, defender, move_data):
+    """Gère les attaques à frappes multiples (ex: Furia, Double-Pied)."""
+    messages = []
+    hits = random.choices([2, 3, 4, 5], weights=[35, 35, 15, 15])[0]  # Probabilités officielles
 
-def process_multi_hit(attacker, defender, move):
-    """Gère les attaques frappant plusieurs fois (2 à 5)."""
-    from battle.engine import calculate_damage
+    for i in range(hits):
+        messages.append(f"Le coup {i+1} touche !")
 
-    hits = random.choices([2, 3, 4, 5], weights=[35, 35, 15, 15])[0]
-    total_damage = 0
-    any_crit = False
-    last_multiplier = 1.0
+    messages.append(f"{move_data['name']} a frappé {hits} fois !")
 
-    for _ in range(hits):
-        dmg, is_crit, mult = calculate_damage(attacker, defender, move)
-        total_damage += dmg
-        any_crit |= is_crit
-        last_multiplier = mult
+    return {
+        "hits": hits,
+        "messages": messages
+    }
 
-    return hits, total_damage, any_crit, last_multiplier
+def get_fixed_damage(attacker, defender, move):
+    """Retourne les dégâts fixes si l'attaque suit ce modèle (ex: Sonic Boom, Niveau 5)."""
+    if move.get("fixed_damage") is not None:
+        return move["fixed_damage"]
+    if move.get("level_damage"):
+        return attacker.get("level", 1)
+    return None

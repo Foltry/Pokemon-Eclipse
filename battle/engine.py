@@ -1,48 +1,49 @@
+# battle/engine.py
+
 import random
-import json
-import os
+from data.types_loader import get_all_types
 
-# Chemin vers le fichier types.json
-TYPES_PATH = os.path.join("data", "types.json")
+TYPE_CHART = get_all_types()
 
-with open(TYPES_PATH, encoding="utf-8") as f:
-    TYPE_CHART = json.load(f)
+def find_type_info(type_name):
+    for type_info in TYPE_CHART:
+        if type_info["name"].lower() == type_name.lower():
+            return type_info
+    return None
 
 def get_type_multiplier(move_type, defender_types):
     multiplier = 1.0
+    move_info = find_type_info(move_type)
+    if not move_info:
+        return multiplier
+
+    relations = move_info.get("damage_relations", {})
+
     for target_type in defender_types:
-        if target_type not in TYPE_CHART or move_type not in TYPE_CHART:
-            continue
-        relations = TYPE_CHART[move_type]["damage_relations"]
-        if target_type in relations["double_damage_to"]:
+        if target_type in relations.get("double_damage_to", []):
             multiplier *= 2.0
-        elif target_type in relations["half_damage_to"]:
+        elif target_type in relations.get("half_damage_to", []):
             multiplier *= 0.5
-        elif target_type in relations["no_damage_to"]:
+        elif target_type in relations.get("no_damage_to", []):
             multiplier *= 0.0
     return multiplier
 
 def calculate_damage(attacker, defender, move):
-    atk_level = attacker["level"]
-    power = move["power"]
-    if power is None or power == 0:
+    atk_level = attacker.get("level", 5)
+    move_power = move.get("power")
+    if move_power is None or move_power == 0:
         return 0, False, 1.0
 
-    is_special = move["damage_class"] == "special"
+    is_special = move.get("damage_class") == "special"
 
-    # Compatibilité avec noms de stats issus de l’API ou du JSON
-    atk_key = "special-attack" if is_special else "attack"
-    def_key = "special-defense" if is_special else "defense"
+    atk_stat = attacker["stats"].get("special-attack" if is_special else "attack", 10)
+    def_stat = defender["stats"].get("special-defense" if is_special else "defense", 10)
 
-    atk_stat = attacker["stats"][atk_key]
-    def_stat = defender["stats"][def_key]
+    base_damage = (((2 * atk_level / 5 + 2) * move_power * atk_stat / def_stat) / 50) + 2
 
-    base_damage = (((2 * atk_level / 5 + 2) * power * atk_stat / def_stat) / 50) + 2
-
-    move_type = move["type"]
-    stab = 1.5 if move_type in attacker["types"] else 1.0
-
-    type_multiplier = get_type_multiplier(move_type, defender["types"])
+    move_type = move.get("type")
+    stab = 1.5 if move_type in attacker.get("types", []) else 1.0
+    type_multiplier = get_type_multiplier(move_type, defender.get("types", []))
     is_crit = random.random() < 0.0625
     crit_multiplier = 1.5 if is_crit else 1.0
     rand = random.uniform(0.85, 1.0)

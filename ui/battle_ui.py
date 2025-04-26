@@ -3,10 +3,10 @@
 import os
 import pygame
 import gif_pygame
-import json
 from PIL import Image
 from ui.health_bar import HealthBar
 from ui.xp_bar import XPBar
+from data.pokemon_loader import get_pokemon_by_id
 
 ASSETS = os.path.join("assets", "ui", "battle")
 FONTS = os.path.join("assets", "fonts")
@@ -19,16 +19,15 @@ BUTTON_HEIGHT = 46
 def get_gif_max_size(gif_path):
     try:
         with Image.open(gif_path) as img:
-            max_width = 0
-            max_height = 0
+            max_width, max_height = 0, 0
             for frame in range(img.n_frames):
                 img.seek(frame)
                 w, h = img.size
                 max_width = max(max_width, w)
                 max_height = max(max_height, h)
             return int(max_width * 2), int(max_height * 2)
-    except:
-        return 96 * 2, 96 * 2
+    except Exception:
+        return 192, 192
 
 def get_command_button(index):
     normal = CMD_IMG.subsurface(pygame.Rect(0, index * BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT))
@@ -47,8 +46,7 @@ class BattleDialogBox:
     def __init__(self, pos=(0, 288)):
         self.image = pygame.image.load(os.path.join(ASSETS, "dialogue_box.png")).convert_alpha()
         self.rect = self.image.get_rect(topleft=pos)
-        font_path = os.path.join(FONTS, "power clear.ttf")
-        self.font = pygame.font.Font(font_path, 25)
+        self.font = pygame.font.Font(os.path.join(FONTS, "power clear.ttf"), 25)
         self.text_color = (0, 0, 0)
         self.margin_x = 22
         self.margin_y = 25
@@ -113,11 +111,8 @@ def load_combat_sprites(ally_id, enemy_id):
     base_ally = pygame.image.load(os.path.join(ASSETS, "base_ally.png")).convert_alpha()
     base_enemy = pygame.image.load(os.path.join(ASSETS, "base_enemy.png")).convert_alpha()
 
-    with open("data/pokemon.json", encoding="utf-8") as f:
-        pokemon_data = json.load(f)
-
-    ally = next((p for p in pokemon_data if str(p["id"]).zfill(3) == str(ally_id).zfill(3)), None)
-    enemy = next((p for p in pokemon_data if str(p["id"]).zfill(3) == str(enemy_id).zfill(3)), None)
+    ally = get_pokemon_by_id(ally_id)
+    enemy = get_pokemon_by_id(enemy_id)
 
     if not ally or not enemy:
         raise ValueError(f"Impossible de charger les sprites : ally={ally_id}, enemy={enemy_id}")

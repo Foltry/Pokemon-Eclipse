@@ -1,3 +1,5 @@
+# scene/starter_scene.py
+
 import pygame
 import random
 import os
@@ -30,10 +32,9 @@ class StarterScene(Scene):
 
     def pick_starters(self):
         with open("data/starters.json", encoding="utf-8") as f:
-            starter_list = json.load(f)  # starter_list = liste de Pokémon (dict)
+            starter_list = json.load(f)
 
         types = {"grass": [], "fire": [], "water": []}
-
         for starter in starter_list:
             for t in starter["types"]:
                 t_lower = t.lower()
@@ -73,7 +74,6 @@ class StarterScene(Scene):
 
     def draw(self, screen):
         screen.blit(BG_IMG, (0, 0))
-
         for i, poke in enumerate(self.starters):
             x = CENTER_X + (i - 1) * OFFSET
             y = Y_POS

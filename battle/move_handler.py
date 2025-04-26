@@ -1,5 +1,6 @@
-from battle.engine import calculate_damage
-from battle.move_effects import apply_move_effect
+# battle/move_handler.py
+
+import random
 from battle.move_utils import (
     check_accuracy,
     is_protected,
@@ -7,97 +8,69 @@ from battle.move_utils import (
     process_multi_hit,
     get_fixed_damage,
 )
-import random
+from battle.move_effects import apply_move_effect
+from data.moves_loader import get_move_data
 
-def use_move(attacker, defender, move, last_move=None):
-    result = {
-        "move_name": move["name"],
-        "attacker": attacker["name"],
-        "messages": [],
-    }
+def use_move(attacker, defender, move):
+    """Traite l'utilisation d'une capacité (dégâts + effets secondaires)."""
+    messages = []
 
-    # 1. Cas d’échec automatique
-    if should_fail(attacker, defender, move, last_move):
-        result["messages"].append(f"{attacker['name']} utilise {move['name']}...")
-        result["messages"].append("Mais cela échoue !")
-        return result
+    # 1️⃣ Vérifie si l'attaque échoue automatiquement
+    if should_fail(attacker, defender, move):
+        messages.append(f"L'attaque de {attacker['name']} a échoué.")
+        return {"damage": 0, "messages": messages}
 
-    # 2. Abri ?
-    if is_protected(defender):
-        result["messages"].append(f"{attacker['name']} utilise {move['name']}...")
-        result["messages"].append(f"{defender['name']} se protège avec Abri !")
-        return result
-
-    result["messages"].append(f"{attacker['name']} utilise {move['name']} !")
-
-    # 3. Attaque à chargement
-    if move.get("charge_turn") and not attacker.get("_charging"):
-        attacker["_charging"] = move
-        result["messages"].append(f"{attacker['name']} commence à charger {move['name']}...")
-        return result
-    elif "_charging" in attacker:
-        del attacker["_charging"]
-
-    # 4. Précision
+    # 2️⃣ Vérifie précision
     if not check_accuracy(attacker, defender, move):
-        result["messages"].append("L’attaque échoue !")
-        return result
+        messages.append(f"{attacker['name']} rate son attaque !")
+        return {"damage": 0, "messages": messages}
 
-    # 5. OHKO ?
-    if move.get("one_hit_ko"):
-        if attacker["level"] < defender["level"]:
-            result["messages"].append("Cela ne marche pas sur un niveau supérieur !")
-            return result
-        if random.random() <= move.get("accuracy", 30) / 100:
-            defender["hp"] = 0
-            result["messages"].append("Coup KO immédiat !")
+    # 3️⃣ Vérifie Abri / Protection
+    if is_protected(defender):
+        messages.append(f"{defender['name']} s'est protégé !")
+        return {"damage": 0, "messages": messages}
+
+    # 4️⃣ Si attaque inflige des dégâts
+    damage = 0
+    if move.get("power") or move.get("fixed_damage") or move.get("level_damage"):
+        # Gestion dégâts fixes ou dégâts normaux
+        damage_info = calculate_basic_damage(attacker, defender, move)
+
+        if isinstance(damage_info, tuple):
+            damage, extra_messages = damage_info
+            messages.extend(extra_messages)
         else:
-            result["messages"].append("L’attaque rate !")
-        return result
+            damage = damage_info
 
-    # 6. Dégâts fixes
-    if move.get("fixed_damage"):
-        damage = get_fixed_damage(attacker, move)
-        defender["hp"] = max(0, defender["hp"] - damage)
-        result["messages"].append(f"{defender['name']} perd {damage} PV.")
-        return result
-
-    # 7. Attaque multi-coups
-    if move.get("multi_hit"):
-        hits, total_dmg, any_crit, eff = process_multi_hit(attacker, defender, move)
-        defender["hp"] = max(0, defender["hp"] - total_dmg)
-        result["messages"].append(f"L’attaque frappe {hits} fois !")
-        if any_crit:
-            result["messages"].append("Coup critique !")
-        if eff > 1:
-            result["messages"].append("C’est super efficace !")
-        elif eff < 1 and eff > 0:
-            result["messages"].append("Ce n’est pas très efficace...")
-        elif eff == 0:
-            result["messages"].append("Ça n’a aucun effet...")
-        result["messages"].append(f"{defender['name']} perd {total_dmg} PV.")
+        damage = max(1, damage)
+        defender["hp"] = max(0, defender.get("hp", 0) - damage)
+        messages.append(f"{defender['name']} a subi {damage} dégâts !")
     else:
-        # 8. Attaque standard
-        dmg, is_crit, mult = calculate_damage(attacker, defender, move)
-        defender["hp"] = max(0, defender["hp"] - dmg)
+        messages.append(f"{attacker['name']} utilise {move['name']} sans effet direct.")
 
-        if is_crit:
-            result["messages"].append("Coup critique !")
-        if mult > 1:
-            result["messages"].append("C’est super efficace !")
-        elif mult < 1 and mult > 0:
-            result["messages"].append("Ce n’est pas très efficace...")
-        elif mult == 0:
-            result["messages"].append("Ça n’a aucun effet...")
+    # 5️⃣ Effets secondaires
+    secondary_effects = apply_move_effect(attacker, defender, move)
+    messages.extend(secondary_effects)
 
-        result["messages"].append(f"{defender['name']} perd {dmg} PV.")
+    return {"damage": damage, "messages": messages}
 
-    # 9. Recharge
-    if move.get("recharge_turn"):
-        attacker["_recharging"] = True
 
-    # 10. Effets secondaires
-    if defender["hp"] > 0:
-        result["messages"] += apply_move_effect(attacker, defender, move)
+def calculate_basic_damage(attacker, defender, move):
+    """Calcule les dégâts d'une attaque en fonction de son type."""
+    fixed_damage = get_fixed_damage(attacker, defender, move)
+    if fixed_damage is not None:
+        return fixed_damage
 
-    return result
+    if move.get("multi_hit"):
+        multi_hit_info = process_multi_hit(attacker, defender, move)
+        return 1, multi_hit_info["messages"]
+
+    attack_stat = attacker.get("stats", {}).get("atk", 10)
+    defense_stat = defender.get("stats", {}).get("def", 10)
+    level = attacker.get("level", 5)
+    power = move.get("power", 50)
+
+    base_damage = (((2 * level / 5 + 2) * attack_stat * power) / (defense_stat * 50)) + 2
+    base_damage *= random.uniform(0.85, 1.0)
+
+    return int(base_damage)

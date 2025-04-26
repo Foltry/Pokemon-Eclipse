@@ -1,6 +1,7 @@
-from core.models.pokemon import Pokemon
-from core.models.item import Item
-from core.data_loader import load_json
+# core/run_manager.py
+
+from data.pokemon_loader import get_all_pokemon
+from data.items_loader import get_all_items
 
 class RunManager:
     def __init__(self):
@@ -8,8 +9,8 @@ class RunManager:
         self.items = {}
         self.active = False
 
-        self.pokemon_data = load_json("data/pokemon.json")
-        self.item_data = load_json("data/items.json")
+        self.pokemon_data = get_all_pokemon()
+        self.item_data = get_all_items()
 
         self.starters = []
 
@@ -28,7 +29,7 @@ class RunManager:
             self.items[item_name] += quantity
 
     def is_team_alive(self):
-        return any(p.hp > 0 for p in self.team)
+        return any(p.get("stats", {}).get("hp", 0) > 0 for p in self.team)
 
     def set_starters(self, starter_list):
         self.starters = starter_list
@@ -38,8 +39,8 @@ class RunManager:
 
     def reset(self):
         self.team = []
-        self.items = {}  # ✅ Correction ici (était une liste)
-        self.state = {}
+        self.items = {}
         self.starters = []
+        self.active = False
 
 run_manager = RunManager()

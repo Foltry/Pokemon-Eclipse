@@ -1,19 +1,17 @@
-import os
-import json
+# battle/item_handler.py
+
+from data.items_loader import get_item_data
 from battle.capture_handler import attempt_capture
 
-# Chargement des données des objets depuis items.json
-with open(os.path.join("data", "items.json"), encoding="utf-8") as f:
-    ITEM_DATA = {item["name"]: item for item in json.load(f)}
-
-# Objets uniquement utilisables hors combat
+# Liste des objets non utilisables en combat
 NON_BATTLE_ITEMS = [
     "Rappel Max", "Rappel", "Repousse", "Super Bonbon"
 ]
 
 def can_use_item_in_battle(item_name):
     """Vérifie si l’objet est utilisable en combat."""
-    return item_name in ITEM_DATA and item_name not in NON_BATTLE_ITEMS
+    item = get_item_data(item_name)
+    return item is not None and item_name not in NON_BATTLE_ITEMS
 
 def use_item_on_pokemon(item_name, target):
     """
@@ -21,7 +19,7 @@ def use_item_on_pokemon(item_name, target):
     Peut être une Poké Ball, un soin de PV ou un soin de statut.
     Retourne un dictionnaire : {success: bool, messages: list[str], ...}
     """
-    item = ITEM_DATA.get(item_name)
+    item = get_item_data(item_name)
     if not item:
         return {
             "success": False,
@@ -42,7 +40,7 @@ def use_item_on_pokemon(item_name, target):
     if "healing" in item:
         current_hp = target["stats"]["hp"]
         max_hp = target["stats"].get("max_hp", current_hp)
-        
+
         if current_hp <= 0:
             return {
                 "success": False,
