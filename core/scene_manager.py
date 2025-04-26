@@ -24,7 +24,7 @@ class SceneManager:
 
     def change_scene(self, new_scene):
         if self.scene:
-            self.scene.on_exit()  # ✅ Corrigé ici
+            self.scene.on_exit()
         self.scene = new_scene
         self.scene.manager = self
         self.scene.on_enter()

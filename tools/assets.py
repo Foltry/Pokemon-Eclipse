@@ -22,3 +22,12 @@ def get_sprite_path(sprite_name: str) -> str:
         folder = f"female_{folder}" if "shiny" not in variant else f"shiny_female_{folder.split('_')[-1]}"
 
     return os.path.join("pokemon", folder, f"{id_part}.gif")
+
+def load_image(path: str) -> pygame.Surface:
+    """
+    Charge une image depuis le répertoire `assets/` et retourne une surface Pygame.
+    """
+    full_path = os.path.join(ASSETS_DIR, path)
+    if not os.path.isfile(full_path):
+        raise FileNotFoundError(f"Image not found: {full_path}")
+    return pygame.image.load(full_path).convert_alpha()

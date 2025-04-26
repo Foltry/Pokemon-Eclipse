@@ -1,3 +1,5 @@
+# ui/battle_ui.py
+
 import os
 import pygame
 import gif_pygame
@@ -16,7 +18,6 @@ BUTTON_HEIGHT = 46
 
 def get_gif_max_size(gif_path):
     try:
-        from PIL import Image
         with Image.open(gif_path) as img:
             max_width = 0
             max_height = 0
@@ -25,10 +26,9 @@ def get_gif_max_size(gif_path):
                 w, h = img.size
                 max_width = max(max_width, w)
                 max_height = max(max_height, h)
-            # Appliquer un facteur de zoom
             return int(max_width * 2), int(max_height * 2)
     except:
-        return 96 * 2, 96 * 2  # Valeur par défaut doublée
+        return 96 * 2, 96 * 2
 
 def get_command_button(index):
     normal = CMD_IMG.subsurface(pygame.Rect(0, index * BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT))
@@ -47,10 +47,8 @@ class BattleDialogBox:
     def __init__(self, pos=(0, 288)):
         self.image = pygame.image.load(os.path.join(ASSETS, "dialogue_box.png")).convert_alpha()
         self.rect = self.image.get_rect(topleft=pos)
-
         font_path = os.path.join(FONTS, "power clear.ttf")
         self.font = pygame.font.Font(font_path, 25)
-
         self.text_color = (0, 0, 0)
         self.margin_x = 22
         self.margin_y = 25
@@ -75,7 +73,6 @@ class BattleDialogBox:
     def draw(self, surface, text, offset_x=0, offset_y=0, draw_box=True):
         if draw_box:
             surface.blit(self.image, self.rect.topleft)
-
         lines = self.wrap_text(text)
         y = self.rect.top + self.margin_y + offset_y
         for line in lines:
@@ -176,7 +173,6 @@ def draw_combat_scene(
     screen.blit(STATUS_ENEMY, (0, 35))
 
     enemy_name_text = font_pkm.render(enemy_name, True, (0, 0, 0))
-
     gender_color = (66, 150, 255) if enemy_gender == "♂" else (255, 105, 180) if enemy_gender == "♀" else (120, 120, 120)
     enemy_gender_text = font_pv.render(enemy_gender, True, gender_color)
     enemy_level_text = font_pv.render(f"Nv.{enemy_level}", True, (51, 51, 51))
@@ -206,76 +202,3 @@ def draw_combat_scene(
     xp_bar = XPBar((308, 267), ally_max_xp)
     xp_bar.update(ally_xp)
     xp_bar.draw(screen)
-
-class AttackUI:
-    def __init__(self, pos=(20, 288), spacing=5):
-        self.pos = pos
-        self.spacing = spacing
-        self.moves = []
-        self.selected_index = 0
-        self.font = pygame.font.Font(os.path.join(FONTS, "power clear.ttf"), 22)
-        self.box = pygame.image.load("assets/ui/battle/dialogue_box_bonus.png").convert_alpha()
-        self.box_rect = self.box.get_rect(topleft=(260, 294))
-
-    def set_moves(self, moves):
-        self.moves = moves[:4] if moves else []
-        self.selected_index = 0
-
-    def move_selection_up(self):
-        if self.selected_index - 2 >= 0:
-            self.selected_index -= 2
-
-    def move_selection_down(self):
-        if self.selected_index + 2 < len(self.moves):
-            self.selected_index += 2
-
-    def move_selection_left(self):
-        if self.selected_index % 2 == 1:
-            self.selected_index -= 1
-
-    def move_selection_right(self):
-        if self.selected_index % 2 == 0 and self.selected_index + 1 < len(self.moves):
-            self.selected_index += 1
-
-    def draw(self, surface):
-        surface.blit(self.box, self.box_rect.topleft)
-
-        if not self.moves:
-            return
-
-        font = pygame.font.Font(os.path.join(FONTS, "power clear.ttf"), 18)
-
-        # Marges internes de la boîte
-        padding_x = 16
-        padding_y = 10
-        spacing_x = 120
-        spacing_y = 40
-
-        start_x = self.box_rect.left + padding_x
-        start_y = self.box_rect.top + padding_y
-
-        for i, move in enumerate(self.moves[:4]):
-            col = i % 2
-            row = i // 2
-            x = start_x + col * spacing_x
-            y = start_y + row * spacing_y
-
-            name = move["name"]
-            type_ = move["type"].capitalize()
-            pp = move.get("pp", 0)
-            max_pp = move.get("max_pp", pp)
-
-            name_text = f"{name} ({type_})"
-            pp_text = f"PP : {pp}/{max_pp}"
-            color = (255, 0, 0) if i == self.selected_index else (0, 0, 0)
-
-            name_surf = font.render(name_text, True, color)
-            pp_surf = font.render(pp_text, True, color)
-
-            surface.blit(name_surf, (x, y))
-            surface.blit(pp_surf, (x, y + name_surf.get_height() + 2))
-
-    def get_selected_move(self):
-        if 0 <= self.selected_index < len(self.moves):
-            return self.moves[self.selected_index]
-        return None
