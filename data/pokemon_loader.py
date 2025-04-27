@@ -72,28 +72,38 @@ from data.moves_loader import get_move_by_name
 
 def get_learnable_moves(pokemon_id: int, level: int = 5) -> list:
     """
-    Retourne une liste de mouvements que le Pokémon peut apprendre à son niveau.
+    Retourne une liste de mouvements que le Pokémon peut apprendre jusqu'à son niveau donné.
+    Corrige la gestion des doublons et des attaques invalides.
     """
     pokemon = get_pokemon_by_id(pokemon_id)
     if not pokemon:
         return []
 
     moves = []
-    learnset = pokemon.get("moves", [])  # Attention ici "moves", pas "learnset"
+    seen_moves = set()
+    learnset = pokemon.get("moves", [])
+
+    # Trier par niveau croissant pour récupérer les meilleures versions
+    learnset = sorted(learnset, key=lambda x: x["level"])
 
     for move_entry in learnset:
-        if move_entry["level"] <= level:
-            move_data = get_move_by_name(move_entry["name"], language="fr")  # Important: language="fr"
+        move_name = move_entry["name"]
+
+        if move_entry["level"] <= level and move_name not in seen_moves:
+            move_data = get_move_by_name(move_name, language="fr")
             if move_data:
                 move = {
                     "name": move_data["name_fr"],
                     "type": move_data["type"],
-                    "power": move_data["power"],
-                    "accuracy": move_data["accuracy"],
-                    "category": move_data["damage_class"],
-                    "pp": move_data["pp"],
-                    "max_pp": move_data["pp"],
+                    "power": move_data.get("power", 0),
+                    "accuracy": move_data.get("accuracy", 100),
+                    "category": move_data.get("damage_class", "unknown"),
+                    "pp": move_data.get("pp", 0),
+                    "max_pp": move_data.get("pp", 0),
                 }
                 moves.append(move)
+                seen_moves.add(move_name)
+            else:
+                print(f"[⚠️] Move introuvable dans moves.json: {move_name} pour Pokémon ID {pokemon_id}")
 
-    return moves[:4]
+    return moves[:4]  # Limite à 4 attaques

@@ -3,29 +3,27 @@
 import pygame
 import os
 
-from data.items_loader import get_item_sprite, get_item_effect
+from data.items_loader import get_item_sprite, get_item_effect, get_item_category
 from battle.use_item import use_item_on_pokemon
+from battle.capture_handler import attempt_capture
+from core import config
 from core.run_manager import run_manager
-
 
 class BagMenu:
     def __init__(self, inventory):
-        # --- Inventaire ---
         self.empty_mode = not inventory
         if self.empty_mode:
             self.inventory = [{"name": "FERMER LE SAC", "quantity": 0}]
         else:
             self.inventory = inventory
 
-        # --- Sélection & Scroll ---
         self.selected_index = 0
         self.scroll_offset = 0
+        self.message_queue = []
 
-        # --- Chargement assets et polices (fixes) ---
-        from core import config
-        self.background = pygame.image.load("assets/ui/Bag/bg_items.png").convert_alpha()
-        self.cursor_img = pygame.image.load("assets/ui/Bag/cursor.png").convert_alpha()
-        self.bag_item_img = pygame.image.load("assets/ui/Bag/bag_items.png").convert_alpha()
+        self.background = self.load_image("assets/ui/Bag/bg_items.png", (0, 0, 0))
+        self.cursor_img = self.load_image("assets/ui/Bag/cursor.png", (255, 0, 0))
+        self.bag_item_img = self.load_image("assets/ui/Bag/bag_items.png", (100, 100, 255))
 
         self.font_items = pygame.font.Font("assets/fonts/power clear.ttf", 22)
         self.font_description = pygame.font.Font("assets/fonts/power clear bold.ttf", 20)
@@ -50,8 +48,16 @@ class BagMenu:
             surface.fill(fallback_color)
             return surface
 
+    def queue_message(self, text):
+        self.message_queue.append(text)
+
     def handle_event(self, event, scene_manager):
         if event.type == pygame.KEYDOWN:
+            if self.message_queue:
+                if event.key == pygame.K_RETURN:
+                    self.message_queue.pop(0)
+                return
+
             if event.key == pygame.K_ESCAPE:
                 from scene.battle_scene import BattleScene
                 scene_manager.change_scene(BattleScene())
@@ -75,32 +81,34 @@ class BagMenu:
                 else:
                     selected_item = self.inventory[self.selected_index]
                     item_name = selected_item["name"]
-
-                    # Prendre le premier Pokémon de l'équipe
-                    if not run_manager.get_team():
-                        print("Vous n'avez pas de Pokémon dans votre équipe.")
+                    if item_name == "FERMER LE SAC":
+                        from scene.battle_scene import BattleScene
+                        scene_manager.change_scene(BattleScene())
                         return
 
-                    pokemon = run_manager.get_team()[0]
+                    category = get_item_category(item_name)
 
-                    result = use_item_on_pokemon(item_name, pokemon)
-
-                    if result["success"]:
-                        print(result["message"])
-                        # Diminuer la quantité
+                    if category == "standard-balls":
+                        # Tentative de capture immédiate
+                        from scene.battle_scene import BattleScene
+                        battle_scene = BattleScene()
+                        scene_manager.change_scene(battle_scene)
+                        battle_scene.throw_ball(item_name)
                         selected_item["quantity"] -= 1
                         if selected_item["quantity"] <= 0:
                             self.inventory.pop(self.selected_index)
-                            # Ajustement curseur si besoin
-                            if self.selected_index >= len(self.inventory):
-                                self.selected_index = max(0, len(self.inventory) - 1)
-                            if not self.inventory:
-                                self.empty_mode = True
-                                self.inventory = [{"name": "FERMER LE SAC", "quantity": 0}]
+                        return
+
                     else:
-                        print(result["message"])
+                        # Soins ou Statuts
+                        pokemon = run_manager.get_team()[0]
+                        result = use_item_on_pokemon(item_name, pokemon)
+                        self.queue_message(result["message"])
 
-
+                        if result["success"]:
+                            selected_item["quantity"] -= 1
+                            if selected_item["quantity"] <= 0:
+                                self.inventory.pop(self.selected_index)
 
     def update(self, dt):
         pass
@@ -109,13 +117,10 @@ class BagMenu:
         screen.blit(self.background, (0, 0))
         screen.blit(self.bag_item_img, (30, 17))
 
-        if not self.inventory:
-            # Cas sans objets
-            empty_text = self.font_items.render("Votre sac est vide.", True, (255, 255, 255))
-            screen.blit(empty_text, (self.LIST_START_X, self.LIST_START_Y))
+        if self.message_queue:
+            self.draw_message(screen)
             return
 
-        # Affichage de la liste
         for i in range(self.VISIBLE_ITEM_COUNT):
             item_index = self.scroll_offset + i
             if item_index >= len(self.inventory):
@@ -126,34 +131,45 @@ class BagMenu:
             y = self.LIST_START_Y + i * self.ITEM_SPACING_Y
 
             name_surface = self.font_items.render(item["name"], True, (0, 0, 0))
-            quantity_surface = self.font_items.render(f"x{item['quantity']}", True, (0, 0, 0))
-
             screen.blit(name_surface, (x, y))
-            screen.blit(quantity_surface, (self.QUANTITY_X, y))
+
+            if not (self.empty_mode or item["name"] == "FERMER LE SAC"):
+                quantity_surface = self.font_items.render(f"x{item['quantity']}", True, (0, 0, 0))
+                screen.blit(quantity_surface, (self.QUANTITY_X, y))
 
             if item_index == self.selected_index:
                 cursor_rect = self.cursor_img.get_rect()
                 cursor_pos = (x + self.CURSOR_OFFSET_X, y + (name_surface.get_height() - cursor_rect.height) // 2)
                 screen.blit(self.cursor_img, cursor_pos)
 
-        # Icône de l'objet sélectionné
-        selected_item = self.inventory[self.selected_index]
-        sprite_path = get_item_sprite(selected_item["name"])
+        if not self.empty_mode and self.inventory[self.selected_index]["name"] != "FERMER LE SAC":
+            selected_item = self.inventory[self.selected_index]
+            sprite_path = get_item_sprite(selected_item["name"])
 
-        if os.path.exists(sprite_path):
-            item_icon = pygame.image.load(sprite_path).convert_alpha()
-            item_icon = pygame.transform.scale(item_icon, (item_icon.get_width() * 2, item_icon.get_height() * 2))
-            icon_x = self.ICON_BOX_POS[0] + (self.ICON_BOX_SIZE[0] - item_icon.get_width()) // 2
-            icon_y = self.ICON_BOX_POS[1] + (self.ICON_BOX_SIZE[1] - item_icon.get_height()) // 2
-            screen.blit(item_icon, (icon_x, icon_y))
-        else:
-            fallback_icon = pygame.Surface((32, 32))
-            fallback_icon.fill((150, 150, 150))
-            screen.blit(fallback_icon, self.ICON_BOX_POS)
+            if os.path.exists(sprite_path):
+                item_icon = pygame.image.load(sprite_path).convert_alpha()
+                item_icon = pygame.transform.scale(item_icon, (item_icon.get_width() * 2, item_icon.get_height() * 2))
+                icon_x = self.ICON_BOX_POS[0] + (self.ICON_BOX_SIZE[0] - item_icon.get_width()) // 2
+                icon_y = self.ICON_BOX_POS[1] + (self.ICON_BOX_SIZE[1] - item_icon.get_height()) // 2
+                screen.blit(item_icon, (icon_x, icon_y))
+            else:
+                fallback_icon = pygame.Surface((32, 32))
+                fallback_icon.fill((150, 150, 150))
+                screen.blit(fallback_icon, self.ICON_BOX_POS)
 
-        # Description
-        effect = get_item_effect(selected_item["name"]) or "Pas de description disponible."
-        self.draw_multiline_text(screen, effect, self.DESCRIPTION_X, self.DESCRIPTION_Y, 462)
+            effect = get_item_effect(selected_item["name"]) or "Pas de description disponible."
+            self.draw_multiline_text(screen, effect, self.DESCRIPTION_X, self.DESCRIPTION_Y, 462)
+
+    def draw_message(self, screen):
+        """Affiche un message simple au centre."""
+        if not self.message_queue:
+            return
+        text = self.message_queue[0]
+        font = self.font_description
+        rendered = font.render(text, True, (255, 255, 255))
+        x = (config.SCREEN_WIDTH - rendered.get_width()) // 2
+        y = config.SCREEN_HEIGHT - 100
+        screen.blit(rendered, (x, y))
 
     def draw_multiline_text(self, screen, text, start_x, start_y, max_width):
         words = text.split()

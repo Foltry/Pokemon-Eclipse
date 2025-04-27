@@ -211,8 +211,14 @@ class BattleScene(Scene):
         # --- Gestion Fight Menu ---
         if self.state == "fight_menu" and self.fight_menu:
             if event.type == pygame.KEYDOWN:
-                if event.key in (pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN):
-                    self.fight_menu.handle_navigation(event.key)
+                if event.key == pygame.K_LEFT:
+                    self.fight_menu.move_cursor("left")
+                elif event.key == pygame.K_RIGHT:
+                    self.fight_menu.move_cursor("right")
+                elif event.key == pygame.K_UP:
+                    self.fight_menu.move_cursor("up")
+                elif event.key == pygame.K_DOWN:
+                    self.fight_menu.move_cursor("down")
                 elif event.key == pygame.K_ESCAPE:
                     self.state = "command"
                     self.fight_menu = None
@@ -220,6 +226,7 @@ class BattleScene(Scene):
                     selected_move = self.fight_menu.moves[self.fight_menu.selected_index]
                     self.use_move(selected_move)
             return
+
 
         # --- Gestion Sélection principale (Command Menu) ---
         if event.type == pygame.KEYDOWN:
