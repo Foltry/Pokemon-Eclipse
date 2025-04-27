@@ -46,3 +46,10 @@ def get_fixed_damage(attacker, defender, move):
     if move.get("level_damage"):
         return attacker.get("level", 1)
     return None
+
+def reset_temp_status(pokemon):
+    """Reset les états temporaires d'un Pokémon après son tour."""
+    if "_protected" in pokemon:
+        del pokemon["_protected"]
+    if "_flinched" in pokemon:
+        del pokemon["_flinched"]

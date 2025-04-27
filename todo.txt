@@ -87,7 +87,6 @@ TODO - PROJET POKÉMON ECLIPSE
 
 - [ ] Intégration graphique du moteur de combat
   - [x] Affichage dynamique des messages (attaques, dégâts, effets)
-  - [ ] Affichage des animations de coups (plus tard)
   - [ ] Choix et usage de capacités avec effets visibles
   - [ ] Affichage des objets utilisés et feedback à l’écran
   - [ ] Affichage des PV, statuts, KO mis à jour en temps réel

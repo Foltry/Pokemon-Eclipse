@@ -2,6 +2,7 @@
 
 import json
 import os
+from data.moves_loader import get_move_by_name
 
 POKEMON_PATH = os.path.join("data", "pokemon.json")
 
@@ -66,3 +67,33 @@ def get_all_pokemon() -> list:
     """
     with open(POKEMON_PATH, encoding="utf-8") as f:
         return json.load(f)
+    
+from data.moves_loader import get_move_by_name
+
+def get_learnable_moves(pokemon_id: int, level: int = 5) -> list:
+    """
+    Retourne une liste de mouvements que le Pokémon peut apprendre à son niveau.
+    """
+    pokemon = get_pokemon_by_id(pokemon_id)
+    if not pokemon:
+        return []
+
+    moves = []
+    learnset = pokemon.get("moves", [])  # Attention ici "moves", pas "learnset"
+
+    for move_entry in learnset:
+        if move_entry["level"] <= level:
+            move_data = get_move_by_name(move_entry["name"], language="fr")  # Important: language="fr"
+            if move_data:
+                move = {
+                    "name": move_data["name_fr"],
+                    "type": move_data["type"],
+                    "power": move_data["power"],
+                    "accuracy": move_data["accuracy"],
+                    "category": move_data["damage_class"],
+                    "pp": move_data["pp"],
+                    "max_pp": move_data["pp"],
+                }
+                moves.append(move)
+
+    return moves[:4]

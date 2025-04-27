@@ -21,7 +21,7 @@
     "category": "standard-balls",
     "cost": 600,
     "effect": "Une Ball très performante dont le taux de réussite est supérieur à celui de la Poké Ball.",
-    "sprite": "great-ball.png"
+    "sprite": "super-ball.png"
   },
   {
     "id": 4,

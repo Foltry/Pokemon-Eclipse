@@ -35,7 +35,7 @@ def get_item_sprite(item_name: str) -> str:
     item = get_item_data(item_name)
     sprite = item.get("sprite")
     if sprite:
-        return os.path.join("assets", "ui", "items", sprite)
+        return os.path.join("assets", "sprites", "items", sprite)
     return ""
 
 def get_item_category(item_name: str) -> str:
