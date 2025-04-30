@@ -14,6 +14,8 @@ from ui.attack_effects import AttackEffect
 from ui.fight_menu import FightMenu
 from ui.capture_effect import CaptureEffect
 from ui.ballthrow import BallThrow
+from ui.pokemon_menu import PokemonMenu
+
 
 from battle.engine import calculate_damage
 from battle.item_handler import use_item_on_pokemon
@@ -41,6 +43,8 @@ class BattleScene(Scene):
         self.bonus_options = []
         self.bonus_message = None
         self.victory_handled = False
+        self.pokemon_menu = None
+
 
         # --- Sprites & Effects ---
         self.throw_animation = None
@@ -175,17 +179,21 @@ class BattleScene(Scene):
     # ======================================================
 
     def handle_event(self, event):
-        # --- Gestion messages en file ---
+        if self.pokemon_menu:
+            self.pokemon_menu.handle_input(event)
+            if self.pokemon_menu.closed:
+                self.pokemon_menu = None
+                self.state = "command"
+            return
+
         if self.message_queue:
             current = self.message_queue[0]
-
             if isinstance(current, AnimatedText):
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and current.done:
                     self.message_queue.pop(0)
                     if not self.message_queue and self.pending_move:
                         self.resolve_move()
                 return
-
             elif callable(current):
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                     current()
@@ -194,7 +202,6 @@ class BattleScene(Scene):
                         self.resolve_move()
                 return
 
-        # --- Gestion Bonus UI après victoire ---
         if self.show_bonus:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
@@ -208,7 +215,6 @@ class BattleScene(Scene):
                         self.manager.change_scene(BattleScene())
             return
 
-        # --- Gestion Fight Menu ---
         if self.state == "fight_menu" and self.fight_menu:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
@@ -227,12 +233,9 @@ class BattleScene(Scene):
                     self.use_move(selected_move)
             return
 
-
-        # --- Gestion Sélection principale (Command Menu) ---
         if event.type == pygame.KEYDOWN:
             col, row = self.grid_pos
 
-            # Navigation curseur
             if event.key == pygame.K_UP and row > 0:
                 row -= 1
             elif event.key == pygame.K_DOWN and row < 1:
@@ -241,12 +244,9 @@ class BattleScene(Scene):
                 col -= 1
             elif event.key == pygame.K_RIGHT and col < 1:
                 col += 1
-
             elif event.key == pygame.K_RETURN:
                 self.selected_index = self.button_grid[col][row]
-
                 if self.selected_index == 0:
-                    # Fight
                     moves = run_manager.get_team()[0]["moves"]
                     font_path = os.path.join("assets/fonts", "power clear.ttf")
                     pp_font_path = os.path.join("assets/fonts", "power clear bold.ttf")
@@ -257,19 +257,23 @@ class BattleScene(Scene):
                         pygame.font.Font(pp_font_path, 18)
                     )
                     self.state = "fight_menu"
-
                 elif self.selected_index == 1:
-                    # Pokémon (non dispo)
-                    self.queue_message("Changer de Pokémon n'est pas disponible.")
+                    team = run_manager.get_team()
+                    if team:
+                        team[0]["hp"] = self.ally_hp
+                        if "stats" not in team[0]:
+                            team[0]["stats"] = dict(team[0].get("base_stats", {}))  # ← copie base_stats si stats absent
+                        team[0]["stats"]["hp"] = self.ally_max_hp  # ← max_hp mis à jour
+                        self.pokemon_menu = PokemonMenu(team)
+                        self.state = "pokemon_menu"
+                    else:
+                        self.queue_message("Vous n'avez aucun Pokémon.")
 
                 elif self.selected_index == 2:
-                    # Bag
                     from scene.bag_scene import BagScene
                     self.manager.change_scene(BagScene())
-
                 elif self.selected_index == 3:
-                    # Run
-                    self.manager.change_scene(BattleScene())
+                    self.queue_message("Impossible de fuir !")
 
             self.grid_pos = [col, row]
             self.selected_index = self.button_grid[col][row]
@@ -292,14 +296,14 @@ class BattleScene(Scene):
             if self.ball_throw.is_done():
                 self.resolve_capture_result()
                 self.ball_throw = None
-
         if self.sprites:
             for sprite in self.sprites:
                 if hasattr(sprite, "update"):
                     sprite.update(dt)
+        if self.pokemon_menu:
+            self.pokemon_menu.update(dt)
 
     def draw(self, screen):
-        # Combat Scene
         sprites = list(self.sprites)
         if self.capture_effect and self.capture_effect.is_active():
             sprites[1] = None
@@ -316,7 +320,10 @@ class BattleScene(Scene):
             ally_xp=self.ally_xp, ally_max_xp=self.ally_max_xp
         )
 
-        # UI Layer
+        if self.pokemon_menu:
+            self.pokemon_menu.draw(screen)
+            return
+
         if self.state == "fight_menu" and self.fight_menu:
             self.fight_menu.surface = screen
             self.fight_menu.draw()
@@ -332,7 +339,6 @@ class BattleScene(Scene):
                 for i, button in enumerate(self.buttons):
                     button.draw(screen, selected=(i == self.selected_index))
 
-        # Effects
         if self.capture_effect:
             self.capture_effect.draw(screen)
         if self.throw_animation:

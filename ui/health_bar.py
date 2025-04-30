@@ -1,24 +1,34 @@
 import pygame
 
 class HealthBar:
-    def __init__(self, pos, size, max_hp):
-        self.pos = pos
-        self.size = size
+    def __init__(self, pos, size, max_hp, colors=None):
+        self.x, self.y = pos
+        self.width, self.height = size
         self.max_hp = max_hp
         self.current_hp = max_hp
+
+        # Couleurs customisables
+        self.colors = colors or {
+            "high": (0, 192, 0),
+            "medium": (232, 192, 0),
+            "low": (240, 64, 48)
+        }
 
     def update(self, current_hp):
         self.current_hp = max(0, min(current_hp, self.max_hp))
 
     def draw(self, surface):
-        x, y = self.pos
-        w, h = self.size
-        ratio = self.current_hp / self.max_hp
-        bar_color = (0, 255, 0) if ratio > 0.5 else (255, 255, 0) if ratio > 0.2 else (255, 0, 0)
+        if self.max_hp == 0:
+            return
 
-        # Background
-        pygame.draw.rect(surface, (50, 50, 50), (x, y, w, h))
-        # Filled bar
-        pygame.draw.rect(surface, bar_color, (x, y, w * ratio, h))
-        # Border
-        pygame.draw.rect(surface, (0, 0, 0), (x, y, w, h), 2)
+        ratio = self.current_hp / self.max_hp
+        if ratio > 0.5:
+            color = self.colors["high"]
+        elif ratio > 0.2:
+            color = self.colors["medium"]
+        else:
+            color = self.colors["low"]
+
+        fill_width = int(self.width * ratio)
+        fill_rect = pygame.Rect(self.x, self.y, fill_width, self.height)
+        pygame.draw.rect(surface, color, fill_rect)

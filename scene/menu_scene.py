@@ -31,7 +31,6 @@ class MenuScene(Scene):
                 self.cooldown = 150
             elif event.key == pygame.K_RETURN:
                 if self.selected == 0:
-                    print("➡️ Changement vers StarterScene")
                     self.manager.change_scene(StarterScene())
                 elif self.selected == 1:
                     pygame.quit()
