@@ -44,6 +44,7 @@ class BattleScene(Scene):
         self.ball_throw = None
         self.capture_result = None
         self.hide_enemy_sprite = False
+        self.ball_animation = None
 
         # === Normalisation des données de l'équipe ===
         for pkm in run_manager.get_team():
@@ -160,13 +161,19 @@ class BattleScene(Scene):
         """Prépare l'animation de lancer de Pokéball."""
         if self.state != "command":
             return
+
+        # Normalisation des PV du Pokémon adverse
+        if "hp" not in self.enemy_data:
+            self.enemy_data["hp"] = self.enemy_data["stats"]["hp"]
+
+        # Calcul du résultat de capture
         self.capture_result = attempt_capture(self.enemy_data, ball_name, status=self.enemy_data.get("status"))
-        self.ball_throw = BallThrow(
-            ball_type=ball_name,
-            start_pos=(200, 400),
-            target_pos=(360, 130),
-            result=self.capture_result
-        )
+        self.capture_result["ball_used"] = ball_name
+
+        # Étape 1 : animation de la Pokéball qui vole (BallAnimation)
+        from ui.ball_animation import BallAnimation
+        self.ball_animation = BallAnimation(ball_type=ball_name, pos=(200, 400))  # ← Correction
+
         self.state = "throwing_ball"
 
     def resolve_capture_result(self):
@@ -174,6 +181,12 @@ class BattleScene(Scene):
         for msg in self.capture_result["messages"]:
             self.queue_message(msg)
 
+        # Faire réapparaître le Pokémon (effet visuel inverse)
+        if self.capture_effect:
+            self.capture_effect.trigger_out()
+            self.hide_enemy_sprite = False  # Réactive le sprite ennemi
+
+        # Si le Pokémon est capturé
         if self.capture_result.get("success"):
             if run_manager.has_team_space():
                 run_manager.add_pokemon_to_team(self.enemy_data)
@@ -181,6 +194,7 @@ class BattleScene(Scene):
             else:
                 self.queue_message("Votre équipe est pleine, impossible de capturer ce Pokémon.")
 
+        # Retour au combat après les messages
         self.message_queue.append(lambda: self.manager.change_scene(BattleScene()))
         self.state = "command"
 
@@ -320,12 +334,33 @@ class BattleScene(Scene):
         if self.capture_effect:
             self.capture_effect.update(dt)
 
+        # Étape 1 : animation préliminaire (BallAnimation)
+        if self.ball_animation:
+            self.ball_animation.update(dt)
+            if self.ball_animation.is_finished():
+                self.ball_animation = None
+
+                # Effet de disparition du Pokémon
+                if self.capture_effect:
+                    self.capture_effect.trigger_in()
+                    self.hide_enemy_sprite = True
+
+                ball_type = self.capture_result.get("ball_used", "Poké Ball")
+                self.ball_throw = BallThrow(
+                    ball_type=ball_type,
+                    start_pos=(200, 400),
+                    target_pos=(360, 130),
+                    result=self.capture_result
+                )
+
+        # Étape 2 : lancer réel avec BallThrow
         if self.ball_throw:
             self.ball_throw.update(dt)
             if self.ball_throw.is_done():
                 self.resolve_capture_result()
                 self.ball_throw = None
 
+        # MAJ des sprites
         if self.sprites:
             for sprite in self.sprites:
                 if hasattr(sprite, "update"):
@@ -334,17 +369,15 @@ class BattleScene(Scene):
         if self.pokemon_menu:
             self.pokemon_menu.update(dt)
 
-
-
     def draw(self, screen):
         """Affiche toute la scène de combat : arrière-plan, sprites, menus, effets, etc."""
-        
+
         # === Préparation des sprites ===
         sprites = list(self.sprites)
         if self.hide_enemy_sprite or (self.capture_effect and self.capture_effect.is_active()):
             sprites[1] = None  # Cache le sprite ennemi si nécessaire
 
-        # === Affichage de la scène de combat ===
+        # === Affichage de la scène principale ===
         draw_combat_scene(
             screen, self.bg, self.bases, sprites,
             ally_name=self.ally_name,
@@ -359,7 +392,7 @@ class BattleScene(Scene):
         # === Menu Pokémon ===
         if self.pokemon_menu:
             self.pokemon_menu.draw(screen)
-            return  # Priorité absolue : on affiche que le menu Pokémon
+            return  # Priorité absolue : on affiche uniquement le menu Pokémon
 
         # === Menu Combat (attaques) ===
         if self.state == "fight_menu" and self.fight_menu:
@@ -370,21 +403,27 @@ class BattleScene(Scene):
         # === Boîte de dialogue principale ===
         self.dialog_box.draw(screen, "", draw_box=True)
 
+        # === Message animé ou bonus ===
         if self.message_queue:
             self.render_current_message(screen)
         elif self.show_bonus:
             self.render_bonus_message(screen)
             self.bonus_ui.draw(screen)
-        else:
+        elif self.state != "throwing_ball" and not self.ball_animation and not self.ball_throw:
+            # Affichage normal si aucune animation de capture
             self.dialog_box.draw(screen, f"Que doit faire {self.ally_name} ?")
             for i, button in enumerate(self.buttons):
                 button.draw(screen, selected=(i == self.selected_index))
 
-        # === Effets visuels divers ===
+        # === Effets visuels ===
         if self.capture_effect:
             self.capture_effect.draw(screen)
+        if self.ball_animation:
+            self.ball_animation.draw(screen)
         if self.throw_animation:
             self.throw_animation.draw(screen)
+        if self.ball_throw:
+            self.ball_throw.draw(screen)
 
     def render_current_message(self, screen):
         """Affiche le message animé en cours, caractère par caractère."""

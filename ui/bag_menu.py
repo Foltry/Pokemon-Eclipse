@@ -2,6 +2,8 @@
 
 import pygame
 import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from data.items_loader import get_item_sprite, get_item_effect, get_item_category
 from battle.use_item import use_item_on_pokemon
@@ -58,11 +60,13 @@ class BagMenu:
                     self.message_queue.pop(0)
                 return
 
+            # === Touche ÉCHAP : revenir à la scène précédente ===
             if event.key == pygame.K_ESCAPE:
-                from scene.battle_scene import BattleScene
-                scene_manager.change_scene(BattleScene())
+                scene_manager.go_back()
+                return
 
-            elif event.key in (pygame.K_DOWN, pygame.K_s):
+            # === Navigation dans l'inventaire ===
+            if event.key in (pygame.K_DOWN, pygame.K_s):
                 if self.selected_index < len(self.inventory) - 1:
                     self.selected_index += 1
                     if self.selected_index - self.scroll_offset >= self.VISIBLE_ITEM_COUNT:
@@ -74,40 +78,42 @@ class BagMenu:
                     if self.selected_index < self.scroll_offset:
                         self.scroll_offset -= 1
 
-
+            # === Utilisation d’un objet ===
             elif event.key == pygame.K_RETURN:
                 if self.empty_mode:
-                    from scene.battle_scene import BattleScene
-                    scene_manager.change_scene(BattleScene())
-                else:
-                    selected_item = self.inventory[self.selected_index]
-                    item_name = selected_item["name"]
-                    if item_name == "FERMER LE SAC":
-                        from scene.battle_scene import BattleScene
-                        scene_manager.change_scene(BattleScene())
-                        return
+                    scene_manager.go_back()
+                    return
 
-                    category = get_item_category(item_name)
+                selected_item = self.inventory[self.selected_index]
+                item_name = selected_item["name"]
 
-                    if category == "standard-balls":
-                        from scene.battle_scene import BattleScene
-                        battle_scene = BattleScene()
-                        scene_manager.change_scene(battle_scene)
-                        battle_scene.throw_ball(item_name)
+                if item_name == "FERMER LE SAC":
+                    scene_manager.go_back()
+                    return
+
+                category = get_item_category(item_name)
+
+                # === Utilisation d’une Ball ===
+                if category == "standard-balls":
+                    current_scene = scene_manager.scene_stack[-2] if len(scene_manager.scene_stack) > 1 else None
+                    if current_scene:
+                        current_scene.throw_ball(item_name)
                         selected_item["quantity"] -= 1
                         if selected_item["quantity"] <= 0:
                             self.inventory.pop(self.selected_index)
-                        return
+                    scene_manager.go_back()
+                    return
 
-                    else:
-                        pokemon = run_manager.get_team()[0]
-                        result = use_item_on_pokemon(item_name, pokemon)
-                        self.queue_message(result["message"])
+                # === Sinon : objets type soins ===
+                pokemon = run_manager.get_team()[0]
+                result = use_item_on_pokemon(item_name, pokemon)
+                self.queue_message(result["message"])
 
-                        if result["success"]:
-                            selected_item["quantity"] -= 1
-                            if selected_item["quantity"] <= 0:
-                                self.inventory.pop(self.selected_index)
+                if result["success"]:
+                    selected_item["quantity"] -= 1
+                    if selected_item["quantity"] <= 0:
+                        self.inventory.pop(self.selected_index)
+
 
     def update(self, dt):
         pass
@@ -157,18 +163,36 @@ class BagMenu:
                 screen.blit(fallback_icon, self.ICON_BOX_POS)
 
             effect = get_item_effect(selected_item["name"]) or "Pas de description disponible."
-            self.draw_multiline_text(screen, effect, self.DESCRIPTION_X, self.DESCRIPTION_Y, 462)
+            self.draw_multiline_text(screen, effect, self.DESCRIPTION_X, self.DESCRIPTION_Y, 478 - self.DESCRIPTION_X)
 
     def draw_message(self, screen):
-        """Affiche un message simple au centre."""
+        """Affiche un message avec retour à la ligne depuis (91, 324), largeur max 387 px (jusqu’à x = 478)."""
         if not self.message_queue:
             return
+
         text = self.message_queue[0]
         font = self.font_description
-        rendered = font.render(text, True, (255, 255, 255))
-        x = (config.SCREEN_WIDTH - rendered.get_width()) // 2
-        y = config.SCREEN_HEIGHT - 100
-        screen.blit(rendered, (x, y))
+        max_width = 387  # 478 - 91
+        start_x = 91
+        start_y = 324
+        y_offset = 0
+        words = text.split()
+        current_line = ""
+
+        for word in words:
+            test_line = current_line + word + " "
+            if font.size(test_line)[0] > max_width:
+                rendered_line = font.render(current_line.strip(), True, (255, 255, 255))
+                screen.blit(rendered_line, (start_x, start_y + y_offset))
+                y_offset += rendered_line.get_height() + 5
+                current_line = word + " "
+            else:
+                current_line = test_line
+
+        if current_line:
+            rendered_line = font.render(current_line.strip(), True, (255, 255, 255))
+            screen.blit(rendered_line, (start_x, start_y + y_offset))
+
 
     def draw_multiline_text(self, screen, text, start_x, start_y, max_width):
         words = text.split()
@@ -189,3 +213,47 @@ class BagMenu:
         if current_line:
             rendered_line = self.font_description.render(current_line.strip(), True, (255, 255, 255))
             screen.blit(rendered_line, (start_x, start_y + y_offset))
+
+# # === TEST rapide ===
+# if __name__ == "__main__":
+
+#     pygame.init()
+#     screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
+#     pygame.display.set_caption("Test BagMenu")
+
+#     # === Simulation d’un Pokémon et d’un objet ===
+#     run_manager.team = [{
+#         "name": "Pikachu",
+#         "level": 5,
+#         "stats": {"hp": 10},  # HP actuels
+#         "base_stats": {"hp": 35},  # HP max
+#         "gender": "male"
+#     }]
+#     run_manager.items.clear()
+#     run_manager.add_item("Potion", 1)
+
+#     inventory = run_manager.get_items_as_inventory()
+#     bag_menu = BagMenu(inventory)
+
+#     class DummyManager:
+#         def change_scene(self, scene):
+#             print("[DEBUG TEST] Changement de scène :", scene)
+
+#     clock = pygame.time.Clock()
+#     running = True
+#     print("[DEBUG TEST] Lancement test BagMenu. Appuyez sur Entrée pour utiliser la Potion.")
+
+#     while running:
+#         for event in pygame.event.get():
+#             if event.type == pygame.QUIT:
+#                 running = False
+#             else:
+#                 bag_menu.handle_event(event, DummyManager())
+
+#         screen.fill((0, 0, 0))
+#         bag_menu.update(clock.tick(60))
+#         bag_menu.draw(screen)
+#         pygame.display.flip()
+
+#     pygame.quit()
+#     sys.exit()

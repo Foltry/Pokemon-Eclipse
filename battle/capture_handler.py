@@ -43,7 +43,7 @@ def attempt_capture(pokemon, ball_name, status=None):
         return {
             "success": True,
             "shakes": 3,
-            "messages": [f"{pokemon['name']} est capturé avec une {ball_name} ! (master ball)"]
+            "messages": [f"{pokemon['name']} est capturé !"]
         }
 
     # Formule de base
@@ -53,7 +53,7 @@ def attempt_capture(pokemon, ball_name, status=None):
         return {
             "success": True,
             "shakes": 3,
-            "messages": [f"{pokemon['name']} est capturé avec une {ball_name} !"]
+            "messages": [f"{pokemon['name']} est capturé !"]
         }
 
     # Calcul du seuil b

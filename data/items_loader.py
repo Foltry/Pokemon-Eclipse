@@ -43,10 +43,12 @@ def get_item_category(item_name: str) -> str:
     item = get_item_data(item_name)
     return item.get("category", "")
 
-def get_all_items() -> list:
-    """Retourne la liste complète des objets du fichier JSON."""
+def get_all_items() -> dict:
+    """Retourne un dictionnaire {nom: données} des objets."""
     with open(ITEMS_PATH, encoding="utf-8") as f:
-        return json.load(f)
+        items = json.load(f)
+        return {item["name"]: item for item in items}
+
 
 def list_available_items() -> list:
     """
@@ -55,8 +57,8 @@ def list_available_items() -> list:
     """
     items = get_all_items()
     valid_items = [
-        item["name"]
-        for item in items
-        if item.get("sprite") and item["name"].lower() != "master ball"
+        name
+        for name, item in items.items()
+        if item.get("sprite") and name.lower() != "master ball"
     ]
     return valid_items

@@ -1,8 +1,10 @@
 import pygame
 import sys
+import random
 
 from core.scene_manager import SceneManager
 from core.config import SCREEN_HEIGHT, SCREEN_WIDTH
+from core.run_manager import run_manager
 from scene.gameover_scene import GameOverScene
 
 def main():
@@ -10,13 +12,15 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption("Pokémon Eclipse")
 
-
     clock = pygame.time.Clock()
     scene_manager = SceneManager()
 
+    # Ajout d'une Ball aléatoire au démarrage
+    run_manager.add_item("Master Ball")
+
     scene_manager.change_scene(GameOverScene())
 
-    running = True  
+    running = True
     while running:
         dt = clock.tick(60)
 
@@ -25,7 +29,7 @@ def main():
                 running = False
             else:
                 scene_manager.handle_event(event)
- 
+
         scene_manager.update(dt)
         scene_manager.draw(screen)
         pygame.display.flip()

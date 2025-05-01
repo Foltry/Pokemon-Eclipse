@@ -26,6 +26,8 @@ class RunManager:
         self.starters.clear()
         self.active = True
 
+        self.add_item("Potion", 1)
+
     def add_pokemon_to_team(self, pokemon):
         """Ajoute un Pokémon à l'équipe."""
         self.team.append(pokemon)
@@ -61,15 +63,13 @@ class RunManager:
         """Ajoute un objet à l'inventaire."""
         if item_name in self.item_data:
             self.items[item_name] = self.items.get(item_name, 0) + quantity
-    
+
     def get_items_as_inventory(self):
         """
         Retourne les objets possédés sous forme de liste :
         [{"name": nom, "quantity": quantité}, ...]
         """
         return [{"name": name, "quantity": qty} for name, qty in self.items.items()]
-
-    
 
 # Singleton de la run
 run_manager = RunManager()

@@ -7,21 +7,25 @@ from ui.bag_menu import BagMenu
 
 class BagScene(Scene):
     def __init__(self):
-        # Récupération de l'inventaire depuis run_manager
-        inventory = run_manager.get_items_as_inventory()
-        self.bag_menu = BagMenu(inventory)
+        self.bag_menu = None  # Initialisation retardée
 
     def handle_event(self, event):
-        self.bag_menu.handle_event(event, self.manager)
+        if self.bag_menu:
+            self.bag_menu.handle_event(event, self.manager)
 
     def update(self, dt):
-        self.bag_menu.update(dt)
+        if self.bag_menu:
+            self.bag_menu.update(dt)
 
     def draw(self, screen):
-        self.bag_menu.draw(screen)
+        if self.bag_menu:
+            self.bag_menu.draw(screen)
 
     def on_enter(self):
-        pass
+        # Recharge dynamique de l'inventaire à chaque entrée
+        inventory = run_manager.get_items_as_inventory()
+        print(f"[DEBUG] Inventaire à l'entrée dans le sac : {inventory}")
+        self.bag_menu = BagMenu(inventory)
 
     def on_exit(self):
-        pass
+        self.bag_menu = None

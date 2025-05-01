@@ -4,6 +4,13 @@ import os
 class BallAnimation:
     def __init__(self, ball_type="pokeball", pos=(200, 150), frame_duration=80):
         self.ball_type = ball_type.lower().replace(" ", "")
+        import unicodedata
+        # Supprimer les accents
+        self.ball_type = ''.join(
+            c for c in unicodedata.normalize('NFD', self.ball_type)
+            if unicodedata.category(c) != 'Mn'
+        )
+
         self.pos = pos
         self.frame_duration = frame_duration  # ms entre frames
 
