@@ -62,9 +62,9 @@ class StarterScene(Scene):
 
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
+            if event.key in (pygame.K_LEFT, pygame.K_q):
                 self.selected_index = max(0, self.selected_index - 1)
-            elif event.key == pygame.K_RIGHT:
+            elif event.key in (pygame.K_RIGHT, pygame.K_d):
                 self.selected_index = min(2, self.selected_index + 1)
             elif event.key == pygame.K_RETURN:
                 chosen = self.starters[self.selected_index]

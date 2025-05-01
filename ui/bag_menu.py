@@ -62,17 +62,18 @@ class BagMenu:
                 from scene.battle_scene import BattleScene
                 scene_manager.change_scene(BattleScene())
 
-            elif event.key == pygame.K_DOWN:
+            elif event.key in (pygame.K_DOWN, pygame.K_s):
                 if self.selected_index < len(self.inventory) - 1:
                     self.selected_index += 1
                     if self.selected_index - self.scroll_offset >= self.VISIBLE_ITEM_COUNT:
                         self.scroll_offset += 1
 
-            elif event.key == pygame.K_UP:
+            elif event.key in (pygame.K_UP, pygame.K_z):
                 if self.selected_index > 0:
                     self.selected_index -= 1
                     if self.selected_index < self.scroll_offset:
                         self.scroll_offset -= 1
+
 
             elif event.key == pygame.K_RETURN:
                 if self.empty_mode:
@@ -89,7 +90,6 @@ class BagMenu:
                     category = get_item_category(item_name)
 
                     if category == "standard-balls":
-                        # Tentative de capture immédiate
                         from scene.battle_scene import BattleScene
                         battle_scene = BattleScene()
                         scene_manager.change_scene(battle_scene)
@@ -100,7 +100,6 @@ class BagMenu:
                         return
 
                     else:
-                        # Soins ou Statuts
                         pokemon = run_manager.get_team()[0]
                         result = use_item_on_pokemon(item_name, pokemon)
                         self.queue_message(result["message"])

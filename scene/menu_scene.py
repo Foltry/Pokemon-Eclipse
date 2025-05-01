@@ -23,10 +23,10 @@ class MenuScene(Scene):
 
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN and self.cooldown <= 0:
-            if event.key == pygame.K_UP:
+            if event.key in (pygame.K_UP, pygame.K_z):
                 self.selected = (self.selected - 1) % len(self.options)
                 self.cooldown = 150
-            elif event.key == pygame.K_DOWN:
+            elif event.key in (pygame.K_DOWN, pygame.K_s):
                 self.selected = (self.selected + 1) % len(self.options)
                 self.cooldown = 150
             elif event.key == pygame.K_RETURN:
@@ -35,6 +35,7 @@ class MenuScene(Scene):
                 elif self.selected == 1:
                     pygame.quit()
                     exit()
+
 
     def draw(self, screen):
         screen.fill((0, 0, 0))

@@ -3,17 +3,17 @@ import sys
 
 from core.scene_manager import SceneManager
 from core.config import SCREEN_HEIGHT, SCREEN_WIDTH
-from scene.gameover_scene import GameOverScene  # ← Import direct pour test
+from scene.gameover_scene import GameOverScene
 
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption("Pokémon Eclipse")
 
+
     clock = pygame.time.Clock()
     scene_manager = SceneManager()
 
-    # ⬇️ Affiche directement la scène Game Over pour test
     scene_manager.change_scene(GameOverScene())
 
     running = True  
