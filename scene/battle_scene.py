@@ -80,6 +80,30 @@ class BattleScene(Scene):
         self.fight_menu = None
 
 
+    def enemy_turn(self):
+        """Le Pokémon ennemi choisit un move et attaque."""
+        if self.enemy_hp <= 0:
+            return
+
+        move = random.choice(self.enemy_data["moves"])
+        attacker = {
+            "name": self.enemy_name,
+            "level": self.enemy_level,
+            "types": self.enemy_data.get("types", []),
+            "stats": self.enemy_data["stats"]
+        }
+        defender = run_manager.get_team()[0]
+        defender.setdefault("stats", defender.get("base_stats", {}))
+        defender.setdefault("hp", defender["stats"].get("hp", 1))
+
+        self.queue_message(f"{self.enemy_name} utilise {move['name']} !")
+
+        from battle.move_handler import use_move as core_use_move
+        result = core_use_move(attacker, defender, move)
+        for msg in result["messages"]:
+            self.queue_message(msg)
+
+        self.ally_hp = defender["hp"]
 
     def queue_message(self, text):
         """Ajoute un message à afficher, soit dans la boîte de dialogue normale, soit dans le menu Pokémon."""
@@ -87,10 +111,8 @@ class BattleScene(Scene):
         animated = AnimatedText(text, self.font, (40, y), speed=50)
 
         if self.pokemon_menu and not self.pokemon_menu.selection_active:
-            # Si on est dans le menu Pokémon mais pas dans une sélection (Envoyer/Annuler), on peut afficher immédiatement
             self.pokemon_menu.override_text = text
         else:
-            # Sinon on utilise la file d'attente normale
             self.message_queue.append(animated)
 
 
@@ -124,11 +146,15 @@ class BattleScene(Scene):
         self.ally_hp = attacker["stats"]["hp"]
         self.enemy_hp = defender["hp"]
 
-        if defender["hp"] <= 0:
-            self.message_queue.append(self.handle_victory)
-
         self.pending_move = None
         self.state = "command"
+
+        if defender["hp"] <= 0:
+            self.message_queue.append(self.handle_victory)
+        else:
+            # 👉 Tour de l'ennemi s'il est vivant
+            self.message_queue.append(self.enemy_turn)
+
 
     def handle_victory(self):
         """Gère l'expérience gagnée et déclenche l'écran bonus (si dispo)."""
@@ -162,7 +188,6 @@ class BattleScene(Scene):
 
         self.bases, self.sprites = load_combat_sprites(self.ally_id, self.enemy_id)
 
-        # 🔄 Recharge le FightMenu avec le bon Pokémon
         from ui.fight_menu import FightMenu
         self.fight_menu = FightMenu(
             self.bg,
@@ -171,13 +196,12 @@ class BattleScene(Scene):
             pygame.font.Font("assets/fonts/power clear bold.ttf", 18)
         )
 
-
-        # 🧠 Réinitialise le focus du menu
         self.grid_pos = [0, 0]
         self.selected_index = 0
-
-        # ✅ Remet l'état à "command" pour activer le menu
         self.state = "command"
+
+        # 👉 Tour de l'ennemi après changement de Pokémon
+        self.message_queue.append(self.enemy_turn)
 
 
     def throw_ball(self, ball_name):

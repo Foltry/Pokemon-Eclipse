@@ -1,5 +1,3 @@
-# ui/bag_menu.py
-
 import pygame
 import os
 import sys
@@ -7,8 +5,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from data.items_loader import get_item_sprite, get_item_effect, get_item_category
 from battle.use_item import use_item_on_pokemon
-from battle.capture_handler import attempt_capture
-from core import config
 from core.run_manager import run_manager
 
 class BagMenu:
@@ -113,6 +109,10 @@ class BagMenu:
                     selected_item["quantity"] -= 1
                     if selected_item["quantity"] <= 0:
                         self.inventory.pop(self.selected_index)
+
+                    if hasattr(scene_manager.scene, "enemy_turn"):
+                        scene_manager.scene.message_queue.append(scene_manager.scene.enemy_turn)
+
 
 
     def update(self, dt):

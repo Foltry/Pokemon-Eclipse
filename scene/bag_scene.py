@@ -1,13 +1,10 @@
-# scene/bag_scene.py
-
-import pygame
 from core.scene_manager import Scene
 from core.run_manager import run_manager
 from ui.bag_menu import BagMenu
 
 class BagScene(Scene):
     def __init__(self):
-        self.bag_menu = None  # Initialisation retardée
+        self.bag_menu = None
 
     def handle_event(self, event):
         if self.bag_menu:
@@ -22,7 +19,6 @@ class BagScene(Scene):
             self.bag_menu.draw(screen)
 
     def on_enter(self):
-        # Recharge dynamique de l'inventaire à chaque entrée
         inventory = run_manager.get_items_as_inventory()
         print(f"[DEBUG] Inventaire à l'entrée dans le sac : {inventory}")
         self.bag_menu = BagMenu(inventory)

@@ -1,6 +1,5 @@
 import pygame
 import sys
-import random
 
 from core.scene_manager import SceneManager
 from core.config import SCREEN_HEIGHT, SCREEN_WIDTH
