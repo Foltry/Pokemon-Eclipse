@@ -146,16 +146,39 @@ class BattleScene(Scene):
             self.bonus_message = AnimatedText("Choisissez un objet :", self.font, (40, y), speed=50)
 
     def switch_pokemon(self, new_index):
-        """Change de Pokémon allié actif."""
+        """Change de Pokémon actif et met à jour l'UI et les menus."""
         team = run_manager.get_team()
-        new_pokemon = team[new_index]
+
+        if new_index != 0:
+            team[0], team[new_index] = team[new_index], team[0]
+
+        new_pokemon = team[0]
         self.ally_id = new_pokemon["id"]
         self.ally_name = new_pokemon["name"]
         self.ally_level = new_pokemon.get("level", 5)
         self.ally_hp = new_pokemon.get("hp", new_pokemon.get("stats", new_pokemon.get("base_stats"))["hp"])
         self.ally_max_hp = new_pokemon.get("stats", new_pokemon.get("base_stats"))["hp"]
         self.ally_xp = new_pokemon.get("xp", 0)
+
         self.bases, self.sprites = load_combat_sprites(self.ally_id, self.enemy_id)
+
+        # 🔄 Recharge le FightMenu avec le bon Pokémon
+        from ui.fight_menu import FightMenu
+        self.fight_menu = FightMenu(
+            self.bg,
+            new_pokemon["moves"],
+            pygame.font.Font("assets/fonts/power clear.ttf", 20),
+            pygame.font.Font("assets/fonts/power clear bold.ttf", 18)
+        )
+
+
+        # 🧠 Réinitialise le focus du menu
+        self.grid_pos = [0, 0]
+        self.selected_index = 0
+
+        # ✅ Remet l'état à "command" pour activer le menu
+        self.state = "command"
+
 
     def throw_ball(self, ball_name):
         """Prépare l'animation de lancer de Pokéball."""
@@ -205,27 +228,25 @@ class BattleScene(Scene):
         # === Pokémon Menu actif ===
         if self.pokemon_menu:
             self.pokemon_menu.handle_input(event)
+            self.pokemon_menu.update(0)  # Optionnel : animation frame
 
             if self.pokemon_menu.closed:
+                if self.pokemon_menu.option_chosen == "send":
+                    selected_index = self.pokemon_menu.selected_index
+                    selected_pokemon = self.pokemon_menu.get_selected_pokemon()
+
+                    if selected_pokemon["id"] == self.ally_id:
+                        self.queue_message(f"{selected_pokemon['name']} est déjà au combat.")
+                    else:
+                        self.queue_message(f"{selected_pokemon['name']} va être envoyé !")
+                        self.switch_pokemon(selected_index)
+
+                # Fermeture du menu après traitement
                 self.pokemon_menu = None
                 self.state = "command"
                 return
 
-            # ← AJOUT ICI
             if self.pokemon_menu.selection_active:
-                return
-
-
-            if self.pokemon_menu.option_chosen == "send":
-                selected_index = self.pokemon_menu.selected_index
-                selected_pokemon = self.pokemon_menu.get_selected_pokemon()
-                if selected_pokemon["id"] == self.ally_id:
-                    self.pokemon_menu.override_text = f"{selected_pokemon['name']} est déjà au combat."
-                else:
-                    self.queue_message(f"{selected_pokemon['name']} va être envoyé !")
-                    self.switch_pokemon(selected_index)
-
-                self.pokemon_menu.reset_selection()
                 return
 
         # === Messages texte animés ===
@@ -318,7 +339,6 @@ class BattleScene(Scene):
 
             self.grid_pos = [col, row]
             self.selected_index = self.button_grid[col][row]
-
 
     def on_enter(self):
         pass

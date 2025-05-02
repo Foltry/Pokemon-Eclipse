@@ -103,11 +103,8 @@ class PokemonMenu:
         elif event.key == pygame.K_RETURN:
             selected_pkm = self.team[self.selected_index]
             if self.selected_option == 0:  # Envoyer
-                if selected_pkm["id"] == self.current_ally_id:
-                    self.override_text = f"{selected_pkm['name']} est déjà au combat."
-                else:
-                    self.option_chosen = "send"
-                    self.closed = True
+                self.option_chosen = "send"
+                self.closed = True
             elif self.selected_option == 1:  # Annuler
                 self.selection_active = False
 
