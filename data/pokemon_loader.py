@@ -107,3 +107,8 @@ def get_learnable_moves(pokemon_id: int, level: int = 5) -> list:
                 print(f"[⚠️] Move introuvable dans moves.json: {move_name} pour Pokémon ID {pokemon_id}")
 
     return moves[:4]  # Limite à 4 attaques
+
+
+def get_pokemon_by_id_name(name: str) -> dict:
+    """Alias pour get_pokemon_by_name (utilisé pour compatibilité dans le code)."""
+    return get_pokemon_by_name(name)

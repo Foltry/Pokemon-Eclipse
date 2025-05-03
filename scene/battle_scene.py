@@ -46,7 +46,7 @@ class BattleScene(Scene):
         self.hide_enemy_sprite = False
         self.ball_animation = None
 
-        # === Normalisation des données de l'équipe ===
+        # === Normalisation de l'équipe ===
         for pkm in run_manager.get_team():
             pkm.setdefault("level", 5)
             pkm.setdefault("stats", pkm.get("base_stats", {}))
@@ -64,21 +64,30 @@ class BattleScene(Scene):
         self.ally_xp = starter.get("xp", 0)
         self.ally_max_xp = 100
 
-        # === Enemy Setup ===
-        self.enemy_id = 16
-        self.enemy_level = 5
-        self.enemy_gender = random.choice(["♂", "♀"])
-        self.enemy_data = get_pokemon_by_id(self.enemy_id)
-        self.enemy_data["moves"] = get_learnable_moves(self.enemy_id, self.enemy_level)
-        self.enemy_name = self.enemy_data["name"]
-        self.enemy_hp = self.enemy_max_hp = self.enemy_data["stats"]["hp"]
-        self.enemy_base_exp = self.enemy_data.get("base_experience", 50)
+        # === Enemy Setup (équilibré ±10%) ===
+        base_enemy = get_pokemon_by_id(random.randint(1, 151))  # Ou un sous-ensemble
+        self.enemy_id = base_enemy["id"]
+        self.enemy_name = base_enemy["name"]
+        self.enemy_level = max(1, self.ally_level + random.choice([-1, 0, 1]))
 
-        # === Sprites ===
-        self.bases, self.sprites = load_combat_sprites(self.ally_id, self.enemy_id)
+        self.enemy_data = base_enemy.copy()
+        self.enemy_data["level"] = self.enemy_level
+        self.enemy_data["stats"] = {}
+
+        for stat, base in base_enemy["stats"].items():
+            variation = base * random.uniform(-0.1, 0.1)
+            self.enemy_data["stats"][stat] = int(base + variation)
+
+        self.enemy_data["hp"] = self.enemy_data["stats"]["hp"]
+        self.enemy_data["moves"] = get_learnable_moves(self.enemy_id, self.enemy_level)
+        self.enemy_data["gender"] = self.enemy_gender = random.choice(["♂", "♀"])
+        self.enemy_base_exp = self.enemy_data.get("base_experience", 50)
+        self.enemy_hp = self.enemy_max_hp = self.enemy_data["stats"]["hp"]
+
+        # === Sprites et positions dynamiques ===
+        self.bases, self.sprites, self.sprite_positions = load_combat_sprites(self.ally_id, self.enemy_id)
         self.capture_effect = CaptureEffect(sprite=self.sprites[1], pos=(360, 130))
         self.fight_menu = None
-
 
     def enemy_turn(self):
         """Le Pokémon ennemi choisit un move et attaque."""
@@ -117,8 +126,10 @@ class BattleScene(Scene):
 
 
     def use_move(self, move):
-        """Prépare et affiche le lancement d'une attaque par l'allié."""
+        """Prépare, applique et affiche le lancement d'une attaque par l'allié."""
+        from battle.move_handler import use_move as core_use_move
         starter = run_manager.get_team()[0]
+
         attacker = {
             "name": starter["name"],
             "level": starter.get("level", 5),
@@ -126,13 +137,37 @@ class BattleScene(Scene):
             "stats": starter.get("stats") or starter.get("base_stats")
         }
         defender = self.enemy_data
+
         if "hp" not in defender:
             defender["hp"] = defender["stats"]["hp"]
 
+        # Prépare l’attaque
         self.pending_move = (attacker, defender, move)
+
+        # Message d'utilisation
         self.queue_message(f"{attacker['name']} utilise {move['name']} !")
-        self.state = "waiting_move"
-        self.fight_menu = None
+
+        # Appliquer immédiatement les effets (calcul, dégâts)
+        result = core_use_move(attacker, defender, move)
+
+        # Afficher tous les messages (efficacité, critique, etc.)
+        for message in result["messages"]:
+            self.queue_message(message)
+
+        # Mise à jour des PV pour l'affichage dès maintenant
+        starter["stats"]["hp"] = attacker["stats"]["hp"]
+        defender["hp"] = max(0, defender["hp"])
+        self.ally_hp = starter["stats"]["hp"]
+        self.enemy_hp = defender["hp"]
+
+        # Vérifie si l’ennemi est KO
+        if defender["hp"] <= 0:
+            self.queue_message(f"{defender['name']} est K.O. !")
+            self.message_queue.append(self.handle_victory)
+
+        self.pending_move = None
+        self.state = "command"
+
 
     def resolve_move(self):
         """Exécute le move préparé et gère les conséquences (HP, victoire, etc.)."""
@@ -155,14 +190,77 @@ class BattleScene(Scene):
             # 👉 Tour de l'ennemi s'il est vivant
             self.message_queue.append(self.enemy_turn)
 
+    def xp_required(self, level):
+        """Retourne l’XP total requis pour atteindre un niveau donné."""
+        return level ** 3
+
+
+    def check_level_up(self, pokemon, queue_message):
+        while pokemon["xp"] >= self.xp_required(pokemon["level"] + 1):
+            pokemon["level"] += 1
+            queue_message(f"{pokemon['name']} monte au niveau {pokemon['level']} !")
+
+            for stat, base in pokemon.get("base_stats", {}).items():
+                increase = base / 50  # Formule : +1/50 * base
+                pokemon["stats"][stat] = int(pokemon["stats"][stat] + increase)
+                if stat == "hp":
+                    pokemon["hp"] = pokemon["stats"]["hp"]
+
+            from battle.evolution_handler import check_and_apply_evolution
+            old_name = pokemon["name"]
+            evolved = check_and_apply_evolution(pokemon)
+            if evolved:
+                queue_message(f"{old_name} évolue en {evolved['name']} !")
+
+                def apply_evolution_update():
+                    if run_manager.get_team()[0]["id"] == pokemon["id"]:
+                        self.ally_id = pokemon["id"]
+                        self.ally_name = pokemon["name"]
+                        self.ally_max_hp = pokemon["stats"]["hp"]
+                        self.ally_hp = pokemon["hp"]
+                        self.bases, self.sprites, self.sprite_positions = load_combat_sprites(self.ally_id, self.enemy_id)
+
+                self.message_queue.append(apply_evolution_update)
 
     def handle_victory(self):
-        """Gère l'expérience gagnée et déclenche l'écran bonus (si dispo)."""
+        """Gère l'expérience gagnée, les niveaux et déclenche les évolutions si besoin."""
+        from battle.evolution_handler import check_evolution
+
         self.victory_handled = True
         xp_gain = int((self.enemy_base_exp * self.enemy_level) / 7)
-        for poke in run_manager.get_team():
-            poke["xp"] = poke.get("xp", 0) + xp_gain
 
+        for i, poke in enumerate(run_manager.get_team()):
+            poke["xp"] = poke.get("xp", 0) + xp_gain
+            self.queue_message(f"{poke['name']} gagne {xp_gain} XP !")
+
+            old_level = poke["level"]
+            self.check_level_up(poke, self.queue_message)
+
+            # S’il y a eu montée de niveau, on vérifie s’il doit évoluer
+            if poke["level"] > old_level:
+                evolved_data = check_evolution(poke)
+                if evolved_data:
+                    old_name = poke["name"]
+                    poke.update({
+                        "id": evolved_data["id"],
+                        "name": evolved_data["name"],
+                        "stats": evolved_data["stats"],
+                        "base_stats": evolved_data["stats"],
+                        "types": evolved_data["types"],
+                        "sprites": evolved_data["sprites"],
+                        "moves": get_learnable_moves(evolved_data["id"], poke["level"])
+                    })
+                    self.queue_message(f"{old_name} évolue en {poke['name']} !")
+
+                    # Mise à jour des PV si le Pokémon est actif
+                    if i == 0:
+                        self.ally_id = poke["id"]
+                        self.ally_name = poke["name"]
+                        self.ally_max_hp = poke["stats"]["hp"]
+                        self.ally_hp = self.ally_max_hp
+                        self.bases, self.sprites, self.sprite_positions = load_combat_sprites(self.ally_id, self.enemy_id)
+
+        # === Bonus post-combat ===
         valid_items = list_available_items()
         if len(valid_items) >= 2:
             self.bonus_options = random.sample(valid_items, 2)
@@ -186,7 +284,7 @@ class BattleScene(Scene):
         self.ally_max_hp = new_pokemon.get("stats", new_pokemon.get("base_stats"))["hp"]
         self.ally_xp = new_pokemon.get("xp", 0)
 
-        self.bases, self.sprites = load_combat_sprites(self.ally_id, self.enemy_id)
+        self.bases, self.sprites, self.sprite_positions = load_combat_sprites(self.ally_id, self.enemy_id)
 
         from ui.fight_menu import FightMenu
         self.fight_menu = FightMenu(
@@ -416,10 +514,21 @@ class BattleScene(Scene):
     def draw(self, screen):
         """Affiche toute la scène de combat : arrière-plan, sprites, menus, effets, etc."""
 
+        # === Calcul de l'XP relative pour l'affichage ===
+        current_pokemon = run_manager.get_team()[0]
+        level = current_pokemon.get("level", 1)
+        xp = current_pokemon.get("xp", 0)
+
+        min_xp = self.xp_required(level)
+        max_xp = self.xp_required(level + 1)
+
+        self.ally_xp = max(0, xp - min_xp)
+        self.ally_max_xp = max(1, max_xp - min_xp)
+
         # === Préparation des sprites ===
         sprites = list(self.sprites)
         if self.hide_enemy_sprite or (self.capture_effect and self.capture_effect.is_active()):
-            sprites[1] = None  # Cache le sprite ennemi si nécessaire
+            sprites[1] = None
 
         # === Affichage de la scène principale ===
         draw_combat_scene(
@@ -430,13 +539,15 @@ class BattleScene(Scene):
             enemy_hp=self.enemy_hp, enemy_max_hp=self.enemy_max_hp,
             ally_level=self.ally_level, enemy_level=self.enemy_level,
             enemy_gender=self.enemy_gender,
-            ally_xp=self.ally_xp, ally_max_xp=self.ally_max_xp
+            ally_xp=self.ally_xp, ally_max_xp=self.ally_max_xp,
+            positions=self.sprite_positions
         )
+
 
         # === Menu Pokémon ===
         if self.pokemon_menu:
             self.pokemon_menu.draw(screen)
-            return  # Priorité absolue : on affiche uniquement le menu Pokémon
+            return
 
         # === Menu Combat (attaques) ===
         if self.state == "fight_menu" and self.fight_menu:
@@ -454,7 +565,6 @@ class BattleScene(Scene):
             self.render_bonus_message(screen)
             self.bonus_ui.draw(screen)
         elif self.state != "throwing_ball" and not self.ball_animation and not self.ball_throw:
-            # Affichage normal si aucune animation de capture
             self.dialog_box.draw(screen, f"Que doit faire {self.ally_name} ?")
             for i, button in enumerate(self.buttons):
                 button.draw(screen, selected=(i == self.selected_index))

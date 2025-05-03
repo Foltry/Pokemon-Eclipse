@@ -38,19 +38,19 @@ def apply_healing(item_name, pokemon):
     if heal_amount is None:
         return {"success": False, "message": "Cet objet de soin n'est pas reconnu."}
 
-    current_hp = pokemon.get("stats", {}).get("hp", 0)
-    max_hp = pokemon.get("base_stats", {}).get("hp", 100)
+    current_hp = pokemon.get("hp", 0)
+    max_hp = pokemon.get("stats", {}).get("hp", 100)
 
     if current_hp >= max_hp:
         return {"success": False, "message": f"{pokemon['name']} a déjà tous ses PV."}
 
     if heal_amount == "full":
-        pokemon["stats"]["hp"] = max_hp
         heal_done = max_hp - current_hp
+        pokemon["hp"] = max_hp
     else:
         new_hp = min(current_hp + heal_amount, max_hp)
         heal_done = new_hp - current_hp
-        pokemon["stats"]["hp"] = new_hp
+        pokemon["hp"] = new_hp
 
     if item_name == "Guérison":
         pokemon["status"] = None

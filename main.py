@@ -5,6 +5,7 @@ from core.scene_manager import SceneManager
 from core.config import SCREEN_HEIGHT, SCREEN_WIDTH
 from core.run_manager import run_manager
 from scene.gameover_scene import GameOverScene
+from data.items_loader import get_all_items
 
 def main():
     pygame.init()
@@ -14,8 +15,10 @@ def main():
     clock = pygame.time.Clock()
     scene_manager = SceneManager()
 
-    # Ajout d'une Ball aléatoire au démarrage
-    run_manager.add_item("Master Ball")
+    items = get_all_items()
+    for item in items:
+        run_manager.add_item(item)
+
 
     scene_manager.change_scene(GameOverScene())
 

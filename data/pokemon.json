@@ -224,9 +224,11 @@
       "evolves_to": [
         {
           "species": "Herbizarre",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Florizarre",
+              "level": 32,
               "evolves_to": []
             }
           ]
@@ -469,9 +471,11 @@
       "evolves_to": [
         {
           "species": "Herbizarre",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Florizarre",
+              "level": 32,
               "evolves_to": []
             }
           ]
@@ -714,9 +718,11 @@
       "evolves_to": [
         {
           "species": "Herbizarre",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Florizarre",
+              "level": 32,
               "evolves_to": []
             }
           ]
@@ -950,9 +956,11 @@
       "evolves_to": [
         {
           "species": "Reptincel",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Dracaufeu",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -1186,9 +1194,11 @@
       "evolves_to": [
         {
           "species": "Reptincel",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Dracaufeu",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -1423,9 +1433,11 @@
       "evolves_to": [
         {
           "species": "Reptincel",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Dracaufeu",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -1683,9 +1695,11 @@
       "evolves_to": [
         {
           "species": "Carabaffe",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Tortank",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -1943,9 +1957,11 @@
       "evolves_to": [
         {
           "species": "Carabaffe",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Tortank",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -2203,9 +2219,11 @@
       "evolves_to": [
         {
           "species": "Carabaffe",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Tortank",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -2263,9 +2281,11 @@
       "evolves_to": [
         {
           "species": "Chrysacier",
+          "level": 7,
           "evolves_to": [
             {
               "species": "Papilusion",
+              "level": 10,
               "evolves_to": []
             }
           ]
@@ -2323,9 +2343,11 @@
       "evolves_to": [
         {
           "species": "Chrysacier",
+          "level": 7,
           "evolves_to": [
             {
               "species": "Papilusion",
+              "level": 10,
               "evolves_to": []
             }
           ]
@@ -2384,9 +2406,11 @@
       "evolves_to": [
         {
           "species": "Chrysacier",
+          "level": 7,
           "evolves_to": [
             {
               "species": "Papilusion",
+              "level": 10,
               "evolves_to": []
             }
           ]
@@ -2445,9 +2469,11 @@
       "evolves_to": [
         {
           "species": "Coconfort",
+          "level": 7,
           "evolves_to": [
             {
               "species": "Dardargnan",
+              "level": 10,
               "evolves_to": []
             }
           ]
@@ -2506,9 +2532,11 @@
       "evolves_to": [
         {
           "species": "Coconfort",
+          "level": 7,
           "evolves_to": [
             {
               "species": "Dardargnan",
+              "level": 10,
               "evolves_to": []
             }
           ]
@@ -2567,9 +2595,11 @@
       "evolves_to": [
         {
           "species": "Coconfort",
+          "level": 7,
           "evolves_to": [
             {
               "species": "Dardargnan",
+              "level": 10,
               "evolves_to": []
             }
           ]
@@ -2764,9 +2794,11 @@
       "evolves_to": [
         {
           "species": "Roucoups",
+          "level": 18,
           "evolves_to": [
             {
               "species": "Roucarnage",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -2961,9 +2993,11 @@
       "evolves_to": [
         {
           "species": "Roucoups",
+          "level": 18,
           "evolves_to": [
             {
               "species": "Roucarnage",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -3158,9 +3192,11 @@
       "evolves_to": [
         {
           "species": "Roucoups",
+          "level": 18,
           "evolves_to": [
             {
               "species": "Roucarnage",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -3338,6 +3374,7 @@
       "evolves_to": [
         {
           "species": "Rattatac",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -3513,6 +3550,7 @@
       "evolves_to": [
         {
           "species": "Rattatac",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -3725,6 +3763,7 @@
       "evolves_to": [
         {
           "species": "Rapasdepic",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -3937,6 +3976,7 @@
       "evolves_to": [
         {
           "species": "Rapasdepic",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -4180,6 +4220,7 @@
       "evolves_to": [
         {
           "species": "Arbok",
+          "level": 22,
           "evolves_to": []
         }
       ]
@@ -4423,6 +4464,7 @@
       "evolves_to": [
         {
           "species": "Arbok",
+          "level": 22,
           "evolves_to": []
         }
       ]
@@ -5034,6 +5076,7 @@
       "evolves_to": [
         {
           "species": "Sablaireau",
+          "level": 22,
           "evolves_to": []
         }
       ]
@@ -5349,6 +5392,7 @@
       "evolves_to": [
         {
           "species": "Sablaireau",
+          "level": 22,
           "evolves_to": []
         }
       ]
@@ -5588,6 +5632,7 @@
       "evolves_to": [
         {
           "species": "Nidorina",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Nidoqueen",
@@ -5832,6 +5877,7 @@
       "evolves_to": [
         {
           "species": "Nidorina",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Nidoqueen",
@@ -6077,6 +6123,7 @@
       "evolves_to": [
         {
           "species": "Nidorina",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Nidoqueen",
@@ -6321,6 +6368,7 @@
       "evolves_to": [
         {
           "species": "Nidorino",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Nidoking",
@@ -6565,6 +6613,7 @@
       "evolves_to": [
         {
           "species": "Nidorino",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Nidoking",
@@ -6810,6 +6859,7 @@
       "evolves_to": [
         {
           "species": "Nidorino",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Nidoking",
@@ -8563,6 +8613,7 @@
       "evolves_to": [
         {
           "species": "Nosferalto",
+          "level": 22,
           "evolves_to": [
             {
               "species": "Nostenfer",
@@ -8908,6 +8959,7 @@
       "evolves_to": [
         {
           "species": "Nosferalto",
+          "level": 22,
           "evolves_to": [
             {
               "species": "Nostenfer",
@@ -9177,6 +9229,7 @@
       "evolves_to": [
         {
           "species": "Ortide",
+          "level": 21,
           "evolves_to": [
             {
               "species": "Rafflesia",
@@ -9450,6 +9503,7 @@
       "evolves_to": [
         {
           "species": "Ortide",
+          "level": 21,
           "evolves_to": [
             {
               "species": "Rafflesia",
@@ -9723,6 +9777,7 @@
       "evolves_to": [
         {
           "species": "Ortide",
+          "level": 21,
           "evolves_to": [
             {
               "species": "Rafflesia",
@@ -9964,6 +10019,7 @@
       "evolves_to": [
         {
           "species": "Parasect",
+          "level": 24,
           "evolves_to": []
         }
       ]
@@ -10196,6 +10252,7 @@
       "evolves_to": [
         {
           "species": "Parasect",
+          "level": 24,
           "evolves_to": []
         }
       ]
@@ -10420,6 +10477,7 @@
       "evolves_to": [
         {
           "species": "Aéromite",
+          "level": 31,
           "evolves_to": []
         }
       ]
@@ -10644,6 +10702,7 @@
       "evolves_to": [
         {
           "species": "Aéromite",
+          "level": 31,
           "evolves_to": []
         }
       ]
@@ -10923,6 +10982,7 @@
       "evolves_to": [
         {
           "species": "Triopikeur",
+          "level": 26,
           "evolves_to": []
         }
       ]
@@ -11202,6 +11262,7 @@
       "evolves_to": [
         {
           "species": "Triopikeur",
+          "level": 26,
           "evolves_to": []
         }
       ]
@@ -11473,10 +11534,12 @@
       "evolves_to": [
         {
           "species": "Persian",
+          "level": 28,
           "evolves_to": []
         },
         {
           "species": "Berserkatt",
+          "level": 28,
           "evolves_to": []
         }
       ]
@@ -11748,10 +11811,12 @@
       "evolves_to": [
         {
           "species": "Persian",
+          "level": 28,
           "evolves_to": []
         },
         {
           "species": "Berserkatt",
+          "level": 28,
           "evolves_to": []
         }
       ]
@@ -12147,6 +12212,7 @@
       "evolves_to": [
         {
           "species": "Akwakwak",
+          "level": 33,
           "evolves_to": []
         }
       ]
@@ -12542,6 +12608,7 @@
       "evolves_to": [
         {
           "species": "Akwakwak",
+          "level": 33,
           "evolves_to": []
         }
       ]
@@ -12853,6 +12920,7 @@
       "evolves_to": [
         {
           "species": "Colossinge",
+          "level": 28,
           "evolves_to": [
             {
               "species": "Courrousinge",
@@ -13169,6 +13237,7 @@
       "evolves_to": [
         {
           "species": "Colossinge",
+          "level": 28,
           "evolves_to": [
             {
               "species": "Courrousinge",
@@ -14103,6 +14172,7 @@
       "evolves_to": [
         {
           "species": "Têtarte",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Tartard",
@@ -14331,6 +14401,7 @@
       "evolves_to": [
         {
           "species": "Têtarte",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Tartard",
@@ -14560,6 +14631,7 @@
       "evolves_to": [
         {
           "species": "Têtarte",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Tartard",
@@ -14612,6 +14684,7 @@
       "evolves_to": [
         {
           "species": "Kadabra",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Alakazam",
@@ -14660,6 +14733,7 @@
       "evolves_to": [
         {
           "species": "Kadabra",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Alakazam",
@@ -14708,6 +14782,7 @@
       "evolves_to": [
         {
           "species": "Kadabra",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Alakazam",
@@ -15052,6 +15127,7 @@
       "evolves_to": [
         {
           "species": "Machopeur",
+          "level": 28,
           "evolves_to": [
             {
               "species": "Mackogneur",
@@ -15396,6 +15472,7 @@
       "evolves_to": [
         {
           "species": "Machopeur",
+          "level": 28,
           "evolves_to": [
             {
               "species": "Mackogneur",
@@ -15740,6 +15817,7 @@
       "evolves_to": [
         {
           "species": "Machopeur",
+          "level": 28,
           "evolves_to": [
             {
               "species": "Mackogneur",
@@ -15941,6 +16019,7 @@
       "evolves_to": [
         {
           "species": "Boustiflor",
+          "level": 21,
           "evolves_to": [
             {
               "species": "Empiflor",
@@ -16142,6 +16221,7 @@
       "evolves_to": [
         {
           "species": "Boustiflor",
+          "level": 21,
           "evolves_to": [
             {
               "species": "Empiflor",
@@ -16343,6 +16423,7 @@
       "evolves_to": [
         {
           "species": "Boustiflor",
+          "level": 21,
           "evolves_to": [
             {
               "species": "Empiflor",
@@ -16692,6 +16773,7 @@
       "evolves_to": [
         {
           "species": "Tentacruel",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -17036,6 +17118,7 @@
       "evolves_to": [
         {
           "species": "Tentacruel",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -17364,6 +17447,7 @@
       "evolves_to": [
         {
           "species": "Gravalanch",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Grolem",
@@ -17697,6 +17781,7 @@
       "evolves_to": [
         {
           "species": "Gravalanch",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Grolem",
@@ -18030,6 +18115,7 @@
       "evolves_to": [
         {
           "species": "Gravalanch",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Grolem",
@@ -18370,6 +18456,7 @@
       "evolves_to": [
         {
           "species": "Galopa",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -18705,6 +18792,7 @@
       "evolves_to": [
         {
           "species": "Galopa",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -19009,6 +19097,7 @@
       "evolves_to": [
         {
           "species": "Flagadoss",
+          "level": 37,
           "evolves_to": []
         },
         {
@@ -19317,6 +19406,7 @@
       "evolves_to": [
         {
           "species": "Flagadoss",
+          "level": 37,
           "evolves_to": []
         },
         {
@@ -19761,6 +19851,7 @@
       "evolves_to": [
         {
           "species": "Magnéton",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Magnézone",
@@ -20206,6 +20297,7 @@
       "evolves_to": [
         {
           "species": "Magnéton",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Magnézone",
@@ -20823,6 +20915,7 @@
       "evolves_to": [
         {
           "species": "Dodrio",
+          "level": 31,
           "evolves_to": []
         }
       ]
@@ -21131,6 +21224,7 @@
       "evolves_to": [
         {
           "species": "Dodrio",
+          "level": 31,
           "evolves_to": []
         }
       ]
@@ -21354,6 +21448,7 @@
       "evolves_to": [
         {
           "species": "Lamantine",
+          "level": 34,
           "evolves_to": []
         }
       ]
@@ -21578,6 +21673,7 @@
       "evolves_to": [
         {
           "species": "Lamantine",
+          "level": 34,
           "evolves_to": []
         }
       ]
@@ -21885,6 +21981,7 @@
       "evolves_to": [
         {
           "species": "Grotadmorv",
+          "level": 38,
           "evolves_to": []
         }
       ]
@@ -22192,6 +22289,7 @@
       "evolves_to": [
         {
           "species": "Grotadmorv",
+          "level": 38,
           "evolves_to": []
         }
       ]
@@ -22999,6 +23097,7 @@
       "evolves_to": [
         {
           "species": "Spectrum",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Ectoplasma",
@@ -23284,6 +23383,7 @@
       "evolves_to": [
         {
           "species": "Spectrum",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Ectoplasma",
@@ -23569,6 +23669,7 @@
       "evolves_to": [
         {
           "species": "Spectrum",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Ectoplasma",
@@ -24337,6 +24438,7 @@
       "evolves_to": [
         {
           "species": "Hypnomade",
+          "level": 26,
           "evolves_to": []
         }
       ]
@@ -24648,6 +24750,7 @@
       "evolves_to": [
         {
           "species": "Hypnomade",
+          "level": 26,
           "evolves_to": []
         }
       ]
@@ -24899,6 +25002,7 @@
       "evolves_to": [
         {
           "species": "Krabboss",
+          "level": 28,
           "evolves_to": []
         }
       ]
@@ -25150,6 +25254,7 @@
       "evolves_to": [
         {
           "species": "Krabboss",
+          "level": 28,
           "evolves_to": []
         }
       ]
@@ -25465,6 +25570,7 @@
       "evolves_to": [
         {
           "species": "Électrode",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -25780,6 +25886,7 @@
       "evolves_to": [
         {
           "species": "Électrode",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -26527,6 +26634,7 @@
       "evolves_to": [
         {
           "species": "Ossatueur",
+          "level": 28,
           "evolves_to": []
         }
       ]
@@ -26802,6 +26910,7 @@
       "evolves_to": [
         {
           "species": "Ossatueur",
+          "level": 28,
           "evolves_to": []
         }
       ]
@@ -26861,14 +26970,17 @@
       "evolves_to": [
         {
           "species": "Kicklee",
+          "level": 20,
           "evolves_to": []
         },
         {
           "species": "Tygnon",
+          "level": 20,
           "evolves_to": []
         },
         {
           "species": "Kapoera",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -26928,14 +27040,17 @@
       "evolves_to": [
         {
           "species": "Kicklee",
+          "level": 20,
           "evolves_to": []
         },
         {
           "species": "Tygnon",
+          "level": 20,
           "evolves_to": []
         },
         {
           "species": "Kapoera",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -27530,6 +27645,7 @@
       "evolves_to": [
         {
           "species": "Smogogo",
+          "level": 35,
           "evolves_to": []
         }
       ]
@@ -27813,6 +27929,7 @@
       "evolves_to": [
         {
           "species": "Smogogo",
+          "level": 35,
           "evolves_to": []
         }
       ]
@@ -28189,6 +28306,7 @@
       "evolves_to": [
         {
           "species": "Rhinoféros",
+          "level": 42,
           "evolves_to": [
             {
               "species": "Rhinastoc",
@@ -28570,6 +28688,7 @@
       "evolves_to": [
         {
           "species": "Rhinoféros",
+          "level": 42,
           "evolves_to": [
             {
               "species": "Rhinastoc",
@@ -29623,6 +29742,7 @@
       "evolves_to": [
         {
           "species": "Hypocéan",
+          "level": 32,
           "evolves_to": [
             {
               "species": "Hyporoi",
@@ -29879,6 +29999,7 @@
       "evolves_to": [
         {
           "species": "Hypocéan",
+          "level": 32,
           "evolves_to": [
             {
               "species": "Hyporoi",
@@ -30135,6 +30256,7 @@
       "evolves_to": [
         {
           "species": "Poissoroy",
+          "level": 33,
           "evolves_to": []
         }
       ]
@@ -30386,6 +30508,7 @@
       "evolves_to": [
         {
           "species": "Poissoroy",
+          "level": 33,
           "evolves_to": []
         }
       ]
@@ -31364,6 +31487,7 @@
           "evolves_to": [
             {
               "species": "M. Glaquette",
+              "level": 42,
               "evolves_to": []
             }
           ]
@@ -31914,6 +32038,7 @@
       "evolves_to": [
         {
           "species": "Lippoutou",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -32169,6 +32294,7 @@
       "evolves_to": [
         {
           "species": "Élektek",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Élekable",
@@ -32417,6 +32543,7 @@
       "evolves_to": [
         {
           "species": "Magmar",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Maganon",
@@ -33089,6 +33216,7 @@
       "evolves_to": [
         {
           "species": "Léviator",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -33145,6 +33273,7 @@
       "evolves_to": [
         {
           "species": "Léviator",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -35214,6 +35343,7 @@
       "evolves_to": [
         {
           "species": "Amonistar",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -35438,6 +35568,7 @@
       "evolves_to": [
         {
           "species": "Amonistar",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -35670,6 +35801,7 @@
       "evolves_to": [
         {
           "species": "Kabutops",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -35902,6 +36034,7 @@
       "evolves_to": [
         {
           "species": "Kabutops",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -37472,9 +37605,11 @@
       "evolves_to": [
         {
           "species": "Draco",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Dracolosse",
+              "level": 55,
               "evolves_to": []
             }
           ]
@@ -37704,9 +37839,11 @@
       "evolves_to": [
         {
           "species": "Draco",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Dracolosse",
+              "level": 55,
               "evolves_to": []
             }
           ]
@@ -37937,9 +38074,11 @@
       "evolves_to": [
         {
           "species": "Draco",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Dracolosse",
+              "level": 55,
               "evolves_to": []
             }
           ]
@@ -38657,9 +38796,11 @@
       "evolves_to": [
         {
           "species": "Macronium",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Méganium",
+              "level": 32,
               "evolves_to": []
             }
           ]
@@ -38801,9 +38942,11 @@
       "evolves_to": [
         {
           "species": "Macronium",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Méganium",
+              "level": 32,
               "evolves_to": []
             }
           ]
@@ -38945,9 +39088,11 @@
       "evolves_to": [
         {
           "species": "Macronium",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Méganium",
+              "level": 32,
               "evolves_to": []
             }
           ]
@@ -39137,9 +39282,11 @@
       "evolves_to": [
         {
           "species": "Feurisson",
+          "level": 14,
           "evolves_to": [
             {
               "species": "Typhlosion",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -39329,9 +39476,11 @@
       "evolves_to": [
         {
           "species": "Feurisson",
+          "level": 14,
           "evolves_to": [
             {
               "species": "Typhlosion",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -39521,9 +39670,11 @@
       "evolves_to": [
         {
           "species": "Feurisson",
+          "level": 14,
           "evolves_to": [
             {
               "species": "Typhlosion",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -39733,9 +39884,11 @@
       "evolves_to": [
         {
           "species": "Crocrodil",
+          "level": 18,
           "evolves_to": [
             {
               "species": "Aligatueur",
+              "level": 30,
               "evolves_to": []
             }
           ]
@@ -39945,9 +40098,11 @@
       "evolves_to": [
         {
           "species": "Crocrodil",
+          "level": 18,
           "evolves_to": [
             {
               "species": "Aligatueur",
+              "level": 30,
               "evolves_to": []
             }
           ]
@@ -40157,9 +40312,11 @@
       "evolves_to": [
         {
           "species": "Crocrodil",
+          "level": 18,
           "evolves_to": [
             {
               "species": "Aligatueur",
+              "level": 30,
               "evolves_to": []
             }
           ]
@@ -40317,6 +40474,7 @@
       "evolves_to": [
         {
           "species": "Fouinar",
+          "level": 15,
           "evolves_to": []
         }
       ]
@@ -40472,6 +40630,7 @@
       "evolves_to": [
         {
           "species": "Fouinar",
+          "level": 15,
           "evolves_to": []
         }
       ]
@@ -40764,6 +40923,7 @@
       "evolves_to": [
         {
           "species": "Noarfang",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -41056,6 +41216,7 @@
       "evolves_to": [
         {
           "species": "Noarfang",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -41244,6 +41405,7 @@
       "evolves_to": [
         {
           "species": "Coxyclaque",
+          "level": 18,
           "evolves_to": []
         }
       ]
@@ -41432,6 +41594,7 @@
       "evolves_to": [
         {
           "species": "Coxyclaque",
+          "level": 18,
           "evolves_to": []
         }
       ]
@@ -41624,6 +41787,7 @@
       "evolves_to": [
         {
           "species": "Migalos",
+          "level": 22,
           "evolves_to": []
         }
       ]
@@ -41816,6 +41980,7 @@
       "evolves_to": [
         {
           "species": "Migalos",
+          "level": 22,
           "evolves_to": []
         }
       ]
@@ -42156,6 +42321,7 @@
       "evolves_to": [
         {
           "species": "Nosferalto",
+          "level": 22,
           "evolves_to": [
             {
               "species": "Nostenfer",
@@ -42401,6 +42567,7 @@
       "evolves_to": [
         {
           "species": "Lanturn",
+          "level": 27,
           "evolves_to": []
         }
       ]
@@ -42641,6 +42808,7 @@
       "evolves_to": [
         {
           "species": "Lanturn",
+          "level": 27,
           "evolves_to": []
         }
       ]
@@ -43835,6 +44003,7 @@
       "evolves_to": [
         {
           "species": "Xatu",
+          "level": 25,
           "evolves_to": []
         }
       ]
@@ -44043,6 +44212,7 @@
       "evolves_to": [
         {
           "species": "Xatu",
+          "level": 25,
           "evolves_to": []
         }
       ]
@@ -44234,9 +44404,11 @@
       "evolves_to": [
         {
           "species": "Lainergie",
+          "level": 15,
           "evolves_to": [
             {
               "species": "Pharamp",
+              "level": 30,
               "evolves_to": []
             }
           ]
@@ -44430,9 +44602,11 @@
       "evolves_to": [
         {
           "species": "Lainergie",
+          "level": 15,
           "evolves_to": [
             {
               "species": "Pharamp",
+              "level": 30,
               "evolves_to": []
             }
           ]
@@ -44626,9 +44800,11 @@
       "evolves_to": [
         {
           "species": "Lainergie",
+          "level": 15,
           "evolves_to": [
             {
               "species": "Pharamp",
+              "level": 30,
               "evolves_to": []
             }
           ]
@@ -44894,6 +45070,7 @@
       "evolves_to": [
         {
           "species": "Ortide",
+          "level": 21,
           "evolves_to": [
             {
               "species": "Rafflesia",
@@ -45050,6 +45227,7 @@
           "evolves_to": [
             {
               "species": "Azumarill",
+              "level": 18,
               "evolves_to": []
             }
           ]
@@ -45199,6 +45377,7 @@
           "evolves_to": [
             {
               "species": "Azumarill",
+              "level": 18,
               "evolves_to": []
             }
           ]
@@ -45663,6 +45842,7 @@
       "evolves_to": [
         {
           "species": "Têtarte",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Tartard",
@@ -45928,9 +46108,11 @@
       "evolves_to": [
         {
           "species": "Floravol",
+          "level": 18,
           "evolves_to": [
             {
               "species": "Cotovol",
+              "level": 27,
               "evolves_to": []
             }
           ]
@@ -46189,9 +46371,11 @@
       "evolves_to": [
         {
           "species": "Floravol",
+          "level": 18,
           "evolves_to": [
             {
               "species": "Cotovol",
+              "level": 27,
               "evolves_to": []
             }
           ]
@@ -46450,9 +46634,11 @@
       "evolves_to": [
         {
           "species": "Floravol",
+          "level": 18,
           "evolves_to": [
             {
               "species": "Cotovol",
+              "level": 27,
               "evolves_to": []
             }
           ]
@@ -47448,10 +47634,12 @@
       "evolves_to": [
         {
           "species": "Maraiste",
+          "level": 20,
           "evolves_to": []
         },
         {
           "species": "Terraiste",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -47624,10 +47812,12 @@
       "evolves_to": [
         {
           "species": "Maraiste",
+          "level": 20,
           "evolves_to": []
         },
         {
           "species": "Terraiste",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -48770,6 +48960,7 @@
       "evolves_to": [
         {
           "species": "Flagadoss",
+          "level": 37,
           "evolves_to": []
         },
         {
@@ -49098,6 +49289,7 @@
       "evolves_to": [
         {
           "species": "Qulbutoké",
+          "level": 15,
           "evolves_to": []
         }
       ]
@@ -49485,6 +49677,7 @@
       "evolves_to": [
         {
           "species": "Foretress",
+          "level": 31,
           "evolves_to": []
         }
       ]
@@ -49665,6 +49858,7 @@
       "evolves_to": [
         {
           "species": "Foretress",
+          "level": 31,
           "evolves_to": []
         }
       ]
@@ -50991,6 +51185,7 @@
       "evolves_to": [
         {
           "species": "Granbull",
+          "level": 23,
           "evolves_to": []
         }
       ]
@@ -51138,6 +51333,7 @@
       "evolves_to": [
         {
           "species": "Granbull",
+          "level": 23,
           "evolves_to": []
         }
       ]
@@ -52807,6 +53003,7 @@
       "evolves_to": [
         {
           "species": "Ursaring",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Ursaking",
@@ -53031,6 +53228,7 @@
       "evolves_to": [
         {
           "species": "Ursaring",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Ursaking",
@@ -53251,6 +53449,7 @@
       "evolves_to": [
         {
           "species": "Volcaropod",
+          "level": 38,
           "evolves_to": []
         }
       ]
@@ -53467,6 +53666,7 @@
       "evolves_to": [
         {
           "species": "Volcaropod",
+          "level": 38,
           "evolves_to": []
         }
       ]
@@ -53695,6 +53895,7 @@
       "evolves_to": [
         {
           "species": "Cochignon",
+          "level": 33,
           "evolves_to": [
             {
               "species": "Mammochon",
@@ -53928,6 +54129,7 @@
       "evolves_to": [
         {
           "species": "Cochignon",
+          "level": 33,
           "evolves_to": [
             {
               "species": "Mammochon",
@@ -54213,6 +54415,7 @@
       "evolves_to": [
         {
           "species": "Corayôme",
+          "level": 38,
           "evolves_to": []
         }
       ]
@@ -54440,6 +54643,7 @@
       "evolves_to": [
         {
           "species": "Octillery",
+          "level": 25,
           "evolves_to": []
         }
       ]
@@ -54667,6 +54871,7 @@
       "evolves_to": [
         {
           "species": "Octillery",
+          "level": 25,
           "evolves_to": []
         }
       ]
@@ -55425,6 +55630,7 @@
       "evolves_to": [
         {
           "species": "Démolosse",
+          "level": 24,
           "evolves_to": []
         }
       ]
@@ -55641,6 +55847,7 @@
       "evolves_to": [
         {
           "species": "Démolosse",
+          "level": 24,
           "evolves_to": []
         }
       ]
@@ -55893,6 +56100,7 @@
       "evolves_to": [
         {
           "species": "Hypocéan",
+          "level": 32,
           "evolves_to": [
             {
               "species": "Hyporoi",
@@ -56033,6 +56241,7 @@
       "evolves_to": [
         {
           "species": "Donphan",
+          "level": 25,
           "evolves_to": []
         }
       ]
@@ -56168,6 +56377,7 @@
       "evolves_to": [
         {
           "species": "Donphan",
+          "level": 25,
           "evolves_to": []
         }
       ]
@@ -56816,14 +57026,17 @@
       "evolves_to": [
         {
           "species": "Kicklee",
+          "level": 20,
           "evolves_to": []
         },
         {
           "species": "Tygnon",
+          "level": 20,
           "evolves_to": []
         },
         {
           "species": "Kapoera",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -56883,14 +57096,17 @@
       "evolves_to": [
         {
           "species": "Kicklee",
+          "level": 20,
           "evolves_to": []
         },
         {
           "species": "Tygnon",
+          "level": 20,
           "evolves_to": []
         },
         {
           "species": "Kapoera",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -57115,6 +57331,7 @@
       "evolves_to": [
         {
           "species": "Lippoutou",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -57370,6 +57587,7 @@
       "evolves_to": [
         {
           "species": "Élektek",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Élekable",
@@ -57618,6 +57836,7 @@
       "evolves_to": [
         {
           "species": "Magmar",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Maganon",
@@ -58763,9 +58982,11 @@
       "evolves_to": [
         {
           "species": "Ymphect",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Tyranocif",
+              "level": 55,
               "evolves_to": []
             }
           ]
@@ -58996,9 +59217,11 @@
       "evolves_to": [
         {
           "species": "Ymphect",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Tyranocif",
+              "level": 55,
               "evolves_to": []
             }
           ]
@@ -59229,9 +59452,11 @@
       "evolves_to": [
         {
           "species": "Ymphect",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Tyranocif",
+              "level": 55,
               "evolves_to": []
             }
           ]
@@ -60042,9 +60267,11 @@
       "evolves_to": [
         {
           "species": "Massko",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Jungko",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -60234,9 +60461,11 @@
       "evolves_to": [
         {
           "species": "Massko",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Jungko",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -60426,9 +60655,11 @@
       "evolves_to": [
         {
           "species": "Massko",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Jungko",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -60606,9 +60837,11 @@
       "evolves_to": [
         {
           "species": "Galifeu",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Braségali",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -60787,9 +61020,11 @@
       "evolves_to": [
         {
           "species": "Galifeu",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Braségali",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -60968,9 +61203,11 @@
       "evolves_to": [
         {
           "species": "Galifeu",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Braségali",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -61152,9 +61389,11 @@
       "evolves_to": [
         {
           "species": "Flobio",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Laggron",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -61337,9 +61576,11 @@
       "evolves_to": [
         {
           "species": "Flobio",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Laggron",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -61522,9 +61763,11 @@
       "evolves_to": [
         {
           "species": "Flobio",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Laggron",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -61742,6 +61985,7 @@
       "evolves_to": [
         {
           "species": "Grahyèna",
+          "level": 18,
           "evolves_to": []
         }
       ]
@@ -61957,6 +62201,7 @@
       "evolves_to": [
         {
           "species": "Grahyèna",
+          "level": 18,
           "evolves_to": []
         }
       ]
@@ -62172,9 +62417,11 @@
       "evolves_to": [
         {
           "species": "Linéon",
+          "level": 20,
           "evolves_to": [
             {
               "species": "Ixon",
+              "level": 35,
               "evolves_to": []
             }
           ]
@@ -62392,9 +62639,11 @@
       "evolves_to": [
         {
           "species": "Linéon",
+          "level": 20,
           "evolves_to": [
             {
               "species": "Ixon",
+              "level": 35,
               "evolves_to": []
             }
           ]
@@ -62460,18 +62709,22 @@
       "evolves_to": [
         {
           "species": "Armulys",
+          "level": 7,
           "evolves_to": [
             {
               "species": "Charmillon",
+              "level": 10,
               "evolves_to": []
             }
           ]
         },
         {
           "species": "Blindalys",
+          "level": 7,
           "evolves_to": [
             {
               "species": "Papinox",
+              "level": 10,
               "evolves_to": []
             }
           ]
@@ -62537,18 +62790,22 @@
       "evolves_to": [
         {
           "species": "Armulys",
+          "level": 7,
           "evolves_to": [
             {
               "species": "Charmillon",
+              "level": 10,
               "evolves_to": []
             }
           ]
         },
         {
           "species": "Blindalys",
+          "level": 7,
           "evolves_to": [
             {
               "species": "Papinox",
+              "level": 10,
               "evolves_to": []
             }
           ]
@@ -62615,18 +62872,22 @@
       "evolves_to": [
         {
           "species": "Armulys",
+          "level": 7,
           "evolves_to": [
             {
               "species": "Charmillon",
+              "level": 10,
               "evolves_to": []
             }
           ]
         },
         {
           "species": "Blindalys",
+          "level": 7,
           "evolves_to": [
             {
               "species": "Papinox",
+              "level": 10,
               "evolves_to": []
             }
           ]
@@ -62692,18 +62953,22 @@
       "evolves_to": [
         {
           "species": "Armulys",
+          "level": 7,
           "evolves_to": [
             {
               "species": "Charmillon",
+              "level": 10,
               "evolves_to": []
             }
           ]
         },
         {
           "species": "Blindalys",
+          "level": 7,
           "evolves_to": [
             {
               "species": "Papinox",
+              "level": 10,
               "evolves_to": []
             }
           ]
@@ -62770,18 +63035,22 @@
       "evolves_to": [
         {
           "species": "Armulys",
+          "level": 7,
           "evolves_to": [
             {
               "species": "Charmillon",
+              "level": 10,
               "evolves_to": []
             }
           ]
         },
         {
           "species": "Blindalys",
+          "level": 7,
           "evolves_to": [
             {
               "species": "Papinox",
+              "level": 10,
               "evolves_to": []
             }
           ]
@@ -62988,6 +63257,7 @@
       "evolves_to": [
         {
           "species": "Lombre",
+          "level": 14,
           "evolves_to": [
             {
               "species": "Ludicolo",
@@ -63197,6 +63467,7 @@
       "evolves_to": [
         {
           "species": "Lombre",
+          "level": 14,
           "evolves_to": [
             {
               "species": "Ludicolo",
@@ -63406,6 +63677,7 @@
       "evolves_to": [
         {
           "species": "Lombre",
+          "level": 14,
           "evolves_to": [
             {
               "species": "Ludicolo",
@@ -63542,6 +63814,7 @@
       "evolves_to": [
         {
           "species": "Pifeuil",
+          "level": 14,
           "evolves_to": [
             {
               "species": "Tengalice",
@@ -63679,6 +63952,7 @@
       "evolves_to": [
         {
           "species": "Pifeuil",
+          "level": 14,
           "evolves_to": [
             {
               "species": "Tengalice",
@@ -63816,6 +64090,7 @@
       "evolves_to": [
         {
           "species": "Pifeuil",
+          "level": 14,
           "evolves_to": [
             {
               "species": "Tengalice",
@@ -63945,6 +64220,7 @@
       "evolves_to": [
         {
           "species": "Hélédelle",
+          "level": 22,
           "evolves_to": []
         }
       ]
@@ -64069,6 +64345,7 @@
       "evolves_to": [
         {
           "species": "Hélédelle",
+          "level": 22,
           "evolves_to": []
         }
       ]
@@ -64309,6 +64586,7 @@
       "evolves_to": [
         {
           "species": "Bekipan",
+          "level": 25,
           "evolves_to": []
         }
       ]
@@ -64549,6 +64827,7 @@
       "evolves_to": [
         {
           "species": "Bekipan",
+          "level": 25,
           "evolves_to": []
         }
       ]
@@ -64849,9 +65128,11 @@
       "evolves_to": [
         {
           "species": "Kirlia",
+          "level": 20,
           "evolves_to": [
             {
               "species": "Gardevoir",
+              "level": 30,
               "evolves_to": []
             },
             {
@@ -65158,9 +65439,11 @@
       "evolves_to": [
         {
           "species": "Kirlia",
+          "level": 20,
           "evolves_to": [
             {
               "species": "Gardevoir",
+              "level": 30,
               "evolves_to": []
             },
             {
@@ -65467,9 +65750,11 @@
       "evolves_to": [
         {
           "species": "Kirlia",
+          "level": 20,
           "evolves_to": [
             {
               "species": "Gardevoir",
+              "level": 30,
               "evolves_to": []
             },
             {
@@ -65604,6 +65889,7 @@
       "evolves_to": [
         {
           "species": "Maskadra",
+          "level": 22,
           "evolves_to": []
         }
       ]
@@ -65732,6 +66018,7 @@
       "evolves_to": [
         {
           "species": "Maskadra",
+          "level": 22,
           "evolves_to": []
         }
       ]
@@ -65903,6 +66190,7 @@
       "evolves_to": [
         {
           "species": "Chapignon",
+          "level": 23,
           "evolves_to": []
         }
       ]
@@ -66075,6 +66363,7 @@
       "evolves_to": [
         {
           "species": "Chapignon",
+          "level": 23,
           "evolves_to": []
         }
       ]
@@ -66214,9 +66503,11 @@
       "evolves_to": [
         {
           "species": "Vigoroth",
+          "level": 18,
           "evolves_to": [
             {
               "species": "Monaflèmit",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -66358,9 +66649,11 @@
       "evolves_to": [
         {
           "species": "Vigoroth",
+          "level": 18,
           "evolves_to": [
             {
               "species": "Monaflèmit",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -66502,9 +66795,11 @@
       "evolves_to": [
         {
           "species": "Vigoroth",
+          "level": 18,
           "evolves_to": [
             {
               "species": "Monaflèmit",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -66655,6 +66950,7 @@
       "evolves_to": [
         {
           "species": "Ninjask",
+          "level": 20,
           "evolves_to": []
         },
         {
@@ -66807,6 +67103,7 @@
       "evolves_to": [
         {
           "species": "Ninjask",
+          "level": 20,
           "evolves_to": []
         },
         {
@@ -66959,6 +67256,7 @@
       "evolves_to": [
         {
           "species": "Ninjask",
+          "level": 20,
           "evolves_to": []
         },
         {
@@ -67154,9 +67452,11 @@
       "evolves_to": [
         {
           "species": "Ramboum",
+          "level": 20,
           "evolves_to": [
             {
               "species": "Brouhabam",
+              "level": 40,
               "evolves_to": []
             }
           ]
@@ -67350,9 +67650,11 @@
       "evolves_to": [
         {
           "species": "Ramboum",
+          "level": 20,
           "evolves_to": [
             {
               "species": "Brouhabam",
+              "level": 40,
               "evolves_to": []
             }
           ]
@@ -67546,9 +67848,11 @@
       "evolves_to": [
         {
           "species": "Ramboum",
+          "level": 20,
           "evolves_to": [
             {
               "species": "Brouhabam",
+              "level": 40,
               "evolves_to": []
             }
           ]
@@ -67726,6 +68030,7 @@
       "evolves_to": [
         {
           "species": "Hariyama",
+          "level": 24,
           "evolves_to": []
         }
       ]
@@ -67901,6 +68206,7 @@
       "evolves_to": [
         {
           "species": "Hariyama",
+          "level": 24,
           "evolves_to": []
         }
       ]
@@ -68048,6 +68354,7 @@
           "evolves_to": [
             {
               "species": "Azumarill",
+              "level": 18,
               "evolves_to": []
             }
           ]
@@ -69701,9 +70008,11 @@
       "evolves_to": [
         {
           "species": "Galegon",
+          "level": 32,
           "evolves_to": [
             {
               "species": "Galeking",
+              "level": 42,
               "evolves_to": []
             }
           ]
@@ -70026,9 +70335,11 @@
       "evolves_to": [
         {
           "species": "Galegon",
+          "level": 32,
           "evolves_to": [
             {
               "species": "Galeking",
+              "level": 42,
               "evolves_to": []
             }
           ]
@@ -70351,9 +70662,11 @@
       "evolves_to": [
         {
           "species": "Galegon",
+          "level": 32,
           "evolves_to": [
             {
               "species": "Galeking",
+              "level": 42,
               "evolves_to": []
             }
           ]
@@ -70604,6 +70917,7 @@
       "evolves_to": [
         {
           "species": "Charmina",
+          "level": 37,
           "evolves_to": []
         }
       ]
@@ -70852,6 +71166,7 @@
       "evolves_to": [
         {
           "species": "Charmina",
+          "level": 37,
           "evolves_to": []
         }
       ]
@@ -71047,6 +71362,7 @@
       "evolves_to": [
         {
           "species": "Élecsprint",
+          "level": 26,
           "evolves_to": []
         }
       ]
@@ -71242,6 +71558,7 @@
       "evolves_to": [
         {
           "species": "Élecsprint",
+          "level": 26,
           "evolves_to": []
         }
       ]
@@ -72426,6 +72743,7 @@
       "evolves_to": [
         {
           "species": "Avaltout",
+          "level": 26,
           "evolves_to": []
         }
       ]
@@ -72621,6 +72939,7 @@
       "evolves_to": [
         {
           "species": "Avaltout",
+          "level": 26,
           "evolves_to": []
         }
       ]
@@ -72825,6 +73144,7 @@
       "evolves_to": [
         {
           "species": "Sharpedo",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -73029,6 +73349,7 @@
       "evolves_to": [
         {
           "species": "Sharpedo",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -73284,6 +73605,7 @@
       "evolves_to": [
         {
           "species": "Wailord",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -73539,6 +73861,7 @@
       "evolves_to": [
         {
           "species": "Wailord",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -73755,6 +74078,7 @@
       "evolves_to": [
         {
           "species": "Camérupt",
+          "level": 33,
           "evolves_to": []
         }
       ]
@@ -73971,6 +74295,7 @@
       "evolves_to": [
         {
           "species": "Camérupt",
+          "level": 33,
           "evolves_to": []
         }
       ]
@@ -74452,6 +74777,7 @@
       "evolves_to": [
         {
           "species": "Groret",
+          "level": 32,
           "evolves_to": []
         }
       ]
@@ -74643,6 +74969,7 @@
       "evolves_to": [
         {
           "species": "Groret",
+          "level": 32,
           "evolves_to": []
         }
       ]
@@ -75084,9 +75411,11 @@
       "evolves_to": [
         {
           "species": "Vibraninf",
+          "level": 35,
           "evolves_to": [
             {
               "species": "Libégon",
+              "level": 45,
               "evolves_to": []
             }
           ]
@@ -75369,9 +75698,11 @@
       "evolves_to": [
         {
           "species": "Vibraninf",
+          "level": 35,
           "evolves_to": [
             {
               "species": "Libégon",
+              "level": 45,
               "evolves_to": []
             }
           ]
@@ -75654,9 +75985,11 @@
       "evolves_to": [
         {
           "species": "Vibraninf",
+          "level": 35,
           "evolves_to": [
             {
               "species": "Libégon",
+              "level": 45,
               "evolves_to": []
             }
           ]
@@ -75854,6 +76187,7 @@
       "evolves_to": [
         {
           "species": "Cacturne",
+          "level": 32,
           "evolves_to": []
         }
       ]
@@ -76050,6 +76384,7 @@
       "evolves_to": [
         {
           "species": "Cacturne",
+          "level": 32,
           "evolves_to": []
         }
       ]
@@ -76350,6 +76685,7 @@
       "evolves_to": [
         {
           "species": "Altaria",
+          "level": 35,
           "evolves_to": []
         }
       ]
@@ -76650,6 +76986,7 @@
       "evolves_to": [
         {
           "species": "Altaria",
+          "level": 35,
           "evolves_to": []
         }
       ]
@@ -77980,6 +78317,7 @@
       "evolves_to": [
         {
           "species": "Barbicha",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -78216,6 +78554,7 @@
       "evolves_to": [
         {
           "species": "Barbicha",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -78459,6 +78798,7 @@
       "evolves_to": [
         {
           "species": "Colhomard",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -78703,6 +79043,7 @@
       "evolves_to": [
         {
           "species": "Colhomard",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -79031,6 +79372,7 @@
       "evolves_to": [
         {
           "species": "Kaorine",
+          "level": 36,
           "evolves_to": []
         }
       ]
@@ -79359,6 +79701,7 @@
       "evolves_to": [
         {
           "species": "Kaorine",
+          "level": 36,
           "evolves_to": []
         }
       ]
@@ -79587,6 +79930,7 @@
       "evolves_to": [
         {
           "species": "Vacilys",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -79815,6 +80159,7 @@
       "evolves_to": [
         {
           "species": "Vacilys",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -80031,6 +80376,7 @@
       "evolves_to": [
         {
           "species": "Armaldo",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -80247,6 +80593,7 @@
       "evolves_to": [
         {
           "species": "Armaldo",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -80968,6 +81315,7 @@
       "evolves_to": [
         {
           "species": "Branette",
+          "level": 37,
           "evolves_to": []
         }
       ]
@@ -81227,6 +81575,7 @@
       "evolves_to": [
         {
           "species": "Branette",
+          "level": 37,
           "evolves_to": []
         }
       ]
@@ -81486,6 +81835,7 @@
       "evolves_to": [
         {
           "species": "Téraclope",
+          "level": 37,
           "evolves_to": [
             {
               "species": "Noctunoir",
@@ -81750,6 +82100,7 @@
       "evolves_to": [
         {
           "species": "Téraclope",
+          "level": 37,
           "evolves_to": [
             {
               "species": "Noctunoir",
@@ -82498,6 +82849,7 @@
       "evolves_to": [
         {
           "species": "Qulbutoké",
+          "level": 15,
           "evolves_to": []
         }
       ]
@@ -82737,6 +83089,7 @@
       "evolves_to": [
         {
           "species": "Oniglali",
+          "level": 42,
           "evolves_to": []
         },
         {
@@ -82980,6 +83333,7 @@
       "evolves_to": [
         {
           "species": "Oniglali",
+          "level": 42,
           "evolves_to": []
         },
         {
@@ -83192,9 +83546,11 @@
       "evolves_to": [
         {
           "species": "Phogleur",
+          "level": 32,
           "evolves_to": [
             {
               "species": "Kaimorse",
+              "level": 44,
               "evolves_to": []
             }
           ]
@@ -83405,9 +83761,11 @@
       "evolves_to": [
         {
           "species": "Phogleur",
+          "level": 32,
           "evolves_to": [
             {
               "species": "Kaimorse",
+              "level": 44,
               "evolves_to": []
             }
           ]
@@ -83618,9 +83976,11 @@
       "evolves_to": [
         {
           "species": "Phogleur",
+          "level": 32,
           "evolves_to": [
             {
               "species": "Kaimorse",
+              "level": 44,
               "evolves_to": []
             }
           ]
@@ -84472,9 +84832,11 @@
       "evolves_to": [
         {
           "species": "Drackhaus",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Drattak",
+              "level": 50,
               "evolves_to": []
             }
           ]
@@ -84672,9 +85034,11 @@
       "evolves_to": [
         {
           "species": "Drackhaus",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Drattak",
+              "level": 50,
               "evolves_to": []
             }
           ]
@@ -84873,9 +85237,11 @@
       "evolves_to": [
         {
           "species": "Drackhaus",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Drattak",
+              "level": 50,
               "evolves_to": []
             }
           ]
@@ -84926,9 +85292,11 @@
       "evolves_to": [
         {
           "species": "Métang",
+          "level": 20,
           "evolves_to": [
             {
               "species": "Métalosse",
+              "level": 45,
               "evolves_to": []
             }
           ]
@@ -84979,9 +85347,11 @@
       "evolves_to": [
         {
           "species": "Métang",
+          "level": 20,
           "evolves_to": [
             {
               "species": "Métalosse",
+              "level": 45,
               "evolves_to": []
             }
           ]
@@ -85032,9 +85402,11 @@
       "evolves_to": [
         {
           "species": "Métang",
+          "level": 20,
           "evolves_to": [
             {
               "species": "Métalosse",
+              "level": 45,
               "evolves_to": []
             }
           ]
@@ -87223,9 +87595,11 @@
       "evolves_to": [
         {
           "species": "Boskara",
+          "level": 18,
           "evolves_to": [
             {
               "species": "Torterra",
+              "level": 32,
               "evolves_to": []
             }
           ]
@@ -87343,9 +87717,11 @@
       "evolves_to": [
         {
           "species": "Boskara",
+          "level": 18,
           "evolves_to": [
             {
               "species": "Torterra",
+              "level": 32,
               "evolves_to": []
             }
           ]
@@ -87464,9 +87840,11 @@
       "evolves_to": [
         {
           "species": "Boskara",
+          "level": 18,
           "evolves_to": [
             {
               "species": "Torterra",
+              "level": 32,
               "evolves_to": []
             }
           ]
@@ -87600,9 +87978,11 @@
       "evolves_to": [
         {
           "species": "Chimpenfeu",
+          "level": 14,
           "evolves_to": [
             {
               "species": "Simiabraz",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -87737,9 +88117,11 @@
       "evolves_to": [
         {
           "species": "Chimpenfeu",
+          "level": 14,
           "evolves_to": [
             {
               "species": "Simiabraz",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -87874,9 +88256,11 @@
       "evolves_to": [
         {
           "species": "Chimpenfeu",
+          "level": 14,
           "evolves_to": [
             {
               "species": "Simiabraz",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -88022,9 +88406,11 @@
       "evolves_to": [
         {
           "species": "Prinplouf",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Pingoléon",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -88170,9 +88556,11 @@
       "evolves_to": [
         {
           "species": "Prinplouf",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Pingoléon",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -88319,9 +88707,11 @@
       "evolves_to": [
         {
           "species": "Prinplouf",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Pingoléon",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -88436,9 +88826,11 @@
       "evolves_to": [
         {
           "species": "Étourvol",
+          "level": 14,
           "evolves_to": [
             {
               "species": "Étouraptor",
+              "level": 34,
               "evolves_to": []
             }
           ]
@@ -88553,9 +88945,11 @@
       "evolves_to": [
         {
           "species": "Étourvol",
+          "level": 14,
           "evolves_to": [
             {
               "species": "Étouraptor",
+              "level": 34,
               "evolves_to": []
             }
           ]
@@ -88670,9 +89064,11 @@
       "evolves_to": [
         {
           "species": "Étourvol",
+          "level": 14,
           "evolves_to": [
             {
               "species": "Étouraptor",
+              "level": 34,
               "evolves_to": []
             }
           ]
@@ -88846,6 +89242,7 @@
       "evolves_to": [
         {
           "species": "Castorno",
+          "level": 15,
           "evolves_to": []
         }
       ]
@@ -89018,6 +89415,7 @@
       "evolves_to": [
         {
           "species": "Castorno",
+          "level": 15,
           "evolves_to": []
         }
       ]
@@ -89089,6 +89487,7 @@
       "evolves_to": [
         {
           "species": "Mélokrik",
+          "level": 10,
           "evolves_to": []
         }
       ]
@@ -89160,6 +89559,7 @@
       "evolves_to": [
         {
           "species": "Mélokrik",
+          "level": 10,
           "evolves_to": []
         }
       ]
@@ -89347,9 +89747,11 @@
       "evolves_to": [
         {
           "species": "Luxio",
+          "level": 15,
           "evolves_to": [
             {
               "species": "Luxray",
+              "level": 30,
               "evolves_to": []
             }
           ]
@@ -89539,9 +89941,11 @@
       "evolves_to": [
         {
           "species": "Luxio",
+          "level": 15,
           "evolves_to": [
             {
               "species": "Luxray",
+              "level": 30,
               "evolves_to": []
             }
           ]
@@ -89731,9 +90135,11 @@
       "evolves_to": [
         {
           "species": "Luxio",
+          "level": 15,
           "evolves_to": [
             {
               "species": "Luxray",
+              "level": 30,
               "evolves_to": []
             }
           ]
@@ -90113,6 +90519,7 @@
       "evolves_to": [
         {
           "species": "Charkos",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -90264,6 +90671,7 @@
       "evolves_to": [
         {
           "species": "Charkos",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -90384,6 +90792,7 @@
       "evolves_to": [
         {
           "species": "Bastiodon",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -90504,6 +90913,7 @@
       "evolves_to": [
         {
           "species": "Bastiodon",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -90567,10 +90977,12 @@
       "evolves_to": [
         {
           "species": "Cheniselle",
+          "level": 20,
           "evolves_to": []
         },
         {
           "species": "Papilord",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -90635,10 +91047,12 @@
       "evolves_to": [
         {
           "species": "Cheniselle",
+          "level": 20,
           "evolves_to": []
         },
         {
           "species": "Papilord",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -90703,10 +91117,12 @@
       "evolves_to": [
         {
           "species": "Cheniselle",
+          "level": 20,
           "evolves_to": []
         },
         {
           "species": "Papilord",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -90775,6 +91191,7 @@
       "evolves_to": [
         {
           "species": "Apireine",
+          "level": 21,
           "evolves_to": []
         }
       ]
@@ -90843,6 +91260,7 @@
       "evolves_to": [
         {
           "species": "Apireine",
+          "level": 21,
           "evolves_to": []
         }
       ]
@@ -91192,6 +91610,7 @@
       "evolves_to": [
         {
           "species": "Mustéflott",
+          "level": 26,
           "evolves_to": []
         }
       ]
@@ -91387,6 +91806,7 @@
       "evolves_to": [
         {
           "species": "Mustéflott",
+          "level": 26,
           "evolves_to": []
         }
       ]
@@ -91542,6 +91962,7 @@
       "evolves_to": [
         {
           "species": "Ceriflor",
+          "level": 25,
           "evolves_to": []
         }
       ]
@@ -91697,6 +92118,7 @@
       "evolves_to": [
         {
           "species": "Ceriflor",
+          "level": 25,
           "evolves_to": []
         }
       ]
@@ -91844,6 +92266,7 @@
       "evolves_to": [
         {
           "species": "Tritosor",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -91992,6 +92415,7 @@
       "evolves_to": [
         {
           "species": "Tritosor",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -92435,6 +92859,7 @@
       "evolves_to": [
         {
           "species": "Grodrive",
+          "level": 28,
           "evolves_to": []
         }
       ]
@@ -92703,6 +93128,7 @@
       "evolves_to": [
         {
           "species": "Grodrive",
+          "level": 28,
           "evolves_to": []
         }
       ]
@@ -93663,6 +94089,7 @@
       "evolves_to": [
         {
           "species": "Chaffreux",
+          "level": 38,
           "evolves_to": []
         }
       ]
@@ -93802,6 +94229,7 @@
       "evolves_to": [
         {
           "species": "Chaffreux",
+          "level": 38,
           "evolves_to": []
         }
       ]
@@ -94185,6 +94613,7 @@
       "evolves_to": [
         {
           "species": "Moufflair",
+          "level": 34,
           "evolves_to": []
         }
       ]
@@ -94445,6 +94874,7 @@
       "evolves_to": [
         {
           "species": "Moufflair",
+          "level": 34,
           "evolves_to": []
         }
       ]
@@ -94657,6 +95087,7 @@
       "evolves_to": [
         {
           "species": "Archéodong",
+          "level": 33,
           "evolves_to": []
         }
       ]
@@ -94869,6 +95300,7 @@
       "evolves_to": [
         {
           "species": "Archéodong",
+          "level": 33,
           "evolves_to": []
         }
       ]
@@ -95331,6 +95763,7 @@
           "evolves_to": [
             {
               "species": "M. Glaquette",
+              "level": 42,
               "evolves_to": []
             }
           ]
@@ -95951,9 +96384,11 @@
       "evolves_to": [
         {
           "species": "Carmache",
+          "level": 24,
           "evolves_to": [
             {
               "species": "Carchacrok",
+              "level": 48,
               "evolves_to": []
             }
           ]
@@ -96108,9 +96543,11 @@
       "evolves_to": [
         {
           "species": "Carmache",
+          "level": 24,
           "evolves_to": [
             {
               "species": "Carchacrok",
+              "level": 48,
               "evolves_to": []
             }
           ]
@@ -96265,9 +96702,11 @@
       "evolves_to": [
         {
           "species": "Carmache",
+          "level": 24,
           "evolves_to": [
             {
               "species": "Carchacrok",
+              "level": 48,
               "evolves_to": []
             }
           ]
@@ -97075,6 +97514,7 @@
       "evolves_to": [
         {
           "species": "Hippodocus",
+          "level": 34,
           "evolves_to": []
         }
       ]
@@ -97230,6 +97670,7 @@
       "evolves_to": [
         {
           "species": "Hippodocus",
+          "level": 34,
           "evolves_to": []
         }
       ]
@@ -97486,6 +97927,7 @@
       "evolves_to": [
         {
           "species": "Drascore",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -97742,6 +98184,7 @@
       "evolves_to": [
         {
           "species": "Drascore",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -97950,6 +98393,7 @@
       "evolves_to": [
         {
           "species": "Coatox",
+          "level": 37,
           "evolves_to": []
         }
       ]
@@ -98158,6 +98602,7 @@
       "evolves_to": [
         {
           "species": "Coatox",
+          "level": 37,
           "evolves_to": []
         }
       ]
@@ -98447,6 +98892,7 @@
       "evolves_to": [
         {
           "species": "Luminéon",
+          "level": 31,
           "evolves_to": []
         }
       ]
@@ -98582,6 +99028,7 @@
       "evolves_to": [
         {
           "species": "Luminéon",
+          "level": 31,
           "evolves_to": []
         }
       ]
@@ -98946,6 +99393,7 @@
       "evolves_to": [
         {
           "species": "Blizzaroi",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -99098,6 +99546,7 @@
       "evolves_to": [
         {
           "species": "Blizzaroi",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -99822,6 +100271,7 @@
       "evolves_to": [
         {
           "species": "Magnéton",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Magnézone",
@@ -100514,6 +100964,7 @@
       "evolves_to": [
         {
           "species": "Rhinoféros",
+          "level": 42,
           "evolves_to": [
             {
               "species": "Rhinastoc",
@@ -101173,6 +101624,7 @@
       "evolves_to": [
         {
           "species": "Élektek",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Élekable",
@@ -101421,6 +101873,7 @@
       "evolves_to": [
         {
           "species": "Magmar",
+          "level": 30,
           "evolves_to": [
             {
               "species": "Maganon",
@@ -103041,6 +103494,7 @@
       "evolves_to": [
         {
           "species": "Cochignon",
+          "level": 33,
           "evolves_to": [
             {
               "species": "Mammochon",
@@ -103618,9 +104072,11 @@
       "evolves_to": [
         {
           "species": "Kirlia",
+          "level": 20,
           "evolves_to": [
             {
               "species": "Gardevoir",
+              "level": 30,
               "evolves_to": []
             },
             {
@@ -104162,6 +104618,7 @@
       "evolves_to": [
         {
           "species": "Téraclope",
+          "level": 37,
           "evolves_to": [
             {
               "species": "Noctunoir",
@@ -104407,6 +104864,7 @@
       "evolves_to": [
         {
           "species": "Oniglali",
+          "level": 42,
           "evolves_to": []
         },
         {
@@ -107020,9 +107478,11 @@
       "evolves_to": [
         {
           "species": "Lianaja",
+          "level": 17,
           "evolves_to": [
             {
               "species": "Majaspic",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -107136,9 +107596,11 @@
       "evolves_to": [
         {
           "species": "Lianaja",
+          "level": 17,
           "evolves_to": [
             {
               "species": "Majaspic",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -107252,9 +107714,11 @@
       "evolves_to": [
         {
           "species": "Lianaja",
+          "level": 17,
           "evolves_to": [
             {
               "species": "Majaspic",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -107360,9 +107824,11 @@
       "evolves_to": [
         {
           "species": "Grotichon",
+          "level": 17,
           "evolves_to": [
             {
               "species": "Roitiflam",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -107469,9 +107935,11 @@
       "evolves_to": [
         {
           "species": "Grotichon",
+          "level": 17,
           "evolves_to": [
             {
               "species": "Roitiflam",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -107578,9 +108046,11 @@
       "evolves_to": [
         {
           "species": "Grotichon",
+          "level": 17,
           "evolves_to": [
             {
               "species": "Roitiflam",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -107710,9 +108180,11 @@
       "evolves_to": [
         {
           "species": "Mateloutre",
+          "level": 17,
           "evolves_to": [
             {
               "species": "Clamiral",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -107842,9 +108314,11 @@
       "evolves_to": [
         {
           "species": "Mateloutre",
+          "level": 17,
           "evolves_to": [
             {
               "species": "Clamiral",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -107974,9 +108448,11 @@
       "evolves_to": [
         {
           "species": "Mateloutre",
+          "level": 17,
           "evolves_to": [
             {
               "species": "Clamiral",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -108106,6 +108582,7 @@
       "evolves_to": [
         {
           "species": "Miradar",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -108233,6 +108710,7 @@
       "evolves_to": [
         {
           "species": "Miradar",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -108376,9 +108854,11 @@
       "evolves_to": [
         {
           "species": "Ponchien",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Mastouffe",
+              "level": 32,
               "evolves_to": []
             }
           ]
@@ -108524,9 +109004,11 @@
       "evolves_to": [
         {
           "species": "Ponchien",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Mastouffe",
+              "level": 32,
               "evolves_to": []
             }
           ]
@@ -108672,9 +109154,11 @@
       "evolves_to": [
         {
           "species": "Ponchien",
+          "level": 16,
           "evolves_to": [
             {
               "species": "Mastouffe",
+              "level": 32,
               "evolves_to": []
             }
           ]
@@ -108820,6 +109304,7 @@
       "evolves_to": [
         {
           "species": "Léopardus",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -108963,6 +109448,7 @@
       "evolves_to": [
         {
           "species": "Léopardus",
+          "level": 20,
           "evolves_to": []
         }
       ]
@@ -110055,9 +110541,11 @@
       "evolves_to": [
         {
           "species": "Colombeau",
+          "level": 21,
           "evolves_to": [
             {
               "species": "Déflaisan",
+              "level": 32,
               "evolves_to": []
             }
           ]
@@ -110208,9 +110696,11 @@
       "evolves_to": [
         {
           "species": "Colombeau",
+          "level": 21,
           "evolves_to": [
             {
               "species": "Déflaisan",
+              "level": 32,
               "evolves_to": []
             }
           ]
@@ -110361,9 +110851,11 @@
       "evolves_to": [
         {
           "species": "Colombeau",
+          "level": 21,
           "evolves_to": [
             {
               "species": "Déflaisan",
+              "level": 32,
               "evolves_to": []
             }
           ]
@@ -110481,6 +110973,7 @@
       "evolves_to": [
         {
           "species": "Zéblitz",
+          "level": 27,
           "evolves_to": []
         }
       ]
@@ -110596,6 +111089,7 @@
       "evolves_to": [
         {
           "species": "Zéblitz",
+          "level": 27,
           "evolves_to": []
         }
       ]
@@ -110727,6 +111221,7 @@
       "evolves_to": [
         {
           "species": "Géolithe",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Gigalithe",
@@ -110863,6 +111358,7 @@
       "evolves_to": [
         {
           "species": "Géolithe",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Gigalithe",
@@ -110999,6 +111495,7 @@
       "evolves_to": [
         {
           "species": "Géolithe",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Gigalithe",
@@ -111447,6 +111944,7 @@
       "evolves_to": [
         {
           "species": "Minotaupe",
+          "level": 31,
           "evolves_to": []
         }
       ]
@@ -111595,6 +112093,7 @@
       "evolves_to": [
         {
           "species": "Minotaupe",
+          "level": 31,
           "evolves_to": []
         }
       ]
@@ -111968,6 +112467,7 @@
       "evolves_to": [
         {
           "species": "Ouvrifier",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Bétochef",
@@ -112124,6 +112624,7 @@
       "evolves_to": [
         {
           "species": "Ouvrifier",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Bétochef",
@@ -112280,6 +112781,7 @@
       "evolves_to": [
         {
           "species": "Ouvrifier",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Bétochef",
@@ -112432,9 +112934,11 @@
       "evolves_to": [
         {
           "species": "Batracné",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Crapustule",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -112585,9 +113089,11 @@
       "evolves_to": [
         {
           "species": "Batracné",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Crapustule",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -112738,9 +113244,11 @@
       "evolves_to": [
         {
           "species": "Batracné",
+          "level": 25,
           "evolves_to": [
             {
               "species": "Crapustule",
+              "level": 36,
               "evolves_to": []
             }
           ]
@@ -113203,6 +113711,7 @@
       "evolves_to": [
         {
           "species": "Couverdure",
+          "level": 20,
           "evolves_to": [
             {
               "species": "Manternel",
@@ -113284,6 +113793,7 @@
       "evolves_to": [
         {
           "species": "Couverdure",
+          "level": 20,
           "evolves_to": [
             {
               "species": "Manternel",
@@ -113365,6 +113875,7 @@
       "evolves_to": [
         {
           "species": "Couverdure",
+          "level": 20,
           "evolves_to": [
             {
               "species": "Manternel",
@@ -113518,9 +114029,11 @@
       "evolves_to": [
         {
           "species": "Scobolide",
+          "level": 22,
           "evolves_to": [
             {
               "species": "Brutapode",
+              "level": 30,
               "evolves_to": []
             }
           ]
@@ -113671,9 +114184,11 @@
       "evolves_to": [
         {
           "species": "Scobolide",
+          "level": 22,
           "evolves_to": [
             {
               "species": "Brutapode",
+              "level": 30,
               "evolves_to": []
             }
           ]
@@ -113824,9 +114339,11 @@
       "evolves_to": [
         {
           "species": "Scobolide",
+          "level": 22,
           "evolves_to": [
             {
               "species": "Brutapode",
+              "level": 30,
               "evolves_to": []
             }
           ]
@@ -114765,9 +115282,11 @@
       "evolves_to": [
         {
           "species": "Escroco",
+          "level": 29,
           "evolves_to": [
             {
               "species": "Crocorible",
+              "level": 40,
               "evolves_to": []
             }
           ]
@@ -114934,9 +115453,11 @@
       "evolves_to": [
         {
           "species": "Escroco",
+          "level": 29,
           "evolves_to": [
             {
               "species": "Crocorible",
+              "level": 40,
               "evolves_to": []
             }
           ]
@@ -115103,9 +115624,11 @@
       "evolves_to": [
         {
           "species": "Escroco",
+          "level": 29,
           "evolves_to": [
             {
               "species": "Crocorible",
+              "level": 40,
               "evolves_to": []
             }
           ]
@@ -115263,6 +115786,7 @@
       "evolves_to": [
         {
           "species": "Darumacho",
+          "level": 35,
           "evolves_to": []
         }
       ]
@@ -115418,6 +115942,7 @@
       "evolves_to": [
         {
           "species": "Darumacho",
+          "level": 35,
           "evolves_to": []
         }
       ]
@@ -115756,6 +116281,7 @@
       "evolves_to": [
         {
           "species": "Crabaraque",
+          "level": 34,
           "evolves_to": []
         }
       ]
@@ -115908,6 +116434,7 @@
       "evolves_to": [
         {
           "species": "Crabaraque",
+          "level": 34,
           "evolves_to": []
         }
       ]
@@ -116092,6 +116619,7 @@
       "evolves_to": [
         {
           "species": "Baggaïd",
+          "level": 39,
           "evolves_to": []
         }
       ]
@@ -116276,6 +116804,7 @@
       "evolves_to": [
         {
           "species": "Baggaïd",
+          "level": 39,
           "evolves_to": []
         }
       ]
@@ -116594,6 +117123,7 @@
       "evolves_to": [
         {
           "species": "Tutankafer",
+          "level": 34,
           "evolves_to": []
         },
         {
@@ -116753,6 +117283,7 @@
       "evolves_to": [
         {
           "species": "Tutankafer",
+          "level": 34,
           "evolves_to": []
         },
         {
@@ -116933,6 +117464,7 @@
       "evolves_to": [
         {
           "species": "Mégapagos",
+          "level": 37,
           "evolves_to": []
         }
       ]
@@ -117109,6 +117641,7 @@
       "evolves_to": [
         {
           "species": "Mégapagos",
+          "level": 37,
           "evolves_to": []
         }
       ]
@@ -117281,6 +117814,7 @@
       "evolves_to": [
         {
           "species": "Aéroptéryx",
+          "level": 37,
           "evolves_to": []
         }
       ]
@@ -117453,6 +117987,7 @@
       "evolves_to": [
         {
           "species": "Aéroptéryx",
+          "level": 37,
           "evolves_to": []
         }
       ]
@@ -117612,6 +118147,7 @@
       "evolves_to": [
         {
           "species": "Miasmax",
+          "level": 36,
           "evolves_to": []
         }
       ]
@@ -117771,6 +118307,7 @@
       "evolves_to": [
         {
           "species": "Miasmax",
+          "level": 36,
           "evolves_to": []
         }
       ]
@@ -117922,6 +118459,7 @@
       "evolves_to": [
         {
           "species": "Zoroark",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -118073,6 +118611,7 @@
       "evolves_to": [
         {
           "species": "Zoroark",
+          "level": 30,
           "evolves_to": []
         }
       ]
@@ -118554,9 +119093,11 @@
       "evolves_to": [
         {
           "species": "Mesmérella",
+          "level": 32,
           "evolves_to": [
             {
               "species": "Sidérella",
+              "level": 41,
               "evolves_to": []
             }
           ]
@@ -118714,9 +119255,11 @@
       "evolves_to": [
         {
           "species": "Mesmérella",
+          "level": 32,
           "evolves_to": [
             {
               "species": "Sidérella",
+              "level": 41,
               "evolves_to": []
             }
           ]
@@ -118874,9 +119417,11 @@
       "evolves_to": [
         {
           "species": "Mesmérella",
+          "level": 32,
           "evolves_to": [
             {
               "species": "Sidérella",
+              "level": 41,
               "evolves_to": []
             }
           ]
@@ -119030,9 +119575,11 @@
       "evolves_to": [
         {
           "species": "Méios",
+          "level": 32,
           "evolves_to": [
             {
               "species": "Symbios",
+              "level": 41,
               "evolves_to": []
             }
           ]
@@ -119186,9 +119733,11 @@
       "evolves_to": [
         {
           "species": "Méios",
+          "level": 32,
           "evolves_to": [
             {
               "species": "Symbios",
+              "level": 41,
               "evolves_to": []
             }
           ]
@@ -119342,9 +119891,11 @@
       "evolves_to": [
         {
           "species": "Méios",
+          "level": 32,
           "evolves_to": [
             {
               "species": "Symbios",
+              "level": 41,
               "evolves_to": []
             }
           ]
@@ -119447,6 +119998,7 @@
       "evolves_to": [
         {
           "species": "Lakmécygne",
+          "level": 35,
           "evolves_to": []
         }
       ]
@@ -119547,6 +120099,7 @@
       "evolves_to": [
         {
           "species": "Lakmécygne",
+          "level": 35,
           "evolves_to": []
         }
       ]
@@ -119702,9 +120255,11 @@
       "evolves_to": [
         {
           "species": "Sorboul",
+          "level": 35,
           "evolves_to": [
             {
               "species": "Sorbouboul",
+              "level": 47,
               "evolves_to": []
             }
           ]
@@ -119862,9 +120417,11 @@
       "evolves_to": [
         {
           "species": "Sorboul",
+          "level": 35,
           "evolves_to": [
             {
               "species": "Sorbouboul",
+              "level": 47,
               "evolves_to": []
             }
           ]
@@ -120022,9 +120579,11 @@
       "evolves_to": [
         {
           "species": "Sorboul",
+          "level": 35,
           "evolves_to": [
             {
               "species": "Sorbouboul",
+              "level": 47,
               "evolves_to": []
             }
           ]
@@ -120151,6 +120710,7 @@
       "evolves_to": [
         {
           "species": "Haydaim",
+          "level": 34,
           "evolves_to": []
         }
       ]
@@ -120275,6 +120835,7 @@
       "evolves_to": [
         {
           "species": "Haydaim",
+          "level": 34,
           "evolves_to": []
         }
       ]
@@ -120853,6 +121414,7 @@
       "evolves_to": [
         {
           "species": "Gaulet",
+          "level": 39,
           "evolves_to": []
         }
       ]
@@ -120997,6 +121559,7 @@
       "evolves_to": [
         {
           "species": "Gaulet",
+          "level": 39,
           "evolves_to": []
         }
       ]
@@ -121149,6 +121712,7 @@
       "evolves_to": [
         {
           "species": "Moyade",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -121301,6 +121865,7 @@
       "evolves_to": [
         {
           "species": "Moyade",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -121611,6 +122176,7 @@
       "evolves_to": [
         {
           "species": "Mygavolt",
+          "level": 36,
           "evolves_to": []
         }
       ]
@@ -121767,6 +122333,7 @@
       "evolves_to": [
         {
           "species": "Mygavolt",
+          "level": 36,
           "evolves_to": []
         }
       ]
@@ -121907,6 +122474,7 @@
       "evolves_to": [
         {
           "species": "Noacier",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -122047,6 +122615,7 @@
       "evolves_to": [
         {
           "species": "Noacier",
+          "level": 40,
           "evolves_to": []
         }
       ]
@@ -122202,9 +122771,11 @@
       "evolves_to": [
         {
           "species": "Clic",
+          "level": 38,
           "evolves_to": [
             {
               "species": "Cliticlic",
+              "level": 49,
               "evolves_to": []
             }
           ]
@@ -122362,9 +122933,11 @@
       "evolves_to": [
         {
           "species": "Clic",
+          "level": 38,
           "evolves_to": [
             {
               "species": "Cliticlic",
+              "level": 49,
               "evolves_to": []
             }
           ]
@@ -122522,9 +123095,11 @@
       "evolves_to": [
         {
           "species": "Clic",
+          "level": 38,
           "evolves_to": [
             {
               "species": "Cliticlic",
+              "level": 49,
               "evolves_to": []
             }
           ]
@@ -122582,6 +123157,7 @@
       "evolves_to": [
         {
           "species": "Lampéroie",
+          "level": 39,
           "evolves_to": [
             {
               "species": "Ohmassacre",
@@ -122642,6 +123218,7 @@
       "evolves_to": [
         {
           "species": "Lampéroie",
+          "level": 39,
           "evolves_to": [
             {
               "species": "Ohmassacre",
@@ -122702,6 +123279,7 @@
       "evolves_to": [
         {
           "species": "Lampéroie",
+          "level": 39,
           "evolves_to": [
             {
               "species": "Ohmassacre",
@@ -122866,6 +123444,7 @@
       "evolves_to": [
         {
           "species": "Neitram",
+          "level": 42,
           "evolves_to": []
         }
       ]
@@ -123025,6 +123604,7 @@
       "evolves_to": [
         {
           "species": "Neitram",
+          "level": 42,
           "evolves_to": []
         }
       ]
@@ -123193,6 +123773,7 @@
       "evolves_to": [
         {
           "species": "Mélancolux",
+          "level": 41,
           "evolves_to": [
             {
               "species": "Lugulabre",
@@ -123366,6 +123947,7 @@
       "evolves_to": [
         {
           "species": "Mélancolux",
+          "level": 41,
           "evolves_to": [
             {
               "species": "Lugulabre",
@@ -123539,6 +124121,7 @@
       "evolves_to": [
         {
           "species": "Mélancolux",
+          "level": 41,
           "evolves_to": [
             {
               "species": "Lugulabre",
@@ -123727,9 +124310,11 @@
       "evolves_to": [
         {
           "species": "Incisache",
+          "level": 38,
           "evolves_to": [
             {
               "species": "Tranchodon",
+              "level": 48,
               "evolves_to": []
             }
           ]
@@ -123915,9 +124500,11 @@
       "evolves_to": [
         {
           "species": "Incisache",
+          "level": 38,
           "evolves_to": [
             {
               "species": "Tranchodon",
+              "level": 48,
               "evolves_to": []
             }
           ]
@@ -124103,9 +124690,11 @@
       "evolves_to": [
         {
           "species": "Incisache",
+          "level": 38,
           "evolves_to": [
             {
               "species": "Tranchodon",
+              "level": 48,
               "evolves_to": []
             }
           ]
@@ -124279,6 +124868,7 @@
       "evolves_to": [
         {
           "species": "Polagriffe",
+          "level": 37,
           "evolves_to": []
         }
       ]
@@ -124450,6 +125040,7 @@
       "evolves_to": [
         {
           "species": "Polagriffe",
+          "level": 37,
           "evolves_to": []
         }
       ]
@@ -125352,6 +125943,7 @@
       "evolves_to": [
         {
           "species": "Shaofouine",
+          "level": 50,
           "evolves_to": []
         }
       ]
@@ -125511,6 +126103,7 @@
       "evolves_to": [
         {
           "species": "Shaofouine",
+          "level": 50,
           "evolves_to": []
         }
       ]
@@ -125845,6 +126438,7 @@
       "evolves_to": [
         {
           "species": "Golemastoc",
+          "level": 43,
           "evolves_to": []
         }
       ]
@@ -126041,6 +126635,7 @@
       "evolves_to": [
         {
           "species": "Golemastoc",
+          "level": 43,
           "evolves_to": []
         }
       ]
@@ -126205,6 +126800,7 @@
       "evolves_to": [
         {
           "species": "Scalproie",
+          "level": 52,
           "evolves_to": [
             {
               "species": "Scalpereur",
@@ -126374,6 +126970,7 @@
       "evolves_to": [
         {
           "species": "Scalproie",
+          "level": 52,
           "evolves_to": [
             {
               "species": "Scalpereur",
@@ -126705,6 +127302,7 @@
       "evolves_to": [
         {
           "species": "Gueriaigle",
+          "level": 54,
           "evolves_to": []
         }
       ]
@@ -126889,6 +127487,7 @@
       "evolves_to": [
         {
           "species": "Gueriaigle",
+          "level": 54,
           "evolves_to": []
         }
       ]
@@ -127041,6 +127640,7 @@
       "evolves_to": [
         {
           "species": "Vaututrice",
+          "level": 54,
           "evolves_to": []
         }
       ]
@@ -127193,6 +127793,7 @@
       "evolves_to": [
         {
           "species": "Vaututrice",
+          "level": 54,
           "evolves_to": []
         }
       ]
@@ -127778,9 +128379,11 @@
       "evolves_to": [
         {
           "species": "Diamat",
+          "level": 50,
           "evolves_to": [
             {
               "species": "Trioxhydre",
+              "level": 64,
               "evolves_to": []
             }
           ]
@@ -127951,9 +128554,11 @@
       "evolves_to": [
         {
           "species": "Diamat",
+          "level": 50,
           "evolves_to": [
             {
               "species": "Trioxhydre",
+              "level": 64,
               "evolves_to": []
             }
           ]
@@ -128124,9 +128729,11 @@
       "evolves_to": [
         {
           "species": "Diamat",
+          "level": 50,
           "evolves_to": [
             {
               "species": "Trioxhydre",
+              "level": 64,
               "evolves_to": []
             }
           ]
@@ -128265,6 +128872,7 @@
       "evolves_to": [
         {
           "species": "Pyrax",
+          "level": 59,
           "evolves_to": []
         }
       ]
@@ -128401,6 +129009,7 @@
       "evolves_to": [
         {
           "species": "Pyrax",
+          "level": 59,
           "evolves_to": []
         }
       ]

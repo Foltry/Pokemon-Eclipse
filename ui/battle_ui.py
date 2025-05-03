@@ -114,28 +114,33 @@ def load_combat_sprites(ally_id, enemy_id):
     ally = get_pokemon_by_id(ally_id)
     enemy = get_pokemon_by_id(enemy_id)
 
-    if not ally or not enemy:
-        raise ValueError(f"Impossible de charger les sprites : ally={ally_id}, enemy={enemy_id}")
-
     ally_path = os.path.join(SPRITE_DIR, ally["sprites"]["back"])
     enemy_path = os.path.join(SPRITE_DIR, enemy["sprites"]["front"])
 
     ally_size = get_gif_max_size(ally_path)
     enemy_size = get_gif_max_size(enemy_path)
 
-    ally_sprite = gif_pygame.load(ally_path)
-    enemy_sprite = gif_pygame.load(enemy_path)
+    ally_sprite = resize_gif(gif_pygame.load(ally_path), ally_size)
+    enemy_sprite = resize_gif(gif_pygame.load(enemy_path), enemy_size)
 
-    ally_sprite = resize_gif(ally_sprite, ally_size)
-    enemy_sprite = resize_gif(enemy_sprite, enemy_size)
+    # === Base positions ===
+    base_ally_rect = base_ally.get_rect(topleft=(-128, 240))
+    base_enemy_rect = base_enemy.get_rect(topleft=(255, 115))
 
-    return (base_ally, base_enemy), (ally_sprite, enemy_sprite)
+    ally_x = base_ally_rect.centerx - (ally_sprite.get_width() // 2)
+    ally_y = base_ally_rect.centery - ally_sprite.get_height() + 30
+
+    enemy_x = base_enemy_rect.centerx - (enemy_sprite.get_width() // 2) - 5
+    enemy_y = base_enemy_rect.centery - enemy_sprite.get_height()
+
+    return (base_ally, base_enemy), (ally_sprite, enemy_sprite), ((ally_x, ally_y), (enemy_x, enemy_y))
 
 def draw_combat_scene(
     screen,
     background,
     bases,
     sprites,
+    positions,
     ally_name="",
     enemy_name="",
     ally_hp=100,
@@ -156,13 +161,14 @@ def draw_combat_scene(
 
     base_ally, base_enemy = bases
     ally_sprite, enemy_sprite = sprites
+    ally_pos, enemy_pos = positions
 
     screen.blit(base_ally, (-128, 240))
     screen.blit(base_enemy, (255, 115))
 
-    screen.blit(ally_sprite.blit_ready(), (80, 200))
+    screen.blit(ally_sprite.blit_ready(), ally_pos)
     if enemy_sprite:
-        screen.blit(enemy_sprite.blit_ready(), (340, 90))
+        screen.blit(enemy_sprite.blit_ready(), enemy_pos)
 
     screen.blit(STATUS_PLAYER, (268, 193))
     screen.blit(STATUS_ENEMY, (0, 35))
@@ -173,14 +179,14 @@ def draw_combat_scene(
     enemy_level_text = font_pv.render(f"Nv.{enemy_level}", True, (51, 51, 51))
 
     screen.blit(enemy_name_text, (10, 45))
-    screen.blit(enemy_gender_text, (55 + enemy_name_text.get_width() + 10, 45))
-    screen.blit(enemy_level_text, (85 + enemy_name_text.get_width(), 45))
+    screen.blit(enemy_gender_text, (120, 45))
+    screen.blit(enemy_level_text, (140, 45))
 
     ally_name_text = font_pkm.render(ally_name, True, (0, 0, 0))
     ally_level_text = font_pv.render(f"Nv.{ally_level}", True, (51, 51, 51))
 
     screen.blit(ally_name_text, (305, 205))
-    screen.blit(ally_level_text, (450, 205))
+    screen.blit(ally_level_text, (430, 205))
 
     ally_bar = HealthBar((402, 232), (98, 9), ally_max_hp)
     ally_bar.update(ally_hp)
