@@ -1,3 +1,5 @@
+# battle/move_effects.py
+
 import random
 
 def apply_move_effect(attacker, defender, move, last_damage=0):
@@ -5,6 +7,9 @@ def apply_move_effect(attacker, defender, move, last_damage=0):
     messages = []
     effects = move.get("effects", {})
 
+    print(f"[DEBUG] apply_move_effect for {move.get('name', '???')} - effects: {effects}")
+
+    # === Effets de statut ===
     status = effects.get("status")
     status_chance = effects.get("status_chance", 100)
     if status and random.randint(1, 100) <= status_chance:
@@ -12,21 +17,33 @@ def apply_move_effect(attacker, defender, move, last_damage=0):
             defender["status"] = status
             messages.append(f"{defender['name']} est maintenant {status} !")
 
+    # === Buffs/Débuffs ===
     stat_changes = effects.get("stat_changes", [])
     for change in stat_changes:
         if random.randint(1, 100) <= change.get("chance", 100):
-            target = attacker if change["target"] == "user" else defender
-            stat = change["stat"]
-            delta = change["change"]
+            target = attacker if change.get("target") == "user" else defender
+            stat = change.get("stat")
+            delta = change.get("change", 0)
 
             if "boosts" not in target:
                 target["boosts"] = {}
             target["boosts"][stat] = target["boosts"].get(stat, 0) + delta
 
-            sign = "+" if delta > 0 else ""
-            who = "lui-même" if change["target"] == "user" else target["name"]
-            messages.append(f"La statistique {stat} de {who} change de {sign}{delta}.")
+            stat_label = {
+                "atk": "Attaque",
+                "def": "Défense",
+                "spa": "Attaque Spéciale",
+                "spd": "Défense Spéciale",
+                "spe": "Vitesse",
+                "acc": "Précision",
+                "eva": "Esquive"
+            }.get(stat, stat.capitalize())
 
+            direction = "augmente" if delta > 0 else "baisse"
+            who = "de lui-même" if change["target"] == "user" else f"de {target['name']}"
+            messages.append(f"{stat_label} {who} {direction} !")
+
+    # === Autres effets ===
     if effects.get("protect"):
         attacker["_protected"] = True
         messages.append(f"{attacker['name']} se protège contre les attaques !")

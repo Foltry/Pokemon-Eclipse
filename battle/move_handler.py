@@ -7,12 +7,18 @@ from battle.move_utils import (
     get_fixed_damage,
     reset_temp_status,
 )
+from data.moves_loader import get_move_by_name  # ✅ Ajouté
 import random
 
 def use_move(attacker, defender, move):
     """Traite l'utilisation d'une capacité (dégâts + effets secondaires)."""
     messages = []
     deferred_damage = None
+
+    # ✅ Recharge l'attaque complète pour garantir la présence des effets
+    move = get_move_by_name(move["name"], language="fr") or move
+
+    print(f"[DEBUG] Utilisation de {move.get('name', move.get('name_fr', '???'))}")
 
     if should_fail(attacker, defender, move):
         messages.append(f"L'attaque de {attacker['name']} a échoué.")
@@ -51,13 +57,15 @@ def use_move(attacker, defender, move):
 
         damage = max(1, damage)
         deferred_damage = damage
-        messages.append(f"{attacker['name']} utilise {move['name']} !")
+        messages.append(f"{attacker['name']} utilise {move['name_fr']} !")
         messages.append(f"{defender['name']} a subi {damage} dégâts !")
 
         secondary_effects = apply_move_effect(attacker, defender, move, last_damage=damage)
-        messages.extend(secondary_effects)
+        if secondary_effects:
+            messages.extend(secondary_effects)
+
     else:
-        messages.append(f"{attacker['name']} utilise {move['name']} !")
+        messages.append(f"{attacker['name']} utilise {move['name_fr']} !")
 
         secondary_effects = apply_move_effect(attacker, defender, move, last_damage=0)
 

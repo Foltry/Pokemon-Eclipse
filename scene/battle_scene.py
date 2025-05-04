@@ -17,7 +17,6 @@ from battle.capture_handler import attempt_capture
 from battle.enemy_selector import get_balanced_enemy
 
 from data.pokemon_loader import get_learnable_moves
-from dev.xp_debug_logger import log_update_ally_xp
 
 class BattleScene(Scene):
     def __init__(self):
@@ -543,8 +542,6 @@ class BattleScene(Scene):
 
         self.ally_xp = xp
         self.ally_max_xp = self.xp_required(level + 1)
-
-        log_update_ally_xp(self.ally_xp, self.ally_max_xp)
 
         if hasattr(self, "ally_xp_bar"):
             self.ally_xp_bar.max_xp = self.ally_max_xp

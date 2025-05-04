@@ -221,7 +221,17 @@
     "description": "Une danse frénétique qui exalte l’esprit combatif. Augmente beaucoup l’Attaque du lanceur.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 15,
@@ -445,7 +455,17 @@
     "description": "Lance du sable au visage de l’ennemi pour baisser sa Précision.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "acc",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 29,
@@ -621,7 +641,17 @@
     "description": "Le lanceur remue son adorable queue pour tromper la vigilance de l’ennemi et baisser sa Défense.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "all-opponents"
+    "target": "all-opponents",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 40,
@@ -685,7 +715,17 @@
     "description": "Le lanceur fait les gros yeux à l’ennemi pour l’intimider et baisser sa Défense.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "all-opponents"
+    "target": "all-opponents",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 44,
@@ -717,7 +757,17 @@
     "description": "Le lanceur pousse un cri tout mimi pour tromper la vigilance de l’ennemi et baisser son Attaque.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "all-opponents"
+    "target": "all-opponents",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 46,
@@ -813,7 +863,17 @@
     "description": "Le lanceur attaque l’ennemi avec un jet d’acide corrosif. Peut aussi baisser sa Défense Spéciale.",
     "effect_chance": 10,
     "ailment": "none",
-    "target": "all-opponents"
+    "target": "all-opponents",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spd",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 52,
@@ -973,7 +1033,17 @@
     "description": "Des bulles sont envoyées avec puissance sur l’ennemi. Peut aussi baisser sa Vitesse.",
     "effect_chance": 10,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 62,
@@ -989,7 +1059,17 @@
     "description": "Envoie un rayon arc-en-ciel sur l’ennemi. Peut aussi baisser son Attaque.",
     "effect_chance": 10,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 63,
@@ -1181,7 +1261,23 @@
     "description": "Le corps du lanceur se développe. Augmente l’Attaque et l’Attaque Spéciale.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spa",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 75,
@@ -1293,7 +1389,17 @@
     "description": "Le lanceur crache de la soie pour ligoter l’ennemi et beaucoup baisser sa Vitesse.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "all-opponents"
+    "target": "all-opponents",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 82,
@@ -1533,7 +1639,17 @@
     "description": "Cette capacité ne peut pas être utilisée. Il est recommandé de l’oublier, même s’il sera impossible de se la remémorer une fois oubliée.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 97,
@@ -1549,7 +1665,17 @@
     "description": "Le lanceur se relaxe et allège son corps pour beaucoup augmenter sa Vitesse.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 98,
@@ -1645,7 +1771,17 @@
     "description": "Le lanceur émet un son strident qui baisse beaucoup la Défense de l’ennemi.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 104,
@@ -1661,7 +1797,17 @@
     "description": "Le lanceur se déplace si vite qu’il crée des copies illusoires de lui-même, augmentant son Esquive.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "eva",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 105,
@@ -1693,7 +1839,17 @@
     "description": "Le lanceur contracte tous ses muscles pour augmenter sa Défense.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 107,
@@ -1709,7 +1865,17 @@
     "description": "Le lanceur comprime son corps pour se faire tout petit et beaucoup augmenter son Esquive.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "eva",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 108,
@@ -1725,7 +1891,17 @@
     "description": "Le lanceur disperse un nuage d’encre ou de fumée. Réduit la Précision de l’ennemi.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "acc",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 109,
@@ -1757,7 +1933,17 @@
     "description": "Le lanceur se recroqueville dans sa carapace, ce qui augmente sa Défense.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 111,
@@ -1773,7 +1959,17 @@
     "description": "Le lanceur s’enroule pour cacher ses points faibles, ce qui augmente sa Défense.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 112,
@@ -1789,7 +1985,17 @@
     "description": "Cette capacité ne peut pas être utilisée. Il est recommandé de l’oublier, même s’il sera impossible de se la remémorer une fois oubliée.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 113,
@@ -2109,7 +2315,17 @@
     "description": "Cette capacité ne peut pas être utilisée. Il est recommandé de l’oublier, même s’il sera impossible de se la remémorer une fois oubliée.",
     "effect_chance": 10,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 133,
@@ -2125,7 +2341,17 @@
     "description": "Le lanceur fait le vide dans son esprit pour oublier ses soucis. Augmente beaucoup sa Défense Spéciale.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spd",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 134,
@@ -2141,7 +2367,17 @@
     "description": "Le lanceur distrait l’ennemi en pliant une cuillère, ce qui baisse sa Précision.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "acc",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 135,
@@ -2317,7 +2553,17 @@
     "description": "Cette capacité ne peut pas être utilisée. Il est recommandé de l’oublier, même s’il sera impossible de se la remémorer une fois oubliée.",
     "effect_chance": 10,
     "ailment": "none",
-    "target": "all-opponents"
+    "target": "all-opponents",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 146,
@@ -2365,7 +2611,17 @@
     "description": "Cette capacité ne peut pas être utilisée. Il est recommandé de l’oublier, même s’il sera impossible de se la remémorer une fois oubliée.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "acc",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 149,
@@ -2413,7 +2669,17 @@
     "description": "Le lanceur modifie sa structure moléculaire pour se liquéfier et beaucoup augmenter sa Défense.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 152,
@@ -2541,7 +2807,17 @@
     "description": "Cette capacité ne peut pas être utilisée. Il est recommandé de l’oublier, même s’il sera impossible de se la remémorer une fois oubliée.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 160,
@@ -2845,7 +3121,17 @@
     "description": "Le lanceur libère des spores cotonneuses qui collent à l’ennemi et baissent beaucoup sa Vitesse.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "all-opponents"
+    "target": "all-opponents",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 179,
@@ -2909,7 +3195,10 @@
     "description": "Le lanceur se protège de toutes les attaques. Peut échouer si utilisée plusieurs fois de suite.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "protect": true
+    }
   },
   {
     "id": 183,
@@ -2941,7 +3230,17 @@
     "description": "Le lanceur fait une grimace qui effraie l’ennemi et réduit beaucoup sa Vitesse.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 185,
@@ -3021,7 +3320,17 @@
     "description": "Le lanceur envoie de la boue au visage de l’ennemi pour infliger des dégâts et baisser sa Précision.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "acc",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 190,
@@ -3037,7 +3346,17 @@
     "description": "Le lanceur attaque en projetant de l’encre au visage de l’ennemi. Peut aussi baisser sa Précision.",
     "effect_chance": 50,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "acc",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 191,
@@ -3133,7 +3452,17 @@
     "description": "Une bourrasque de vent froid blesse l’ennemi. Réduit aussi sa Vitesse.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "all-opponents"
+    "target": "all-opponents",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 197,
@@ -3149,7 +3478,10 @@
     "description": "Le lanceur se protège de toutes les attaques. Peut échouer si utilisée plusieurs fois de suite.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "protect": true
+    }
   },
   {
     "id": 198,
@@ -3261,7 +3593,17 @@
     "description": "Le lanceur fait les yeux doux pour berner l’ennemi et beaucoup réduire son Attaque.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 205,
@@ -3309,7 +3651,17 @@
     "description": "Fait enrager la cible et la plonge dans la confusion, mais augmente beaucoup son Attaque.",
     "effect_chance": null,
     "ailment": "confusion",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 208,
@@ -3661,7 +4013,17 @@
     "description": "Une attaque tournoyante pouvant aussi annuler, par exemple, Étreinte, Ligotage ou Vampigraine. Augmente également la Vitesse du lanceur.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 230,
@@ -3677,7 +4039,17 @@
     "description": "Un doux parfum qui réduit beaucoup l’Esquive de l’ennemi.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "all-opponents"
+    "target": "all-opponents",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "eva",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 231,
@@ -3693,7 +4065,17 @@
     "description": "Attaque l’ennemi avec une queue de fer. Peut aussi baisser sa Défense.",
     "effect_chance": 30,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 232,
@@ -3709,7 +4091,17 @@
     "description": "Attaque avec des griffes d’acier. Peut aussi augmenter l’Attaque du lanceur.",
     "effect_chance": 10,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 233,
@@ -3869,7 +4261,17 @@
     "description": "Le lanceur mord l’ennemi de ses crocs pointus. Peut aussi baisser sa Défense.",
     "effect_chance": 20,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 243,
@@ -3933,7 +4335,41 @@
     "description": "Une attaque préhistorique qui peut augmenter toutes les stats du lanceur d’un seul coup.",
     "effect_chance": 10,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "def",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spa",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spd",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spe",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 247,
@@ -3949,7 +4385,17 @@
     "description": "Projette une grande ombre sur l’ennemi. Peut aussi faire baisser sa Défense Spéciale.",
     "effect_chance": 20,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spd",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 248,
@@ -4061,7 +4507,23 @@
     "description": "Le lanceur accumule de la puissance et augmente sa Défense et sa Défense Spéciale. Peut être utilisée trois fois.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spd",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 255,
@@ -4157,7 +4619,17 @@
     "description": "Rend la cible confuse, mais augmente son Attaque Spéciale.",
     "effect_chance": null,
     "ailment": "confusion",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 261,
@@ -4189,7 +4661,23 @@
     "description": "Le lanceur est mis K.O., mais l’Attaque et l’Attaque Spéciale de l’ennemi baissent beaucoup.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spa",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 263,
@@ -4285,7 +4773,17 @@
     "description": "Le lanceur concentre sa puissance pour sa prochaine attaque Électrik. Augmente sa Défense Spéciale.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spd",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 269,
@@ -4413,7 +4911,23 @@
     "description": "Une attaque puissante, mais qui baisse l’Attaque et la Défense du lanceur.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "def",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 277,
@@ -4701,7 +5215,17 @@
     "description": "Cette capacité ne peut pas être utilisée. Il est recommandé de l’oublier, même s’il sera impossible de se la remémorer une fois oubliée.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": 3,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 295,
@@ -4717,7 +5241,17 @@
     "description": "Le lanceur libère un éclair lumineux. Peut aussi baisser la Défense Spéciale de l’ennemi.",
     "effect_chance": 50,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spd",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 296,
@@ -4733,7 +5267,17 @@
     "description": "Une bulle de brume inflige des dégâts à l’ennemi. Peut aussi réduire son Attaque Spéciale.",
     "effect_chance": 50,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 297,
@@ -4749,7 +5293,17 @@
     "description": "Une montagne de plumes ensevelit l’ennemi et réduit beaucoup son Attaque.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 298,
@@ -4893,7 +5447,17 @@
     "description": "Lacère l’ennemi avec des griffes solides et aiguisées. Peut aussi baisser sa Défense.",
     "effect_chance": 50,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 307,
@@ -4941,7 +5505,17 @@
     "description": "Un coup de poing lancé à la vitesse d’un météore. Peut aussi augmenter l’Attaque du lanceur.",
     "effect_chance": 20,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 310,
@@ -5005,7 +5579,17 @@
     "description": "Le lanceur fait semblant de pleurer pour troubler l’ennemi et beaucoup baisser sa Défense Spéciale.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spd",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 314,
@@ -5037,7 +5621,17 @@
     "description": "Attaque l’ennemi à pleine puissance. Le contrecoup baisse beaucoup l’Attaque Spéciale du lanceur.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 316,
@@ -5085,7 +5679,41 @@
     "description": "Cette capacité ne peut pas être utilisée. Il est recommandé de l’oublier, même s’il sera impossible de se la remémorer une fois oubliée.",
     "effect_chance": 10,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "def",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spa",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spd",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spe",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 319,
@@ -5101,7 +5729,17 @@
     "description": "Un cri horrible tel un crissement métallique qui réduit beaucoup la Défense Spéciale de l’ennemi.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spd",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 320,
@@ -5133,7 +5771,23 @@
     "description": "Le lanceur chatouille l’ennemi, ce qui baisse son Attaque et sa Défense.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "def",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 322,
@@ -5149,7 +5803,23 @@
     "description": "Le lanceur absorbe un pouvoir mystique spatial qui augmente sa Défense et sa Défense Spéciale.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spd",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 323,
@@ -5341,7 +6011,17 @@
     "description": "L’épiderme du lanceur devient dur comme du fer, ce qui augmente beaucoup sa Défense.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 335,
@@ -5373,7 +6053,17 @@
     "description": "Le lanceur grogne pour se rassurer, ce qui augmente son Attaque et celle de ses alliés.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user-and-allies"
+    "target": "user-and-allies",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 337,
@@ -5421,7 +6111,23 @@
     "description": "Le lanceur tend ses muscles pour se gonfler, ce qui booste son Attaque et sa Défense.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "def",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 340,
@@ -5453,7 +6159,17 @@
     "description": "Le lanceur attaque en projetant de la boue sur l’ennemi. Réduit aussi la Vitesse de la cible.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 342,
@@ -5549,7 +6265,23 @@
     "description": "Le lanceur se concentre et fait le vide dans son esprit pour augmenter son Attaque Spéciale et sa Défense Spéciale.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spd",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 348,
@@ -5581,7 +6313,23 @@
     "description": "Une danse mystique dont le rythme effréné augmente l’Attaque et la Vitesse du lanceur.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spe",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 350,
@@ -5661,7 +6409,17 @@
     "description": "Cette capacité ne peut pas être utilisée. Il est recommandé de l’oublier, même s’il sera impossible de se la remémorer une fois oubliée.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 355,
@@ -5741,7 +6499,17 @@
     "description": "Le lanceur donne un puissant coup de poing à l’ennemi. Réduit la Vitesse du lanceur.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 360,
@@ -5917,7 +6685,23 @@
     "description": "Le lanceur combat au corps à corps sans se protéger. Baisse aussi sa Défense et sa Défense Spéciale.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spd",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 371,
@@ -6573,7 +7357,17 @@
     "description": "Le lanceur rassemble ses forces et laisse éclater son pouvoir. Peut aussi baisser la Défense Spéciale de l’ennemi.",
     "effect_chance": 10,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spd",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 412,
@@ -6589,7 +7383,17 @@
     "description": "Utilise les pouvoirs de la nature pour attaquer l’ennemi. Peut aussi baisser sa Défense Spéciale.",
     "effect_chance": 10,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spd",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 413,
@@ -6621,7 +7425,17 @@
     "description": "De terribles séismes secouent l’ennemi. Peut aussi baisser sa Défense Spéciale.",
     "effect_chance": 10,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spd",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 415,
@@ -6669,7 +7483,17 @@
     "description": "Stimule l’esprit par de mauvaises pensées. Augmente beaucoup l’Attaque Spéciale du lanceur.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 418,
@@ -6813,7 +7637,17 @@
     "description": "Cette capacité ne peut pas être utilisée. Il est recommandé de l’oublier, même s’il sera impossible de se la remémorer une fois oubliée.",
     "effect_chance": 30,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "acc",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 427,
@@ -6861,7 +7695,17 @@
     "description": "Cette capacité ne peut pas être utilisée. Il est recommandé de l’oublier, même s’il sera impossible de se la remémorer une fois oubliée.",
     "effect_chance": 30,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "acc",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 430,
@@ -6877,7 +7721,17 @@
     "description": "Le lanceur concentre son énergie lumineuse et la fait exploser. Peut aussi baisser la Défense Spéciale de l’ennemi.",
     "effect_chance": 10,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spd",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 431,
@@ -6909,7 +7763,17 @@
     "description": "Un grand coup de vent qui disperse la Protection ou le Mur Lumière de l’ennemi. Diminue aussi son Esquive.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "eva",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 433,
@@ -6941,7 +7805,17 @@
     "description": "Le lanceur invoque des comètes. Le contrecoup réduit beaucoup son Attaque Spéciale.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 435,
@@ -6989,7 +7863,17 @@
     "description": "Invoque une tempête de feuilles acérées. Le contrecoup réduit beaucoup l’Attaque Spéciale du lanceur.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 438,
@@ -7117,7 +8001,17 @@
     "description": "Cette capacité ne peut pas être utilisée. Il est recommandé de l’oublier, même s’il sera impossible de se la remémorer une fois oubliée.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "all-opponents"
+    "target": "all-opponents",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 446,
@@ -7213,7 +8107,17 @@
     "description": "Le lanceur tire un rayon chargé d’électricité. Peut aussi augmenter son Attaque Spéciale.",
     "effect_chance": 70,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 452,
@@ -7277,7 +8181,23 @@
     "description": "Le lanceur appelle ses sous-fifres pour former un bouclier qui augmente sa Défense et sa Défense Spéciale.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spd",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 456,
@@ -7437,7 +8357,17 @@
     "description": "Le corps du lanceur émet une onde de choc. Peut aussi beaucoup baisser la Défense Spéciale de la cible.",
     "effect_chance": 40,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spd",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 466,
@@ -7453,7 +8383,41 @@
     "description": "Cette capacité ne peut pas être utilisée. Il est recommandé de l’oublier, même s’il sera impossible de se la remémorer une fois oubliée.",
     "effect_chance": 10,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "def",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spa",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spd",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spe",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 467,
@@ -7485,7 +8449,23 @@
     "description": "Le lanceur s’aiguise les griffes. Augmente l’Attaque et la Précision.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "acc",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 469,
@@ -7597,7 +8577,17 @@
     "description": "Le lanceur se débarrasse des parties inutiles de son corps. Son poids diminue et sa Vitesse augmente beaucoup.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 476,
@@ -7725,7 +8715,29 @@
     "description": "Une danse mystique dont le rythme parfait augmente l’Attaque Spéciale, la Défense Spéciale et la Vitesse du lanceur.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spd",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spe",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 484,
@@ -7805,7 +8817,17 @@
     "description": "Le lanceur s’entoure de flammes pour attaquer l’ennemi. Il se concentre et sa Vitesse augmente.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 489,
@@ -7821,7 +8843,29 @@
     "description": "Le lanceur s’enroule sur lui-même et se concentre. Son Attaque, sa Défense et sa Précision augmentent.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "def",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "acc",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 490,
@@ -7837,7 +8881,17 @@
     "description": "Un coup rapide qui affecte la mobilité de l’ennemi et diminue sa Vitesse.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 491,
@@ -7853,7 +8907,17 @@
     "description": "Projette un liquide acide qui fait fondre l’ennemi. Sa Défense Spéciale diminue beaucoup.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spd",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 492,
@@ -8061,7 +9125,41 @@
     "description": "Le lanceur brise sa coquille. Il baisse sa Défense et sa Défense Spéciale, mais augmente beaucoup son Attaque, son Attaque Spéciale et sa Vitesse.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spd",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "atk",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spa",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spe",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 505,
@@ -8125,7 +9223,23 @@
     "description": "Le lanceur fait tourner ses engrenages. Cela augmente son Attaque et augmente beaucoup sa Vitesse.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spe",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 509,
@@ -8365,7 +9479,17 @@
     "description": "Le lanceur piétine le sol et inflige des dégâts à tous les Pokémon autour de lui. Baisse aussi leur Vitesse.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "all-other-pokemon"
+    "target": "all-other-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 524,
@@ -8413,7 +9537,23 @@
     "description": "Le lanceur se rengorge. Augmente l’Attaque et l’Attaque Spéciale.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spa",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 527,
@@ -8429,7 +9569,17 @@
     "description": "Attrape l’ennemi dans un filet électrique. Baisse aussi la Vitesse de l’ennemi.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "all-opponents"
+    "target": "all-opponents",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 528,
@@ -8541,7 +9691,17 @@
     "description": "Un coquillage aiguisé lacère l’ennemi. Peut aussi baisser sa Défense.",
     "effect_chance": 50,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 535,
@@ -8573,7 +9733,17 @@
     "description": "L’ennemi est pris dans un tourbillon de feuilles acérées. Peut aussi baisser sa Précision.",
     "effect_chance": 50,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "acc",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 537,
@@ -8605,7 +9775,17 @@
     "description": "Le lanceur se protège en s’emmitouflant dans du coton. Sa Défense augmente énormément.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": 3,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 539,
@@ -8621,7 +9801,17 @@
     "description": "Le lanceur attaque l’ennemi avec une onde de choc ténébreuse. Peut aussi baisser sa Précision.",
     "effect_chance": 40,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "acc",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 540,
@@ -8781,7 +9971,17 @@
     "description": "Un souffle de vent qui congèle tout sur son passage s’abat sur l’ennemi. Réduit aussi sa Vitesse.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "all-opponents"
+    "target": "all-opponents",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 550,
@@ -8829,7 +10029,17 @@
     "description": "Le lanceur enveloppe l’ennemi de flammes. Peut aussi augmenter l’Attaque Spéciale du lanceur.",
     "effect_chance": 50,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 553,
@@ -8877,7 +10087,17 @@
     "description": "Le lanceur hurle sur l’ennemi. Baisse l’Attaque Spéciale de l’ennemi.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "all-opponents"
+    "target": "all-opponents",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 556,
@@ -8909,7 +10129,29 @@
     "description": "Le lanceur projette une flamme ardente de son front et se jette sur l’ennemi. Baisse la Défense, la Défense Spéciale et la Vitesse.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spd",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spe",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 558,
@@ -9005,7 +10247,23 @@
     "description": "Cette capacité ne peut pas être utilisée. Il est recommandé de l’oublier, même s’il sera impossible de se la remémorer une fois oubliée.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "all-pokemon"
+    "target": "all-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spa",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 564,
@@ -9085,7 +10343,23 @@
     "description": "Le lanceur pousse un rugissement qui intimide l’ennemi et diminue son Attaque et son Attaque Spéciale.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spa",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 569,
@@ -9197,7 +10471,23 @@
     "description": "Menace l’ennemi dans une ultime tirade avant de changer de place avec un autre Pokémon. Réduit l’Attaque et l’Attaque Spéciale de l’ennemi.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spa",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 576,
@@ -9261,7 +10551,17 @@
     "description": "Grâce à une force mystérieuse, la Défense de tous les Pokémon plantee au combat augmente.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "all-pokemon"
+    "target": "all-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 580,
@@ -9325,7 +10625,17 @@
     "description": "Attaque l’ennemi avec un câlin. Peut diminuer son Attaque.",
     "effect_chance": 10,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 584,
@@ -9357,7 +10667,17 @@
     "description": "Attaque l’ennemi grâce au pouvoir de la lune. Peut diminuer son Attaque Spéciale.",
     "effect_chance": 30,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 586,
@@ -9437,7 +10757,17 @@
     "description": "Dévoile des secrets à l’ennemi, qui perd alors sa concentration et voit son Attaque Spéciale diminuer.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 591,
@@ -9453,7 +10783,17 @@
     "description": "Provoque une tempête de diamants qui inflige des dégâts. Peut beaucoup augmenter la Défense du lanceur.",
     "effect_chance": 50,
     "ailment": "none",
-    "target": "all-opponents"
+    "target": "all-opponents",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 592,
@@ -9533,7 +10873,10 @@
     "description": "Protège des attaques, et diminue les PV de tout attaquant qui entre en contact avec le lanceur.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "protect": true
+    }
   },
   {
     "id": 597,
@@ -9549,7 +10892,17 @@
     "description": "Grâce à un parfum mystérieux, augmente la Défense Spéciale d’un allié.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "ally"
+    "target": "ally",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spd",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 598,
@@ -9565,7 +10918,17 @@
     "description": "Le corps du lanceur produit des ondes anormales qui enveloppent l’ennemi et diminuent beaucoup son Attaque Spéciale.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 599,
@@ -9581,7 +10944,29 @@
     "description": "Sécrète un liquide empoisonné. Diminue l’Attaque, l’Attaque Spéciale et la Vitesse de l’ennemi empoisonné.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "all-opponents"
+    "target": "all-opponents",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spa",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spe",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 600,
@@ -9613,7 +10998,29 @@
     "description": "Le lanceur absorbe de l’énergie au premier tour et augmente beaucoup son Attaque Spéciale, sa Défense Spéciale et sa Vitesse au second.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spd",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spe",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 602,
@@ -9629,7 +11036,23 @@
     "description": "Manipule les champs magnétiques pour augmenter la Défense et la Défense Spéciale des Pokémon alliés dotés du talent Plus ou du talent Moins.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user-and-allies"
+    "target": "user-and-allies",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spd",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 603,
@@ -9725,7 +11148,17 @@
     "description": "Fixe l’ennemi d’un air très attendrissant qui le touche et diminue son Attaque. Agit en priorité.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 609,
@@ -9789,7 +11222,17 @@
     "description": "À force de frapper, les poings deviennent plus durs. Augmente l’Attaque du lanceur si l’ennemi est touché.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 613,
@@ -9917,7 +11360,23 @@
     "description": "Le Pokémon s’abat à toute vitesse sur la cible depuis les hautes couches de l’atmosphère. Baisse la Défense et la Défense Spéciale du lanceur.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spd",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 621,
@@ -9933,7 +11392,17 @@
     "description": "Le Pokémon utilise sa multitude de bras pour infliger une nuée de coups qui ignorent les capacités telles qu’Abri ou Détection. Baisse la Défense du lanceur.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 622,
@@ -10685,7 +12154,17 @@
     "description": "Rend au lanceur une quantité de PV équivalente à la stat d’Attaque de la cible, puis baisse celle-ci.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 669,
@@ -10749,7 +12228,17 @@
     "description": "Tisse un fil imprégné de venin. Empoisonne la cible et baisse sa Vitesse.",
     "effect_chance": 100,
     "ailment": "poison",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 673,
@@ -10781,7 +12270,23 @@
     "description": "Change de réglage pour augmenter l’Attaque et l’Attaque Spéciale des alliés ayant les talents Plus ou Moins.",
     "effect_chance": null,
     "ailment": "none",
-    "target": "user-and-allies"
+    "target": "user-and-allies",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spa",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 675,
@@ -10861,7 +12366,17 @@
     "description": "Le lanceur se jette sur la cible de toutes ses forces pour lui infliger des dégâts et baisser son Attaque.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 680,
@@ -11005,7 +12520,17 @@
     "description": "Un coup de pied chaud comme les tropiques qui inflige des dégâts à la cible et baisse son Attaque.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 689,
@@ -11053,7 +12578,17 @@
     "description": "Le lanceur déclenche un vacarme en frottant ses écailles les unes contre les autres pour attaquer. Baisse la Défense du lanceur.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "all-opponents"
+    "target": "all-opponents",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 692,
@@ -11229,7 +12764,41 @@
     "description": "Cette capacité ne peut pas être utilisée. Il est recommandé de l’oublier, même s’il sera impossible de se la remémorer une fois oubliée.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "def",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spa",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spd",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spe",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 703,
@@ -11277,7 +12846,17 @@
     "description": "Envoie un rayon laser dévastateur. Baisse beaucoup l’Attaque Spéciale du lanceur.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": -2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 706,
@@ -11325,7 +12904,17 @@
     "description": "Le lanceur frappe avec un os possédé par l’âme d’un défunt. Peut aussi baisser la Défense de la cible.",
     "effect_chance": 20,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 709,
@@ -11357,7 +12946,17 @@
     "description": "Le lanceur utilise la force de l’eau pour attaquer. Peut aussi baisser la Défense de la cible.",
     "effect_chance": 20,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 711,
@@ -11437,7 +13036,23 @@
     "description": "Le lanceur jette un regard plein de larmes à la cible. Celle-ci perd toute velléité de combat et voit son Attaque et son Attaque Spéciale baisser.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spa",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 716,
@@ -11645,7 +13260,41 @@
     "description": "Cette capacité ne peut pas être utilisée. Il est recommandé de l’oublier, même s’il sera impossible de se la remémorer une fois oubliée.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "all-opponents"
+    "target": "all-opponents",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "def",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spa",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spd",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spe",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 729,
@@ -11661,7 +13310,17 @@
     "description": "Cette capacité ne peut pas être utilisée. Il est recommandé de l’oublier, même s’il sera impossible de se la remémorer une fois oubliée.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "eva",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 730,
@@ -11949,7 +13608,17 @@
     "description": "Le lanceur mange la Baie qu’il tient, ce qui augmente beaucoup sa Défense.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 748,
@@ -11965,7 +13634,41 @@
     "description": "Le lanceur voit toutes ses stats augmenter, mais en contrepartie, il ne peut plus fuir ou se retirer du combat.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "def",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spa",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spd",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spe",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 749,
@@ -11981,7 +13684,17 @@
     "description": "Le lanceur recouvre sa cible de goudron liquide pour baisser sa Vitesse et la rendre vulnérable au feu.",
     "effect_chance": 100,
     "ailment": "tar-shot",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 750,
@@ -12397,7 +14110,41 @@
     "description": "Le lanceur sacrifie une partie de ses PV pour augmenter toutes ses stats.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "user"
+    "target": "user",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "def",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spa",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spd",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spe",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 776,
@@ -12429,7 +14176,23 @@
     "description": "Le lanceur augmente beaucoup l’Attaque et l’Attaque Spéciale de la cible en la nappant de glaçage.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "spa",
+          "change": 2,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 778,
@@ -12445,7 +14208,17 @@
     "description": "Le lanceur bat son tambour pour en diriger les racines sur la cible, l’attaquer, et baisser sa Vitesse.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 779,
@@ -12525,7 +14298,17 @@
     "description": "Morpeko libère l’énergie stockée dans ses joues pour attaquer et augmenter sa Vitesse. Le type de cette capacité change en fonction de la forme de Morpeko.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spe",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 784,
@@ -12541,7 +14324,17 @@
     "description": "Le lanceur balaie violemment le camp adverse avec son immense queue. Baisse l’Attaque de la cible.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "all-opponents"
+    "target": "all-opponents",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 785,
@@ -12589,7 +14382,17 @@
     "description": "Le lanceur attaque son adversaire avec un liquide corrosif créé à partir d’une pomme acide. Baisse la Défense Spéciale de la cible.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spd",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 788,
@@ -12605,7 +14408,17 @@
     "description": "Le lanceur attaque son adversaire avec une pomme qu’il fait tomber de très haut. Baisse la Défense de la cible.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 789,
@@ -12621,7 +14434,17 @@
     "description": "Le lanceur attaque son adversaire avec une telle force que ce dernier peut s’en retrouver profondément troublé. Baisse l’Attaque Spéciale de la cible.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 790,
@@ -12893,7 +14716,17 @@
     "description": "Le lanceur rampe derrière l’ennemi pour l’attaquer. Baisse l’Attaque Spéciale de la cible.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "spa",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 807,
@@ -12973,7 +14806,23 @@
     "description": "Le lanceur coache ses alliés, augmentant ainsi leur Attaque et leur Défense.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "user-and-allies"
+    "target": "user-and-allies",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "atk",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        },
+        {
+          "stat": "def",
+          "change": 1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 812,
@@ -13165,7 +15014,17 @@
     "description": "Le lanceur assène un coup de pied à la cible à la vitesse de l’éclair. Baisse aussi la Défense de la cible.",
     "effect_chance": 100,
     "ailment": "none",
-    "target": "selected-pokemon"
+    "target": "selected-pokemon",
+    "effects": {
+      "stat_changes": [
+        {
+          "stat": "def",
+          "change": -1,
+          "target": "opponent",
+          "chance": 100
+        }
+      ]
+    }
   },
   {
     "id": 824,
