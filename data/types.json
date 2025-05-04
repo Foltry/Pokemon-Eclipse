@@ -6,19 +6,19 @@
     "color": "physique",
     "damage_relations": {
       "double_damage_from": [
-        "fighting"
+        "combat"
       ],
       "double_damage_to": [],
       "half_damage_from": [],
       "half_damage_to": [
-        "rock",
-        "steel"
+        "roche",
+        "acier"
       ],
       "no_damage_from": [
-        "ghost"
+        "spectre"
       ],
       "no_damage_to": [
-        "ghost"
+        "spectre"
       ]
     }
   },
@@ -29,30 +29,30 @@
     "color": "physique",
     "damage_relations": {
       "double_damage_from": [
-        "flying",
-        "psychic"
+        "vol",
+        "psy"
       ],
       "double_damage_to": [
         "normal",
-        "rock",
-        "steel",
-        "ice",
-        "dark"
+        "roche",
+        "acier",
+        "glace",
+        "ténèbres"
       ],
       "half_damage_from": [
-        "rock",
-        "bug",
-        "dark"
+        "roche",
+        "insecte",
+        "ténèbres"
       ],
       "half_damage_to": [
-        "flying",
+        "vol",
         "poison",
-        "bug",
-        "psychic"
+        "insecte",
+        "psy"
       ],
       "no_damage_from": [],
       "no_damage_to": [
-        "ghost"
+        "spectre"
       ]
     }
   },
@@ -63,27 +63,27 @@
     "color": "physique",
     "damage_relations": {
       "double_damage_from": [
-        "rock",
-        "electric",
-        "ice"
+        "roche",
+        "électrik",
+        "glace"
       ],
       "double_damage_to": [
-        "fighting",
-        "bug",
-        "grass"
+        "combat",
+        "insecte",
+        "plante"
       ],
       "half_damage_from": [
-        "fighting",
-        "bug",
-        "grass"
+        "combat",
+        "insecte",
+        "plante"
       ],
       "half_damage_to": [
-        "rock",
-        "steel",
-        "electric"
+        "roche",
+        "acier",
+        "électrik"
       ],
       "no_damage_from": [
-        "ground"
+        "sol"
       ],
       "no_damage_to": []
     }
@@ -95,27 +95,27 @@
     "color": "physique",
     "damage_relations": {
       "double_damage_from": [
-        "ground",
-        "psychic"
+        "sol",
+        "psy"
       ],
       "double_damage_to": [
-        "grass"
+        "plante"
       ],
       "half_damage_from": [
-        "fighting",
+        "combat",
         "poison",
-        "bug",
-        "grass"
+        "insecte",
+        "plante"
       ],
       "half_damage_to": [
         "poison",
-        "ground",
-        "rock",
-        "ghost"
+        "sol",
+        "roche",
+        "spectre"
       ],
       "no_damage_from": [],
       "no_damage_to": [
-        "steel"
+        "acier"
       ]
     }
   },
@@ -126,30 +126,30 @@
     "color": "physique",
     "damage_relations": {
       "double_damage_from": [
-        "water",
-        "grass",
-        "ice"
+        "eau",
+        "plante",
+        "glace"
       ],
       "double_damage_to": [
         "poison",
-        "rock",
-        "steel",
-        "fire",
-        "electric"
+        "roche",
+        "acier",
+        "feu",
+        "électrik"
       ],
       "half_damage_from": [
         "poison",
-        "rock"
+        "roche"
       ],
       "half_damage_to": [
-        "bug",
-        "grass"
+        "insecte",
+        "plante"
       ],
       "no_damage_from": [
-        "electric"
+        "électrik"
       ],
       "no_damage_to": [
-        "flying"
+        "vol"
       ]
     }
   },
@@ -160,28 +160,28 @@
     "color": "physique",
     "damage_relations": {
       "double_damage_from": [
-        "fighting",
-        "ground",
-        "steel",
-        "water",
-        "grass"
+        "combat",
+        "sol",
+        "acier",
+        "eau",
+        "plante"
       ],
       "double_damage_to": [
-        "flying",
-        "bug",
-        "fire",
-        "ice"
+        "vol",
+        "insecte",
+        "feu",
+        "glace"
       ],
       "half_damage_from": [
         "normal",
-        "flying",
+        "vol",
         "poison",
-        "fire"
+        "feu"
       ],
       "half_damage_to": [
-        "fighting",
-        "ground",
-        "steel"
+        "combat",
+        "sol",
+        "acier"
       ],
       "no_damage_from": [],
       "no_damage_to": []
@@ -194,27 +194,27 @@
     "color": "physique",
     "damage_relations": {
       "double_damage_from": [
-        "flying",
-        "rock",
-        "fire"
+        "vol",
+        "roche",
+        "feu"
       ],
       "double_damage_to": [
-        "grass",
-        "psychic",
-        "dark"
+        "plante",
+        "psy",
+        "ténèbres"
       ],
       "half_damage_from": [
-        "fighting",
-        "ground",
-        "grass"
+        "combat",
+        "sol",
+        "plante"
       ],
       "half_damage_to": [
-        "fighting",
-        "flying",
+        "combat",
+        "vol",
         "poison",
-        "ghost",
-        "steel",
-        "fire"
+        "spectre",
+        "acier",
+        "feu"
       ],
       "no_damage_from": [],
       "no_damage_to": []
@@ -227,23 +227,23 @@
     "color": "physique",
     "damage_relations": {
       "double_damage_from": [
-        "ghost",
-        "dark"
+        "spectre",
+        "ténèbres"
       ],
       "double_damage_to": [
-        "ghost",
-        "psychic"
+        "spectre",
+        "psy"
       ],
       "half_damage_from": [
         "poison",
-        "bug"
+        "insecte"
       ],
       "half_damage_to": [
-        "dark"
+        "ténèbres"
       ],
       "no_damage_from": [
         "normal",
-        "fighting"
+        "combat"
       ],
       "no_damage_to": [
         "normal"
@@ -257,30 +257,30 @@
     "color": "physique",
     "damage_relations": {
       "double_damage_from": [
-        "fighting",
-        "ground",
-        "fire"
+        "combat",
+        "sol",
+        "feu"
       ],
       "double_damage_to": [
-        "rock",
-        "ice"
+        "roche",
+        "glace"
       ],
       "half_damage_from": [
         "normal",
-        "flying",
-        "rock",
-        "bug",
-        "steel",
-        "grass",
-        "psychic",
-        "ice",
+        "vol",
+        "roche",
+        "insecte",
+        "acier",
+        "plante",
+        "psy",
+        "glace",
         "dragon"
       ],
       "half_damage_to": [
-        "steel",
-        "fire",
-        "water",
-        "electric"
+        "acier",
+        "feu",
+        "eau",
+        "électrik"
       ],
       "no_damage_from": [
         "poison"
@@ -295,27 +295,27 @@
     "color": "spécial",
     "damage_relations": {
       "double_damage_from": [
-        "ground",
-        "rock",
-        "water"
+        "sol",
+        "roche",
+        "eau"
       ],
       "double_damage_to": [
-        "bug",
-        "steel",
-        "grass",
-        "ice"
+        "insecte",
+        "acier",
+        "plante",
+        "glace"
       ],
       "half_damage_from": [
-        "bug",
-        "steel",
-        "fire",
-        "grass",
-        "ice"
+        "insecte",
+        "acier",
+        "feu",
+        "plante",
+        "glace"
       ],
       "half_damage_to": [
-        "rock",
-        "fire",
-        "water",
+        "roche",
+        "feu",
+        "eau",
         "dragon"
       ],
       "no_damage_from": [],
@@ -329,23 +329,23 @@
     "color": "spécial",
     "damage_relations": {
       "double_damage_from": [
-        "grass",
-        "electric"
+        "plante",
+        "électrik"
       ],
       "double_damage_to": [
-        "ground",
-        "rock",
-        "fire"
+        "sol",
+        "roche",
+        "feu"
       ],
       "half_damage_from": [
-        "steel",
-        "fire",
-        "water",
-        "ice"
+        "acier",
+        "feu",
+        "eau",
+        "glace"
       ],
       "half_damage_to": [
-        "water",
-        "grass",
+        "eau",
+        "plante",
         "dragon"
       ],
       "no_damage_from": [],
@@ -359,30 +359,30 @@
     "color": "spécial",
     "damage_relations": {
       "double_damage_from": [
-        "flying",
+        "vol",
         "poison",
-        "bug",
-        "fire",
-        "ice"
+        "insecte",
+        "feu",
+        "glace"
       ],
       "double_damage_to": [
-        "ground",
-        "rock",
-        "water"
+        "sol",
+        "roche",
+        "eau"
       ],
       "half_damage_from": [
-        "ground",
-        "water",
-        "grass",
-        "electric"
+        "sol",
+        "eau",
+        "plante",
+        "électrik"
       ],
       "half_damage_to": [
-        "flying",
+        "vol",
         "poison",
-        "bug",
-        "steel",
-        "fire",
-        "grass",
+        "insecte",
+        "acier",
+        "feu",
+        "plante",
         "dragon"
       ],
       "no_damage_from": [],
@@ -396,25 +396,25 @@
     "color": "spécial",
     "damage_relations": {
       "double_damage_from": [
-        "ground"
+        "sol"
       ],
       "double_damage_to": [
-        "flying",
-        "water"
+        "vol",
+        "eau"
       ],
       "half_damage_from": [
-        "flying",
-        "steel",
-        "electric"
+        "vol",
+        "acier",
+        "électrik"
       ],
       "half_damage_to": [
-        "grass",
-        "electric",
+        "plante",
+        "électrik",
         "dragon"
       ],
       "no_damage_from": [],
       "no_damage_to": [
-        "ground"
+        "sol"
       ]
     }
   },
@@ -425,25 +425,25 @@
     "color": "spécial",
     "damage_relations": {
       "double_damage_from": [
-        "bug",
-        "ghost",
-        "dark"
+        "insecte",
+        "spectre",
+        "ténèbres"
       ],
       "double_damage_to": [
-        "fighting",
+        "combat",
         "poison"
       ],
       "half_damage_from": [
-        "fighting",
-        "psychic"
+        "combat",
+        "psy"
       ],
       "half_damage_to": [
-        "steel",
-        "psychic"
+        "acier",
+        "psy"
       ],
       "no_damage_from": [],
       "no_damage_to": [
-        "dark"
+        "ténèbres"
       ]
     }
   },
@@ -454,25 +454,25 @@
     "color": "spécial",
     "damage_relations": {
       "double_damage_from": [
-        "fighting",
-        "rock",
-        "steel",
-        "fire"
+        "combat",
+        "roche",
+        "acier",
+        "feu"
       ],
       "double_damage_to": [
-        "flying",
-        "ground",
-        "grass",
+        "vol",
+        "sol",
+        "plante",
         "dragon"
       ],
       "half_damage_from": [
-        "ice"
+        "glace"
       ],
       "half_damage_to": [
-        "steel",
-        "fire",
-        "water",
-        "ice"
+        "acier",
+        "feu",
+        "eau",
+        "glace"
       ],
       "no_damage_from": [],
       "no_damage_to": []
@@ -485,20 +485,20 @@
     "color": "spécial",
     "damage_relations": {
       "double_damage_from": [
-        "ice",
+        "glace",
         "dragon"
       ],
       "double_damage_to": [
         "dragon"
       ],
       "half_damage_from": [
-        "fire",
-        "water",
-        "grass",
-        "electric"
+        "feu",
+        "eau",
+        "plante",
+        "électrik"
       ],
       "half_damage_to": [
-        "steel"
+        "acier"
       ],
       "no_damage_from": [],
       "no_damage_to": []
@@ -511,23 +511,23 @@
     "color": "spécial",
     "damage_relations": {
       "double_damage_from": [
-        "fighting",
-        "bug"
+        "combat",
+        "insecte"
       ],
       "double_damage_to": [
-        "ghost",
-        "psychic"
+        "spectre",
+        "psy"
       ],
       "half_damage_from": [
-        "ghost",
-        "dark"
+        "spectre",
+        "ténèbres"
       ],
       "half_damage_to": [
-        "fighting",
-        "dark"
+        "combat",
+        "ténèbres"
       ],
       "no_damage_from": [
-        "psychic"
+        "psy"
       ],
       "no_damage_to": []
     }

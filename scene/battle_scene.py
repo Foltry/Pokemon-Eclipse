@@ -5,7 +5,7 @@ import time
 from core.scene_manager import Scene
 from core.run_manager import run_manager
 
-from ui.battle_ui import load_battle_ui, load_combat_sprites, draw_combat_scene
+from ui.battle_ui import load_battle_ui, load_combat_sprites, draw_combat_scene, XPBar, HealthBar
 from ui.bonus_ui import BonusUI
 from ui.animated_text import AnimatedText
 from ui.fight_menu import FightMenu
@@ -17,6 +17,7 @@ from battle.capture_handler import attempt_capture
 from battle.enemy_selector import get_balanced_enemy
 
 from data.pokemon_loader import get_learnable_moves
+from dev.xp_debug_logger import log_update_ally_xp
 
 class BattleScene(Scene):
     def __init__(self):
@@ -60,16 +61,19 @@ class BattleScene(Scene):
         self.ally_level = starter["level"]
         self.ally_max_hp = starter["stats"]["hp"]
         self.ally_hp = min(starter["hp"], self.ally_max_hp)
+
+        self.ally_hp_bar = HealthBar((402, 232), (98, 9), self.ally_max_hp)
+        self.ally_hp_bar.current_hp = self.ally_hp
+        self.ally_hp_bar.displayed_hp = self.ally_hp
+
         self.ally_xp = 0
         self.ally_max_xp = 1
         self.update_ally_xp()
-
-
+        self.ally_xp_bar = XPBar((308, 267), self.ally_max_xp)
+        self.ally_xp_bar.displayed_xp = self.ally_xp
 
         # === Enemy Setup via script équilibré ===
-        starter = run_manager.get_team()[0]
         base_enemy = get_balanced_enemy(starter)
-
         self.enemy_id = base_enemy["id"]
         self.enemy_name = base_enemy["name"]
         self.enemy_level = base_enemy["level"]
@@ -82,6 +86,9 @@ class BattleScene(Scene):
         self.enemy_base_exp = base_enemy.get("base_experience", 50)
         self.enemy_hp = self.enemy_max_hp = self.enemy_data["hp"]
 
+        self.enemy_hp_bar = HealthBar((116, 73), (98, 9), self.enemy_max_hp)
+        self.enemy_hp_bar.current_hp = self.enemy_hp
+        self.enemy_hp_bar.displayed_hp = self.enemy_hp
 
         # === Sprites et positions dynamiques ===
         self.bases, self.sprites, self.sprite_positions = load_combat_sprites(self.ally_id, self.enemy_id)
@@ -146,26 +153,51 @@ class BattleScene(Scene):
 
         result = core_use_move(attacker, defender, move)
 
-        def display_result_messages(result=result):
-            for msg in result["messages"]:
-                self.queue_message(msg)
+        for msg in result["messages"]:
+            self.queue_message(msg)
 
-        self.message_queue.append(display_result_messages)
+        def apply_player_damage():
+            if result["deferred_damage"]:
+                defender["hp"] = max(0, defender["hp"] - result["deferred_damage"])
+            self.enemy_hp = defender["hp"]
 
-
-        defender["hp"] = max(0, defender["hp"])
-        self.ally_hp = starter["hp"]
-        self.enemy_hp = defender["hp"]
+                
+        self.message_queue.append(apply_player_damage)
 
         if defender["hp"] <= 0:
             self.queue_message(f"{defender['name']} est K.O. !")
             self.hide_enemy_sprite = True
             self.message_queue.append(self.handle_victory)
         else:
-            self.message_queue.append(self.enemy_turn)
+            def delayed_enemy_turn():
+                move = random.choice(self.enemy_data["moves"])
+                self.queue_message(f"{self.enemy_name} utilise {move['name']} !")
+
+                attacker = {
+                    "name": self.enemy_name,
+                    "level": self.enemy_level,
+                    "types": self.enemy_data.get("types", []),
+                    "stats": self.enemy_data["stats"]
+                }
+                defender = run_manager.get_team()[0]
+                defender.setdefault("stats", defender.get("base_stats", {}))
+                defender.setdefault("hp", defender["stats"].get("hp", 1))
+
+                result = core_use_move(attacker, defender, move)
+
+                for msg in result["messages"]:
+                    self.queue_message(msg)
+
+                def apply_enemy_damage():
+                    if result["deferred_damage"]:
+                        defender["hp"] = max(0, defender["hp"] - result["deferred_damage"])
+                        self.ally_hp = defender["hp"]
+
+                self.message_queue.append(apply_enemy_damage)
+
+            self.message_queue.append(delayed_enemy_turn)
 
         self.state = "command"
-
 
     def xp_required(self, level):
         """Retourne l’XP total requis pour atteindre un niveau donné."""
@@ -215,10 +247,8 @@ class BattleScene(Scene):
         xp_gain = int((self.enemy_base_exp * self.enemy_level) / 7)
 
         for i, poke in enumerate(run_manager.get_team()):
-            # Donne l'XP
             poke["xp"] = poke.get("xp", 0) + xp_gain
 
-            # Si c'est le Pokémon actif, ajoute une fonction qui met à jour la barre d’XP PUIS affiche le message
             if i == 0:
                 def update_and_show_xp_gain(p=poke, gain=xp_gain):
                     self.update_ally_xp()
@@ -227,7 +257,6 @@ class BattleScene(Scene):
             else:
                 self.queue_message(f"{poke['name']} gagne {xp_gain} XP !")
 
-            # Vérifie le level-up et évolution
             old_level = poke["level"]
             self.check_level_up(poke, self.queue_message)
 
@@ -319,11 +348,9 @@ class BattleScene(Scene):
         if self.capture_result.get("success"):
             added = run_manager.has_team_space()
 
-            # Donne l’XP avant d’ajouter le Pokémon capturé
             self.message_queue.append(lambda: self.handle_victory())
 
             if added:
-                # Ajout après gain d’XP
                 self.message_queue.append(lambda: run_manager.add_pokemon_to_team(self.enemy_data))
                 self.message_queue.append(lambda: self.queue_message(f"{self.enemy_name} a rejoint votre équipe !"))
             else:
@@ -451,7 +478,7 @@ class BattleScene(Scene):
 
     def on_exit(self):
         pass
-
+    
     def update(self, dt):
         """Mise à jour des éléments dynamiques (animations, effets, menus)."""
         if self.throw_animation:
@@ -494,42 +521,48 @@ class BattleScene(Scene):
         self.ally_max_hp = starter["stats"]["hp"]
 
         self.update_ally_xp()
-        
-        if self.message_queue:
-            top = self.message_queue[0]
-            type_str = type(top).__name__
-            content = getattr(top, "full_text", str(top))
 
-   
+        # Animation de la barre d'XP (vers la cible)
+        if hasattr(self, "ally_xp_bar"):
+            self.ally_xp_bar.update(self.ally_xp, dt/1000)
+            
+        if hasattr(self, "ally_hp_bar"):
+            self.ally_hp_bar.update(self.ally_hp, dt / 1000)
+        
+        if hasattr(self, "enemy_hp_bar"):
+            self.enemy_hp_bar.update(self.enemy_hp, dt / 1000)
+
+
+
     def update_ally_xp(self):
+        """Met à jour les valeurs cibles d'XP du Pokémon actif (sans toucher à displayed_xp)."""
         starter = run_manager.get_team()[0]
         level = starter.get("level", 1)
         xp = starter.get("xp", 0)
 
-        next_level_xp = self.xp_required(level + 1)
-
         self.ally_xp = xp
-        self.ally_max_xp = next_level_xp
+        self.ally_max_xp = self.xp_required(level + 1)
 
+        log_update_ally_xp(self.ally_xp, self.ally_max_xp)
+
+        if hasattr(self, "ally_xp_bar"):
+            self.ally_xp_bar.max_xp = self.ally_max_xp
+            self.ally_xp_bar.current_xp = self.ally_xp  # Cible animée
 
     def queue_message_with_xp_update(self, text):
         """Met à jour la barre d’XP et ajoute le message dans la file."""
         self.update_ally_xp()
         self.queue_message(text)
 
-
-
     def draw(self, screen):
         """Affiche toute la scène de combat : arrière-plan, sprites, menus, effets, etc."""
 
-        # Préparation des sprites
         sprites = list(self.sprites)
         if self.hide_enemy_sprite or (self.capture_effect and self.capture_effect.is_active()):
             sprites[1] = None
 
         self.update_ally_xp()
 
-        # Affichage de la scène principale (background, barres, sprites)
         draw_combat_scene(
             screen,
             self.bg,
@@ -537,19 +570,28 @@ class BattleScene(Scene):
             sprites,
             ally_name=self.ally_name,
             enemy_name=self.enemy_name,
-            ally_hp=self.ally_hp,
-            ally_max_hp=self.ally_max_hp,
+            ally_hp=None,  # ← On désactive l’ancienne barre
+            ally_max_hp=None,
             enemy_hp=self.enemy_hp,
             enemy_max_hp=self.enemy_max_hp,
             ally_level=self.ally_level,
             enemy_level=self.enemy_level,
             enemy_gender=self.enemy_gender,
-            ally_xp=self.ally_xp,
-            ally_max_xp=self.ally_max_xp,
-            positions=self.sprite_positions
+            ally_xp=0,
+            ally_max_xp=1,
+            positions=self.sprite_positions,
+            draw_ally_hp_bar=False  # ← Nouvelle option
         )
 
-        # Menus spécifiques (Pokémon ou Combat)
+        if self.ally_xp_bar:
+            self.ally_xp_bar.draw(screen)
+
+        if self.ally_hp_bar:
+            self.ally_hp_bar.draw(screen)
+        if self.enemy_hp_bar:
+            self.enemy_hp_bar.draw(screen)
+
+        # Menus spécifiques
         if self.pokemon_menu:
             self.pokemon_menu.draw(screen)
             return
@@ -569,7 +611,7 @@ class BattleScene(Scene):
         if self.ball_throw:
             self.ball_throw.draw(screen)
 
-        # === Zone de message principale ===
+        # Messages et commandes
         if self.message_queue:
             self.render_current_message(screen)
         elif self.show_bonus:
@@ -581,6 +623,7 @@ class BattleScene(Scene):
                 button.draw(screen, selected=(i == self.selected_index))
         else:
             self.dialog_box.draw(screen, "", draw_box=True)
+
 
     def render_current_message(self, screen):
         """Affiche le message animé en cours, caractère par caractère + MAJ visuelle XP."""
@@ -599,9 +642,6 @@ class BattleScene(Scene):
         else:
             # Si ce n’est pas un AnimatedText → boîte vide sans "(...)"
             self.dialog_box.draw(screen, "", draw_box=True)
-
-
-
             
     def is_blocked(self):
         """Renvoie True si un message ou une action est en cours."""

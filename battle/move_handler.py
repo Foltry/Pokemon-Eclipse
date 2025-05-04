@@ -13,27 +13,28 @@ import random
 def use_move(attacker, defender, move):
     """Traite l'utilisation d'une capacité (dégâts + effets secondaires)."""
     messages = []
+    deferred_damage = None  # Nouveau : dégâts différés
 
     # 1️⃣ Vérifie si l'attaque échoue automatiquement
     if should_fail(attacker, defender, move):
         messages.append(f"L'attaque de {attacker['name']} a échoué.")
         reset_temp_status(attacker)
         reset_temp_status(defender)
-        return {"damage": 0, "messages": messages}
+        return {"damage": 0, "messages": messages, "deferred_damage": None}
 
     # 2️⃣ Vérifie précision
     if not check_accuracy(attacker, defender, move):
         messages.append(f"{attacker['name']} rate son attaque !")
         reset_temp_status(attacker)
         reset_temp_status(defender)
-        return {"damage": 0, "messages": messages}
+        return {"damage": 0, "messages": messages, "deferred_damage": None}
 
     # 3️⃣ Vérifie Abri / Protection
     if is_protected(defender):
         messages.append(f"{defender['name']} s'est protégé contre l'attaque !")
         reset_temp_status(attacker)
         reset_temp_status(defender)
-        return {"damage": 0, "messages": messages}
+        return {"damage": 0, "messages": messages, "deferred_damage": None}
 
     # 4️⃣ Vérifie One-Hit KO
     if move.get("effects", {}).get("one_hit_ko"):
@@ -41,7 +42,7 @@ def use_move(attacker, defender, move):
         messages.append(f"{attacker['name']} a mis KO {defender['name']} en un seul coup !")
         reset_temp_status(attacker)
         reset_temp_status(defender)
-        return {"damage": 9999, "messages": messages}
+        return {"damage": 9999, "messages": messages, "deferred_damage": 9999}
 
     # 5️⃣ Si attaque inflige des dégâts
     damage = 0
@@ -55,7 +56,7 @@ def use_move(attacker, defender, move):
             damage = damage_info
 
         damage = max(1, damage)
-        defender["hp"] = max(0, defender.get("hp", 0) - damage)
+        deferred_damage = damage  # ← Ne modifie pas les PV tout de suite
         messages.append(f"{defender['name']} a subi {damage} dégâts !")
     else:
         messages.append(f"{attacker['name']} utilise {move['name']} sans effet direct.")
@@ -64,11 +65,15 @@ def use_move(attacker, defender, move):
     secondary_effects = apply_move_effect(attacker, defender, move, last_damage=damage)
     messages.extend(secondary_effects)
 
-    # 🧹 Reset protections/flinch après l'action
+    # 🧹 Reset temporaire
     reset_temp_status(attacker)
     reset_temp_status(defender)
 
-    return {"damage": damage, "messages": messages}
+    return {
+        "damage": damage,
+        "messages": messages,
+        "deferred_damage": deferred_damage
+    }
 
 def calculate_basic_damage(attacker, defender, move):
     """Calcule les dégâts d'une attaque en fonction de son type."""

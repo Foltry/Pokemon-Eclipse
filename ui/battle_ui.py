@@ -151,7 +151,8 @@ def draw_combat_scene(
     enemy_level=5,
     enemy_gender="?",
     ally_xp=0,
-    ally_max_xp=100
+    ally_max_xp=100,
+    draw_ally_hp_bar=True  # ⬅️ Ajouté pour désactiver la barre statique
 ):
     load_status_images()
     font_pkm = pygame.font.Font(os.path.join(FONTS, "power clear.ttf"), 27)
@@ -188,18 +189,11 @@ def draw_combat_scene(
     screen.blit(ally_name_text, (305, 205))
     screen.blit(ally_level_text, (430, 205))
 
-    ally_bar = HealthBar((402, 232), (98, 9), ally_max_hp)
-    ally_bar.update(ally_hp)
-    ally_bar.draw(screen)
+    if draw_ally_hp_bar and ally_hp is not None and ally_max_hp is not None:
+        ally_bar = HealthBar((402, 232), (98, 9), ally_max_hp)
+        ally_bar.current_hp = ally_hp
+        ally_bar.draw(screen)
 
-    enemy_bar = HealthBar((116, 73), (98, 9), enemy_max_hp)
-    enemy_bar.update(enemy_hp)
-    enemy_bar.draw(screen)
-
-    hp_text = font_pv.render(f"{ally_hp}/{ally_max_hp}", True, (51, 51, 51))
-    hp_text = pygame.transform.scale(hp_text, (hp_text.get_width(), int(hp_text.get_height() * 0.65)))
-    screen.blit(hp_text, (410, 246))
-
-    xp_bar = XPBar((308, 267), ally_max_xp)    
-    xp_bar.update(ally_xp)
-    xp_bar.draw(screen)
+        hp_text = font_pv.render(f"{ally_hp}/{ally_max_hp}", True, (51, 51, 51))
+        hp_text = pygame.transform.scale(hp_text, (hp_text.get_width(), int(hp_text.get_height() * 0.65)))
+        screen.blit(hp_text, (410, 246))
