@@ -5,7 +5,13 @@ from data.items_loader import get_item_category
 def use_item_on_pokemon(item_name, pokemon):
     """
     Utilise un objet spécifique sur un Pokémon.
-    Renvoie un dict {success: bool, message: str}
+
+    Args:
+        item_name (str): Nom de l'objet.
+        pokemon (dict): Données du Pokémon ciblé.
+
+    Returns:
+        dict: Contient le succès de l'action et un message utilisateur.
     """
     if not pokemon:
         return {"success": False, "message": "Aucun Pokémon sélectionné."}
@@ -24,14 +30,23 @@ def use_item_on_pokemon(item_name, pokemon):
     return {"success": False, "message": "Objet inutilisable ici."}
 
 def apply_healing(item_name, pokemon):
-    """Soigne les PV en fonction de l'objet utilisé."""
+    """
+    Applique un objet de soin à un Pokémon.
+
+    Args:
+        item_name (str): Nom de l'objet.
+        pokemon (dict): Données du Pokémon.
+
+    Returns:
+        dict: Succès et message utilisateur.
+    """
     heal_values = {
         "Potion": 20,
         "Super Potion": 50,
         "Hyper Potion": 200,
         "Eau Fraîche": 50,
         "Potion Max": "full",
-        "Guérison": "full"  # Guérison soigne aussi tous les statuts, géré séparément
+        "Guérison": "full"
     }
 
     heal_amount = heal_values.get(item_name)
@@ -58,7 +73,16 @@ def apply_healing(item_name, pokemon):
     return {"success": True, "message": f"{pokemon['name']} récupère {heal_done} PV !"}
 
 def apply_status_cure(item_name, pokemon):
-    """Soigne un statut en fonction de l'objet utilisé."""
+    """
+    Applique un objet de soin de statut à un Pokémon.
+
+    Args:
+        item_name (str): Nom de l'objet.
+        pokemon (dict): Données du Pokémon.
+
+    Returns:
+        dict: Succès et message utilisateur.
+    """
     if not pokemon.get("status"):
         return {"success": False, "message": f"{pokemon['name']} n'a aucun problème de statut."}
 
@@ -72,13 +96,12 @@ def apply_status_cure(item_name, pokemon):
     }
 
     target_status = status_effects.get(item_name)
-
     current_status = pokemon.get("status")
 
     if target_status == "all":
         pokemon["status"] = None
         return {"success": True, "message": f"{pokemon['name']} est totalement guéri !"}
-    
+
     if current_status == target_status:
         pokemon["status"] = None
         return {"success": True, "message": f"{pokemon['name']} est guéri de {current_status} !"}

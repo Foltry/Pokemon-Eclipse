@@ -1,3 +1,6 @@
+# battle/move_handler.py
+
+import random
 from battle.move_effects import apply_move_effect
 from battle.move_utils import (
     check_accuracy,
@@ -7,17 +10,24 @@ from battle.move_utils import (
     get_fixed_damage,
     reset_temp_status,
 )
-from data.moves_loader import get_move_by_name  # ✅ Ajouté
-import random
+from data.moves_loader import get_move_by_name
 
 def use_move(attacker, defender, move):
-    """Traite l'utilisation d'une capacité (dégâts + effets secondaires)."""
+    """
+    Traite l'utilisation d'une capacité, infligeant les dégâts et appliquant les effets secondaires.
+
+    Args:
+        attacker (dict): Le Pokémon attaquant.
+        defender (dict): Le Pokémon défenseur.
+        move (dict): Données de l'attaque (doit contenir au minimum "name").
+
+    Returns:
+        dict: {"damage": int, "messages": list[str], "deferred_damage": Optional[int]}
+    """
     messages = []
     deferred_damage = None
 
-    # ✅ Recharge l'attaque complète pour garantir la présence des effets
     move = get_move_by_name(move["name"], language="fr") or move
-
     print(f"[DEBUG] Utilisation de {move.get('name', move.get('name_fr', '???'))}")
 
     if should_fail(attacker, defender, move):
@@ -46,6 +56,7 @@ def use_move(attacker, defender, move):
         return {"damage": 9999, "messages": messages, "deferred_damage": 9999}
 
     damage = 0
+
     if move.get("power") or move.get("fixed_damage") or move.get("level_damage"):
         damage_info = calculate_basic_damage(attacker, defender, move)
 
@@ -72,7 +83,7 @@ def use_move(attacker, defender, move):
         if secondary_effects:
             messages.extend(secondary_effects)
         else:
-            messages.append(f"Mais cela n'a eu aucun effet...")
+            messages.append("Mais cela n'a eu aucun effet...")
 
     reset_temp_status(attacker)
     reset_temp_status(defender)
@@ -84,7 +95,17 @@ def use_move(attacker, defender, move):
     }
 
 def calculate_basic_damage(attacker, defender, move):
-    """Calcule les dégâts d'une attaque en fonction de son type."""
+    """
+    Calcule les dégâts d'une attaque de base (sans effets secondaires).
+
+    Args:
+        attacker (dict): Pokémon attaquant.
+        defender (dict): Pokémon défenseur.
+        move (dict): Attaque utilisée.
+
+    Returns:
+        int | tuple[int, list[str]]: Dégâts infligés, ou (1, messages) pour attaques multi-coups.
+    """
     fixed_damage = get_fixed_damage(attacker, defender, move)
     if fixed_damage is not None:
         return fixed_damage

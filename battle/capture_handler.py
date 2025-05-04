@@ -1,7 +1,9 @@
+# battle/capture_handler.py
+
 import random
 import math
 
-# Modificateurs de statut
+# Modificateurs appliqués selon le statut du Pokémon
 STATUS_MODIFIERS = {
     "sleep": 2.0,
     "freeze": 2.0,
@@ -10,7 +12,7 @@ STATUS_MODIFIERS = {
     "burn": 1.5
 }
 
-# Modificateurs de Poké Balls (exemples de base)
+# Modificateurs des types de Poké Balls
 BALL_MODIFIERS = {
     "poké ball": 1.0,
     "super ball": 1.5,
@@ -19,17 +21,46 @@ BALL_MODIFIERS = {
 }
 
 def get_ball_modifier(ball_name):
+    """
+    Renvoie le multiplicateur associé à une Poké Ball.
+
+    Args:
+        ball_name (str): Le nom de la Poké Ball.
+
+    Returns:
+        float: Le multiplicateur de capture.
+    """
     return BALL_MODIFIERS.get(ball_name.lower(), 1.0)
 
 def get_status_modifier(status):
+    """
+    Renvoie le multiplicateur associé à un statut.
+
+    Args:
+        status (str): Le statut du Pokémon (ex: "sleep", "burn").
+
+    Returns:
+        float: Le multiplicateur de capture selon le statut.
+    """
     if not status:
         return 1.0
     return STATUS_MODIFIERS.get(status.lower(), 1.0)
 
 def attempt_capture(pokemon, ball_name, status=None):
     """
-    Tente de capturer un Pokémon avec la formule officielle.
-    Renvoie un dict : {"success": bool, "shakes": int, "messages": list[str]}
+    Tente de capturer un Pokémon en utilisant la formule officielle.
+
+    Args:
+        pokemon (dict): Dictionnaire contenant les infos du Pokémon (hp, stats, capture rate...).
+        ball_name (str): Type de Poké Ball utilisée.
+        status (str, optional): Statut du Pokémon (par défaut: None).
+
+    Returns:
+        dict: {
+            "success": bool,
+            "shakes": int,
+            "messages": list[str]
+        }
     """
     max_hp = pokemon["stats"]["hp"]
     current_hp = pokemon["hp"]
@@ -38,7 +69,7 @@ def attempt_capture(pokemon, ball_name, status=None):
     ball_mod = get_ball_modifier(ball_name)
     status_mod = get_status_modifier(status)
 
-    # Master Ball = capture garantie
+    # Master Ball = réussite automatique
     if ball_mod >= 255:
         return {
             "success": True,
@@ -46,7 +77,7 @@ def attempt_capture(pokemon, ball_name, status=None):
             "messages": [f"{pokemon['name']} est capturé !"]
         }
 
-    # Formule de base
+    # Calcul du taux de capture
     a = ((3 * max_hp - 2 * current_hp) * catch_rate * ball_mod * status_mod) / (3 * max_hp)
 
     if a >= 255:
@@ -56,7 +87,7 @@ def attempt_capture(pokemon, ball_name, status=None):
             "messages": [f"{pokemon['name']} est capturé !"]
         }
 
-    # Calcul du seuil b
+    # Calcul du seuil b (probabilité de secousses)
     try:
         b = int(1048560 / math.sqrt(math.sqrt(16711680 / a)))
     except ZeroDivisionError:
@@ -75,11 +106,9 @@ def attempt_capture(pokemon, ball_name, status=None):
             "shakes": 3,
             "messages": [f"{pokemon['name']} est capturé !"]
         }
-    else:
-        return {
-            "success": False,
-            "shakes": shakes,
-            "messages": [f"{pokemon['name']} s'est échappé !"]
-        }
-
- 
+    
+    return {
+        "success": False,
+        "shakes": shakes,
+        "messages": [f"{pokemon['name']} s'est échappé !"]
+    }

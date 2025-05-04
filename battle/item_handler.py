@@ -3,21 +3,34 @@
 from data.items_loader import get_item_data
 from battle.capture_handler import attempt_capture
 
-# Liste des objets non utilisables en combat
+# Objets interdits pendant un combat
 NON_BATTLE_ITEMS = [
     "Rappel Max", "Rappel", "Repousse", "Super Bonbon"
 ]
 
 def can_use_item_in_battle(item_name):
-    """Vérifie si l’objet est utilisable en combat."""
+    """
+    Vérifie si un objet peut être utilisé en combat.
+
+    Args:
+        item_name (str): Nom de l’objet.
+
+    Returns:
+        bool: True si l’objet est utilisable en combat, sinon False.
+    """
     item = get_item_data(item_name)
     return item is not None and item_name not in NON_BATTLE_ITEMS
 
 def use_item_on_pokemon(item_name, target):
     """
-    Applique les effets de l’objet sur un Pokémon (en combat).
-    Peut être une Poké Ball, un soin de PV ou un soin de statut.
-    Retourne un dictionnaire : {success: bool, messages: list[str], ...}
+    Utilise un objet pendant un combat sur un Pokémon.
+
+    Args:
+        item_name (str): Nom de l’objet.
+        target (dict): Données du Pokémon cible.
+
+    Returns:
+        dict: {success: bool, messages: list[str]} décrivant le résultat.
     """
     item = get_item_data(item_name)
     if not item:
@@ -32,11 +45,11 @@ def use_item_on_pokemon(item_name, target):
             "messages": [f"Impossible d’utiliser {item_name} pendant un combat."]
         }
 
-    # === Poké Balls ===
+    # --- Poké Balls ---
     if item.get("category") == "standard-balls":
         return attempt_capture(target, item_name, target.get("status"))
 
-    # === Soins de PV ===
+    # --- Soins de PV ---
     if "healing" in item:
         current_hp = target["stats"]["hp"]
         max_hp = target["stats"].get("max_hp", current_hp)
@@ -61,7 +74,7 @@ def use_item_on_pokemon(item_name, target):
             "messages": [f"{item_name} a restauré {healed} PV à {target['name']}."]
         }
 
-    # === Soins de statut ===
+    # --- Soins de statut ---
     if "status_heal" in item:
         current_status = target.get("status")
         if not current_status:
@@ -77,13 +90,13 @@ def use_item_on_pokemon(item_name, target):
                 "success": True,
                 "messages": [f"{target['name']} n’est plus {current_status} !"]
             }
-        else:
-            return {
-                "success": False,
-                "messages": [f"{item_name} ne peut pas soigner ce statut."]
-            }
 
-    # === Par défaut : aucun effet connu ===
+        return {
+            "success": False,
+            "messages": [f"{item_name} ne peut pas soigner ce statut."]
+        }
+
+    # --- Aucun effet applicable ---
     return {
         "success": False,
         "messages": [f"{item_name} n’a aucun effet en combat."]
