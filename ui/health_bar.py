@@ -1,7 +1,22 @@
+# ui/health_bar.py
+
 import pygame
 
 class HealthBar:
+    """
+    Barre de points de vie avec animation fluide et code couleur.
+    """
+
     def __init__(self, pos, size, max_hp, colors=None):
+        """
+        Initialise la barre de PV.
+
+        Args:
+            pos (tuple): Coordonnées (x, y) de la barre.
+            size (tuple): Taille (largeur, hauteur) de la barre.
+            max_hp (int): PV maximum.
+            colors (dict, optional): Couleurs selon la proportion de PV restante.
+        """
         self.x, self.y = pos
         self.width, self.height = size
         self.max_hp = max_hp
@@ -13,15 +28,22 @@ class HealthBar:
         self.target_hp = max_hp
         self.animating = False
         self.animation_elapsed = 0
-        self.animation_duration = 0.7
+        self.animation_duration = 0.7  # en secondes
 
         self.colors = colors or {
-            "high": (0, 192, 0),
-            "medium": (232, 192, 0),
-            "low": (240, 64, 48)
+            "high": (0, 192, 0),       # > 50%
+            "medium": (232, 192, 0),   # entre 20% et 50%
+            "low": (240, 64, 48)       # < 20%
         }
 
     def update(self, current_hp, dt):
+        """
+        Met à jour la barre en animant la transition de PV.
+
+        Args:
+            current_hp (int): Valeur actuelle réelle de PV.
+            dt (float): Temps écoulé depuis la dernière frame (en secondes).
+        """
         current_hp = max(0, min(current_hp, self.max_hp))
         self.current_hp = current_hp
 
@@ -40,6 +62,12 @@ class HealthBar:
                 self.animating = False
 
     def draw(self, surface):
+        """
+        Dessine la barre de PV sur la surface cible.
+
+        Args:
+            surface (pygame.Surface): Surface sur laquelle dessiner.
+        """
         if self.max_hp <= 0:
             return
 

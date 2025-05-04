@@ -4,19 +4,36 @@ import os
 import pygame
 import gif_pygame
 from PIL import Image
+
 from ui.health_bar import HealthBar
 from ui.xp_bar import XPBar
 from data.pokemon_loader import get_pokemon_by_id
 
+# === Chemins ===
 ASSETS = os.path.join("assets", "ui", "battle")
 FONTS = os.path.join("assets", "fonts")
 SPRITE_DIR = os.path.join("assets", "sprites", "pokemon")
-CMD_IMG = pygame.image.load(os.path.join(ASSETS, "cursor_command.png"))
 
+# === Constantes ===
 BUTTON_WIDTH = 130
 BUTTON_HEIGHT = 46
+CMD_IMG = pygame.image.load(os.path.join(ASSETS, "cursor_command.png"))
+
+# === Chargement différé des images de statut ===
+STATUS_PLAYER = None
+STATUS_ENEMY = None
+_status_loaded = False
+
+def load_status_images():
+    """Charge les images de statut pour les barres de combat (une fois)."""
+    global STATUS_PLAYER, STATUS_ENEMY, _status_loaded
+    if not _status_loaded:
+        STATUS_PLAYER = pygame.image.load(os.path.join(ASSETS, "status_player.png")).convert_alpha()
+        STATUS_ENEMY = pygame.image.load(os.path.join(ASSETS, "status_enemy.png")).convert_alpha()
+        _status_loaded = True
 
 def get_gif_max_size(gif_path):
+    """Retourne les dimensions maximales d’un GIF pour le redimensionner correctement."""
     try:
         with Image.open(gif_path) as img:
             max_width, max_height = 0, 0
@@ -30,11 +47,13 @@ def get_gif_max_size(gif_path):
         return 192, 192
 
 def get_command_button(index):
+    """Retourne les sprites (normal et sélectionné) du bouton de commande."""
     normal = CMD_IMG.subsurface(pygame.Rect(0, index * BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT))
     selected = CMD_IMG.subsurface(pygame.Rect(BUTTON_WIDTH, index * BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT))
     return normal, selected
 
 class BattleButton:
+    """Bouton interactif dans le menu de combat."""
     def __init__(self, index, pos):
         self.normal, self.selected = get_command_button(index)
         self.rect = self.normal.get_rect(topleft=pos)
@@ -43,6 +62,7 @@ class BattleButton:
         surface.blit(self.selected if selected else self.normal, self.rect.topleft)
 
 class BattleDialogBox:
+    """Boîte de dialogue du combat affichant les textes et choix."""
     def __init__(self, pos=(0, 288)):
         self.image = pygame.image.load(os.path.join(ASSETS, "dialogue_box.png")).convert_alpha()
         self.rect = self.image.get_rect(topleft=pos)
@@ -54,6 +74,7 @@ class BattleDialogBox:
         self.max_width = 216
 
     def wrap_text(self, text):
+        """Découpe un texte en lignes selon la largeur max autorisée."""
         words = text.split(" ")
         lines = []
         current_line = ""
@@ -69,6 +90,7 @@ class BattleDialogBox:
         return lines
 
     def draw(self, surface, text, offset_x=0, offset_y=0, draw_box=True):
+        """Affiche la boîte et le texte avec position et marges personnalisées."""
         if draw_box:
             surface.blit(self.image, self.rect.topleft)
         lines = self.wrap_text(text)
@@ -79,6 +101,7 @@ class BattleDialogBox:
             y += txt_surface.get_height() + self.line_spacing
 
 def load_battle_ui():
+    """Charge le fond, la boîte de dialogue et les boutons de combat."""
     bg = pygame.image.load(os.path.join(ASSETS, "battle_bg.png")).convert()
     dialog = BattleDialogBox()
     buttons = [
@@ -89,18 +112,8 @@ def load_battle_ui():
     ]
     return bg, dialog, buttons
 
-STATUS_PLAYER = None
-STATUS_ENEMY = None
-_status_loaded = False
-
-def load_status_images():
-    global STATUS_PLAYER, STATUS_ENEMY, _status_loaded
-    if not _status_loaded:
-        STATUS_PLAYER = pygame.image.load(os.path.join(ASSETS, "status_player.png")).convert_alpha()
-        STATUS_ENEMY = pygame.image.load(os.path.join(ASSETS, "status_enemy.png")).convert_alpha()
-        _status_loaded = True
-
 def resize_gif(gif_obj, size):
+    """Redimensionne chaque frame d’un GIF."""
     resized_frames = [
         (pygame.transform.scale(frame, size), duration)
         for frame, duration in gif_obj.get_datas()
@@ -108,6 +121,7 @@ def resize_gif(gif_obj, size):
     return gif_pygame.GIFPygame(resized_frames)
 
 def load_combat_sprites(ally_id, enemy_id):
+    """Charge les bases et sprites animés du combat (allié + ennemi)."""
     base_ally = pygame.image.load(os.path.join(ASSETS, "base_ally.png")).convert_alpha()
     base_enemy = pygame.image.load(os.path.join(ASSETS, "base_enemy.png")).convert_alpha()
 
@@ -123,7 +137,7 @@ def load_combat_sprites(ally_id, enemy_id):
     ally_sprite = resize_gif(gif_pygame.load(ally_path), ally_size)
     enemy_sprite = resize_gif(gif_pygame.load(enemy_path), enemy_size)
 
-    # === Base positions ===
+    # Calcul des positions
     base_ally_rect = base_ally.get_rect(topleft=(-128, 240))
     base_enemy_rect = base_enemy.get_rect(topleft=(255, 115))
 
@@ -152,8 +166,13 @@ def draw_combat_scene(
     enemy_gender="?",
     ally_xp=0,
     ally_max_xp=100,
-    draw_ally_hp_bar=True  # ⬅️ Ajouté pour désactiver la barre statique
+    draw_ally_hp_bar=True
 ):
+    """
+    Affiche la scène complète de combat avec sprites, bases, noms et niveaux.
+
+    Cette fonction est utilisée par BattleScene.draw().
+    """
     load_status_images()
     font_pkm = pygame.font.Font(os.path.join(FONTS, "power clear.ttf"), 27)
     font_pv = pygame.font.Font(os.path.join(FONTS, "power clear bold.ttf"), 27)
@@ -173,7 +192,8 @@ def draw_combat_scene(
 
     screen.blit(STATUS_PLAYER, (268, 193))
     screen.blit(STATUS_ENEMY, (0, 35))
-    
+
+    # Texte ennemi
     enemy_name_text = font_pkm.render(enemy_name, True, (0, 0, 0))
     gender_color = (66, 150, 255) if enemy_gender == "♂" else (255, 105, 180) if enemy_gender == "♀" else (120, 120, 120)
     enemy_gender_text = font_pv.render(enemy_gender, True, gender_color)
@@ -183,12 +203,14 @@ def draw_combat_scene(
     screen.blit(enemy_gender_text, (120, 45))
     screen.blit(enemy_level_text, (140, 45))
 
+    # Texte allié
     ally_name_text = font_pkm.render(ally_name, True, (0, 0, 0))
     ally_level_text = font_pv.render(f"Nv.{ally_level}", True, (51, 51, 51))
 
     screen.blit(ally_name_text, (305, 205))
     screen.blit(ally_level_text, (430, 205))
 
+    # Barre de PV statique
     if draw_ally_hp_bar and ally_hp is not None and ally_max_hp is not None:
         ally_bar = HealthBar((402, 232), (98, 9), ally_max_hp)
         ally_bar.current_hp = ally_hp

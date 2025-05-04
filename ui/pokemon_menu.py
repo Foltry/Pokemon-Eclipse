@@ -1,6 +1,9 @@
+# ui/pokemon_menu.py
+
 import unicodedata
 import pygame
 import os, sys
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from core.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
@@ -13,15 +16,17 @@ DIALOGUE_BOX_POS = (2, 322)
 DIALOGUE_BOX_SEL = (350, 258)
 
 def normalize_name(name):
+    """Normalise un nom pour correspondre aux fichiers d’icônes (ex: accents supprimés)."""
     return unicodedata.normalize("NFD", name).encode("ascii", "ignore").decode("utf-8").upper()
 
 class PokemonMenu:
+    """Menu de sélection de Pokémon pour l'équipe du joueur."""
+
     def __init__(self, team, current_ally_id, surface=None):
         self.team = team
         self.current_ally_id = current_ally_id
         self.surface = surface
 
-        # État interne
         self.selected_index = 0
         self.selection_active = False
         self.selected_option = 0
@@ -34,17 +39,10 @@ class PokemonMenu:
         self.font_niv = pygame.font.Font(os.path.join(FONTS, "power clear bold.ttf"), 22)
         self.font_dialogue = pygame.font.Font(os.path.join(FONTS, "power clear.ttf"), 25)
 
-        # Images
+        # Images & slots
         self.images = self.load_images()
         self.bg = pygame.image.load(os.path.join(ASSETS, "bg.png")).convert()
         self.icon_frames = [self.load_icon(p["name"]) for p in team]
-
-        # Animation
-        self.frame_index = 0
-        self.animation_timer = 0
-        self.ANIMATION_DELAY = 400
-
-        # Position slots
         self.slot_positions = [
             (0, 0), (255, 15),
             (0, 95), (255, 110),
@@ -52,7 +50,13 @@ class PokemonMenu:
         ][:len(team)]
         self.cancel_index = len(team)
 
+        # Animation
+        self.frame_index = 0
+        self.animation_timer = 0
+        self.ANIMATION_DELAY = 400
+
     def load_images(self):
+        """Charge tous les assets image nécessaires."""
         return {
             "round": pygame.image.load(os.path.join(ASSETS, "slot_round.png")).convert_alpha(),
             "round_selected": pygame.image.load(os.path.join(ASSETS, "slot_round_selected.png")).convert_alpha(),
@@ -69,6 +73,7 @@ class PokemonMenu:
         }
 
     def load_icon(self, name):
+        """Retourne les deux frames d'animation de l'icône du Pokémon."""
         path = os.path.join(ICONS, f"{normalize_name(name)}.png")
         if not os.path.exists(path):
             return []
@@ -77,6 +82,7 @@ class PokemonMenu:
         return [img.subsurface((0, 0, w, img.get_height())), img.subsurface((w, 0, w, img.get_height()))]
 
     def update(self, dt):
+        """Met à jour l’animation des icônes Pokémon."""
         self.animation_timer += dt
         if self.animation_timer >= self.ANIMATION_DELAY:
             self.animation_timer = 0
@@ -85,11 +91,11 @@ class PokemonMenu:
             self.override_text = None
 
     def handle_input(self, event):
+        """Gère l'entrée clavier selon le contexte (sélection ou navigation)."""
         if event.type != pygame.KEYDOWN:
             return
 
         self.option_chosen = None
-
         if self.selection_active:
             self.handle_selection_input(event)
         else:
@@ -101,24 +107,20 @@ class PokemonMenu:
         elif event.key in (pygame.K_DOWN, pygame.K_s):
             self.selected_option = (self.selected_option + 1) % 2
         elif event.key == pygame.K_RETURN:
-            selected_pkm = self.team[self.selected_index]
-            if self.selected_option == 0:  # Envoyer
+            if self.selected_option == 0:
                 self.option_chosen = "send"
                 self.closed = True
-            elif self.selected_option == 1:  # Annuler
+            else:
                 self.selection_active = False
 
     def handle_slot_navigation(self, event):
         if event.key in (pygame.K_UP, pygame.K_z):
             if self.selected_index == self.cancel_index:
-                self.selected_index = len(self.team) - 1 if len(self.team) % 2 == 1 else len(self.team) - 2
+                self.selected_index = len(self.team) - (1 if len(self.team) % 2 == 1 else 2)
             elif self.selected_index >= 2:
                 self.selected_index -= 2
         elif event.key in (pygame.K_DOWN, pygame.K_s):
-            if self.selected_index + 2 < self.cancel_index:
-                self.selected_index += 2
-            else:
-                self.selected_index = self.cancel_index
+            self.selected_index = self.cancel_index if self.selected_index + 2 >= self.cancel_index else self.selected_index + 2
         elif event.key in (pygame.K_LEFT, pygame.K_q):
             if self.selected_index % 2 == 1:
                 self.selected_index -= 1
@@ -126,14 +128,12 @@ class PokemonMenu:
             if self.selected_index % 2 == 0 and self.selected_index + 1 < self.cancel_index:
                 self.selected_index += 1
         elif event.key == pygame.K_RETURN:
-            if self.selected_index == self.cancel_index:
-                self.closed = True
-            else:
-                self.selection_active = True
+            self.closed = self.selected_index == self.cancel_index
+            self.selection_active = not self.closed
 
     def draw(self, surface=None):
-        if surface is None:
-            surface = self.surface
+        """Affiche tout le menu Pokémon (slots, boîte de dialogue, sélection)."""
+        surface = surface or self.surface
         if surface is None:
             return
 
@@ -151,6 +151,7 @@ class PokemonMenu:
         stats = p.get("stats") or p.get("base_stats", {})
         hp, max_hp = p.get("hp", stats["hp"]), stats["hp"]
 
+        # Slot image
         slot_img = (
             self.images["round_selected"] if index == 0 and index == self.selected_index else
             self.images["round"] if index == 0 else
@@ -209,4 +210,5 @@ class PokemonMenu:
         surface.blit(font.render(text, True, text_color), pos)
 
     def get_selected_pokemon(self):
+        """Retourne le Pokémon actuellement sélectionné."""
         return self.team[self.selected_index]

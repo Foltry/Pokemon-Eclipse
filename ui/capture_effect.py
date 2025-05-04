@@ -1,22 +1,33 @@
 import pygame
 
 class CaptureEffect:
+    """
+    Gère un effet visuel de capture avec transition (scale + opacity).
+    Peut être utilisé avec un sprite statique ou animé (GIFPygame).
+    """
+
     def __init__(self, sprite, pos):
-        self.sprite = sprite  # Peut être une Surface ou un GIFPygame
+        """
+        Initialise l’effet de capture.
+
+        Args:
+            sprite (pygame.Surface | gif_pygame.GIFPygame): Sprite à afficher.
+            pos (tuple): Position centrale (x, y) de l’effet.
+        """
+        self.sprite = sprite
         self.pos = pos
         self.offset = (0, 0)
 
         self.scale = 1.0
         self.opacity = 255
 
-        self.duration = 500  # durée d’une animation (in ou out) en ms
+        self.duration = 500  # Durée de transition (in ou out) en ms
         self.elapsed = 0
-        self.phase = None  # "in", "out", None
+        self.phase = None  # "in", "out", ou None
         self.active = False
 
-        self.current_frame_index = 0  # nécessaire pour draw()
-
     def trigger_in(self):
+        """Déclenche l’animation de disparition (fade out + shrink)."""
         self.phase = "in"
         self.elapsed = 0
         self.active = True
@@ -24,6 +35,7 @@ class CaptureEffect:
         self.opacity = 255
 
     def trigger_out(self):
+        """Déclenche l’animation d’apparition (fade in + grow)."""
         if self.phase == "out" and self.active:
             return
         self.phase = "out"
@@ -32,14 +44,21 @@ class CaptureEffect:
         self.scale = 0.5
         self.opacity = 0
 
-
     def is_active(self):
+        """Renvoie True si l’animation est en cours."""
         return self.active
 
     def current_phase(self):
+        """Renvoie la phase actuelle : 'in', 'out' ou None."""
         return self.phase
 
     def update(self, dt):
+        """
+        Met à jour l’état de l’animation.
+
+        Args:
+            dt (int): Temps écoulé depuis la dernière frame (en ms).
+        """
         if not self.active:
             return
 
@@ -58,25 +77,27 @@ class CaptureEffect:
             self.phase = None
 
     def draw(self, surface):
+        """
+        Dessine le sprite à l’écran avec échelle et opacité dynamiques.
+
+        Args:
+            surface (pygame.Surface): Surface cible.
+        """
         if not self.is_active():
             return
 
-        # Récupérer la frame (Surface)
-        if isinstance(self.sprite, pygame.Surface):
-            frame = self.sprite
-        else:
-            frame = self.sprite.blit_ready()
-
-        # Adapter taille
+        frame = self.sprite if isinstance(self.sprite, pygame.Surface) else self.sprite.blit_ready()
         w, h = frame.get_width(), frame.get_height()
         new_size = (int(w * self.scale), int(h * self.scale))
 
-        if frame.get_bitsize() in (24, 32):
-            scaled = pygame.transform.smoothscale(frame, new_size)
-        else:
-            scaled = pygame.transform.scale(frame, new_size)
+        # Redimensionnement adapté
+        scaled = (
+            pygame.transform.smoothscale(frame, new_size)
+            if frame.get_bitsize() in (24, 32)
+            else pygame.transform.scale(frame, new_size)
+        )
 
-        # Appliquer l’opacité
+        # Appliquer alpha
         if scaled.get_alpha() is None:
             scaled = scaled.convert_alpha()
         scaled.set_alpha(self.opacity)
