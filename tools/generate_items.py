@@ -1,3 +1,5 @@
+# tools/generate_items.py
+
 import os
 import json
 import requests
@@ -16,6 +18,15 @@ ALLOWED_CATEGORIES = {
 
 
 def fetch_json(url):
+    """
+    Effectue une requête HTTP GET vers une URL et retourne la réponse JSON.
+
+    Args:
+        url (str): L'URL cible.
+
+    Returns:
+        dict | None: Données JSON ou None si erreur.
+    """
     try:
         response = requests.get(url)
         response.raise_for_status()
@@ -26,6 +37,16 @@ def fetch_json(url):
 
 
 def download_sprite(url, filename):
+    """
+    Télécharge un sprite d'objet depuis une URL et le sauvegarde localement.
+
+    Args:
+        url (str): URL du sprite.
+        filename (str): Nom du fichier à enregistrer.
+
+    Returns:
+        str | None: Nom du fichier ou None si erreur.
+    """
     try:
         response = requests.get(url)
         response.raise_for_status()
@@ -40,6 +61,16 @@ def download_sprite(url, filename):
 
 
 def get_localized_name(obj, lang="fr"):
+    """
+    Extrait le nom localisé d'un objet (par défaut en français).
+
+    Args:
+        obj (dict): Données brutes de l'objet.
+        lang (str): Code langue (par défaut "fr").
+
+    Returns:
+        str: Nom localisé ou nom par défaut.
+    """
     for entry in obj.get("names", []):
         if entry["language"]["name"] == lang:
             return entry["name"]
@@ -47,12 +78,21 @@ def get_localized_name(obj, lang="fr"):
 
 
 def get_item_effect(item):
-    # 1. Effet court FR (s'il existe)
+    """
+    Extrait la description courte de l’effet d’un objet (en français si possible).
+
+    Args:
+        item (dict): Données JSON de l’objet.
+
+    Returns:
+        str: Texte d’effet ou chaîne vide.
+    """
+    # Essai direct : effet court en français
     for entry in item.get("effect_entries", []):
         if entry["language"]["name"] == "fr":
             return entry.get("short_effect") or entry.get("effect") or ""
 
-    # 2. Sinon, texte long via flavor_text_entries
+    # Fallback : flavor text récent
     recent_versions = {"sword-shield", "ultra-sun-ultra-moon", "x-y", "black-white"}
     flavor_texts = [
         entry["text"] for entry in item.get("flavor_text_entries", [])
@@ -61,7 +101,7 @@ def get_item_effect(item):
     if flavor_texts:
         return flavor_texts[0].replace("\n", " ").strip()
 
-    # 3. Fallback EN si vraiment rien
+    # Dernier recours : anglais
     for entry in item.get("effect_entries", []):
         if entry["language"]["name"] == "en":
             return entry.get("short_effect") or entry.get("effect") or ""
@@ -70,6 +110,15 @@ def get_item_effect(item):
 
 
 def extract_item_data(url):
+    """
+    Extrait les données utiles d’un objet à partir de son URL API.
+
+    Args:
+        url (str): URL vers l’objet dans la PokéAPI.
+
+    Returns:
+        dict | None: Données formatées ou None si erreur ou catégorie ignorée.
+    """
     item = fetch_json(url)
     if not item:
         return None
@@ -82,20 +131,18 @@ def extract_item_data(url):
         name = get_localized_name(item)
         effect = get_item_effect(item)
 
-        # Traduction de la catégorie
+        # Nom de la catégorie traduit
         category_data = fetch_json(item["category"]["url"])
         category = get_localized_name(category_data)
 
+        # Téléchargement du sprite
         sprite_url = item["sprites"]["default"]
         sprite_filename = f"{item['name']}.png"
         sprite_path = os.path.join(SPRITE_DIR, sprite_filename)
         sprite = None
 
         if sprite_url:
-            if not os.path.exists(sprite_path):
-                sprite = download_sprite(sprite_url, sprite_filename)
-            else:
-                sprite = sprite_filename
+            sprite = sprite_filename if os.path.exists(sprite_path) else download_sprite(sprite_url, sprite_filename)
 
         return {
             "id": item["id"],
@@ -112,12 +159,21 @@ def extract_item_data(url):
 
 
 def get_all_item_urls():
+    """
+    Récupère toutes les URLs des objets disponibles dans l’API.
+
+    Returns:
+        list[str]: Liste d’URLs vers les objets.
+    """
     url = f"{POKEAPI_BASE}/item?limit=1000"
     data = fetch_json(url)
     return [i["url"] for i in data["results"]] if data else []
 
 
 def main():
+    """
+    Script principal pour générer `items.json` à partir des données de la PokéAPI.
+    """
     item_urls = get_all_item_urls()
     all_items = []
 

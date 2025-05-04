@@ -10,6 +10,15 @@ OUTPUT_PATH = os.path.join("data", "moves.json")
 
 
 def fetch_json(url):
+    """
+    Effectue une requête HTTP GET vers une URL et retourne les données JSON.
+
+    Args:
+        url (str): URL à interroger.
+
+    Returns:
+        dict | None: Données JSON si succès, sinon None.
+    """
     try:
         response = requests.get(url)
         response.raise_for_status()
@@ -19,50 +28,49 @@ def fetch_json(url):
         return None
 
 
-def get_localized_name(obj, lang="fr"):
-    return next((n["name"] for n in obj.get("names", []) if n["language"]["name"] == lang), obj.get("name", ""))
-
-
-def get_effect_text(move, lang="fr"):
-    for entry in move.get("effect_entries", []):
-        if entry["language"]["name"] == lang:
-            effect = entry["short_effect"].replace("$effect_chance", str(move.get("effect_chance", "")))
-            return effect
-    return ""
-
-
-def get_flavor_text(move, lang="fr", version_group="firered-leafgreen"):
-    for entry in move.get("flavor_text_entries", []):
-        if entry["language"]["name"] == lang and entry["version_group"]["name"] == version_group:
-            return entry["flavor_text"].replace("\n", " ")
-    return ""
-
-
 def get_all_move_urls():
+    """
+    Récupère toutes les URLs des attaques connues via la PokéAPI.
+
+    Returns:
+        list[str]: Liste d'URLs d'attaques.
+    """
     url = f"{POKEAPI_BASE}/move?limit=1000"
     data = fetch_json(url)
     return [m["url"] for m in data["results"]] if data else []
 
 
 def extract_move_data(url):
+    """
+    Extrait toutes les données utiles d’une attaque à partir de son URL API.
+
+    Args:
+        url (str): URL de l’attaque dans la PokéAPI.
+
+    Returns:
+        dict | None: Données formatées ou None en cas d’erreur.
+    """
     move = fetch_json(url)
     if not move:
         return None
 
     try:
         name_en = move["name"]
-        name_fr = next((n["name"] for n in move["names"] if n["language"]["name"] == "fr"), name_en)
+        name_fr = next((n["name"] for n in move.get("names", []) if n["language"]["name"] == "fr"), name_en)
 
+        # Texte d'effet (court), avec substitution de $effect_chance
         effect_entry_fr = next((e for e in move.get("effect_entries", []) if e["language"]["name"] == "fr"), None)
-        effect_text = effect_entry_fr["short_effect"].replace("$effect_chance", str(move.get("effect_chance", ""))) if effect_entry_fr else ""
+        effect_text = (
+            effect_entry_fr["short_effect"].replace("$effect_chance", str(move.get("effect_chance", "")))
+            if effect_entry_fr else ""
+        )
 
+        # Texte de description (flavor text)
         flavor_fr = next(
             (f["flavor_text"].replace("\n", " ") for f in reversed(move.get("flavor_text_entries", []))
              if f["language"]["name"] == "fr" and f["version_group"]["name"] == "firered-leafgreen"),
             ""
         )
-
-        # Fallback à un autre flavor si firered-leafgreen pas dispo
         if not flavor_fr:
             flavor_fr = next(
                 (f["flavor_text"].replace("\n", " ") for f in reversed(move.get("flavor_text_entries", []))
@@ -75,16 +83,16 @@ def extract_move_data(url):
             "name_en": name_en,
             "name_fr": name_fr,
             "type": move["type"]["name"],
-            "damage_class": move["damage_class"]["name"] if move.get("damage_class") else None,
-            "power": move["power"],
-            "accuracy": move["accuracy"],
-            "pp": move["pp"],
-            "priority": move["priority"],
+            "damage_class": move.get("damage_class", {}).get("name"),
+            "power": move.get("power"),
+            "accuracy": move.get("accuracy"),
+            "pp": move.get("pp"),
+            "priority": move.get("priority"),
             "effect": effect_text,
             "description": flavor_fr,
             "effect_chance": move.get("effect_chance"),
-            "ailment": move.get("meta", {}).get("ailment", {}).get("name") if move.get("meta") else None,
-            "target": move["target"]["name"],
+            "ailment": move.get("meta", {}).get("ailment", {}).get("name"),
+            "target": move.get("target", {}).get("name"),
         }
 
     except Exception as e:
@@ -92,8 +100,11 @@ def extract_move_data(url):
         return None
 
 
-
 def main():
+    """
+    Script principal. Récupère toutes les attaques, les convertit,
+    puis les sauvegarde dans data/moves.json.
+    """
     move_urls = get_all_move_urls()
     all_moves = []
 

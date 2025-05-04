@@ -1,19 +1,20 @@
+# tools/patch_moves.py
+
 import sys
 import os
 import json
 import requests
 from tqdm import tqdm
 
-# 📁 Corriger le chemin d'accès depuis ./tools
+# Ajout du dossier racine au path pour imports éventuels
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-# 🔄 Charger moves.json original
-moves_path = os.path.join("data", "moves.json")
-with open(moves_path, "r", encoding="utf-8") as f:
-    moves = json.load(f)
+# === Constantes ===
+MOVES_PATH = os.path.join("data", "moves.json")
+POKEAPI_MOVE_URL = "https://pokeapi.co/api/v2/move"
 
-# 🧠 Mapping stats PokéAPI → ton format projet
-stat_map = {
+# Mapping PokéAPI → format projet
+STAT_MAP = {
     "attack": "atk",
     "defense": "def",
     "special-attack": "spa",
@@ -24,41 +25,46 @@ stat_map = {
     "hp": "hp"
 }
 
+# === Chargement des attaques existantes ===
+with open(MOVES_PATH, "r", encoding="utf-8") as f:
+    moves = json.load(f)
+
 patched_count = 0
-for move in tqdm(moves, desc="🔄 Mise à jour"):
+
+# === Traitement de chaque attaque ===
+for move in tqdm(moves, desc="🔄 Mise à jour des effets secondaires"):
     name_en = move.get("name_en", "").lower()
     if not name_en:
         continue
 
     try:
-        url = f"https://pokeapi.co/api/v2/move/{name_en}"
-        res = requests.get(url)
-        if res.status_code != 200:
+        response = requests.get(f"{POKEAPI_MOVE_URL}/{name_en}")
+        if response.status_code != 200:
             continue
+        data = response.json()
 
-        data = res.json()
         effect = {}
 
-        # 📉 Ajout des effets de stat
+        # Ajout des changements de stats
         stat_changes = data.get("stat_changes", [])
         if stat_changes:
             effect["stat_changes"] = []
-            for s in stat_changes:
-                raw_stat = s["stat"]["name"]
+            for change in stat_changes:
+                stat_name = change["stat"]["name"]
                 effect["stat_changes"].append({
-                    "stat": stat_map.get(raw_stat, raw_stat[:3]),
-                    "change": s["change"],
+                    "stat": STAT_MAP.get(stat_name, stat_name[:3]),
+                    "change": change["change"],
                     "target": "opponent",
                     "chance": 100
                 })
 
-        # 💬 Ajout du texte de l’effet en français
+        # Ajout du texte d'effet (FR)
         for entry in data.get("effect_entries", []):
             if entry["language"]["name"] == "fr":
                 effect["text"] = entry.get("short_effect", "").strip()
                 break
 
-        # 🛡️ Cas spécial : attaque de protection
+        # Attaques spéciales de type "protect"
         if name_en in ["protect", "detect", "spiky-shield"]:
             effect["protect"] = True
 
@@ -67,10 +73,10 @@ for move in tqdm(moves, desc="🔄 Mise à jour"):
             patched_count += 1
 
     except Exception as e:
-        print(f"❌ Erreur avec {name_en} : {e}")
+        print(f"❌ Erreur lors du traitement de {name_en} : {e}")
 
-# 💾 Écriture DIRECTE dans moves.json
-with open(moves_path, "w", encoding="utf-8") as f:
+# === Sauvegarde du fichier mis à jour ===
+with open(MOVES_PATH, "w", encoding="utf-8") as f:
     json.dump(moves, f, ensure_ascii=False, indent=2)
 
-print(f"\n✅ {patched_count} attaques mises à jour dans moves.json")
+print(f"\n✅ {patched_count} attaques mises à jour avec effets dans moves.json")
