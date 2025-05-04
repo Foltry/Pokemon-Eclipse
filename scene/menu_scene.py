@@ -1,3 +1,5 @@
+# scene/menu_scene.py
+
 import pygame
 from core.scene_manager import Scene
 from scene.starter_scene import StarterScene
@@ -8,20 +10,30 @@ OPTION_COLOR = (255, 255, 255)
 SELECTED_COLOR = (255, 0, 0)
 
 class MenuScene(Scene):
+    """
+    Scène du menu principal affichée au lancement du jeu.
+    Permet de lancer une nouvelle aventure ou de quitter le jeu.
+    """
+
     def __init__(self):
+        super().__init__()
         self.options = ["Nouvelle aventure", "Quitter"]
         self.selected = 0
-        self.font_title = pygame.font.Font(FONT_PATH, 48)
-        self.font_option = pygame.font.Font(FONT_PATH, 28)
         self.cooldown = 0
 
+        self.font_title = pygame.font.Font(FONT_PATH, 48)
+        self.font_option = pygame.font.Font(FONT_PATH, 28)
+
     def on_enter(self):
+        """Réinitialise le délai d'entrée clavier à l'entrée dans la scène."""
         self.cooldown = 0
 
     def update(self, dt):
+        """Met à jour le cooldown pour éviter les double-inputs rapides."""
         self.cooldown = max(0, self.cooldown - dt)
 
     def handle_event(self, event):
+        """Gère les événements clavier pour naviguer dans le menu."""
         if event.type == pygame.KEYDOWN and self.cooldown <= 0:
             if event.key in (pygame.K_UP, pygame.K_z):
                 self.selected = (self.selected - 1) % len(self.options)
@@ -36,8 +48,8 @@ class MenuScene(Scene):
                     pygame.quit()
                     exit()
 
-
     def draw(self, screen):
+        """Affiche le titre du jeu et les options du menu principal."""
         screen.fill((0, 0, 0))
 
         title_surf = self.font_title.render("Pokémon Eclipse", True, TITLE_COLOR)
