@@ -1,42 +1,37 @@
 from battle.move_effects import apply_move_effect
-from data.moves_loader import get_move_data
 from battle.move_utils import (
     check_accuracy,
     is_protected,
     should_fail,
     process_multi_hit,
     get_fixed_damage,
-    reset_temp_status,  # 💥 Nouveau import ici
+    reset_temp_status,
 )
 import random
 
 def use_move(attacker, defender, move):
     """Traite l'utilisation d'une capacité (dégâts + effets secondaires)."""
     messages = []
-    deferred_damage = None  # Nouveau : dégâts différés
+    deferred_damage = None
 
-    # 1️⃣ Vérifie si l'attaque échoue automatiquement
     if should_fail(attacker, defender, move):
         messages.append(f"L'attaque de {attacker['name']} a échoué.")
         reset_temp_status(attacker)
         reset_temp_status(defender)
         return {"damage": 0, "messages": messages, "deferred_damage": None}
 
-    # 2️⃣ Vérifie précision
     if not check_accuracy(attacker, defender, move):
         messages.append(f"{attacker['name']} rate son attaque !")
         reset_temp_status(attacker)
         reset_temp_status(defender)
         return {"damage": 0, "messages": messages, "deferred_damage": None}
 
-    # 3️⃣ Vérifie Abri / Protection
     if is_protected(defender):
         messages.append(f"{defender['name']} s'est protégé contre l'attaque !")
         reset_temp_status(attacker)
         reset_temp_status(defender)
         return {"damage": 0, "messages": messages, "deferred_damage": None}
 
-    # 4️⃣ Vérifie One-Hit KO
     if move.get("effects", {}).get("one_hit_ko"):
         defender["hp"] = 0
         messages.append(f"{attacker['name']} a mis KO {defender['name']} en un seul coup !")
@@ -44,7 +39,6 @@ def use_move(attacker, defender, move):
         reset_temp_status(defender)
         return {"damage": 9999, "messages": messages, "deferred_damage": 9999}
 
-    # 5️⃣ Si attaque inflige des dégâts
     damage = 0
     if move.get("power") or move.get("fixed_damage") or move.get("level_damage"):
         damage_info = calculate_basic_damage(attacker, defender, move)
@@ -56,16 +50,22 @@ def use_move(attacker, defender, move):
             damage = damage_info
 
         damage = max(1, damage)
-        deferred_damage = damage  # ← Ne modifie pas les PV tout de suite
+        deferred_damage = damage
+        messages.append(f"{attacker['name']} utilise {move['name']} !")
         messages.append(f"{defender['name']} a subi {damage} dégâts !")
+
+        secondary_effects = apply_move_effect(attacker, defender, move, last_damage=damage)
+        messages.extend(secondary_effects)
     else:
-        messages.append(f"{attacker['name']} utilise {move['name']} sans effet direct.")
+        messages.append(f"{attacker['name']} utilise {move['name']} !")
 
-    # 6️⃣ Applique effets secondaires
-    secondary_effects = apply_move_effect(attacker, defender, move, last_damage=damage)
-    messages.extend(secondary_effects)
+        secondary_effects = apply_move_effect(attacker, defender, move, last_damage=0)
 
-    # 🧹 Reset temporaire
+        if secondary_effects:
+            messages.extend(secondary_effects)
+        else:
+            messages.append(f"Mais cela n'a eu aucun effet...")
+
     reset_temp_status(attacker)
     reset_temp_status(defender)
 

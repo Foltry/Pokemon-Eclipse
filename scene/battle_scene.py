@@ -341,9 +341,11 @@ class BattleScene(Scene):
         for msg in self.capture_result["messages"]:
             self.queue_message(msg)
 
-        if self.capture_effect:
+        if self.capture_effect and not self.capture_result.get("success"):
             self.capture_effect.trigger_out()
             self.hide_enemy_sprite = False
+        else : 
+            self.hide_enemy_sprite = True
 
         if self.capture_result.get("success"):
             added = run_manager.has_team_space()
@@ -357,7 +359,6 @@ class BattleScene(Scene):
                 self.message_queue.append(lambda: self.queue_message("Votre équipe est pleine, impossible de capturer ce Pokémon."))
 
         self.state = "command"
-
 
     def handle_event(self, event):
         """Gère tous les événements utilisateurs selon l’état actuel (combat, menu, messages, etc.)."""
