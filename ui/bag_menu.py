@@ -51,6 +51,7 @@ class BagMenu:
 
     def handle_event(self, event, scene_manager):
         if event.type == pygame.KEYDOWN:
+            # === Affichage de message en attente ===
             if self.message_queue:
                 if event.key == pygame.K_RETURN:
                     self.message_queue.pop(0)
@@ -61,7 +62,7 @@ class BagMenu:
                 scene_manager.go_back()
                 return
 
-            # === Navigation dans l'inventaire ===
+            # === Navigation dans le sac ===
             if event.key in (pygame.K_DOWN, pygame.K_s):
                 if self.selected_index < len(self.inventory) - 1:
                     self.selected_index += 1
@@ -74,7 +75,7 @@ class BagMenu:
                     if self.selected_index < self.scroll_offset:
                         self.scroll_offset -= 1
 
-            # === Utilisation d’un objet ===
+            # === Utilisation d'un objet ===
             elif event.key == pygame.K_RETURN:
                 if self.empty_mode:
                     scene_manager.go_back()
@@ -89,30 +90,38 @@ class BagMenu:
 
                 category = get_item_category(item_name)
 
-                # === Utilisation d’une Ball ===
-                if category == "standard-balls":
-                    current_scene = scene_manager.scene_stack[-2] if len(scene_manager.scene_stack) > 1 else None
-                    if current_scene:
-                        current_scene.throw_ball(item_name)
-                        selected_item["quantity"] -= 1
-                        if selected_item["quantity"] <= 0:
-                            self.inventory.pop(self.selected_index)
+                current_scene = scene_manager.scene_stack[-2] if len(scene_manager.scene_stack) > 1 else None
+                if not current_scene:
                     scene_manager.go_back()
                     return
 
-                # === Sinon : objets type soins ===
+                # === Poké Ball ===
+                if category == "standard-balls":
+                    current_scene.throw_ball(item_name)
+                    selected_item["quantity"] -= 1
+                    if selected_item["quantity"] <= 0:
+                        self.inventory.pop(self.selected_index)
+                    scene_manager.go_back()
+                    return
+
+                # === Objet de soin ou statut ===
                 pokemon = run_manager.get_team()[0]
                 result = use_item_on_pokemon(item_name, pokemon)
-                self.queue_message(result["message"])
 
                 if result["success"]:
                     selected_item["quantity"] -= 1
                     if selected_item["quantity"] <= 0:
                         self.inventory.pop(self.selected_index)
 
-                    if hasattr(scene_manager.scene, "enemy_turn"):
-                        scene_manager.scene.message_queue.append(scene_manager.scene.enemy_turn)
+                    if hasattr(current_scene, "ally_hp"):
+                        current_scene.ally_hp = pokemon["hp"]
 
+                    current_scene.queue_message(result["message"])
+                    current_scene.message_queue.append(current_scene.enemy_turn)
+                    scene_manager.go_back()
+                else:
+                    # ❌ Objet inutile, on reste dans le sac et affiche le message ici
+                    self.queue_message(result["message"])
 
 
     def update(self, dt):

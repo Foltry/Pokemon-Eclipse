@@ -172,7 +172,7 @@ def draw_combat_scene(
 
     screen.blit(STATUS_PLAYER, (268, 193))
     screen.blit(STATUS_ENEMY, (0, 35))
-
+    
     enemy_name_text = font_pkm.render(enemy_name, True, (0, 0, 0))
     gender_color = (66, 150, 255) if enemy_gender == "♂" else (255, 105, 180) if enemy_gender == "♀" else (120, 120, 120)
     enemy_gender_text = font_pv.render(enemy_gender, True, gender_color)
@@ -200,6 +200,6 @@ def draw_combat_scene(
     hp_text = pygame.transform.scale(hp_text, (hp_text.get_width(), int(hp_text.get_height() * 0.65)))
     screen.blit(hp_text, (410, 246))
 
-    xp_bar = XPBar((308, 267), ally_max_xp)
+    xp_bar = XPBar((308, 267), ally_max_xp)    
     xp_bar.update(ally_xp)
     xp_bar.draw(screen)
