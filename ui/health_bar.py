@@ -63,14 +63,12 @@ class HealthBar:
 
     def draw(self, surface):
         """
-        Dessine la barre de PV sur la surface cible.
-
-        Args:
-            surface (pygame.Surface): Surface sur laquelle dessiner.
+        Dessine la barre de PV sur la surface cible ainsi que le texte "PV actuels / max" (allié uniquement).
         """
         if self.max_hp <= 0:
             return
 
+        # --- Couleur en fonction du ratio de PV ---
         ratio = self.displayed_hp / self.max_hp
         if ratio > 0.5:
             color = self.colors["high"]
@@ -79,6 +77,17 @@ class HealthBar:
         else:
             color = self.colors["low"]
 
+        # --- Dessin de la barre de PV ---
         fill_width = int(self.width * ratio)
         fill_rect = pygame.Rect(self.x, self.y, fill_width, self.height)
         pygame.draw.rect(surface, color, fill_rect)
+
+        # --- Affichage statique du texte pour le Pokémon allié uniquement ---
+        if self.x == 402 and self.y == 232:  # ← coordonnées spécifiques à la barre du joueur
+            font = pygame.font.Font("assets/fonts/power clear bold.ttf", 23)
+            current = int(round(self.displayed_hp))
+            hp_text = f"{current}/{self.max_hp}"
+            text_surface = font.render(hp_text, True, (80, 80, 84))
+
+            # Coordonnées fixes sous la barre alliée
+            surface.blit(text_surface, (413, 242))

@@ -4,7 +4,6 @@ class XPBar:
     """
     Barre d'expérience animée pour les Pokémon.
     """
-
     def __init__(self, pos, max_xp):
         self.pos = pos
         self.max_xp = max_xp
@@ -42,7 +41,6 @@ class XPBar:
             if t >= 1.0:
                 self.displayed_xp = self.target_xp
                 self.animating = False
-
 
     def draw(self, surface):
         x, y = self.pos
