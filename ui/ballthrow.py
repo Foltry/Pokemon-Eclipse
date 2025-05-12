@@ -27,14 +27,14 @@ class BallThrow:
         self.elapsed = 0
         self.peak_height = -80
 
-        self.phase = "throw"  # Phases : throw → shake → wait → done
+        self.phase = "throw"
         self.result = result
         self.captured = result.get("success", False)
         self.shakes = result.get("shakes", 0)
 
         self.shake_index = 0
         self.shake_timer = 0
-        self.shake_interval = 600  # ms
+        self.shake_interval = 600
 
         self.wait_timer = 0
         self.wait_after = 500
@@ -58,7 +58,6 @@ class BallThrow:
         self.elapsed += dt
         t = min(self.elapsed / self.duration, 1)
 
-        # Mouvement parabolique
         x = self.start_pos.x + (self.target_pos.x - self.start_pos.x) * t
         y = self.start_pos.y + (self.target_pos.y - self.start_pos.y) * t + self.peak_height * math.sin(math.pi * t)
         self.ball_anim.pos = (x, y)

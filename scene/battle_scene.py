@@ -296,7 +296,6 @@ class BattleScene(Scene):
 
         starter = run_manager.get_team()[0]
         self.ally_level = starter.get("level", 5)
-
         xp_gain = int((self.enemy_base_exp * self.enemy_level) / (5 + self.ally_level / 2))
 
         for i, poke in enumerate(run_manager.get_team()):
@@ -341,7 +340,6 @@ class BattleScene(Scene):
                             self.bases, self.sprites, self.sprite_positions = load_combat_sprites(
                                 self.ally_id, self.enemy_id
                             )
-
             if i == 0:
                 def xp_gain_sequence(p=poke, gain=xp_gain, old_lvl=old_level):
                     self.update_ally_xp()
