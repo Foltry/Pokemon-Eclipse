@@ -287,7 +287,7 @@ class BattleScene(Scene):
 
     def handle_victory(self):
         """
-        Gère la fin d’un combat gagné : XP, évolution, bonus, etc.
+        Gère la fin d’un combat gagné : gain d’expérience, montée de niveau, évolution et bonus.
         """
         from battle.evolution_handler import check_evolution
         from data.items_loader import list_available_items
@@ -303,53 +303,60 @@ class BattleScene(Scene):
             old_level = poke["level"]
             poke["xp"] = poke.get("xp", 0) + xp_gain
 
+            def process_post_xp(p=poke, old_lvl=old_level):
+                self.check_level_up(p, self.queue_message)
+
+                if p["level"] > old_lvl:
+                    from battle.evolution_handler import check_evolution
+                    evolved_data = check_evolution(p)
+                    if evolved_data:
+                        old_name = p["name"]
+                        old_hp = p["hp"]
+                        old_max_hp = p["stats"]["hp"]
+
+                        p.update({
+                            "id": evolved_data["id"],
+                            "name": evolved_data["name"],
+                            "stats": evolved_data["stats"],
+                            "base_stats": evolved_data["stats"],
+                            "types": evolved_data["types"],
+                            "sprites": evolved_data["sprites"],
+                            "moves": get_learnable_moves(evolved_data["id"], p["level"])
+                        })
+
+                        new_max_hp = p["stats"]["hp"]
+                        if old_hp == old_max_hp:
+                            p["hp"] = new_max_hp
+                        else:
+                            ratio = old_hp / old_max_hp
+                            p["hp"] = max(1, min(int(new_max_hp * ratio), new_max_hp))
+
+                        self.queue_message(f"{old_name} évolue en {p['name']} !")
+
+                        if run_manager.get_team()[0]["id"] == p["id"]:
+                            self.ally_id = p["id"]
+                            self.ally_name = p["name"]
+                            self.ally_max_hp = p["stats"]["hp"]
+                            self.ally_hp = p["hp"]
+                            self.bases, self.sprites, self.sprite_positions = load_combat_sprites(
+                                self.ally_id, self.enemy_id
+                            )
+
             if i == 0:
                 def xp_gain_sequence(p=poke, gain=xp_gain, old_lvl=old_level):
                     self.update_ally_xp()
                     self.queue_message(f"{p['name']} gagne {gain} XP !")
-
-                    def after_xp():
-                        if p["level"] > old_lvl:
-                            self.queue_message(f"{p['name']} monte au niveau {p['level']} !")
-                        self.check_level_up(p, self.queue_message)
-
-                    self.message_queue.append(after_xp)
-
+                    self.message_queue.append(lambda: process_post_xp(p, old_lvl))
                 self.message_queue.append(xp_gain_sequence)
             else:
                 self.queue_message(f"{poke['name']} gagne {xp_gain} XP !")
-                self.check_level_up(poke, self.queue_message)
-
-            if poke["level"] > old_level:
-                evolved_data = check_evolution(poke)
-                if evolved_data:
-                    old_name = poke["name"]
-                    poke.update({
-                        "id": evolved_data["id"],
-                        "name": evolved_data["name"],
-                        "stats": evolved_data["stats"],
-                        "base_stats": evolved_data["stats"],
-                        "types": evolved_data["types"],
-                        "sprites": evolved_data["sprites"],
-                        "moves": get_learnable_moves(evolved_data["id"], poke["level"])
-                    })
-                    self.queue_message(f"{old_name} évolue en {poke['name']} !")
-
-                    if i == 0:
-                        self.ally_id = poke["id"]
-                        self.ally_name = poke["name"]
-                        self.ally_max_hp = poke["stats"]["hp"]
-                        self.ally_hp = self.ally_max_hp
-                        self.bases, self.sprites, self.sprite_positions = load_combat_sprites(
-                            self.ally_id, self.enemy_id
-                        )
+                self.message_queue.append(lambda: process_post_xp(poke, old_level))
 
         self.hide_enemy_sprite = True
 
         valid_items = list_available_items()
         if len(valid_items) >= 2:
             self.message_queue.append(lambda: self.show_end_bonus(valid_items))
-
 
     def switch_pokemon(self, new_index):
         """
@@ -440,6 +447,10 @@ class BattleScene(Scene):
 
     def handle_event(self, event):
         """Gère tous les événements utilisateurs selon l’état actuel (combat, menu, messages, etc.)."""
+
+        # === Désactive toute entrée pendant le lancer de Poké Ball ===
+        if self.state == "throwing_ball" or self.ball_animation or self.ball_throw:
+            return
 
         # === Pokémon Menu actif ===
         if self.pokemon_menu:

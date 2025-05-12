@@ -25,7 +25,7 @@ bulbizarre_data = {
     "id": bulbizarre["id"],
     "name": bulbizarre["name"],
     "level": 15,
-    "xp": 4000,  # Juste avant niveau 16
+    "xp": 4086,  # Juste avant niveau 16
     "types": bulbizarre["types"],
     "stats": bulbizarre["stats"].copy(),
     "base_stats": bulbizarre["stats"].copy(),
@@ -42,21 +42,6 @@ run_manager.add_pokemon_to_team(bulbizarre_data)
 # Ajoute tous les objets au sac
 for item in get_all_items():
     run_manager.add_item(item)
-
-# Fonction debug XP
-def log_xp_state(pokemon):
-    level = pokemon.get("level", 1)
-    xp = pokemon.get("xp", 0)
-    next_xp = (level + 1) ** 3
-    prev_xp = level ** 3
-    progress = xp - prev_xp
-    needed = next_xp - prev_xp
-    logging.debug(
-        f"[XP CHECK] {pokemon['name']} | XP={xp} | Level={level} | "
-        f"Progress={progress}/{needed} | XP_prev={prev_xp} XP_next={next_xp}"
-    )
-
-log_xp_state(bulbizarre_data)
 
 # Combat
 manager = SceneManager()
@@ -76,6 +61,4 @@ while running:
     manager.draw(screen)
 
     pygame.display.flip()
-    log_xp_state(run_manager.get_team()[0])  # log live
-
 pygame.quit()
