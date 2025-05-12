@@ -34,7 +34,6 @@ class XPBar:
             self.target_xp = xp_value
             self.animation_elapsed = 0
             self.animating = True
-            print(f"[XPBar] START {self.start_xp} → TARGET {self.target_xp}")
 
         if self.animating:
             self.animation_elapsed += dt
@@ -44,7 +43,6 @@ class XPBar:
                 self.displayed_xp = self.target_xp
                 self.animating = False
 
-        print(f"[DRAW] XP BAR - displayed: {self.displayed_xp:.1f} / max: {self.max_xp}")
 
     def draw(self, surface):
         x, y = self.pos
@@ -52,9 +50,6 @@ class XPBar:
         ratio = self.displayed_xp / self.max_xp if self.max_xp else 0
         fill_width = int(self.bar_width * ratio)
         pygame.draw.rect(surface, self.bar_color, (x, y, fill_width, self.bar_height))
-
-        # DEBUG
-        print(f"[DRAW] XP BAR - displayed: {self.displayed_xp:.1f} / max: {self.max_xp}")
 
     def reset_displayed_xp(self, force_value=0):
         self.start_xp = force_value

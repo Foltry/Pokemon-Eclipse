@@ -296,19 +296,28 @@ class BattleScene(Scene):
         xp_gain = int((self.enemy_base_exp * self.enemy_level) / 7)
 
         for i, poke in enumerate(run_manager.get_team()):
+            old_level = poke["level"]
             poke["xp"] = poke.get("xp", 0) + xp_gain
 
             if i == 0:
-                def update_and_show_xp_gain(p=poke, gain=xp_gain):
+                def xp_gain_sequence(p=poke, gain=xp_gain, old_lvl=old_level):
                     self.update_ally_xp()
                     self.queue_message(f"{p['name']} gagne {gain} XP !")
-                self.message_queue.append(update_and_show_xp_gain)
+
+                    def after_xp():
+                        # Vérifie si le niveau a changé après le gain d'XP
+                        if p["level"] > old_lvl:
+                            self.queue_message(f"{p['name']} monte au niveau {p['level']} !")
+                        self.check_level_up(p, self.queue_message)
+
+                    self.message_queue.append(after_xp)
+
+                self.message_queue.append(xp_gain_sequence)
             else:
                 self.queue_message(f"{poke['name']} gagne {xp_gain} XP !")
+                self.check_level_up(poke, self.queue_message)
 
-            old_level = poke["level"]
-            self.check_level_up(poke, self.queue_message)
-
+            # Évolution (uniquement après la montée de niveau)
             if poke["level"] > old_level:
                 evolved_data = check_evolution(poke)
                 if evolved_data:
@@ -329,7 +338,9 @@ class BattleScene(Scene):
                         self.ally_name = poke["name"]
                         self.ally_max_hp = poke["stats"]["hp"]
                         self.ally_hp = self.ally_max_hp
-                        self.bases, self.sprites, self.sprite_positions = load_combat_sprites(self.ally_id, self.enemy_id)
+                        self.bases, self.sprites, self.sprite_positions = load_combat_sprites(
+                            self.ally_id, self.enemy_id
+                        )
 
         self.hide_enemy_sprite = True
 
@@ -624,12 +635,9 @@ class BattleScene(Scene):
         self.ally_xp = xp_in_level
         self.ally_max_xp = xp_needed
 
-        print(f"[XP UPDATE] xp_total={xp_total} level={level} → {xp_in_level}/{xp_needed}")
-
         if hasattr(self, "ally_xp_bar"):
             self.ally_xp_bar.max_xp = xp_needed
             self.ally_xp_bar.update(xp_in_level, 0)
-
 
     def queue_message_with_xp_update(self, text):
         """Met à jour la barre d’XP et ajoute un message dans la file."""
