@@ -34,7 +34,7 @@ def get_evolution_tree(pokemon):
         list[dict]: Liste d'évolutions possibles.
     """
     def search_evo_chain(evo_data, target_species):
-        if evo_data["species"].lower() == target_species:
+        if evo_data["species"].lower() == target_species.lower():
             return evo_data.get("evolves_to", [])
         for child in evo_data.get("evolves_to", []):
             result = search_evo_chain(child, target_species)
@@ -44,7 +44,8 @@ def get_evolution_tree(pokemon):
 
     base_data = get_pokemon_by_id(pokemon["id"])
     evo_tree = base_data.get("evolution", {})
-    return search_evo_chain(evo_tree, base_data["name"].lower()) or []
+    return search_evo_chain(evo_tree, base_data["name"]) or []
+
 
 def get_pokemon_by_id_name(name):
     """

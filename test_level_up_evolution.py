@@ -8,40 +8,42 @@ from data.pokemon_loader import get_pokemon_by_id, get_learnable_moves
 from data.items_loader import get_all_items
 from core.config import *
 
-# Setup logging dans un fichier
+# Setup logging XP
 logging.basicConfig(
     filename="xp_debug.log",
     level=logging.DEBUG,
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# Initialisation Pygame
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 
-# === Construction du Pokémon test (Rattata Nv.5 avec 200 XP) ===
-rattata = get_pokemon_by_id(19)
-rattata_data = {
-    "id": rattata["id"],
-    "name": rattata["name"],
-    "level": 5,
-    "xp": 200,  # Juste avant le niveau 6 (216)
-    "types": rattata["types"],
-    "stats": rattata["stats"].copy(),
-    "base_stats": rattata["stats"].copy(),
-    "sprites": rattata["sprites"],
-    "gender": "♀",
-    "moves": get_learnable_moves(19, 5),
-    "hp": rattata["stats"]["hp"]
+# === Pokémon test : Bulbizarre niveau 15 avec 4000 XP (Niveau 15 = 3375, 16 = 4096) ===
+bulbizarre = get_pokemon_by_id(1)
+bulbizarre_data = {
+    "id": bulbizarre["id"],
+    "name": bulbizarre["name"],
+    "level": 15,
+    "xp": 4000,  # Juste avant niveau 16
+    "types": bulbizarre["types"],
+    "stats": bulbizarre["stats"].copy(),
+    "base_stats": bulbizarre["stats"].copy(),
+    "sprites": bulbizarre["sprites"],
+    "gender": "♂",
+    "moves": get_learnable_moves(1, 15),
+    "hp": bulbizarre["stats"]["hp"]
 }
-run_manager.start_new_run()
-run_manager.add_pokemon_to_team(rattata_data)
 
+# Init run
+run_manager.start_new_run()
+run_manager.add_pokemon_to_team(bulbizarre_data)
+
+# Ajoute tous les objets au sac
 for item in get_all_items():
     run_manager.add_item(item)
 
-# === Fonction de logging XP (hookée dans update_ally_xp manuellement si besoin) ===
+# Fonction debug XP
 def log_xp_state(pokemon):
     level = pokemon.get("level", 1)
     xp = pokemon.get("xp", 0)
@@ -49,19 +51,17 @@ def log_xp_state(pokemon):
     prev_xp = level ** 3
     progress = xp - prev_xp
     needed = next_xp - prev_xp
-
     logging.debug(
         f"[XP CHECK] {pokemon['name']} | XP={xp} | Level={level} | "
         f"Progress={progress}/{needed} | XP_prev={prev_xp} XP_next={next_xp}"
     )
 
-log_xp_state(rattata_data)
+log_xp_state(bulbizarre_data)
 
-# === Lancement de la scène de combat ===
+# Combat
 manager = SceneManager()
 manager.change_scene(BattleScene())
 
-# === Boucle de jeu ===
 running = True
 while running:
     dt = clock.tick(60)
@@ -76,8 +76,6 @@ while running:
     manager.draw(screen)
 
     pygame.display.flip()
-
-    # Log en continu (facultatif)
-    log_xp_state(run_manager.get_team()[0])
+    log_xp_state(run_manager.get_team()[0])  # log live
 
 pygame.quit()
