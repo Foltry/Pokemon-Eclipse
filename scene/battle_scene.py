@@ -232,15 +232,17 @@ class BattleScene(Scene):
 
     def check_level_up(self, pokemon, queue_message):
         """
-        Vérifie si un Pokémon monte de niveau et applique les effets si c’est le cas.
-        Peut également déclencher une évolution.
+        Vérifie si un Pokémon monte de niveau, ajuste ses statistiques et déclenche une évolution si nécessaire.
 
         Args:
-            pokemon (dict): Le Pokémon à vérifier.
-            queue_message (callable): Fonction pour empiler les messages.
+            pokemon (dict): Le Pokémon concerné.
+            queue_message (callable): Fonction pour afficher les messages différés.
         """
+        leveled_up = False
+
         while pokemon["xp"] >= self.xp_required(pokemon["level"] + 1):
             pokemon["level"] += 1
+            leveled_up = True
             queue_message(f"{pokemon['name']} monte au niveau {pokemon['level']} !")
 
             for stat, base in pokemon.get("base_stats", {}).items():
@@ -264,6 +266,10 @@ class BattleScene(Scene):
                         self.bases, self.sprites, self.sprite_positions = load_combat_sprites(self.ally_id, self.enemy_id)
 
                 self.message_queue.append(apply_evolution_update)
+
+        if leveled_up and run_manager.get_team()[0]["id"] == pokemon["id"]:
+            # On recalcule correctement l’XP affichée après level-up
+            self.update_ally_xp()
 
     def show_end_bonus(self, items):
         """
@@ -594,17 +600,36 @@ class BattleScene(Scene):
             self.enemy_hp_bar.update(self.enemy_hp, dt / 1000)
 
     def update_ally_xp(self):
-        """Met à jour les valeurs cibles d'XP du Pokémon actif."""
+        """
+        Met à jour les valeurs d'XP du Pokémon actif.
+        Calcule l'XP dans le niveau et les bornes du niveau.
+        """
         starter = run_manager.get_team()[0]
-        level = starter.get("level", 1)
-        xp = starter.get("xp", 0)
+        xp_total = starter.get("xp", 0)
 
-        self.ally_xp = xp
-        self.ally_max_xp = self.xp_required(level + 1)
+        # Déduire le niveau réel
+        level = 1
+        while self.xp_required(level) <= xp_total:
+            level += 1
+        level -= 1
+
+        starter["level"] = level
+        self.ally_level = level
+
+        xp_prev = self.xp_required(level)
+        xp_next = self.xp_required(level + 1)
+        xp_in_level = xp_total - xp_prev
+        xp_needed = xp_next - xp_prev
+
+        self.ally_xp = xp_in_level
+        self.ally_max_xp = xp_needed
+
+        print(f"[XP UPDATE] xp_total={xp_total} level={level} → {xp_in_level}/{xp_needed}")
 
         if hasattr(self, "ally_xp_bar"):
-            self.ally_xp_bar.max_xp = self.ally_max_xp
-            self.ally_xp_bar.current_xp = self.ally_xp
+            self.ally_xp_bar.max_xp = xp_needed
+            self.ally_xp_bar.update(xp_in_level, 0)
+
 
     def queue_message_with_xp_update(self, text):
         """Met à jour la barre d’XP et ajoute un message dans la file."""
@@ -624,18 +649,12 @@ class BattleScene(Scene):
             self.bg,
             self.bases,
             sprites,
+            positions=self.sprite_positions,
             ally_name=self.ally_name,
             enemy_name=self.enemy_name,
-            ally_hp=None,
-            ally_max_hp=None,
-            enemy_hp=self.enemy_hp,
-            enemy_max_hp=self.enemy_max_hp,
             ally_level=self.ally_level,
             enemy_level=self.enemy_level,
             enemy_gender=self.enemy_gender,
-            ally_xp=0,
-            ally_max_xp=1,
-            positions=self.sprite_positions,
             draw_ally_hp_bar=False
         )
 

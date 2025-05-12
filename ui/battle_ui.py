@@ -157,21 +157,13 @@ def draw_combat_scene(
     positions,
     ally_name="",
     enemy_name="",
-    ally_hp=100,
-    ally_max_hp=100,
-    enemy_hp=100,
-    enemy_max_hp=100,
     ally_level=5,
     enemy_level=5,
     enemy_gender="?",
-    ally_xp=0,
-    ally_max_xp=100,
     draw_ally_hp_bar=True
 ):
     """
     Affiche la scène complète de combat avec sprites, bases, noms et niveaux.
-
-    Cette fonction est utilisée par BattleScene.draw().
     """
     load_status_images()
     font_pkm = pygame.font.Font(os.path.join(FONTS, "power clear.ttf"), 27)
@@ -210,12 +202,3 @@ def draw_combat_scene(
     screen.blit(ally_name_text, (305, 205))
     screen.blit(ally_level_text, (430, 205))
 
-    # Barre de PV statique
-    if draw_ally_hp_bar and ally_hp is not None and ally_max_hp is not None:
-        ally_bar = HealthBar((402, 232), (98, 9), ally_max_hp)
-        ally_bar.current_hp = ally_hp
-        ally_bar.draw(screen)
-
-        hp_text = font_pv.render(f"{ally_hp}/{ally_max_hp}", True, (51, 51, 51))
-        hp_text = pygame.transform.scale(hp_text, (hp_text.get_width(), int(hp_text.get_height() * 0.65)))
-        screen.blit(hp_text, (410, 246))
